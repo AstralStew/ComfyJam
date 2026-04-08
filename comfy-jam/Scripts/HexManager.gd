@@ -55,31 +55,31 @@ func _ready() -> void:
 	
 	hex_clicked.connect(test_hex)
 	
-	test()
 
 func test_hex(_hex:Hex) -> void:
 	print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
 	print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
 
-func test() -> void:
-	await get_tree().create_timer(1).timeout
-	
-	check_coords(Vector2i(-1,3))
-	
-	await get_tree().create_timer(0.5).timeout	
-	
-	check_coords(Vector2i(10,11))
-	
-	await get_tree().create_timer(0.5).timeout
-	
-	check_coords(Vector2i(4,6))
-	
-	await get_tree().create_timer(0.5).timeout
-	
-	get_adjacent_coord(Vector2i(4,6),HexDirection.TopL)
-	
-	
+#func test() -> void:
+	#await get_tree().create_timer(1).timeout
+	#
+	#check_coords(Vector2i(-1,3))
+	#
+	#await get_tree().create_timer(0.5).timeout	
+	#
+	#check_coords(Vector2i(10,11))
+	#
+	#await get_tree().create_timer(0.5).timeout
+	#
+	#check_coords(Vector2i(4,6))
+	#
+	#await get_tree().create_timer(0.5).timeout
+	#
+	#get_adjacent_coord(Vector2i(4,6),HexDirection.TopL)
 
+
+
+#region  Coords
 
 func check_coords(_coords:Vector2i) -> bool:
 		# Make sure the coords exist on the grid
@@ -166,21 +166,4 @@ func get_adjacent_hexes(_hex:Hex) -> Array[Hex]:
 	return _adjacent_hexes
 
 
-#
-	#
-	#if get_adjacent_hex(_hex,HexDirection.TopL) != null:
-		#_adjacent_hexes.append(get_adjacent_hex(_hex,HexDirection.TopL))
-	#
-	#if get_adjacent_coord(_coords,HexDirection.TopL) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.TopL)) )
-	#if get_adjacent_coord(_coords,HexDirection.TopR) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.TopR)) )
-	#if get_adjacent_coord(_coords,HexDirection.MidL) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.MidL)) )
-	#if get_adjacent_coord(_coords,HexDirection.MidR) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.MidR)) )
-	#if get_adjacent_coord(_coords,HexDirection.BotL) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.BotL)) )
-	#if get_adjacent_coord(_coords,HexDirection.BotR) != Vector2i(-1,-1):
-		#_adjacent_hexes.append( get_hex(get_adjacent_coord(_coords,HexDirection.BotR)) )
-	#
+#endregion

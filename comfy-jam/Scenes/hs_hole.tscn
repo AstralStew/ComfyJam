@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dxlsfguauhwiq"]
+
+[ext_resource type="Script" uid="uid://ctr8i5u45e370" path="res://Scripts/HexStructures/HSHole.gd" id="1_pnbf6"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/Prototyping/hexagon.png" id="2_lxni0"]
+
+[node name="HS_Hole" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_pnbf6")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+self_modulate = Color(1, 0.8666667, 0.79607844, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lxni0")
+expand_mode = 1
