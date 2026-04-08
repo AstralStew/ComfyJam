@@ -1,4 +1,6 @@
 class_name Draggable extends Area2D
+var _debug_name : String :
+	get: return "[b][" + get_parent().name + "/Draggable][/b]"
 
 @export var can_drag := false
 
@@ -6,8 +8,6 @@ var hovered = false
 var mouse_in = false
 var dragging = false
 
-var _debug_name : String :
-	get: return "{" + str(Time.get_ticks_msec()) + "} [" + get_parent().name + "/Draggable]"
 
 
 signal on_drag_start
