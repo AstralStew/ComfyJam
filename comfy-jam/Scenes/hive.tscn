@@ -6,9 +6,11 @@
 [ext_resource type="Script" uid="uid://by4a06jffcty7" path="res://Scripts/SelectionManager.gd" id="3_7s54b"]
 [ext_resource type="Texture2D" uid="uid://ce4vtmxg6dr1x" path="res://Assets/Images/Palette/wisteric-17-1x.png" id="3_spxe2"]
 [ext_resource type="Texture2D" uid="uid://by7navwjmhwp1" path="res://Assets/Images/Prototyping/brainstorm canvas.png" id="4_frvg8"]
+[ext_resource type="Script" uid="uid://b27okm36wcnw4" path="res://Scripts/ObjectManager.gd" id="4_hbc4g"]
 [ext_resource type="Texture2D" uid="uid://dy24abwgqu18u" path="res://Assets/Images/Prototyping/initialconcept.png" id="5_hbc4g"]
 [ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="6_7s54b"]
 [ext_resource type="Script" uid="uid://dgo8ptrgtqwv1" path="res://Scripts/fadetest.gd" id="7_csxaf"]
+[ext_resource type="Texture2D" uid="uid://cncx2fwukf76l" path="res://Assets/Images/Prototyping/TestBackground.png" id="8_frvg8"]
 [ext_resource type="PackedScene" uid="uid://lxg7t6b2ob6x" path="res://Scenes/worker_bee.tscn" id="10_spxe2"]
 [ext_resource type="PackedScene" uid="uid://cgm50ypwkds26" path="res://Scenes/nectar.tscn" id="11_frvg8"]
 [ext_resource type="PackedScene" uid="uid://cvublqk4qudmo" path="res://Scenes/pollen.tscn" id="12_hbc4g"]
@@ -22,8 +24,8 @@ shader_parameter/dithering_size = 6
 shader_parameter/resolution_scale = 1
 shader_parameter/quantization_level = 14
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_rfa7q"]
-b = Vector2(640, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbc4g"]
+size = Vector2(640, 64)
 
 [node name="Hive" type="CanvasLayer" unique_id=615366674]
 
@@ -40,9 +42,9 @@ metadata/_custom_type_script = "uid://dcdvp81o3g0on"
 script = ExtResource("3_7s54b")
 metadata/_custom_type_script = "uid://by4a06jffcty7"
 
-[node name="ObjectManager" type="Node" parent="." unique_id=1249195888]
-script = ExtResource("3_7s54b")
-metadata/_custom_type_script = "uid://by4a06jffcty7"
+[node name="ObjectManager" type="Node" parent="." unique_id=1802849222]
+script = ExtResource("4_hbc4g")
+metadata/_custom_type_script = "uid://b27okm36wcnw4"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1829435906]
 material = SubResource("ShaderMaterial_shopd")
@@ -70,6 +72,11 @@ scale = Vector2(0.625, 0.625)
 texture = ExtResource("5_hbc4g")
 centered = false
 
+[node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
+position = Vector2(344, 320)
+scale = Vector2(2.775, 2)
+texture = ExtResource("8_frvg8")
+
 [node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
 position = Vector2(128, 56)
 scale = Vector2(1.04, 1.04)
@@ -82,6 +89,7 @@ offset_bottom = 371.63806
 color = Color(0.2, 0.08235294, 0.25490198, 1)
 
 [node name="BeeTest" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=1571100291]
+visible = false
 position = Vector2(312.00003, 320)
 scale = Vector2(0.445, 0.445)
 texture = ExtResource("6_7s54b")
@@ -96,18 +104,32 @@ offset_bottom = 608.0
 color = Color(0.0627451, 0.043137256, 0.15294118, 1)
 
 [node name="BeeTest3" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=768531548]
+visible = false
 position = Vector2(544, 560.00006)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("6_7s54b")
 flip_h = true
 
 [node name="BeeTest4" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=606323739]
+visible = false
 position = Vector2(328, 584.00006)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("6_7s54b")
 
 [node name="WorkerBee" parent="SubViewportContainer/SubViewport" unique_id=1959467300 instance=ExtResource("10_spxe2")]
 position = Vector2(104, 360)
+
+[node name="WorkerBee2" parent="SubViewportContainer/SubViewport" unique_id=1856649126 instance=ExtResource("10_spxe2")]
+position = Vector2(192, 360)
+
+[node name="WorkerBee3" parent="SubViewportContainer/SubViewport" unique_id=738024063 instance=ExtResource("10_spxe2")]
+position = Vector2(312, 360)
+
+[node name="WorkerBee4" parent="SubViewportContainer/SubViewport" unique_id=1955594594 instance=ExtResource("10_spxe2")]
+position = Vector2(400, 360)
+
+[node name="WorkerBee5" parent="SubViewportContainer/SubViewport" unique_id=352277619 instance=ExtResource("10_spxe2")]
+position = Vector2(488, 360)
 
 [node name="Nectar" parent="SubViewportContainer/SubViewport" unique_id=2092266365 instance=ExtResource("11_frvg8")]
 position = Vector2(64, 448)
@@ -123,6 +145,6 @@ position = Vector2(176, 432)
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Floor/Area2D" unique_id=1481956742]
-position = Vector2(0, 560)
-shape = SubResource("SegmentShape2D_rfa7q")
+position = Vector2(320, 608)
+shape = SubResource("RectangleShape2D_hbc4g")
 debug_color = Color(0, 0.38817656, 0.962156, 0.41960785)

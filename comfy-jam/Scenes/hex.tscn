@@ -30,7 +30,7 @@ offset_top = -24.0
 offset_right = 24.0
 offset_bottom = -8.0
 grow_horizontal = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 8
 theme_override_font_sizes/bold_font_size = 8
 theme_override_font_sizes/bold_italics_font_size = 8
@@ -42,3 +42,5 @@ scroll_active = false
 horizontal_alignment = 1
 
 [connection signal="gui_input" from="ClickableArea" to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]

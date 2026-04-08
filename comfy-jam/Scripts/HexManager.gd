@@ -14,7 +14,11 @@ static var instance : HexManager = null
 @export var hexgrid : Dictionary[int,Array] = {}
 
 
-signal hex_clicked(hex)
+@export_category("READ ONLY")
+static var last_hovered_hex : Hex = null
+
+signal on_hex_clicked(hex)
+signal on_hex_unclicked(hex)
 
 func _enter_tree() -> void:
 	instance = self
@@ -35,30 +39,30 @@ func _ready() -> void:
 		else: _row_node.position = Vector2(0,0.85*_row) * grid_spacing
 		
 		for _column in grid_width:
-			# Create a hex
+			# Create a hex inside the row
 			_hex = hex_prefab.instantiate()
 			_hex.name = "hex_" + str(_column) + "_" + str(_row)
 			_hex.coords = Vector2i(_column,_row)
 			_row_node.add_child(_hex)
-			_hex.hex_clicked.connect(hex_clicked.emit.bind(_hex))
-			
-			# Set position if row is even
-			#if _row % 2 == 0: _hex.position = Vector2(0.5+_column,_row) * grid_spacing
-			# Set position if row is odd
-			#else: _hex.position = Vector2(_column,_row) * grid_spacing
 			_hex.position = Vector2(_column,0) * grid_spacing
+			_hex.on_hex_clicked.connect(on_hex_clicked.emit.bind(_hex))
+			_hex.on_hex_unclicked.connect(on_hex_unclicked.emit.bind(_hex))
+			
 			
 			# Add hex to this row's column array
 			_columns.append(_hex)
 		hexgrid[_row] = _columns.duplicate()
 		_columns.clear()
 	
-	hex_clicked.connect(test_hex)
+	on_hex_clicked.connect(test_hex)
 	
+
 
 func test_hex(_hex:Hex) -> void:
 	print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
 	print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
+
+
 
 #func test() -> void:
 	#await get_tree().create_timer(1).timeout
