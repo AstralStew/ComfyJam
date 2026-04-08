@@ -1,14 +1,14 @@
 class_name HexStructure extends Node2D
 var DEBUG_NAME : String :
 	get: return _debug_name()
-func _debug_name() -> String: return "[b][" + get_parent().name + "/HexStructure][/b]"
+func _debug_name() -> String: return "[b][" + get_parent().name + "/HexStructure][/b] "
 
 @export var max_workers : int = 0
 @export var assigned_workers : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_setup()
 
 
 func _setup() -> void:

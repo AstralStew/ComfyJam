@@ -1,0 +1,26 @@
+class_name Nectar extends Node2D
+var DEBUG_NAME : String :
+	get: return "[b][" + name + "/Nectar][/b] "
+
+var _draggable : Draggable = null
+var _fallable : Fallable = null
+var _fall_on_setup : bool = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	_setup()
+
+func _setup() -> void:
+	_draggable = $Draggable
+	_fallable = $Fallable
+	
+	_draggable.on_touching_floor.connect(_fallable.set_falling.bind(false))
+	_draggable.on_drag_start.connect(_fallable.set_falling.bind(false))
+	_draggable.on_drag_end.connect(_fallable.set_falling.bind(true))
+	
+	if _fall_on_setup:
+		_fallable.falling = true
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://lxg7t6b2ob6x"]
+
+[ext_resource type="Script" uid="uid://c51ypulm8tjms" path="res://Scripts/Objects/WorkerBee.gd" id="1_fuhfs"]
+[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="2_kthol"]
+[ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_ugjxm"]
+[ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_qndmq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3h87t"]
+radius = 16.0
+height = 48.0
+
+[node name="WorkerBee" type="Node2D" unique_id=1959467300]
+script = ExtResource("1_fuhfs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=808300566]
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("2_kthol")
+
+[node name="Draggable" type="Area2D" parent="." unique_id=335325692]
+collision_mask = 257
+script = ExtResource("3_ugjxm")
+can_drag = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=498600466]
+position = Vector2(0, 8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3h87t")
+
+[node name="Fallable" type="Node" parent="." unique_id=935422569]
+script = ExtResource("4_qndmq")
+can_fall = true
+metadata/_custom_type_script = "uid://bd0txc82jo681"
+
+[connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
+[connection signal="input_event" from="Draggable" to="Draggable" method="_on_input_event"]

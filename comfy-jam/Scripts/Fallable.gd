@@ -12,8 +12,8 @@ var _current_fall_speed : Vector2 = Vector2.ZERO
 
 #region Internal functions
 
-func _ready() -> void:
-	falling = can_fall
+#func _ready() -> void:
+	#falling = can_fall
 
 func _process(delta: float) -> void:
 	if falling:

@@ -1,4 +1,6 @@
-class_name WorkerBee extends Node2D
+class_name Pollen extends Node2D
+var DEBUG_NAME : String :
+	get: return "[b][" + name + "/Pollen][/b] "
 
 var _draggable : Draggable = null
 var _fallable : Fallable = null

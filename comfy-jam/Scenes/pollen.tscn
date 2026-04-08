@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cvublqk4qudmo"]
+
+[ext_resource type="Script" uid="uid://sdiushi1rssh" path="res://Scripts/Objects/Pollen.gd" id="1_6naop"]
+[ext_resource type="Texture2D" uid="uid://cy6stu1lb8q4v" path="res://Assets/Images/Prototyping/BeePollen.png" id="2_w85s6"]
+[ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_rcm0y"]
+[ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_kdfb2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08nax"]
+radius = 16.000002
+
+[node name="Pollen" type="Node2D" unique_id=395431437]
+script = ExtResource("1_6naop")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2110981204]
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("2_w85s6")
+
+[node name="Draggable" type="Area2D" parent="." unique_id=1944465093]
+collision_mask = 257
+script = ExtResource("3_rcm0y")
+can_drag = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=583127688]
+shape = SubResource("CircleShape2D_08nax")
+
+[node name="Fallable" type="Node" parent="." unique_id=1616402917]
+script = ExtResource("4_kdfb2")
+can_fall = true
+metadata/_custom_type_script = "uid://bd0txc82jo681"
+
+[connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
+[connection signal="input_event" from="Draggable" to="Draggable" method="_on_input_event"]
