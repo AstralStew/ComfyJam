@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c3mhglj7pc6rc"]
+
+[ext_resource type="Script" uid="uid://bs6ekrhoeogkc" path="res://Scripts/Hex.gd" id="1_tje73"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/Prototyping/hexagon.png" id="2_23esk"]
+
+[node name="Hex" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_tje73")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_23esk")
+expand_mode = 1
+
+[node name="Coords" type="RichTextLabel" parent="TextureRect" unique_id=562717074]
+visible = false
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(0, 11.375)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 2.0
+offset_bottom = 13.375
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+bbcode_enabled = true
+text = " 1  1"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=1838122803]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 26.0
+offset_bottom = 30.0
+color = Color(0.4509804, 0.1764706, 0.44705883, 1)
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_gui_input"]
+[connection signal="gui_input" from="TextureRect/ColorRect" to="." method="_on_gui_input"]
