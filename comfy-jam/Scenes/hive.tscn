@@ -188,14 +188,15 @@ physics_object_picking = true
 size = Vector2i(640, 640)
 render_target_update_mode = 4
 
-[node name="Pixelartexample" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=138267212]
-scale = Vector2(0.625, 0.625)
-texture = ExtResource("4_frvg8")
-centered = false
-
 [node name="FarBackgroundTest" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=1942697853]
 position = Vector2(320, 320)
 texture = ExtResource("9_08nax")
+
+[node name="Pixelartexample" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=138267212]
+visible = false
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("4_frvg8")
+centered = false
 
 [node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
 position = Vector2(344, 392)
@@ -380,6 +381,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvkj5")
 
 [node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=871287542]
+visible = false
 custom_minimum_size = Vector2(10, 10)
 anchors_preset = 15
 anchor_right = 1.0
@@ -428,6 +430,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 256.0

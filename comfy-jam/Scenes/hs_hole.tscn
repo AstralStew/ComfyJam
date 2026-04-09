@@ -1,42 +1,49 @@
 [gd_scene format=3 uid="uid://dxlsfguauhwiq"]
 
 [ext_resource type="Script" uid="uid://ctr8i5u45e370" path="res://Scripts/HexStructures/HsHole.gd" id="1_pnbf6"]
-[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_lxni0"]
 [ext_resource type="Shader" uid="uid://c1mbike56b781" path="res://Assets/Shaders/gradient_outline.gdshader" id="2_yv856"]
+[ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_405aw"]
+[ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="3_r64se"]
 [ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Objects/bee_test.png" id="3_yv856"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_405aw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r64se"]
 shader = ExtResource("2_yv856")
-shader_parameter/max_line_width = 21.775
-shader_parameter/min_line_width = -3.67
-shader_parameter/freq = 2.805
-shader_parameter/block_size = 20.0
-shader_parameter/starting_colour = Vector4(1, 1, 1, 1)
-shader_parameter/ending_colour = Vector4(1, 1, 1, 0)
+shader_parameter/max_line_width = 14.0
+shader_parameter/min_line_width = 10.0
+shader_parameter/freq = 5.0
+shader_parameter/block_size = 1.0
+shader_parameter/starting_colour = Vector4(1, 0.7, 0.5, 0.415)
+shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.05)
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
 returnable_candidates = Array[int]([1, 2])
 max_workers = 1
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
-self_modulate = Color(1, 0.8666667, 0.79607844, 1)
-material = SubResource("ShaderMaterial_405aw")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -26.0
-offset_right = 23.0
-offset_bottom = 26.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("2_lxni0")
-expand_mode = 1
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=609414424]
 visible = false
 position = Vector2(6.1035156e-05, 3.0517578e-05)
 scale = Vector2(0.445, 0.445)
 texture = ExtResource("3_yv856")
+
+[node name="HsHole" type="Sprite2D" parent="." unique_id=1268797718]
+visible = false
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("3_r64se")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+self_modulate = Color(1, 0.8666667, 0.79607844, 1)
+material = SubResource("ShaderMaterial_r64se")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -40.0
+offset_right = 49.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.86, 0.86)
+mouse_filter = 2
+texture = ExtResource("3_405aw")
+stretch_mode = 5
