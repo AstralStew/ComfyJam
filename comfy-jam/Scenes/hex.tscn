@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3mhglj7pc6rc"]
 
 [ext_resource type="Script" uid="uid://bs6ekrhoeogkc" path="res://Scripts/Hex.gd" id="1_tje73"]
-[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/Prototyping/hexagon.png" id="2_23esk"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_23esk"]
 [ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="3_kmuko"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23esk"]
@@ -40,7 +40,6 @@ spacing_top = -2
 script = ExtResource("1_tje73")
 
 [node name="ClickableArea" type="TextureRect" parent="." unique_id=1007952217]
-modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

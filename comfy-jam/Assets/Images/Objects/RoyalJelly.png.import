@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blcunlc1bq5yw"
-path="res://.godot/imported/BeeNectar.png-5d330d1a31ed5d22b1cdd5bbf87d75cb.ctex"
+uid="uid://1d2hx45rull5"
+path="res://.godot/imported/RoyalJelly.png-8c78aa84dc4d89a4df5922db661b62a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Prototyping/BeeNectar.png"
-dest_files=["res://.godot/imported/BeeNectar.png-5d330d1a31ed5d22b1cdd5bbf87d75cb.ctex"]
+source_file="res://Assets/Images/Objects/RoyalJelly.png"
+dest_files=["res://.godot/imported/RoyalJelly.png-8c78aa84dc4d89a4df5922db661b62a9.ctex"]
 
 [params]
 

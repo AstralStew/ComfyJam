@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvublqk4qudmo"]
 
 [ext_resource type="Script" uid="uid://sdiushi1rssh" path="res://Scripts/Objects/Pollen.gd" id="1_6naop"]
-[ext_resource type="Texture2D" uid="uid://cy6stu1lb8q4v" path="res://Assets/Images/Prototyping/BeePollen.png" id="2_w85s6"]
+[ext_resource type="Texture2D" uid="uid://cy6stu1lb8q4v" path="res://Assets/Images/Objects/BeePollen.png" id="2_w85s6"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_rcm0y"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_kdfb2"]
 

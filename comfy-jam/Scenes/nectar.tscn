@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cgm50ypwkds26"]
 
 [ext_resource type="Script" uid="uid://c58rhu3ojmp2p" path="res://Scripts/Objects/Nectar.gd" id="1_ixqpn"]
-[ext_resource type="Texture2D" uid="uid://blcunlc1bq5yw" path="res://Assets/Images/Prototyping/BeeNectar.png" id="2_g8ng2"]
+[ext_resource type="Texture2D" uid="uid://blcunlc1bq5yw" path="res://Assets/Images/Objects/BeeNectar.png" id="2_g8ng2"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_1ocmj"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_20g1d"]
 

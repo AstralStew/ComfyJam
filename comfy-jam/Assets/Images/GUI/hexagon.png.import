@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy6stu1lb8q4v"
-path="res://.godot/imported/BeePollen.png-fe7c46857d5424c778e8ae2cb04af065.ctex"
+uid="uid://qm1xpo021pjm"
+path="res://.godot/imported/hexagon.png-16642b3bd2136f7e31d443036fbe46f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Prototyping/BeePollen.png"
-dest_files=["res://.godot/imported/BeePollen.png-fe7c46857d5424c778e8ae2cb04af065.ctex"]
+source_file="res://Assets/Images/GUI/hexagon.png"
+dest_files=["res://.godot/imported/hexagon.png-16642b3bd2136f7e31d443036fbe46f7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qm1xpo021pjm"
-path="res://.godot/imported/hexagon.png-2a287474062eb769c9b982aa9a5206cc.ctex"
+uid="uid://bnxbcatcqvxof"
+path="res://.godot/imported/FarBack.png-7d1a9302b568f32e8aa55acc34275f5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Prototyping/hexagon.png"
-dest_files=["res://.godot/imported/hexagon.png-2a287474062eb769c9b982aa9a5206cc.ctex"]
+source_file="res://Assets/Images/Backgrounds/FarBack.png"
+dest_files=["res://.godot/imported/FarBack.png-7d1a9302b568f32e8aa55acc34275f5d.ctex"]
 
 [params]
 

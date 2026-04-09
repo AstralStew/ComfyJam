@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://lxg7t6b2ob6x"]
 
 [ext_resource type="Script" uid="uid://c51ypulm8tjms" path="res://Scripts/Objects/WorkerBee.gd" id="1_fuhfs"]
-[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="2_kthol"]
+[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Objects/bee_test.png" id="2_kthol"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_ugjxm"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_qndmq"]
 
