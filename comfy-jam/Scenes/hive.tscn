@@ -380,7 +380,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvkj5")
 
 [node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=871287542]
-visible = false
 custom_minimum_size = Vector2(10, 10)
 anchors_preset = 15
 anchor_right = 1.0
@@ -428,12 +427,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1744241727]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 256.0
