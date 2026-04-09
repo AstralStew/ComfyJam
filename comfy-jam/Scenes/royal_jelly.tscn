@@ -1,33 +1,33 @@
-[gd_scene format=3 uid="uid://cgm50ypwkds26"]
+[gd_scene format=3 uid="uid://bla0o6cr5y3ih"]
 
-[ext_resource type="Script" uid="uid://c58rhu3ojmp2p" path="res://Scripts/Objects/Nectar.gd" id="1_ixqpn"]
-[ext_resource type="Texture2D" uid="uid://blcunlc1bq5yw" path="res://Assets/Images/Objects/BeeNectar.png" id="2_g8ng2"]
-[ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_1ocmj"]
-[ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_20g1d"]
+[ext_resource type="Script" uid="uid://bdv2acfxxregg" path="res://Scripts/Objects/RoyalJelly.gd" id="1_fblwy"]
+[ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="2_fblwy"]
+[ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_8qvmd"]
+[ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_elejs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_spxe2"]
 radius = 16.0
-height = 44.0
+height = 48.0
 
-[node name="Nectar" type="Node2D" unique_id=2092266365]
-script = ExtResource("1_ixqpn")
+[node name="Royal Jelly" type="Node2D" unique_id=2092266365]
+script = ExtResource("1_fblwy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=651330221]
 scale = Vector2(0.23, 0.23)
-texture = ExtResource("2_g8ng2")
+texture = ExtResource("2_fblwy")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=1206883716]
 collision_mask = 257
-script = ExtResource("3_1ocmj")
+script = ExtResource("3_8qvmd")
 can_drag = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=1646303070]
-position = Vector2(0, 4.46)
+position = Vector2(0, 2.655)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_spxe2")
 
 [node name="Fallable" type="Node" parent="." unique_id=2006113861]
-script = ExtResource("4_20g1d")
+script = ExtResource("4_elejs")
 can_fall = true
 metadata/_custom_type_script = "uid://bd0txc82jo681"
 

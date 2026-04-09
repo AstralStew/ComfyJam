@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dtxgff1dylu6"]
+
+[ext_resource type="Script" uid="uid://s1ifjkdv0ve5" path="res://Scripts/HexStructures/HsJellyFactory.gd" id="1_28kgw"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_uaxht"]
+[ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="3_28kgw"]
+
+[node name="HS_Jelly_Factory" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_28kgw")
+returnable_candidates = Array[int]([3])
+wrapup_time = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+visible = false
+self_modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_uaxht")
+expand_mode = 1
+
+[node name="Node2D" type="Node2D" parent="." unique_id=811355455]
+modulate = Color(0, 1.1603818, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=609414424]
+position = Vector2(6.1035156e-05, 3.0517578e-05)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("3_28kgw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=1823561195]
+position = Vector2(-7, 4)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("3_28kgw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=1342445244]
+position = Vector2(9, 4)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("3_28kgw")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=851488920]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

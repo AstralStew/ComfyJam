@@ -3,12 +3,13 @@ const DEBUG_NAME : String = "[b][ObjectManager][/b] "
 
 static var instance : ObjectManager = null
 
-enum ObjectType {WORKER,NECTAR,POLLEN}
+enum ObjectType {WORKER,NECTAR,POLLEN,ROYAL_JELLY}
 static var spawned_objects : Node
 
 static var worker_prefab = preload("res://Scenes/worker_bee.tscn")
 static var nectar_prefab = preload("res://Scenes/nectar.tscn")
 static var pollen_prefab = preload("res://Scenes/pollen.tscn")
+static var royal_jelly_prefab = preload("res://Scenes/royal_jelly.tscn")
 
 
 func _enter_tree() -> void:
@@ -35,6 +36,11 @@ static func create_pollen() -> Pollen:
 	spawned_objects.add_child(_new_pollen)
 	return _new_pollen
 
+static func create_royal_jelly() -> RoyalJelly:
+	var _new_jelly = royal_jelly_prefab.instantiate()
+	_new_jelly.name = "RoyalJelly"
+	spawned_objects.add_child(_new_jelly)
+	return _new_jelly
 
 static func create_object(_type:ObjectType) -> Node2D:
 	match _type:
@@ -44,6 +50,8 @@ static func create_object(_type:ObjectType) -> Node2D:
 			return create_nectar()
 		ObjectType.POLLEN:
 			return create_pollen()
+		ObjectType.ROYAL_JELLY:
+			return create_royal_jelly()
 	
 	print_rich(DEBUG_NAME,"CreateObject > [color=red]Bad object type recieved, cancelling.")
 	return null

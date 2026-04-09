@@ -40,6 +40,7 @@ spacing_top = -2
 script = ExtResource("1_tje73")
 
 [node name="ClickableArea" type="TextureRect" parent="." unique_id=1007952217]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -75,6 +76,7 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="BuildButton" type="Panel" parent="." unique_id=182484854]
+visible = false
 custom_minimum_size = Vector2(2, 2)
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,7 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_23esk")
 
-[node name="DebugCoords2" type="RichTextLabel" parent="BuildButton" unique_id=784485485]
+[node name="Rtl_Plus" type="RichTextLabel" parent="BuildButton" unique_id=784485485]
 modulate = Color(0.0627451, 0.043137256, 0.15294118, 1)
 layout_mode = 1
 anchors_preset = 8

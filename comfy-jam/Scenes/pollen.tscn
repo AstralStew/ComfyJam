@@ -5,8 +5,9 @@
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_rcm0y"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_kdfb2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_08nax"]
-radius = 16.000002
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6naop"]
+radius = 14.0
+height = 40.0
 
 [node name="Pollen" type="Node2D" unique_id=395431437]
 script = ExtResource("1_6naop")
@@ -21,7 +22,9 @@ script = ExtResource("3_rcm0y")
 can_drag = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=583127688]
-shape = SubResource("CircleShape2D_08nax")
+position = Vector2(1.535, 2.235)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_6naop")
 
 [node name="Fallable" type="Node" parent="." unique_id=1616402917]
 script = ExtResource("4_kdfb2")
