@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_405aw"]
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="3_r64se"]
 [ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Objects/bee_test.png" id="3_yv856"]
+[ext_resource type="Texture2D" uid="uid://pkuxetguk1s2" path="res://Assets/Images/Structures/HS_Hole_White.png" id="6_r64se"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r64se"]
 shader = ExtResource("2_yv856")
@@ -47,3 +48,8 @@ scale = Vector2(0.86, 0.86)
 mouse_filter = 2
 texture = ExtResource("3_405aw")
 stretch_mode = 5
+
+[node name="HsHoleWhite" type="Sprite2D" parent="." unique_id=4913283]
+position = Vector2(59, -15)
+scale = Vector2(0.185, 0.185)
+texture = ExtResource("6_r64se")
