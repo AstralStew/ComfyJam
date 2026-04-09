@@ -17,45 +17,28 @@ signal on_drag_end
 signal on_touching_floor
 
 #region Internal functions
-#
-#func _unhandled_input(event: InputEvent) -> void:
-	#if dragging:
-		#if event is InputEventMouseButton and event.is_action_released("Click"):
-			#print(_debug_name, " Stopped dragging.")
-			#dragging = false
-			#on_drag_end.emit()
-		#
-		#if event is InputEventMouseMotion:
-			#(get_parent() as Node2D).position += event.relative
-			#on_drag_move.emit()
-		#
-		#get_viewport().set_input_as_handled()
-	#
-	#
-	#
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	
 	if event is InputEventMouseButton:
 	
 		if event.is_action_pressed("Click"):
-			print(_debug_name, "OnInputEvent > Click pressed")
+			print_rich(_debug_name, "OnInputEvent > Click pressed")
 			
 			if can_drag && !dragging && !SelectionManager.has_selection:
-				print(_debug_name, "OnInputEvent > Starting drag...")
+				print_rich(_debug_name, "OnInputEvent > Starting drag...")
 				dragging = true
-				SelectionManager.current_selection = self
+				SelectionManager.set_current_selection(get_parent())
 				on_drag_start.emit()
 		
 		if event.is_action_released("Click"):
-			print(_debug_name, "OnInputEvent > Click released")
+			print_rich(_debug_name, "OnInputEvent > Click released")
 			if dragging:
-				print(_debug_name, "OnInputEvent > Stopping drag.")
+				print_rich(_debug_name, "OnInputEvent > Stopping drag.")
 				dragging = false
-				SelectionManager.current_selection = null
+				SelectionManager.set_current_selection(null)
 				on_drag_end.emit()
 					
-	
 	
 	#elif event is InputEventMouseMotion:
 			#(get_parent() as Node2D).position += event.relative
@@ -63,7 +46,9 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 
 func _process(delta: float) -> void:
 	if dragging:
-		(get_parent() as Node2D).global_position = get_global_mouse_position()
+		if (get_parent() as Node2D).global_position != get_global_mouse_position():
+			(get_parent() as Node2D).global_position = get_global_mouse_position()
+			on_drag_move.emit()
 
 
 func _on_mouse_entered() -> void:

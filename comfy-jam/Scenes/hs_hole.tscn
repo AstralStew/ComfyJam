@@ -6,8 +6,8 @@
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
+returnable_candidates = Array[int]([1, 2])
 max_workers = 1
-assigned_workers = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
 self_modulate = Color(1, 0.8666667, 0.79607844, 1)
@@ -20,10 +20,12 @@ offset_right = 23.0
 offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_lxni0")
 expand_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=609414424]
+visible = false
 position = Vector2(6.1035156e-05, 3.0517578e-05)
 scale = Vector2(0.445, 0.445)
 texture = ExtResource("3_yv856")

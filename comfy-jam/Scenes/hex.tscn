@@ -2,6 +2,39 @@
 
 [ext_resource type="Script" uid="uid://bs6ekrhoeogkc" path="res://Scripts/Hex.gd" id="1_tje73"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/Prototyping/hexagon.png" id="2_23esk"]
+[ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="3_kmuko"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_23esk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.44297108, 1, 0.72135246, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44297108, 1, 0.72135246, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_left = 9.0
+expand_margin_top = 9.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(0.5, 0.5)
+anti_aliasing_size = 1.278
+
+[sub_resource type="FontVariation" id="FontVariation_pqijf"]
+base_font = ExtResource("3_kmuko")
+variation_embolden = -1.13
+spacing_space = -2
+spacing_top = -2
 
 [node name="Hex" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_tje73")
@@ -21,6 +54,7 @@ texture = ExtResource("2_23esk")
 expand_mode = 1
 
 [node name="DebugCoords" type="RichTextLabel" parent="." unique_id=562717074]
+visible = false
 modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(40, 11.375)
 anchors_preset = 10
@@ -30,7 +64,7 @@ offset_top = -24.0
 offset_right = 24.0
 offset_bottom = -8.0
 grow_horizontal = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 8
 theme_override_font_sizes/bold_font_size = 8
 theme_override_font_sizes/bold_italics_font_size = 8
@@ -41,4 +75,49 @@ text = " 1  1"
 scroll_active = false
 horizontal_alignment = 1
 
+[node name="BuildButton" type="Panel" parent="." unique_id=182484854]
+custom_minimum_size = Vector2(2, 2)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_23esk")
+
+[node name="DebugCoords2" type="RichTextLabel" parent="BuildButton" unique_id=784485485]
+modulate = Color(0.0627451, 0.043137256, 0.15294118, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.07
+offset_top = -8.0
+offset_right = 7.9300003
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 6)
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_pqijf")
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+bbcode_enabled = true
+text = " +"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 3
+
 [connection signal="gui_input" from="ClickableArea" to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]

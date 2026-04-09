@@ -22,5 +22,11 @@ func assign_worker(_worker:WorkerBee) -> bool:
 	
 	_worker.queue_free()
 	assigned_workers += 1
+	print_rich(DEBUG_NAME,"[color=999900] assigned workers = "+str(assigned_workers))
 	return true
-	
+
+func object_dropped_here(_object:Node2D) -> void:
+	print_rich(DEBUG_NAME,"ObjectDroppedHere > Object = '",_object.name,"'")
+	if (_object as WorkerBee) != null:
+		print_rich(DEBUG_NAME,"ObjectDroppedHere > Object is WorkerBee! Assigning here...")
+		assign_worker(_object as WorkerBee)

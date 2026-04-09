@@ -27,5 +27,6 @@ static func set_structure(_hex:Hex,_type:StructureType) -> bool:
 			print_rich(DEBUG_NAME,"SetStructure > Type = HOLE, creating structure")
 			_new_structure = hole_prefab.instantiate()
 			_hex.add_child(_new_structure)
+			_hex.structure = _new_structure
 	
 	return true
