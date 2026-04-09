@@ -196,6 +196,11 @@ position = Vector2(344, 320)
 scale = Vector2(2.775, 2)
 texture = ExtResource("8_frvg8")
 
+[node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
+position = Vector2(344, 320)
+scale = Vector2(2.775, 2)
+texture = ExtResource("8_frvg8")
+
 [node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
 position = Vector2(128, 56)
 scale = Vector2(1.04, 1.04)
