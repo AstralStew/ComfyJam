@@ -8,10 +8,12 @@ static var instance : StructureManager = null
 static var hole_prefab = preload("res://Scenes/hs_hole.tscn")
 static var jelly_factory_prefab = preload("res://Scenes/hs_jelly_factory.tscn")
 
+static var build_menu : BuildMenu = null
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	instance = self
-
+	
+	build_menu = $"../SubViewportContainer/SubViewport/BuildMenu"
 
 
 static func set_structure(_hex:Hex,_type:StructureType) -> bool:

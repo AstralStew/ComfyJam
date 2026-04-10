@@ -30,14 +30,7 @@ script = ExtResource("1_pnbf6")
 returnable_candidates = Array[int]([1, 2])
 max_workers = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=609414424]
-visible = false
-position = Vector2(6.1035156e-05, 3.0517578e-05)
-scale = Vector2(0.445, 0.445)
-texture = ExtResource("3_yv856")
-
 [node name="HsHole" type="Sprite2D" parent="." unique_id=1268797718]
-visible = false
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("3_r64se")
 
@@ -63,3 +56,9 @@ visible = false
 material = SubResource("ShaderMaterial_ws02s")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_r64se")
+
+[node name="BeeSprite" type="Sprite2D" parent="." unique_id=609414424]
+visible = false
+position = Vector2(6.1035156e-05, 3.0517578e-05)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("3_yv856")

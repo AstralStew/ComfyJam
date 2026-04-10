@@ -19,6 +19,9 @@
 [ext_resource type="FontFile" uid="uid://gdxm02kup507" path="res://Assets/Fonts/singleday.ttf" id="15_7s54b"]
 [ext_resource type="Script" uid="uid://djkmutrigu2xm" path="res://Scripts/Tooltip.gd" id="15_kvkj5"]
 [ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="18_lxibn"]
+[ext_resource type="Script" uid="uid://0k0hq0t6if6i" path="res://Scripts/BuildMenu.gd" id="19_lrhcs"]
+[ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="20_fdmwc"]
+[ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="21_lrhcs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -155,10 +158,13 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
 [node name="Hive" type="CanvasLayer" unique_id=615366674]
+metadata/_edit_horizontal_guides_ = [460.0]
+metadata/_edit_vertical_guides_ = [427.0, 469.0]
 
 [node name="HexManager" type="Node" parent="." unique_id=715828618]
 script = ExtResource("1_3ey1d")
-grid_width = 8
+grid_height = 7
+grid_width = 6
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
 
 [node name="StructureManager" type="Node" parent="." unique_id=1466089573]
@@ -204,8 +210,8 @@ scale = Vector2(2.775, 1.505)
 texture = ExtResource("8_frvg8")
 
 [node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
-position = Vector2(128, 56)
-scale = Vector2(1.04, 1.04)
+position = Vector2(128, 88)
+scale = Vector2(1.35, 1.35)
 
 [node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Hexes" unique_id=1045948358]
 visible = false
@@ -390,7 +396,178 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gdl44")
 
+[node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 364.0
+offset_top = 432.0
+offset_right = 364.0
+offset_bottom = 432.0
+script = ExtResource("19_lrhcs")
+
+[node name="TL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
+visible = false
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -70.0
+offset_right = -21.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="TR" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
+visible = false
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -70.0
+offset_right = 47.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="L" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -13.0
+offset_right = -54.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="R" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 54.0
+offset_top = -13.0
+offset_right = 79.999985
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/BuildMenu/R" unique_id=1118883263]
+position = Vector2(13, 14)
+scale = Vector2(0.98, 0.98)
+
+[node name="HsHole2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1696530802]
+modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+position = Vector2(-0.19470215, -0.8956299)
+scale = Vector2(0.2024922, 0.2024922)
+texture = ExtResource("20_fdmwc")
+
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1699985041]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-1.2464838, -13.099998)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1185835228]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(8.753516, -7.0999985)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D6" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=408949644]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-8.246484, -5.0999985)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=2096871735]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-3.0999985, -3.953514)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1133678437]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(6.9000015, 2.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=746455375]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-10.099998, 4.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D7" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=974626190]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(1.0464869, 8.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="BL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = 44.0
+offset_right = -21.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="BR" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = 44.0
+offset_right = 47.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1217251974]
+visible = false
+layout_mode = 0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
 [node name="Tooltip" type="Control" parent="SubViewportContainer/SubViewport" unique_id=498368713]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -398,14 +575,15 @@ offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("15_kvkj5")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Tooltip" unique_id=889079805]
+[node name="Rtl_Tooltip" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Tooltip" unique_id=889079805]
 z_index = 1
 clip_contents = false
+custom_minimum_size = Vector2(64, 0)
 layout_mode = 0
 offset_left = 24.0
 offset_top = 8.0
-offset_right = 192.0
-offset_bottom = 56.0
+offset_right = 60.0
+offset_bottom = 23.0
 theme_override_colors/default_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_fdmwc")
 theme_override_fonts/bold_font = SubResource("FontVariation_csxaf")
@@ -415,11 +593,12 @@ theme_override_font_sizes/bold_italics_font_size = 14
 theme_override_font_sizes/italics_font_size = 14
 theme_override_font_sizes/mono_font_size = 14
 bbcode_enabled = true
-text = "[b]ASSIGN TO HOLE[/b]
-Worker will forage and return with nectar or pollen"
+text = "ddddddd sd sd sd s ds ds ds ss sdsdsdsdsdsds s s dsds "
+fit_content = true
 scroll_active = false
+autowrap_mode = 0
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Tooltip/RichTextLabel" unique_id=1396284988]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Tooltip/Rtl_Tooltip" unique_id=1396284988]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -429,107 +608,4 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
-[node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 256.0
-offset_top = 256.0
-offset_right = 296.0
-offset_bottom = 296.0
-
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -92.0
-offset_right = -88.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
-
-[node name="Panel2" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -92.0
-offset_right = -40.0
-offset_bottom = -80.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
-
-[node name="Panel3" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -52.0
-offset_right = -112.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
-
-[node name="Panel4" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -52.0
-offset_right = -16.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
-
-[node name="Panel5" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
-visible = false
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -12.0
-offset_right = -40.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
-
-[node name="Panel6" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
-visible = false
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -12.0
-offset_right = -88.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/R" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_r_gui_input"]

@@ -62,7 +62,7 @@ func test_hex(_hex:Hex) -> void:
 	print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
 	print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
 	
-	StructureManager.set_structure(_hex,StructureManager.StructureType.JELLY_FACTORY)
+	%BuildMenu.build_structure(_hex)
 
 
 

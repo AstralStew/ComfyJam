@@ -1,8 +1,8 @@
 class_name HexStructureJellyFactory extends HexStructure
 func _debug_name() -> String:
-	return "[b][" + get_parent().name + "/HsHole][/b] "
+	return "[b][" + get_parent().name + "/HsJellyFactory][/b] "
 
-var plus_sign : RichTextLabel = null
+var bee_sprite : Sprite2D = null
 
 @export var returnable_amount : int = 1
 @export var returnable_candidates : Array[ObjectManager.ObjectType] = []
@@ -22,20 +22,24 @@ var plus_sign : RichTextLabel = null
 
 func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Yep!")
-	plus_sign = $RichTextLabel
+	bee_sprite = $Node2D/BeeSprite
 	
 	max_workers = 1
-	
 
-func object_dropped_here(_object:Node2D) -> void:
-	super(_object)
+
+
+func worker_dropped_here(_worker:WorkerBee) -> bool:
+	if !super(_worker):
+		# Worker was not used by base class, cancelling here
+		return false
 	
+	# Activate foraging
 	if !active && assigned_workers == 1:
 		print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
-		plus_sign.visible = true
+		bee_sprite.visible = true
 		producing()
-
-
+	
+	return true
 
 
 func producing() -> void:

@@ -15,6 +15,7 @@ signal on_hex_clicked
 signal on_hex_unclicked
 
 
+
 func object_dropped_here(_object:Node2D) -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Object = '",_object.name,"'")
 	if structure != null:
@@ -52,8 +53,21 @@ func _on_mouse_entered() -> void:
 		HexManager.last_hovered_hex = self
 		$ClickableArea.modulate = Color(1.0, 1.0, 1.0, 0.239)
 		
+		var _tooltip : Array[String] = ["","",""]
 		if structure == null && !SelectionManager.has_selection:
 			$BuildButton.visible = true
+			_tooltip[0] = "Build structure"
+		elif structure is HexStructureHole:
+			_tooltip[0] =  "- Forages Nectar or Pollen"
+			_tooltip[1] = "HOLE"
+			if structure.assigned_workers == 0: _tooltip[2] = "Worker"
+		elif structure is HexStructureJellyFactory:
+			_tooltip[0] =  "- Produces Royal Jelly"
+			_tooltip[1] = "JELLY FACTORY"
+			if structure.assigned_workers == 0: _tooltip[2] = "Worker"
+		
+		Tooltip.show_tooltip(_tooltip[0],_tooltip[1],_tooltip[2])
+		
 
 
 func _on_mouse_exited() -> void:
@@ -61,4 +75,6 @@ func _on_mouse_exited() -> void:
 		HexManager.last_hovered_hex = null
 		$ClickableArea.modulate = Color.TRANSPARENT
 		$BuildButton.visible = false
-			
+		
+		Tooltip.hide_tooltip()
+		

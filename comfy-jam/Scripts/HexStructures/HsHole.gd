@@ -5,8 +5,8 @@ func _debug_name() -> String:
 var sprite : Sprite2D = null
 
 
-@export var returnable_amount : int = 1
-@export var returnable_candidates : Array[ObjectManager.ObjectType] = []
+#@export var returnable_amount : int = 1
+#@export var returnable_candidates : Array[ObjectManager.ObjectType] = []
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 3
@@ -15,27 +15,27 @@ var sprite : Sprite2D = null
 
 @export var speed_multiplier : float = 1
 
-@export_category("READ ONLY")
 
-@export var active : bool = false
-
-@export var _returnables : Array[Node2D] = []
 
 func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Yep!")
-	sprite = $Sprite2D
+	sprite = $BeeSprite
 	
 	max_workers = 1
 	
 
-func object_dropped_here(_object:Node2D) -> void:
-	super(_object)
+func worker_dropped_here(_worker:WorkerBee) -> bool:
+	if !super(_worker):
+		# Worker was not used by base class, cancelling here
+		return false
 	
+	# Activate foraging
 	if !active && assigned_workers == 1:
 		print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
 		sprite.visible = true
 		foraging()
-
+	
+	return true
 
 
 
@@ -49,20 +49,26 @@ func foraging() -> void:
 		
 		await finish_forage()
 		
-		var _chosen_returnables : Array[ObjectManager.ObjectType]
-		if !returnable_candidates.is_empty():
-			for i in returnable_amount:
-				_chosen_returnables.append(returnable_candidates.pick_random())
+		output_object()
 		
-		#Here is where we check if there are other hexes that can grab the thing
+		while (!_chosen_returnables.is_empty())
 		
-		var _new_object : Node2D = null
-		while !_chosen_returnables.is_empty():
-			# Create an object from the last chosen returnable type
-			_new_object = ObjectManager.create_object(_chosen_returnables.pop_back())
-			_new_object.global_position = self.global_position
-			print_rich(DEBUG_NAME,"Foraging > Popped out '"+_new_object.name+"'! Waiting for player to grab...")
-			await _new_object.on_move
+		await on_output_removed
+		#
+		#var _chosen_returnables : Array[ObjectManager.ObjectType]
+		#if !returnable_candidates.is_empty():
+			#for i in returnable_amount:
+				#_chosen_returnables.append(returnable_candidates.pick_random())
+		#
+		##Here is where we check if there are other hexes that can grab the thing
+		#
+		#var _new_object : Node2D = null
+		#while !_chosen_returnables.is_empty():
+			## Create an object from the last chosen returnable type
+			#_new_object = ObjectManager.create_object(_chosen_returnables.pop_back())
+			#_new_object.global_position = self.global_position
+			#print_rich(DEBUG_NAME,"Foraging > Popped out '"+_new_object.name+"'! Waiting for player to grab...")
+			#await _new_object.on_move
 
 
 
@@ -76,6 +82,6 @@ func start_forage() -> void:
 func finish_forage() -> void:
 	# Finish up animation
 	var _tween = create_tween().set_parallel(true)
-	_tween.tween_property(sprite, "scale", Vector2(0.445,0.445), wrapup_time)
+	_tween.tween_property(sprite, "scale", Vector2(0.36,0.36), wrapup_time)
 	_tween.tween_property(sprite, "modulate", Color.WHITE, wrapup_time)
 	await _tween.finished
