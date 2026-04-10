@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://0k0hq0t6if6i" path="res://Scripts/BuildMenu.gd" id="19_lrhcs"]
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="20_fdmwc"]
 [ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="21_lrhcs"]
+[ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -457,6 +458,58 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
 
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/BuildMenu/L" unique_id=1118883263]
+position = Vector2(13, 14)
+scale = Vector2(0.875, 0.875)
+
+[node name="HsHole2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1696530802]
+modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+position = Vector2(-0.19470215, -0.8956299)
+scale = Vector2(0.2024922, 0.2024922)
+texture = ExtResource("20_fdmwc")
+
+[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1699985041]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-1.2464838, -13.099998)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1185835228]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(8.753516, -7.0999985)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D6" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=408949644]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-8.246484, -5.0999985)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=2096871735]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-3.0999985, -3.953514)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1133678437]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(6.9000015, 2.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=746455375]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(-10.099998, 4.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
+[node name="Sprite2D7" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=974626190]
+self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
+position = Vector2(1.0464869, 8.046486)
+scale = Vector2(0.089, 0.089)
+texture = ExtResource("21_lrhcs")
+
 [node name="R" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
@@ -473,57 +526,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
 
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/BuildMenu/R" unique_id=1118883263]
+[node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R" unique_id=1279538699]
 position = Vector2(13, 14)
-scale = Vector2(0.98, 0.98)
-
-[node name="HsHole2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1696530802]
-modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
-position = Vector2(-0.19470215, -0.8956299)
-scale = Vector2(0.2024922, 0.2024922)
-texture = ExtResource("20_fdmwc")
-
-[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1699985041]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-1.2464838, -13.099998)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1185835228]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(8.753516, -7.0999985)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D6" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=408949644]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-8.246484, -5.0999985)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=2096871735]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-3.0999985, -3.953514)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=1133678437]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(6.9000015, 2.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=746455375]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-10.099998, 4.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D7" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R/Node2D" unique_id=974626190]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(1.0464869, 8.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("22_j5hfv")
 
 [node name="BL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
 custom_minimum_size = Vector2(10, 10)
@@ -608,4 +614,5 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/L" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_l_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/R" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_r_gui_input"]

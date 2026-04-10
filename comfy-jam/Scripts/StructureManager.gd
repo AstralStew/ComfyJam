@@ -1,12 +1,13 @@
 class_name StructureManager extends Node
 const DEBUG_NAME : String = "[b][StructureManager][/b] "
 
-enum StructureType {BLANK,HOLE,JELLY_FACTORY}
+enum StructureType {BLANK,HOLE,JELLY_FACTORY,NURSERY}
 
 static var instance : StructureManager = null
 
 static var hole_prefab = preload("res://Scenes/hs_hole.tscn")
 static var jelly_factory_prefab = preload("res://Scenes/hs_jelly_factory.tscn")
+static var nursery_prefab = preload("res://Scenes/hs_nursery.tscn")
 
 static var build_menu : BuildMenu = null
 
@@ -34,6 +35,11 @@ static func set_structure(_hex:Hex,_type:StructureType) -> bool:
 		StructureType.JELLY_FACTORY:
 			print_rich(DEBUG_NAME,"SetStructure > Type = JELLY_FACTORY, creating a Jelly Factory structure")
 			_new_structure = jelly_factory_prefab.instantiate()
+			_hex.add_child(_new_structure)
+			_hex.structure = _new_structure
+		StructureType.NURSERY:
+			print_rich(DEBUG_NAME,"SetStructure > Type = NURSERY, creating a Nursery structure")
+			_new_structure = nursery_prefab.instantiate()
 			_hex.add_child(_new_structure)
 			_hex.structure = _new_structure
 	

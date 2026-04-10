@@ -31,8 +31,10 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 	
 	# Activate foraging
 	if !active && assigned_workers == 1:
-		print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
+		print_rich(DEBUG_NAME,"WorkerDroppedHere > Worker assigned, beginning to forage!")
 		sprite.visible = true
+		active = true
+		
 		foraging()
 	
 	return true
@@ -40,7 +42,7 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 
 
 func foraging() -> void:
-	active = true
+	
 	while (active):
 		
 		await start_forage()
@@ -49,12 +51,13 @@ func foraging() -> void:
 		
 		await finish_forage()
 		
+		add_object_to_output()
 		output_object()
 		
-		while (!_chosen_returnables.is_empty())
+		await on_outputs_empty
 		
-		await on_output_removed
-		#
+		
+		
 		#var _chosen_returnables : Array[ObjectManager.ObjectType]
 		#if !returnable_candidates.is_empty():
 			#for i in returnable_amount:

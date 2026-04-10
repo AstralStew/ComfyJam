@@ -14,10 +14,6 @@ func deactivate() -> void:
 	visible = false
 	overlay.visible = false
 
-func _on_r_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouse && event.is_action_pressed("Click"):
-		print_rich(DEBUG_NAME,"OnRGuiInput > Mouse click recieved!")
-		build.emit(StructureManager.StructureType.JELLY_FACTORY)
 
 
 func build_structure(_hex:Hex) -> void:
@@ -33,3 +29,16 @@ func build_structure(_hex:Hex) -> void:
 		StructureManager.set_structure(_hex,_structure_type)
 	
 	deactivate()
+
+
+
+
+func _on_l_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse && event.is_action_pressed("Click"):
+		print_rich(DEBUG_NAME,"OnLGuiInput > Mouse click recieved!")
+		build.emit(StructureManager.StructureType.NURSERY)
+
+func _on_r_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse && event.is_action_pressed("Click"):
+		print_rich(DEBUG_NAME,"OnRGuiInput > Mouse click recieved!")
+		build.emit(StructureManager.StructureType.JELLY_FACTORY)

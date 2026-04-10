@@ -54,13 +54,27 @@ func _on_mouse_entered() -> void:
 		$ClickableArea.modulate = Color(1.0, 1.0, 1.0, 0.239)
 		
 		var _tooltip : Array[String] = ["","",""]
-		if structure == null && !SelectionManager.has_selection:
-			$BuildButton.visible = true
-			_tooltip[0] = "Build structure"
+		if structure == null:
+			if SelectionManager.has_selection:
+				$BuildButton.visible = false
+				Tooltip.hide_tooltip()
+				return
+			else:
+				$BuildButton.visible = true
+				_tooltip[0] = "Build structure"
 		elif structure is HexStructureHole:
-			_tooltip[0] =  "- Forages Nectar or Pollen"
-			_tooltip[1] = "HOLE"
-			if structure.assigned_workers == 0: _tooltip[2] = "Worker"
+			if SelectionManager.has_selection:
+				if SelectionManager.current_selection is WorkerBee:
+					_tooltip[0] =  "Assign Worker to Hole"
+				else:
+					$BuildButton.visible = false
+					Tooltip.hide_tooltip()
+					return
+			else:
+				_tooltip[0] =  "- Forages Nectar or Pollen"
+				_tooltip[1] = "HOLE"
+				if structure.assigned_workers == 0: _tooltip[2] = "Worker"
+			
 		elif structure is HexStructureJellyFactory:
 			_tooltip[0] =  "- Produces Royal Jelly"
 			_tooltip[1] = "JELLY FACTORY"

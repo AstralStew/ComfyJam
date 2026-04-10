@@ -3,10 +3,12 @@ const DEBUG_NAME : String = "[b][ObjectManager][/b] "
 
 static var instance : ObjectManager = null
 
-enum ObjectType {WORKER,NECTAR,POLLEN,ROYAL_JELLY}
+enum ObjectType {LARVAE,WORKER,NECTAR,POLLEN,ROYAL_JELLY}
 static var spawned_objects : Node
 
+static var larvae_prefab = preload("res://Scenes/larvae.tscn")
 static var worker_prefab = preload("res://Scenes/worker_bee.tscn")
+
 static var nectar_prefab = preload("res://Scenes/nectar.tscn")
 static var pollen_prefab = preload("res://Scenes/pollen.tscn")
 static var royal_jelly_prefab = preload("res://Scenes/royal_jelly.tscn")
@@ -17,6 +19,12 @@ func _enter_tree() -> void:
 	spawned_objects = $"../SubViewportContainer/SubViewport/SpawnedObjects"
 	print_rich(DEBUG_NAME,"EnterTree > SpawnedObjects = "+spawned_objects.name)
 	
+
+static func create_larvae() -> Larvae:
+	var _new_larvae = larvae_prefab.instantiate()
+	_new_larvae.name = "Larvae"
+	spawned_objects.add_child(_new_larvae)
+	return _new_larvae
 
 static func create_worker() -> WorkerBee:
 	var _new_worker = worker_prefab.instantiate()
@@ -44,6 +52,8 @@ static func create_royal_jelly() -> RoyalJelly:
 
 static func create_object(_type:ObjectType) -> Node2D:
 	match _type:
+		ObjectType.LARVAE:
+			return create_larvae()
 		ObjectType.WORKER:
 			return create_worker()
 		ObjectType.NECTAR:

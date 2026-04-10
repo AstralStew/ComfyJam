@@ -4,8 +4,6 @@ func _debug_name() -> String:
 
 var bee_sprite : Sprite2D = null
 
-@export var returnable_amount : int = 1
-@export var returnable_candidates : Array[ObjectManager.ObjectType] = []
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 3
@@ -16,14 +14,7 @@ var bee_sprite : Sprite2D = null
 
 @export_category("READ ONLY")
 
-@export var active : bool = false
-
-@export var _returnables : Array[Node2D] = []
-
-
 @export var producing : bool = false
-
-signal restart_producing
 
 func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Yep!")
@@ -37,22 +28,27 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 		# Worker was not used by base class, cancelling here
 		return false
 	
-	# Activate foraging
+	# Activate nursery
 	if !active && assigned_workers == 1:
 		print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
 		bee_sprite.visible = true
-		producing()
+		active = true
 	
 	return true
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
-	if !active: return false
+	if !active || producing: return false
 	
+	print_rich(DEBUG_NAME,"NectarDroppedHere > Using Nectar to start production...")
+	_nectar.queue_free()
 	produce()
+	
+	return true
 
 
 
 func produce() -> void:
+	producing = true
 	
 	await start_production()
 		
@@ -60,25 +56,20 @@ func produce() -> void:
 	
 	await finish_production()
 	
-	var _chosen_returnables : Array[ObjectManager.ObjectType]
-	if !returnable_candidates.is_empty():
-		for i in returnable_amount:
-			_chosen_returnables.append(returnable_candidates.pick_random())
+	add_object_to_output()
+	output_object()
 	
-	#Here is where we check if there are other hexes that can grab the thing
+	await on_outputs_empty
 	
-	var _new_object : Node2D = null
-	while !_chosen_returnables.is_empty():
-		# Create an object from the last chosen returnable type
-		_new_object = ObjectManager.create_object(_chosen_returnables.pop_back())
-		_new_object.global_position = self.global_position
-		print_rich(DEBUG_NAME,"Producing > Popped out '"+_new_object.name+"'! Waiting for player to grab...")
-		await _new_object.on_move
+	producing = false
 
 
 
 func start_production() -> void:
-	await get_tree().create_timer(startup_time)
+	$Node2D.modulate = Color.GREEN
+	await get_tree().create_timer(startup_time).timeout
+	
 
 func finish_production() -> void:
-	await get_tree().create_timer(wrapup_time)
+	$Node2D.modulate = Color.WHITE
+	await get_tree().create_timer(wrapup_time).timeout
