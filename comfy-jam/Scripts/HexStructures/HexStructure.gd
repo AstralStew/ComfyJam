@@ -3,6 +3,8 @@ var DEBUG_NAME : String :
 	get: return _debug_name()
 func _debug_name() -> String: return "[b][" + get_parent().name + "/HexStructure][/b] "
 
+var hex : Hex = null
+
 @export var max_workers : int = 0
 @export var assigned_workers : int = 0
 
@@ -18,9 +20,11 @@ func _debug_name() -> String: return "[b][" + get_parent().name + "/HexStructure
 
 signal on_outputs_empty
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_setup()
+## Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+	#_setup()
+	
+
 
 
 func _setup() -> void:
@@ -42,18 +46,17 @@ func output_object() -> bool:
 		return false
 	
 	# Create an object from the last chosen returnable type
-	output = ObjectManager.create_object(_outputs.pop_back())
-	output.global_position = self.global_position
+	output = ObjectManager.create_object(_outputs.pop_back(),global_position)
 	
 	print_rich(DEBUG_NAME,"OutputObject > Popped out '"+output.name+"'! Waiting for player to grab...")
 	
-	output.on_move.connect(output_removed.bind(output))
+	output.on_dragged.connect(output_removed.bind(output))
 	
 	return true
 
 
 func output_removed(_object:Node2D):
-	_object.on_move.disconnect(output_removed.bind(_object))
+	_object.on_dragged.disconnect(output_removed.bind(_object))
 	
 	if !output_object():
 		print_rich("OutputRemoved > No outputs left!")
@@ -86,8 +89,16 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 	print_rich(DEBUG_NAME,"WorkerDroppedHere > Assigning worker...")
 	_worker.queue_free()
 	assigned_workers += 1
+	
+	# Activate structure
+	if !active && assigned_workers == 1:
+		activate()
+	
 	return true
 
+
+func activate() -> void:
+	pass
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
 	return false

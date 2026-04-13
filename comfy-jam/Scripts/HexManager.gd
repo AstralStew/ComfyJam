@@ -13,6 +13,10 @@ static var instance : HexManager = null
 @export var grid_spacing = 50
 @export var hexgrid : Dictionary[int,Array] = {}
 
+@export var starting_empty_holes = 7
+@export var starting_holes_with_workers = 1
+@export var starting_nurseries_with_workers = 1
+
 
 @export_category("READ ONLY")
 static var last_hovered_hex : Hex = null
@@ -48,11 +52,41 @@ func _ready() -> void:
 			_hex.on_hex_clicked.connect(on_hex_clicked.emit.bind(_hex))
 			_hex.on_hex_unclicked.connect(on_hex_unclicked.emit.bind(_hex))
 			
-			
 			# Add hex to this row's column array
 			_columns.append(_hex)
+		# Add an extra hex if this is an odd row
+		if _row % 2 != 0:
+			# Create a hex inside the row
+			_hex = hex_prefab.instantiate()
+			_hex.name = "hex_" + str(grid_width) + "_" + str(_row)
+			_hex.coords = Vector2i(grid_width,_row)
+			_row_node.add_child(_hex)
+			_hex.position = Vector2(grid_width,0) * grid_spacing
+			_hex.on_hex_clicked.connect(on_hex_clicked.emit.bind(_hex))
+			_hex.on_hex_unclicked.connect(on_hex_unclicked.emit.bind(_hex))
+		
 		hexgrid[_row] = _columns.duplicate()
 		_columns.clear()
+	
+	# Add some specific hexes
+	
+	for i in starting_empty_holes:
+		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.HOLE)
+		print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
+		
+	for i in starting_holes_with_workers:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.HOLE)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		print_rich(DEBUG_NAME,"Ready > Created starting hole with worker ("+_hex.name+")")
+	
+	for i in starting_nurseries_with_workers:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.NURSERY)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		print_rich(DEBUG_NAME,"Ready > Created starting nursery with worker ("+_hex.name+")")
 	
 	on_hex_clicked.connect(test_hex)
 	
@@ -62,7 +96,7 @@ func test_hex(_hex:Hex) -> void:
 	print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
 	print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
 	
-	%BuildMenu.build_structure(_hex)
+	BuildMenu.build_structure(_hex)
 
 
 
@@ -83,6 +117,22 @@ func test_hex(_hex:Hex) -> void:
 	#
 	#get_adjacent_coord(Vector2i(4,6),HexDirection.TopL)
 
+
+func get_random_hex(empty_only:bool=false) -> Hex:
+	
+	if empty_only:
+		var _hex : Hex = null
+		while _hex == null:
+			_hex = hexgrid[randi() % hexgrid.size()].pick_random()
+			print_rich(DEBUG_NAME,"GetRandomHex > Hex is still null, checking hex("+_hex.name+")")
+			if _hex.structure == null:
+				print_rich(DEBUG_NAME,"GetRandomHex > Hex("+_hex.name+") structure is null! Returning this hex...")
+				return _hex
+			else: _hex = null
+	
+	print_rich(DEBUG_NAME,"GetRandomHex > Returning any random hex")
+	return hexgrid[randi() % hexgrid.size()].pick_random()
+	
 
 
 #region  Coords

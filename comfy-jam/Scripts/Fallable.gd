@@ -4,38 +4,53 @@ var _debug_name : String :
 
 
 @export var can_fall := false
-@export var _fall_speed : float = 0.2
+@export var fall_speed : float = 0.2
 
-var falling = false 
+#@export var floor_bounds_y : Vector2i = Vector2i(570,630)
+@export var midpoint : int = 600
+@export var floor_width : int = 30
 
-var _current_fall_speed : Vector2 = Vector2.ZERO
+
+var falling = false :
+	get: return falling
+	set(value):
+		if !falling && value: on_falling_start.emit()
+		if falling && !value: on_falling_end.emit()
+		falling = value
+
+
+signal on_falling_start
+signal on_falling_end
 
 #region Internal functions
 
-#func _ready() -> void:
-	#falling = can_fall
-
-func _process(delta: float) -> void:
-	if falling:
-		_current_fall_speed += Vector2(0,_fall_speed)
-		(get_parent() as Node2D).position += _current_fall_speed
+#
+#func _process(delta: float) -> void:
+	#if falling:
+		#_current_fall_speed += Vector2(0,fall_speed*delta)
+		#(get_parent() as Node2D).position += _current_fall_speed
 
 #endregion
 
 
 func set_falling(_value:bool) -> void:
+	
 	if can_fall && _value:
-		falling = true
-		_current_fall_speed = Vector2.ZERO
+		fall() 
 	elif !_value:
 		falling = false
-		_current_fall_speed = Vector2.ZERO
+		#_current_fall_speed = Vector2.ZERO
 
-#: 
-	#get: return falling
-	#set(value):
-		#if !falling && value:
-			#on_start_fall.emit()
-		#elif falling && !value:
-			#on_land.emit()
-		#falling = value
+func fall() -> void:
+	var _current_fall_speed := Vector2.ZERO
+	var _floor_height := midpoint + (randi_range(-1,1) * randi() % floor_width) # randi_range(floor_bounds_y.x,floor_bounds_y.y)
+	
+	falling = true
+	while(falling):
+		_current_fall_speed += Vector2(0,fall_speed)
+		(get_parent() as Node2D).global_position += _current_fall_speed
+		if (get_parent() as Node2D).global_position.y >= _floor_height:
+			(get_parent() as Node2D).global_position.y = _floor_height
+			break
+		await get_tree().process_frame
+	falling = false

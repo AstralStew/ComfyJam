@@ -13,11 +13,14 @@ height = 48.0
 script = ExtResource("1_fblwy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=651330221]
+position = Vector2(0, -14)
 scale = Vector2(0.23, 0.23)
 texture = ExtResource("2_fblwy")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=1206883716]
-collision_mask = 257
+position = Vector2(0, -14)
+collision_layer = 64
+collision_mask = 256
 script = ExtResource("3_8qvmd")
 can_drag = true
 
@@ -29,6 +32,8 @@ shape = SubResource("CapsuleShape2D_spxe2")
 [node name="Fallable" type="Node" parent="." unique_id=2006113861]
 script = ExtResource("4_elejs")
 can_fall = true
+midpoint = 620
+floor_width = 10
 metadata/_custom_type_script = "uid://bd0txc82jo681"
 
 [connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]

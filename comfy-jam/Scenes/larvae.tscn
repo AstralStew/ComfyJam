@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bwjgfuxfq7e2k" path="res://Assets/Images/Objects/larvae_test.png" id="2_gx85f"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_latdd"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_gkhpu"]
+[ext_resource type="Script" uid="uid://cfk5o6ob6vw13" path="res://Scripts/Crawlable.gd" id="5_8mxnq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3h87t"]
 radius = 16.0
@@ -11,13 +12,17 @@ height = 60.0
 
 [node name="Larvae" type="Node2D" unique_id=1959467300]
 script = ExtResource("1_gx85f")
+floor_width = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=808300566]
+position = Vector2(0, -12.499999)
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("2_gx85f")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=335325692]
-collision_mask = 257
+position = Vector2(0, -12.5)
+collision_layer = 2
+collision_mask = 432
 script = ExtResource("3_latdd")
 can_drag = true
 
@@ -30,6 +35,11 @@ shape = SubResource("CapsuleShape2D_3h87t")
 script = ExtResource("4_gkhpu")
 can_fall = true
 metadata/_custom_type_script = "uid://bd0txc82jo681"
+
+[node name="Crawlable" type="Node" parent="." unique_id=1233694236]
+script = ExtResource("5_8mxnq")
+crawl_speed = Vector2(10, 0.2)
+metadata/_custom_type_script = "uid://cfk5o6ob6vw13"
 
 [connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
 [connection signal="input_event" from="Draggable" to="Draggable" method="_on_input_event"]

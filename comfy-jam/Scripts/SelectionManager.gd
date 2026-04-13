@@ -28,5 +28,3 @@ static func set_current_selection(_new_selection:Node2D):
 	
 	current_selection = _new_selection
 	instance.on_selection_change.emit(_new_selection)
-	
-	

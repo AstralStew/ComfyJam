@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cdj8u4v138gaj"]
+
+[ext_resource type="Script" uid="uid://drglakt16w3pq" path="res://Scripts/HexStructures/HsConstruction.gd" id="1_6t10m"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_cmamy"]
+[ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="3_ldro2"]
+
+[node name="HS_Construction" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_6t10m")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+visible = false
+self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_cmamy")
+expand_mode = 1
+
+[node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
+modulate = Color(0.22149003, 0.22117391, 0, 1)
+position = Vector2(0, 1)
+texture = ExtResource("3_ldro2")

@@ -20,9 +20,9 @@
 [ext_resource type="Script" uid="uid://djkmutrigu2xm" path="res://Scripts/Tooltip.gd" id="15_kvkj5"]
 [ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="18_lxibn"]
 [ext_resource type="Script" uid="uid://0k0hq0t6if6i" path="res://Scripts/BuildMenu.gd" id="19_lrhcs"]
-[ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="20_fdmwc"]
-[ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="21_lrhcs"]
+[ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="21_j5hfv"]
 [ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
+[ext_resource type="PackedScene" uid="uid://8vi6vmat5vwl" path="res://Scenes/larvae.tscn" id="24_k6nk5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -32,9 +32,6 @@ shader_parameter/dithering = true
 shader_parameter/dithering_size = 6
 shader_parameter/resolution_scale = 1
 shader_parameter/quantization_level = 14
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbc4g"]
-size = Vector2(640, 64)
 
 [sub_resource type="FontVariation" id="FontVariation_pylrw"]
 base_font = ExtResource("18_lxibn")
@@ -132,6 +129,38 @@ anti_aliasing_size = 1.278
 bg_color = Color(0.06100855, 0.03876, 0.15170373, 0.666)
 corner_detail = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5hfv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.44297108, 1, 0.72135246, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44297108, 1, 0.72135246, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_left = 9.0
+expand_margin_top = 9.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(0.5, 0.5)
+anti_aliasing_size = 1.278
+
+[sub_resource type="FontVariation" id="FontVariation_k6nk5"]
+base_font = ExtResource("18_lxibn")
+variation_embolden = -1.13
+spacing_space = -2
+spacing_top = -2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_08nax"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -222,41 +251,35 @@ offset_right = 381.9467
 offset_bottom = 371.63806
 color = Color(0.2, 0.08235294, 0.25490198, 1)
 
-[node name="Floor" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1494343238 groups=["Floor"]]
+[node name="SpawnedObjects" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=573064140]
+y_sort_enabled = true
 
-[node name="Area2D" type="Area2D" parent="SubViewportContainer/SubViewport/Floor" unique_id=150737439]
-collision_layer = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewportContainer/SubViewport/Floor/Area2D" unique_id=1481956742]
-position = Vector2(320, 608)
-shape = SubResource("RectangleShape2D_hbc4g")
-debug_color = Color(0, 0.38817656, 0.962156, 0.41960785)
-
-[node name="SpawnedObjects" type="Node" parent="SubViewportContainer/SubViewport" unique_id=954439203]
-
-[node name="WorkerBee" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1959467300 instance=ExtResource("10_spxe2")]
+[node name="WorkerBee" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1959467300 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(104, 536)
 
-[node name="WorkerBee2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1856649126 instance=ExtResource("10_spxe2")]
+[node name="WorkerBee2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1856649126 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(192, 536)
 
-[node name="WorkerBee3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=738024063 instance=ExtResource("10_spxe2")]
+[node name="WorkerBee3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=738024063 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(312, 536)
 
-[node name="WorkerBee4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1955594594 instance=ExtResource("10_spxe2")]
+[node name="WorkerBee4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1955594594 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(400, 536)
 
-[node name="WorkerBee5" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=352277619 instance=ExtResource("10_spxe2")]
+[node name="WorkerBee5" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=352277619 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(488, 536)
 
-[node name="Nectar" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=2092266365 instance=ExtResource("11_frvg8")]
+[node name="Nectar" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=2092266365 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(64, 552)
 
-[node name="Pollen" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=395431437 instance=ExtResource("12_hbc4g")]
+[node name="Pollen" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=395431437 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(176, 536)
 
-[node name="Royal Jelly" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=808926887 instance=ExtResource("13_gdl44")]
+[node name="Royal Jelly" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=808926887 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(224, 544)
+
+[node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 instance=ExtResource("24_k6nk5")]
+position = Vector2(153, 570)
 
 [node name="Old" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1025313271]
 
@@ -397,6 +420,50 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gdl44")
 
+[node name="BuildButton" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=533535366]
+visible = false
+custom_minimum_size = Vector2(2, 2)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = 111.0
+offset_right = 45.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5hfv")
+
+[node name="Rtl_Plus" type="RichTextLabel" parent="SubViewportContainer/SubViewport/BuildButton" unique_id=1067509365]
+modulate = Color(0.0627451, 0.043137256, 0.15294118, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.07
+offset_top = -8.0
+offset_right = 7.9300003
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 6)
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_k6nk5")
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+bbcode_enabled = true
+text = " +"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 3
+
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
 unique_name_in_owner = true
 visible = false
@@ -458,57 +525,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
 
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/BuildMenu/L" unique_id=1118883263]
+[node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L" unique_id=1446871648]
 position = Vector2(13, 14)
-scale = Vector2(0.875, 0.875)
-
-[node name="HsHole2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1696530802]
-modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
-position = Vector2(-0.19470215, -0.8956299)
-scale = Vector2(0.2024922, 0.2024922)
-texture = ExtResource("20_fdmwc")
-
-[node name="Sprite2D4" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1699985041]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-1.2464838, -13.099998)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D5" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1185835228]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(8.753516, -7.0999985)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D6" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=408949644]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-8.246484, -5.0999985)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=2096871735]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-3.0999985, -3.953514)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D3" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=1133678437]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(6.9000015, 2.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=746455375]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(-10.099998, 4.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
-
-[node name="Sprite2D7" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L/Node2D" unique_id=974626190]
-self_modulate = Color(0.5454163, 0.00081629754, 0.65752023, 1)
-position = Vector2(1.0464869, 8.046486)
-scale = Vector2(0.089, 0.089)
-texture = ExtResource("21_lrhcs")
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("21_j5hfv")
 
 [node name="R" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
 custom_minimum_size = Vector2(10, 10)
@@ -590,6 +610,7 @@ offset_left = 24.0
 offset_top = 8.0
 offset_right = 60.0
 offset_bottom = 23.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_fdmwc")
 theme_override_fonts/bold_font = SubResource("FontVariation_csxaf")
@@ -603,6 +624,7 @@ text = "ddddddd sd sd sd s ds ds ds ss sdsdsdsdsdsds s s dsds "
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Tooltip/Rtl_Tooltip" unique_id=1396284988]
 z_index = -1
@@ -612,6 +634,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/L" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_l_gui_input"]

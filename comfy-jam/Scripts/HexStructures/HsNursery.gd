@@ -2,7 +2,10 @@ class_name HexStructureNursery extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsNursery][/b] "
 
-var bee_sprite : Sprite2D = null
+var texture_1 : Texture = null
+var texture_2 : Texture = null
+
+var sprite : Sprite2D = null
 
 
 @export var startup_time : float = 1
@@ -18,33 +21,28 @@ var bee_sprite : Sprite2D = null
 
 func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Yep!")
-	bee_sprite = $Node2D/BeeSprite
+	sprite = $HsNursery
+	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
+	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
 	
 	max_workers = 1
 	
 
-func worker_dropped_here(_worker:WorkerBee) -> bool:
-	if !super(_worker):
-		# Worker was not used by base class, cancelling here
-		return false
-	
-	# Activate nursery
-	if !active && assigned_workers == 1:
-		print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
-		bee_sprite.visible = true
-		active = true
-	
-	return true
 
-func nectar_dropped_here(_nectar:Nectar) -> bool:
+func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 	if !active || producing: return false
 	
-	print_rich(DEBUG_NAME,"NectarDroppedHere > Using Nectar to start production...")
-	_nectar.queue_free()
+	print_rich(DEBUG_NAME,"NectarDroppedHere > Using Royal Jelly to start production...")
+	_royal_jelly.queue_free()
 	produce()
 	
 	return true
 
+
+func activate() -> void:
+	print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
+	sprite.texture = texture_1
+	active = true
 
 
 func produce() -> void:
@@ -66,10 +64,10 @@ func produce() -> void:
 
 
 func start_production() -> void:
-	$Node2D.modulate = Color.GREEN
+	sprite.texture = texture_2
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_production() -> void:
-	$Node2D.modulate = Color.WHITE
+	sprite.texture = texture_1
 	await get_tree().create_timer(wrapup_time).timeout

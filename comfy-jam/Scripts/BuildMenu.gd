@@ -1,32 +1,47 @@
 class_name BuildMenu extends Control
 const DEBUG_NAME : String = "[b][BuildMenu][/b] "
 
-signal build(structure_type)
+static var instance : BuildMenu = null
+
 
 @onready var overlay : Control = $"../DarkOverlay"
+@onready var build_button : Control = $"../BuildButton"
 
 
-func activate() -> void:
-	visible = true
-	overlay.visible = true
-
-func deactivate() -> void:
-	visible = false
-	overlay.visible = false
+signal build(structure_type)
 
 
+static func show_build_button(_hex:Hex) -> void:
+	instance.build_button.global_position = _hex.global_position
+	instance.build_button.visible = true
 
-func build_structure(_hex:Hex) -> void:
+static func hide_build_button() -> void:
+	instance.build_button.visible = false
+
+func _ready() -> void:
+	instance = self
+
+static func activate() -> void:
+	instance.visible = true
+	instance.overlay.visible = true
+
+static func deactivate() -> void:
+	instance.visible = false
+	instance.overlay.visible = false
+
+
+
+static func build_structure(_hex:Hex) -> void:
 	if _hex.structure != null:
 		print_rich(DEBUG_NAME,"BuildStructure > [color=red] Hex already has structure, cancelling")
 		return
 	
-	global_position = _hex.global_position
+	instance.global_position = _hex.global_position
 	activate()
 	
-	var _structure_type = await build
+	var _structure_type = await instance.build
 	if _structure_type != StructureManager.StructureType.BLANK:
-		StructureManager.set_structure(_hex,_structure_type)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.CONSTRUCTION, _structure_type)
 	
 	deactivate()
 

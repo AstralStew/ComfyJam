@@ -9,12 +9,12 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r64se"]
 shader = ExtResource("2_yv856")
-shader_parameter/max_line_width = 14.0
+shader_parameter/max_line_width = 18.0
 shader_parameter/min_line_width = 10.0
 shader_parameter/freq = 5.0
 shader_parameter/block_size = 1.0
 shader_parameter/starting_colour = Vector4(1, 0.7, 0.5, 0.415)
-shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.05)
+shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.03)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ws02s"]
 shader = ExtResource("2_yv856")
@@ -27,6 +27,7 @@ shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.05)
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
+forage_time = Vector2(10, 30)
 max_workers = 1
 output_candidates = Array[int]([2, 3])
 

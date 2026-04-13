@@ -24,22 +24,23 @@ func _setup() -> void:
 	max_workers = 1
 	
 
-func worker_dropped_here(_worker:WorkerBee) -> bool:
-	if !super(_worker):
-		# Worker was not used by base class, cancelling here
-		return false
-	
-	# Activate foraging
-	if !active && assigned_workers == 1:
-		print_rich(DEBUG_NAME,"WorkerDroppedHere > Worker assigned, beginning to forage!")
-		sprite.visible = true
-		active = true
-		
-		foraging()
-	
-	return true
+#func worker_dropped_here(_worker:WorkerBee) -> bool:
+	#if !super(_worker):
+		## Worker was not used by base class, cancelling here
+		#return false
+	#
+	## Activate foraging
+	#if !active && assigned_workers == 1:
+		#activate()
+	#
+	#return true
 
-
+func activate() -> void:
+	print_rich(DEBUG_NAME,"WorkerDroppedHere > Worker assigned, beginning to forage!")
+	sprite.visible = true
+	active = true
+	
+	foraging()
 
 func foraging() -> void:
 	

@@ -2,7 +2,7 @@ class_name HexStructureJellyFactory extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsJellyFactory][/b] "
 
-@onready var texture : Texture = load("res://Assets/Images/Structures/HS_JellyFactory_Bee.png")
+var texture : Texture = null
 
 var bee_sprite : Sprite2D = null
 
@@ -17,26 +17,31 @@ var bee_sprite : Sprite2D = null
 func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Yep!")
 	bee_sprite = $HsJellyFactory
+	texture = preload("res://Assets/Images/Structures/HS_JellyFactory_Bee.png")
 	
 	max_workers = 1
-
-
-
-func worker_dropped_here(_worker:WorkerBee) -> bool:
-	if !super(_worker):
-		# Worker was not used by base class, cancelling here
-		return false
 	
-	# Activate foraging
-	if !active && assigned_workers == 1:
-		print_rich(DEBUG_NAME,"WorkerDroppedHere > Worker assigned, beginning to forage!")
-		bee_sprite.texture = texture
-		active = true
-		
-		producing()
 	
-	return true
 
+
+
+#func worker_dropped_here(_worker:WorkerBee) -> bool:
+	#if !super(_worker):
+		## Worker was not used by base class, cancelling here
+		#return false
+	#
+	## Activate foraging
+	#if !active && assigned_workers == 1:
+		#
+	#
+	#return true
+
+func activate() -> void:
+	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
+	bee_sprite.texture = texture
+	active = true
+	
+	producing()
 
 func producing() -> void:
 	while (active):
