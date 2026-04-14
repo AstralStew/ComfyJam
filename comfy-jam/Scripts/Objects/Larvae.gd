@@ -112,7 +112,7 @@ func area_entered(_area:Area2D) -> void:
 				eat_pollen()
 			return
 
-func eat_nectar() -> void:	
+func eat_nectar() -> void:
 	eating_on_cooldown = true
 	
 	_draggable.can_drag = false

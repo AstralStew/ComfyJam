@@ -12,6 +12,13 @@ var honeycomb_sprite : Sprite2D = null
 
 @export var capacity : int = 4
 
+@export var direction_tl : bool = false
+@export var direction_tr : bool = false
+@export var direction_l : bool = false
+@export var direction_r : bool = false
+@export var direction_bl : bool = false
+@export var direction_br : bool = false
+
 @export_category("READ ONLY")
 @export var is_full : bool = false :
 	get: return _outputs.size() + (1 if output != null else 0) >= capacity

@@ -15,6 +15,7 @@ static var instance : HexManager = null
 @export var grid_spacing = 50
 @export var hexgrid : Dictionary[int,Array] = {}
 
+@export var starting_impassable = 0
 @export var starting_empty_holes = 0
 @export var starting_holes_with_workers = 0
 @export var starting_nurseries_with_workers = 0
@@ -76,10 +77,14 @@ func _ready() -> void:
 	
 	# Add some specific hexes
 	
+	for i in starting_impassable:
+		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.IMPASSABLE)
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting impassable")
+	
 	for i in starting_empty_holes:
 		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.HOLE)
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
-		
+	
 	for i in starting_holes_with_workers:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.HOLE)

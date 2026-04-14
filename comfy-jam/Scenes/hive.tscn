@@ -197,9 +197,9 @@ metadata/_edit_vertical_guides_ = [427.0, 469.0]
 script = ExtResource("1_3ey1d")
 grid_height = 7
 grid_width = 6
+starting_impassable = 3
 starting_holes_with_workers = 1
 starting_nurseries_with_workers = 1
-starting_honeycomb_with_workers = 6
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
 
 [node name="StructureManager" type="Node" parent="." unique_id=1466089573]
@@ -479,7 +479,6 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 364.0
@@ -685,6 +684,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 mouse_filter = 2
 
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/DarkOverlay" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_overlay_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TL" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tl_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TR" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tr_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/L" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_l_gui_input"]

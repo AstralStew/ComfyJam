@@ -66,3 +66,8 @@ func _on_r_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouse && event.is_action_pressed("Click"):
 		print_rich(DEBUG_NAME,"OnRGuiInput > Mouse click recieved!")
 		build.emit(StructureManager.StructureType.JELLY_FACTORY)
+
+
+func _on_overlay_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse && event.is_action_pressed("Click"):
+		deactivate()
