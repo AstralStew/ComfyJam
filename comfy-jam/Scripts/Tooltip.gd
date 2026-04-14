@@ -139,7 +139,15 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 					
 					_tooltip[1] = "HONEYCOMB"
 					if _hex.structure.assigned_workers == 0: _tooltip[2] = "Worker"
-			
+			elif _hex.structure is HexStructureImpassable:
+				if SelectionManager.has_selection:
+					BuildMenu.hide_build_button()
+					Tooltip.hide_tooltip()
+					return
+				else:
+					_tooltip[0] =  "- Cannot be built on (yet)"
+					_tooltip[1] = "IMPASSABLE"
+				
 		
 		TooltipType.OBJECT:
 			if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Type is an object!")

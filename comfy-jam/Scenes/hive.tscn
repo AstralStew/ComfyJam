@@ -435,7 +435,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gdl44")
 
 [node name="BuildButton" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=533535366]
-visible = false
 custom_minimum_size = Vector2(2, 2)
 anchors_preset = 8
 anchor_left = 0.5
@@ -479,6 +478,7 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 364.0
