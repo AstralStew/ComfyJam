@@ -42,6 +42,8 @@ func activate() -> void:
 	sprite.visible = true
 	active = true
 	
+	super()
+	
 	foraging()
 
 func foraging() -> void:

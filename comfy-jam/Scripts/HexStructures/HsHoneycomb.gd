@@ -2,6 +2,13 @@ class_name HexStructureHoneycomb extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsHoneycomb][/b] "
 
+var edge_tl : Label = null
+var edge_tr : Label = null
+var edge_l : Label = null
+var edge_r : Label = null
+var edge_bl : Label = null
+var edge_br : Label = null
+
 var texture : Texture = null
 
 var honeycomb_sprite : Sprite2D = null
@@ -12,12 +19,12 @@ var honeycomb_sprite : Sprite2D = null
 
 @export var capacity : int = 4
 
-@export var direction_tl : bool = false
-@export var direction_tr : bool = false
-@export var direction_l : bool = false
-@export var direction_r : bool = false
-@export var direction_bl : bool = false
-@export var direction_br : bool = false
+@export var tl_open : bool = false
+@export var tr_open : bool = false
+@export var l_open : bool = false
+@export var r_open : bool = false
+@export var bl_open : bool = false
+@export var br_open : bool = false
 
 @export_category("READ ONLY")
 @export var is_full : bool = false :
@@ -28,7 +35,21 @@ var cooldowning : bool = false
 func _setup() -> void:
 	super()
 	
-	print_rich(DEBUG_NAME,"Setup(Honeycomb) > Yep")
+	print_rich(DEBUG_NAME,"Setup(Honeycomb) > Setting up edges")
+	edge_tl = $Edge_tl
+	edge_tr = $Edge_tr
+	edge_l = $Edge_l
+	edge_r = $Edge_r
+	edge_bl = $Edge_bl
+	edge_br = $Edge_br
+	
+	set_edge(HexManager.HexDirection.TopL,false)
+	set_edge(HexManager.HexDirection.TopR,false)
+	set_edge(HexManager.HexDirection.MidL,false)
+	set_edge(HexManager.HexDirection.MidR,false)
+	set_edge(HexManager.HexDirection.BotL,false)
+	set_edge(HexManager.HexDirection.BotR,false)
+	
 	honeycomb_sprite = $HsHoneycomb
 	texture = preload("res://Assets/Images/Structures/HS_Honeycomb.png")
 	
@@ -36,6 +57,98 @@ func _setup() -> void:
 	
 	#on_output_object_removed.connect(check_adjacent_hexes)
 	on_outputs_added.connect(dispense)
+	
+
+
+
+func toggle_edge(_direction:HexManager.HexDirection) -> void:
+	print_rich(DEBUG_NAME,"ToggleEdge > Setting edge '"+str(_direction)+"' to " + ("open" if !get_edge_open(_direction) else "closed"))
+	set_edge(_direction,!get_edge_open(_direction))
+
+func set_edge(_direction:HexManager.HexDirection, _open:bool) -> void:
+	var _text = ">" if _open else "<"
+	var _color = Color(0.525, 0.757, 0.639, 1.0) if _open else  Color(0.655, 0.357, 0.502, 1.0)
+	
+	match _direction:
+		HexManager.HexDirection.TopL:
+			tl_open = _open
+			edge_tl.text = _text
+			edge_tl.modulate = _color
+			
+		HexManager.HexDirection.TopR:
+			tr_open = _open
+			edge_tr.text = _text
+			edge_tr.modulate = _color
+			
+		HexManager.HexDirection.MidL:
+			l_open = _open
+			edge_l.text = _text
+			edge_l.modulate = _color
+			
+		HexManager.HexDirection.MidR:
+			r_open = _open
+			edge_r.text = _text
+			edge_r.modulate = _color
+			
+		HexManager.HexDirection.BotL:
+			bl_open = _open
+			edge_bl.text = _text
+			edge_bl.modulate = _color
+			
+		HexManager.HexDirection.BotR:
+			br_open = _open
+			edge_br.text = _text
+			edge_br.modulate = _color
+	
+	update_adjacent_hexes()
+
+func get_edge_open(_direction:HexManager.HexDirection) -> bool:
+	match _direction:
+		HexManager.HexDirection.TopL: return tl_open
+		HexManager.HexDirection.TopR: return tr_open
+		HexManager.HexDirection.MidL: return l_open
+		HexManager.HexDirection.MidR: return r_open
+		HexManager.HexDirection.BotL: return bl_open
+		HexManager.HexDirection.BotR: return br_open
+	push_error(DEBUG_NAME,"GetEdgeOpen > [color=red] Bad direction!")
+	
+	return false
+
+
+func update_adjacent_hexes() -> void:
+	await get_tree().create_timer(adjacent_output_removal_delay).timeout
+	#HexManager.get_adjacent_hex(hex,)
+	#var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	var _adjacent_hex : Hex = null
+	var _took_object_from_me : bool = false
+	
+	var _directions = HexManager.HexDirection.values()
+	_directions.shuffle()
+	for _direction in _directions:
+		_adjacent_hex = HexManager.get_adjacent_hex(hex,_direction)
+		if _adjacent_hex != null && _adjacent_hex.structure != null:
+			#adjacent_hex_updated(_adjacent_hex)
+			if !_took_object_from_me && get_edge_open(_direction):
+				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' is OPEN and has a structure, asking if it wants the object")
+				if _adjacent_hex.structure.adjacent_hex_updated(hex):
+					print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+					_took_object_from_me = true
+			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no or that direction is closed")
+	
+	#
+	#var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	#_adacent_hexes.shuffle()
+	#var _took_object_from_me : bool = false
+	#for _adjacent_hex:Hex in _adacent_hexes:
+		#if _adjacent_hex.structure != null:
+			#adjacent_hex_updated(_adjacent_hex)
+			#if !_took_object_from_me:
+				#print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' has a structure, asking if it wants the object")
+				#if _adjacent_hex.structure.adjacent_hex_updated(hex):
+					#print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+					#_took_object_from_me = true
+			#print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no.")
+
 
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
@@ -75,47 +188,36 @@ func activate() -> void:
 	honeycomb_sprite.texture = texture
 	active = true
 	
+	super()
+	
 	#dispensing()
 
 func dispense() -> void:
 	await get_tree().create_timer(cooldown_time).timeout
 	output_object()
 
-#func dispensing() -> void:
-	#while (active):
-		
-		
-		
-		#print_rich(DEBUG_NAME,"Dispensing > Waiting for an output to be added...")
-		
-		#var _result = await on_outputs_added_or_empty()
-		#if _result[0] == on_outputs_added && output == null:
-				#if (output_on_cooldown):
-					#continue
-				#await get_tree().create_timer(adjacent_output_removal_delay).timeout
-				#output_object()
-		#elif _result[0] == on_outputs_empty:
-			#await on_outputs_added
-			#print_rich(DEBUG_NAME,"Dispensing > Outputting object!")
-			#if output == null:
-				#output_object()
-		
-		
-		
-		
-	
 
 
-func on_outputs_added_or_empty() -> Signal:
-	
-	var worker = RefCounted.new()
-	worker.add_user_signal("result")
-		
-	for _signal in [on_outputs_added,on_outputs_empty]:
-		_signal.connect(
-			func(...params):
-				worker.emit_signal("result",_signal,params),
-				CONNECT_ONE_SHOT
-		)
-	
-	return Signal(worker, "result")
+func _tl_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.TopL)
+
+func _tr_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.TopR)
+
+func _l_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.MidL)
+
+func _r_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.MidR)
+
+func _bl_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.BotL)
+
+func _br_gui_event(event:InputEvent) -> void:	
+	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
+		toggle_edge(HexManager.HexDirection.BotR)

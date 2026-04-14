@@ -28,27 +28,18 @@ func object_dropped_here(_object:Node2D) -> void:
 
 
 
-## Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#
-	##if structure != null:
-		##on_hex_clicked.connect(structure.clicked)
-		##on_hex_unclicked.connect(structure.unclicked)
-	#
-	#
-	
 
 
 func _on_gui_input(event: InputEvent) -> void:
 	
 	if event is InputEventMouse:
 		
-		if event.is_action_pressed("Click"):
-			print_rich(DEBUG_NAME,"OnGuiInput > Mouse click recieved!")
+		if event.is_action_pressed("LeftClick"):
+			print_rich(DEBUG_NAME,"OnGuiInput > LeftClick pressed recieved!")
 			on_hex_clicked.emit()
 		
-		if event.is_action_released("Click"):
-			print_rich(DEBUG_NAME,"OnGuiInput > Mouse released recieved!")
+		if event.is_action_released("LeftClick"):
+			print_rich(DEBUG_NAME,"OnGuiInput > LeftClick released recieved!")
 			on_hex_unclicked.emit()
 
 

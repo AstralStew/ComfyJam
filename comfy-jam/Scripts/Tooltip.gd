@@ -33,6 +33,7 @@ func _ready() -> void:
 
 static func set_tooltip_type(_type:TooltipType, _element:Variant):
 	
+	
 	if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > [color=orange] _type = ",str(_type),str(_element))
 	
 	var _tooltip : Array[String] = ["","",""]

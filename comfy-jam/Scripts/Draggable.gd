@@ -29,8 +29,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	
 	if event is InputEventMouseButton:
 	
-		if event.is_action_pressed("Click"):
-			print_rich(_debug_name, "OnInputEvent > Click pressed")
+		if event.is_action_pressed("LeftClick"):
+			print_rich(_debug_name, "OnInputEvent > LeftClick pressed")
 			
 			if can_drag && !dragging && !SelectionManager.has_selection:
 				print_rich(_debug_name, "OnInputEvent > Starting drag...")
@@ -44,7 +44,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 func wait_for_unclick() -> void:
 	await get_tree().process_frame
 	while (dragging):
-		if !Input.is_action_pressed("Click"):
+		if !Input.is_action_pressed("LeftClick"):
 			print_rich(_debug_name, "OnInputEvent > Stopping drag.")
 			dragging = false
 			SelectionManager.set_current_selection(null)
@@ -63,9 +63,13 @@ func _process(delta: float) -> void:
 func _on_mouse_entered() -> void:
 	hovered = true
 	#if SelectionManager.current_hover == null:
-	SelectionManager.set_current_hover(get_parent())
-	SelectionManager.instance.on_hover_change.connect(end_hover)
-	Tooltip.set_tooltip_type(Tooltip.TooltipType.OBJECT,get_parent())
+	
+	if SelectionManager.current_selection != get_parent():
+		SelectionManager.set_current_hover(get_parent())
+		SelectionManager.instance.on_hover_change.connect(end_hover)
+		
+		Tooltip.set_tooltip_type(Tooltip.TooltipType.OBJECT,get_parent())
+	
 	on_hover_start.emit()
 
 

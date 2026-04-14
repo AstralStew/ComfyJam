@@ -44,6 +44,8 @@ func activate() -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning to forage!")
 	sprite.texture = texture_1
 	active = true
+	
+	super()
 
 
 func produce() -> void:

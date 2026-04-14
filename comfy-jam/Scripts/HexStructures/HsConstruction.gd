@@ -150,6 +150,8 @@ func activate() -> void:
 	sprite.texture = texture_2
 	active = true
 	
+	super()
+	
 	check_inputs()
 
 

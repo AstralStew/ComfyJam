@@ -53,10 +53,12 @@ func fall_end() -> void:
 	_draggable.can_drag = true
 
 func hover_start() -> void:
-	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
+	if self != SelectionManager.current_selection:
+		_sprite.material = preload("res://Assets/Materials/selection_material.tres")
 	
 func hover_end() -> void:
-	_sprite.material = null
+	if self != SelectionManager.current_selection:
+		_sprite.material = null
 
 func area_entered(_area:Area2D) -> void:
 	if _draggable.dragging: return

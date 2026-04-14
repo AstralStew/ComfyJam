@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://rqujlqgewlrg" path="res://Assets/Images/Structures/HS_Impassable.png" id="3_tixn7"]
 
 [node name="HS_Impassable" type="Node2D" unique_id=1869955823]
+modulate = Color(1, 0, 1, 1)
 script = ExtResource("1_5rsbn")
 max_workers = 1
 output_candidates = Array[int]([2, 3])

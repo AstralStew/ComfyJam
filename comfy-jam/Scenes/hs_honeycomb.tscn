@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_bcsvd"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_o8x1l"]
 [ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="4_0bhcy"]
+[ext_resource type="FontFile" uid="uid://gdxm02kup507" path="res://Assets/Fonts/singleday.ttf" id="5_bcsvd"]
+
+[sub_resource type="FontVariation" id="FontVariation_o8x1l"]
+base_font = ExtResource("5_bcsvd")
+variation_embolden = 1.0
 
 [node name="HS_Honeycomb" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_0bhcy")
@@ -45,3 +50,140 @@ tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 scale = Vector2(0.825, 0.825)
 texture = ExtResource("4_0bhcy")
+
+[node name="Edge_tl" type="Label" parent="." unique_id=1018495924]
+modulate = Color(0.5254902, 0.75686276, 0.6392157, 1)
+offset_left = -12.999999
+offset_top = -10.999994
+offset_right = -4.999999
+offset_bottom = 6.0000057
+rotation = -2.019346
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_tl" unique_id=1624772338]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.537421
+offset_bottom = 10.704737
+
+[node name="Edge_tr" type="Label" parent="." unique_id=573854910]
+modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+offset_left = 3.0000005
+offset_top = -17.0
+offset_right = 12.0
+rotation = -0.97563905
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_tr" unique_id=1227382389]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347352
+offset_right = 6.537421
+offset_bottom = 10.704735
+
+[node name="Edge_l" type="Label" parent="." unique_id=971121510]
+modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+offset_left = -16.0
+offset_top = 5.0
+offset_right = -8.0
+offset_bottom = 22.0
+rotation = 3.1415927
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_l" unique_id=650429131]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.537421
+offset_bottom = 10.704736
+
+[node name="Edge_r" type="Label" parent="." unique_id=1948580910]
+modulate = Color(0.5254902, 0.75686276, 0.6392157, 1)
+offset_left = 16.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 11.0
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_r" unique_id=807313091]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704737
+
+[node name="Edge_bl" type="Label" parent="." unique_id=557388437]
+modulate = Color(0.654902, 0.35686275, 0.5019608, 1)
+offset_left = -3.999998
+offset_top = 17.0
+offset_right = 4.000002
+offset_bottom = 34.0
+rotation = 2.1642082
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_bl" unique_id=1715867000]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704736
+
+[node name="Edge_br" type="Label" parent="." unique_id=411585020]
+modulate = Color(0.5254902, 0.75686276, 0.6392157, 1)
+offset_left = 13.000002
+offset_top = 11.0
+offset_right = 21.000004
+offset_bottom = 28.0
+rotation = 0.97563905
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "<"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_br" unique_id=402829596]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704736
+
+[connection signal="gui_input" from="Edge_tl/Clickable" to="." method="_tl_gui_event"]
+[connection signal="gui_input" from="Edge_tr/Clickable" to="." method="_tr_gui_event"]
+[connection signal="gui_input" from="Edge_l/Clickable" to="." method="_l_gui_event"]
+[connection signal="gui_input" from="Edge_r/Clickable" to="." method="_r_gui_event"]
+[connection signal="gui_input" from="Edge_bl/Clickable" to="." method="_bl_gui_event"]
+[connection signal="gui_input" from="Edge_br/Clickable" to="." method="_br_gui_event"]

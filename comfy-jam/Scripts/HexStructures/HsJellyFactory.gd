@@ -43,6 +43,8 @@ func activate() -> void:
 	bee_sprite.texture = texture
 	active = true
 	
+	super()
+	
 	producing()
 
 func producing() -> void:
