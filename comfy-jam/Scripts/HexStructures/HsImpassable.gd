@@ -12,4 +12,7 @@ func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup(Impassable) > Yep!")
 	
 	max_workers = 0
-	
+
+
+func adjacent_hex_updated(_hex:Hex) -> bool:
+	return false

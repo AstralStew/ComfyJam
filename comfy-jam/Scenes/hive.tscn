@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dcdvp81o3g0on" path="res://Scripts/StructureManager.gd" id="2_hbc4g"]
 [ext_resource type="Script" uid="uid://by4a06jffcty7" path="res://Scripts/SelectionManager.gd" id="3_7s54b"]
 [ext_resource type="Texture2D" uid="uid://ce4vtmxg6dr1x" path="res://Assets/Images/Palette/wisteric-17-1x.png" id="3_spxe2"]
-[ext_resource type="Texture2D" uid="uid://by7navwjmhwp1" path="res://Assets/Images/Prototyping/brainstorm canvas.png" id="4_frvg8"]
 [ext_resource type="Script" uid="uid://b27okm36wcnw4" path="res://Scripts/ObjectManager.gd" id="4_hbc4g"]
 [ext_resource type="Texture2D" uid="uid://dy24abwgqu18u" path="res://Assets/Images/Prototyping/initialconcept.png" id="5_hbc4g"]
 [ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="6_7s54b"]
@@ -21,11 +20,13 @@
 [ext_resource type="Script" uid="uid://djkmutrigu2xm" path="res://Scripts/Tooltip.gd" id="15_kvkj5"]
 [ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="18_lxibn"]
 [ext_resource type="Script" uid="uid://0k0hq0t6if6i" path="res://Scripts/BuildMenu.gd" id="19_lrhcs"]
+[ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="20_pylrw"]
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="21_ivwil"]
 [ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="21_j5hfv"]
 [ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="21_k6nk5"]
 [ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
 [ext_resource type="PackedScene" uid="uid://8vi6vmat5vwl" path="res://Scenes/larvae.tscn" id="24_k6nk5"]
+[ext_resource type="Texture2D" uid="uid://1qt5pb31h71x" path="res://Assets/Images/Structures/HS_KissingBooth.png" id="26_fdwxk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -35,6 +36,18 @@ shader_parameter/dithering = true
 shader_parameter/dithering_size = 6
 shader_parameter/resolution_scale = 1
 shader_parameter/quantization_level = 14
+
+[sub_resource type="Gradient" id="Gradient_bcsvd"]
+offsets = PackedFloat32Array(0.3843159, 0.5378198)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pylrw"]
+gradient = SubResource("Gradient_bcsvd")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.52)
+fill_to = Vector2(1.075, 0)
 
 [sub_resource type="FontVariation" id="FontVariation_pylrw"]
 base_font = ExtResource("18_lxibn")
@@ -129,7 +142,7 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdl44"]
-bg_color = Color(0.06100855, 0.03876, 0.15170373, 0.666)
+bg_color = Color(0.06119998, 0.039, 0.15, 0.44705883)
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5hfv"]
@@ -214,12 +227,11 @@ metadata/_edit_vertical_guides_ = [307.0, 353.0]
 
 [node name="HexManager" type="Node" parent="." unique_id=715828618]
 script = ExtResource("1_3ey1d")
-grid_height = 7
-grid_width = 6
+grid_height = 8
+grid_width = 7
 starting_impassable = 3
 starting_holes_with_workers = 1
 starting_nurseries_with_workers = 1
-starting_honeycomb_with_workers = 8
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
 
 [node name="StructureManager" type="Node" parent="." unique_id=1466089573]
@@ -253,284 +265,261 @@ render_target_update_mode = 4
 position = Vector2(320, 320)
 texture = ExtResource("9_08nax")
 
-[node name="HS_Impassable" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1869955823 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-234, -235)
-scale = Vector2(1.35, 1.35)
+[node name="BackHexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1109020140]
+position = Vector2(99, 88)
+scale = Vector2(1.25, 1.25)
 
-[node name="HS_Impassable33" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=153677764 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-266, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=762167946 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-24.444447, -2.2222214)
 
-[node name="HS_Impassable48" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=2111219871 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-334, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable33" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=153677764 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-48.148148, -43.703697)
 
-[node name="HS_Impassable34" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=937086966 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-201, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable48" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2111219871 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-98.51852, -43.703697)
 
-[node name="HS_Impassable35" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=637589488 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-133, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable34" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=937086966 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(0, -43.703697)
 
-[node name="HS_Impassable36" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1185364750 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-66, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable35" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=637589488 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(50.37036, -43.703697)
 
-[node name="HS_Impassable37" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1414294079 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(1, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable36" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1185364750 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(100, -43.703697)
 
-[node name="HS_Impassable38" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=253411228 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(69, -291)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable37" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1414294079 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(149.62962, -43.703697)
 
-[node name="HS_Impassable39" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=957155314 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(137.99998, -290)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable38" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=253411228 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(199.99998, -43.703697)
 
-[node name="HS_Impassable42" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1161834 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-201, 164)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable39" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=957155314 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(251.1111, -42.96296)
 
-[node name="HS_Impassable43" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1589000638 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-133, 164)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable42" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1161834 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-24.8, 338.93347)
 
-[node name="HS_Impassable44" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=938149396 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-66, 164)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable43" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1589000638 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(25.570362, 338.93347)
 
-[node name="HS_Impassable45" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1282657361 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(1, 164)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable44" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=938149396 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(75.20001, 338.93347)
 
-[node name="HS_Impassable46" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1090466040 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(69, 164)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable45" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1282657361 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(124.82963, 338.93347)
 
-[node name="HS_Impassable47" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=91566608 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(137.99998, 165)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable46" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1090466040 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(175.2, 338.93347)
 
-[node name="HS_Impassable40" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1086210280 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(272, -290)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable47" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=91566608 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(226.31111, 339.67413)
 
-[node name="HS_Impassable41" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=776056224 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(205, -290)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable40" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1086210280 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(350.37036, -42.96296)
 
-[node name="HS_Impassable2" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=263836719 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-234, -117.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable41" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=776056224 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(300.74072, -42.96296)
 
-[node name="HS_Impassable3" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=2036482899 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-234, -3)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable2" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=263836719 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-24.444447, 85.18518)
 
-[node name="HS_Impassable4" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=809519041 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-234, 106.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable3" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2036482899 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-24.444447, 169.62962)
 
-[node name="HS_Impassable9" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=712815337 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-267, -177.00002)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable4" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=809519041 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-24.444447, 251.11108)
 
-[node name="HS_Impassable10" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1906805242 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-267, -59.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable9" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=712815337 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-48.88889, 40.74073)
 
-[node name="HS_Impassable11" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=815796462 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-267, 55)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable10" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1906805242 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-48.88889, 128.14815)
 
-[node name="HS_Impassable12" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=53709653 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-267, 164.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable11" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=815796462 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-48.88889, 212.59259)
 
-[node name="HS_Impassable13" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1731828845 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-335, -177.00002)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable12" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=53709653 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-48.88889, 294.07404)
 
-[node name="HS_Impassable14" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1399054435 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-335, -59.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable13" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1731828845 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-99.25926, 40.74073)
 
-[node name="HS_Impassable15" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1259977114 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-335, 55)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable14" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1399054435 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-99.25926, 128.14815)
 
-[node name="HS_Impassable16" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1461391307 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-335, 164.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable15" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1259977114 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-99.25926, 212.59259)
 
-[node name="HS_Impassable5" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1939639387 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-300, -234)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable16" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1461391307 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-99.25926, 294.07404)
 
-[node name="HS_Impassable6" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1091510197 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-300, -116.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable5" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1939639387 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-73.333336, -1.4814796)
 
-[node name="HS_Impassable7" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=212273775 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-300, -2)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable6" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1091510197 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-73.333336, 85.92592)
 
-[node name="HS_Impassable8" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=926832354 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-300, 109.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable7" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=212273775 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-73.333336, 170.37036)
 
-[node name="HS_Impassable51" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1538202595 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(-300, 223)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable8" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=926832354 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-73.333336, 253.33331)
 
-[node name="HS_Impassable17" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1556440035 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(304, -235)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable52" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1869955823 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(399.19998, 296.474)
 
-[node name="HS_Impassable18" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1224070195 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(304, -117.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable57" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1566582406 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(424.00012, 338.87405)
 
-[node name="HS_Impassable19" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=677737131 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(304, -3)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable53" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1838881812 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(423.52585, -1.4814796)
 
-[node name="HS_Impassable20" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1960990116 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(304, 106.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable54" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=972599605 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(423.52585, 85.92592)
 
-[node name="HS_Impassable21" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1565543321 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(271, -177.00003)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable55" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=959466419 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(423.52585, 170.37036)
 
-[node name="HS_Impassable22" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=837017667 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(271, -59.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable56" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2102694574 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(423.52582, 254.13335)
 
-[node name="HS_Impassable23" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=979102975 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(271, 55)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable51" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1538202595 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(-73.333336, 337.03702)
 
-[node name="HS_Impassable24" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1058336881 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(271, 164.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable17" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1556440035 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(374.07404, -2.2222214)
 
-[node name="HS_Impassable28" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1021668635 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(203, 164.99997)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable18" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1224070195 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(374.07404, 85.18518)
 
-[node name="HS_Impassable29" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=68204715 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(238, -234.00002)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable19" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=677737131 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(374.07404, 169.62962)
 
-[node name="HS_Impassable30" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1400807000 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(238, -116.000015)
-scale = Vector2(1.35, 1.35)
+[node name="HS_Impassable20" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1960990116 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(374.07404, 254.31107)
 
-[node name="HS_Impassable31" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=591012842 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(238, -2)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable32" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=154979724 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(238, 109.99997)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable49" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=562992466 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(339, -291)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable25" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1277003781 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(338, -177.00002)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable26" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1451561764 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(338, -59.000015)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable27" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=1520826396 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(338, 55)
-scale = Vector2(1.35, 1.35)
-
-[node name="HS_Impassable50" parent="SubViewportContainer/SubViewport/FarBackgroundTest" unique_id=549818447 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.42700002)
-position = Vector2(338, 164.99997)
-scale = Vector2(1.35, 1.35)
-
-[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=195320496]
+[node name="HS_Impassable21" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1565543321 instance=ExtResource("8_pylrw")]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.133)
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(349.62964, 40.740723)
 
-[node name="Pixelartexample" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=138267212]
+[node name="HS_Impassable22" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=837017667 instance=ExtResource("8_pylrw")]
 visible = false
-scale = Vector2(0.625, 0.625)
-texture = ExtResource("4_frvg8")
-centered = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(349.62964, 128.14815)
+
+[node name="HS_Impassable23" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=979102975 instance=ExtResource("8_pylrw")]
+visible = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(349.62964, 212.59259)
+
+[node name="HS_Impassable24" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1058336881 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(324.82965, 339.67413)
+
+[node name="HS_Impassable28" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1021668635 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(274.4593, 339.67413)
+
+[node name="HS_Impassable29" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=68204715 instance=ExtResource("8_pylrw")]
+visible = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(325.18518, -1.4814911)
+
+[node name="HS_Impassable30" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1400807000 instance=ExtResource("8_pylrw")]
+visible = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(325.18518, 85.92592)
+
+[node name="HS_Impassable31" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=591012842 instance=ExtResource("8_pylrw")]
+visible = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(325.18518, 170.37036)
+
+[node name="HS_Impassable32" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=154979724 instance=ExtResource("8_pylrw")]
+visible = false
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(325.18518, 253.33331)
+
+[node name="HS_Impassable49" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=562992466 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(400, -43.703697)
+
+[node name="HS_Impassable25" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1277003781 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(399.25922, 40.74073)
+
+[node name="HS_Impassable26" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1451561764 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(399.25922, 128.14815)
+
+[node name="HS_Impassable27" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1520826396 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(399.2592, 211.79259)
+
+[node name="HS_Impassable50" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=549818447 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
+position = Vector2(374.45923, 339.67413)
 
 [node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
 position = Vector2(344, 392)
 scale = Vector2(2.775, 1.505)
 texture = ExtResource("8_frvg8")
 
+[node name="Vignette" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1228271874]
+modulate = Color(1, 1, 1, 0.69803923)
+offset_left = -164.0
+offset_top = -219.0
+offset_right = 802.0
+offset_bottom = 838.0
+texture = SubResource("GradientTexture2D_pylrw")
+
 [node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
-position = Vector2(119, 88)
-scale = Vector2(1.35, 1.35)
+position = Vector2(99, 88)
+scale = Vector2(1.25, 1.25)
 
 [node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Hexes" unique_id=1045948358]
 visible = false
@@ -573,6 +562,42 @@ fall_on_setup = true
 
 [node name="Royal Jelly" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=808926887 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(224, 544)
+fall_on_setup = true
+
+[node name="Nectar2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1031934735 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+position = Vector2(251, 507)
+fall_on_setup = true
+
+[node name="Pollen2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1703529730 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+position = Vector2(363, 491)
+fall_on_setup = true
+
+[node name="Royal Jelly2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1608661769 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+position = Vector2(411, 499)
+fall_on_setup = true
+
+[node name="Nectar3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1610233612 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+position = Vector2(421, 492)
+fall_on_setup = true
+
+[node name="Pollen3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1748823959 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+position = Vector2(533, 476)
+fall_on_setup = true
+
+[node name="Royal Jelly3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1967495802 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+position = Vector2(581, 484)
+fall_on_setup = true
+
+[node name="Nectar4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1151535108 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+position = Vector2(132, 487)
+fall_on_setup = true
+
+[node name="Pollen4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=635721852 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+position = Vector2(244, 471)
+fall_on_setup = true
+
+[node name="Royal Jelly4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1589057186 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+position = Vector2(292, 479)
 fall_on_setup = true
 
 [node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 instance=ExtResource("24_k6nk5")]
@@ -772,7 +797,21 @@ offset_right = 364.0
 offset_bottom = 432.0
 script = ExtResource("19_lrhcs")
 
-[node name="TL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
+[node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=388707858]
+scale = Vector2(1.35, 1.35)
+points = PackedVector2Array(0, -25.18518, 22.222229, -11.851868, 22.222229, 12.59259, 0, 25.18518, -22.222214, 12.59259, -22.222214, -11.851868)
+closed = true
+width = 3.0
+default_color = Color(0.78200006, 0.85, 0.71400005, 0.4392157)
+texture_mode = 2
+
+[node name="Overlay" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1372379963]
+modulate = Color(1, 1, 1, 0.15686275)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("20_pylrw")
+
+[node name="Hole" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -788,12 +827,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pylrw")
 
-[node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/TL" unique_id=1858676053]
+[node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Hole" unique_id=1858676053]
 position = Vector2(23, 23)
 scale = Vector2(0.17587829, 0.17587829)
 texture = ExtResource("21_ivwil")
 
-[node name="TR" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
+[node name="Honeycomb" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -809,13 +849,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/TR" unique_id=502927539]
+[node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" unique_id=502927539]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 position = Vector2(23, 23)
 scale = Vector2(0.74, 0.74)
 texture = ExtResource("21_k6nk5")
 
-[node name="L" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
+[node name="Nursery" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -831,12 +872,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/L" unique_id=1446871648]
+[node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Nursery" unique_id=1446871648]
 position = Vector2(23.000015, 24)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("21_j5hfv")
 
-[node name="R" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
+[node name="Jelly Factory" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -852,12 +894,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/R" unique_id=1279538699]
+[node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" unique_id=1279538699]
 position = Vector2(23.000015, 24)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("22_j5hfv")
 
-[node name="BL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
+[node name="Dancepad" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -873,7 +916,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="BR" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
+[node name="Kiss Station" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
+self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -888,6 +932,11 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+
+[node name="HsKissStation" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" unique_id=264155649]
+position = Vector2(22.999998, 23)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("26_fdwxk")
 
 [node name="BR2" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=305304209]
 visible = false
@@ -970,7 +1019,21 @@ offset_bottom = 5.0
 mouse_filter = 2
 
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/DarkOverlay" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_overlay_gui_input"]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TL" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tl_gui_input"]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TR" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tr_gui_input"]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/L" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_l_gui_input"]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/R" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_r_gui_input"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_hole_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Hole"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_honeycomb_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Honeycomb"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Honeycomb"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_nursery_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Nursery"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Nursery"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_jelly_factory_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["JellyFactory"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["JellyFactory"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_dancepad_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Dancepad"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Dancepad"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_kiss_station_factory_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["KissStation"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["KissStation"]]

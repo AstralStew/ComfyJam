@@ -38,7 +38,9 @@ func _setup() -> void:
 	#return true
 
 func activate() -> void:
-	print_rich(DEBUG_NAME,"WorkerDroppedHere > Worker assigned, beginning to forage!")
+	if active: return
+	
+	print_rich(DEBUG_NAME,"Activate > Activated, beginning to forage!")
 	sprite.visible = true
 	active = true
 	

@@ -27,17 +27,6 @@ func _setup() -> void:
 
 
 
-#func worker_dropped_here(_worker:WorkerBee) -> bool:
-	#if !super(_worker):
-		## Worker was not used by base class, cancelling here
-		#return false
-	#
-	## Activate foraging
-	#if !active && assigned_workers == 1:
-		#
-	#
-	#return true
-
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
 	bee_sprite.texture = texture

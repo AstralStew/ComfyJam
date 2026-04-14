@@ -1,7 +1,7 @@
 class_name StructureManager extends Node
 const DEBUG_NAME : String = "[b][StructureManager][/b] "
 
-enum StructureType {BLANK,HOLE,JELLY_FACTORY,NURSERY,CONSTRUCTION,HONEYCOMB,IMPASSABLE}
+enum StructureType {BLANK,HOLE,JELLY_FACTORY,NURSERY,CONSTRUCTION,HONEYCOMB,IMPASSABLE,KISS_STATION}
 
 static var instance : StructureManager = null
 
@@ -11,6 +11,7 @@ static var nursery_prefab = preload("res://Scenes/hs_nursery.tscn")
 static var construction_prefab = preload("res://Scenes/hs_construction.tscn")
 static var honeycomb_prefab = preload("res://Scenes/hs_honeycomb.tscn")
 static var impassable_prefab = preload("res://Scenes/hs_impassable.tscn")
+static var kiss_station_prefab = preload("res://Scenes/hs_kiss_station.tscn")
 
 static var build_menu : BuildMenu = null
 
@@ -67,5 +68,16 @@ static func set_structure(_hex:Hex,_type:StructureType,_construction_type:Struct
 			_hex.add_child(_new_structure)
 			_hex.structure = _new_structure
 			_hex.structure._setup()
+		StructureType.KISS_STATION:
+			print_rich(DEBUG_NAME,"SetStructure > Type = KISS_STATION, creating a Kiss Station structure ")
+			_new_structure = kiss_station_prefab.instantiate()
+			_hex.add_child(_new_structure)
+			_hex.structure = _new_structure
+			_hex.structure._setup()
+	
+	#Temporary
+	if _type != StructureType.CONSTRUCTION && _type != StructureType.IMPASSABLE && !_hex.structure.active:
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
 	
 	return true

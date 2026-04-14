@@ -89,6 +89,7 @@ static func create_object(_type:ObjectType,_position:Vector2) -> Node2D:
 
 static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7) -> void:
 	#_object.process_mode = Node.PROCESS_MODE_DISABLED
+	_object.hide_outline()
 	_object.set_script(null)
 	for i in _object.get_child_count():
 		if i > 0: _object.get_child(i).queue_free()

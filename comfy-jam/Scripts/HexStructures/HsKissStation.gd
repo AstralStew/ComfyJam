@@ -1,6 +1,6 @@
-class_name HexStructureNursery extends HexStructure
+class_name HexStructureKissStation extends HexStructure
 func _debug_name() -> String:
-	return "[b][" + get_parent().name + "/HsNursery][/b] "
+	return "[b][" + get_parent().name + "/HsKissStation][/b] "
 
 var texture_1 : Texture = null
 var texture_2 : Texture = null
@@ -17,25 +17,25 @@ var sprite : Sprite2D = null
 
 @export_category("READ ONLY")
 
-@export var producing : bool = false
+@export var kissing : bool = false
 
 func _setup() -> void:
 	super()
 	
-	print_rich(DEBUG_NAME,"Setup(Nursery) > Yep!")
-	sprite = $HsNursery
-	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
-	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
+	print_rich(DEBUG_NAME,"Setup(KissStation) > Yep!")
+	sprite = $HsKissStation
+	texture_1 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee.png")
+	texture_2 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee_kiss.png")
 	
 	max_workers = 1
 
 
-func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
-	if !active || producing: return false
+func nectar_dropped_here(_nectar:Nectar) -> bool:
+	if !active || kissing: return false
 	
-	print_rich(DEBUG_NAME,"NectarDroppedHere > Using Royal Jelly to start production...")
-	ObjectManager.move_and_destroy(_royal_jelly,hex.global_position)
-	produce()
+	print_rich(DEBUG_NAME,"NectarDroppedHere > Using Nectar to start kissing...")
+	ObjectManager.move_and_destroy(_nectar,hex.global_position)
+	kiss()
 	
 	return true
 
@@ -48,29 +48,29 @@ func activate() -> void:
 	super()
 
 
-func produce() -> void:
-	producing = true
+func kiss() -> void:
+	kissing = true
 	
-	await start_production()
+	await start_kissing()
 		
 	await get_tree().create_timer(production_time * speed_multiplier).timeout
 	
-	await finish_production()
+	await finish_kissing()
 	
 	add_object_to_output()
 	output_object()
 	
 	await on_outputs_empty
 	
-	producing = false
+	kissing = false
 
 
 
-func start_production() -> void:
+func start_kissing() -> void:
 	sprite.texture = texture_2
 	await get_tree().create_timer(startup_time).timeout
 	
 
-func finish_production() -> void:
+func finish_kissing() -> void:
 	sprite.texture = texture_1
 	await get_tree().create_timer(wrapup_time).timeout

@@ -10,6 +10,7 @@ var hex : Hex = null
 
 @export var output_amount : int = 1
 @export var output_cooldown : float = 0.1
+@export var output_scale : float = 0.64
 @export var output_candidates : Array[ObjectManager.ObjectType] = []
 
 @export var adjacent_output_removal_delay : float = 0.5
@@ -43,6 +44,7 @@ func _setup() -> void:
 	
 	on_output_object.connect(update_adjacent_hexes)
 	on_activate.connect(update_adjacent_hexes)
+	on_output_object_removed.connect(ask_others_to_update_adjacent_hexes)
 	
 	on_outputs_added.connect(
 		func():
@@ -74,7 +76,7 @@ func update_adjacent_hexes() -> void:
 	var _took_object_from_me : bool = false
 	for _adjacent_hex:Hex in _adacent_hexes:
 		if _adjacent_hex.structure != null:
-			#adjacent_hex_updated(_adjacent_hex)
+			#if _adjacent_hex.structure is not HexStructureHoneycomb: adjacent_hex_updated(_adjacent_hex)
 			if !_took_object_from_me:
 				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' has a structure, asking if it wants the object")
 				if _adjacent_hex.structure.adjacent_hex_updated(hex):
@@ -82,6 +84,12 @@ func update_adjacent_hexes() -> void:
 					_took_object_from_me = true
 			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no.")
 
+func ask_others_to_update_adjacent_hexes() -> void:
+	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	_adacent_hexes.shuffle()
+	for _adjacent_hex:Hex in _adacent_hexes:
+		if _adjacent_hex.structure != null:
+			_adjacent_hex.structure.update_adjacent_hexes()
 
 func adjacent_hex_updated(_hex:Hex) -> bool:
 	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Checking adjacent hex '"+_hex.name+"'...")
@@ -133,8 +141,9 @@ func output_object() -> bool:
 		return false
 	
 	# Create an object from the last chosen returnable type
-	output = ObjectManager.create_object(_outputs.pop_front(),global_position)
-	output.global_scale *= 0.8
+	output = ObjectManager.create_object(_outputs.pop_front(),global_position - Vector2(0,6))
+	output.global_scale *= output_scale
+	output.show_outline() # .material = preload("res://Assets/Materials/selection_material.tres")
 	
 	on_output_object.emit()
 	

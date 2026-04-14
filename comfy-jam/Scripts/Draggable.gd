@@ -79,8 +79,13 @@ func _on_mouse_exited() -> void:
 		if SelectionManager.current_hover == get_parent():
 			Tooltip.hide_tooltip()
 			SelectionManager.set_current_hover(null)
+		
+		if HexManager.last_hovered_hex != null:
+			HexManager.last_hovered_hex._on_mouse_entered()
+		
 		hovered = false
 		on_hover_end.emit()
+	
 
 func end_hover(_new_object) -> void:
 	SelectionManager.instance.on_hover_change.disconnect(end_hover)

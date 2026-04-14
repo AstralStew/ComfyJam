@@ -38,12 +38,11 @@ func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 	
 	match _structure:
 		StructureManager.StructureType.CONSTRUCTION:
-			print_rich(DEBUG_NAME,"SetConstructionType -> [color=999966]Structure cannot be CONSTRUCTION! Cancelling")
+			push_error(DEBUG_NAME,"SetConstructionType -> [color=999966]Structure cannot be CONSTRUCTION! Cancelling")
 			return false
 		StructureManager.StructureType.BLANK:
-			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = BLANK...")
-			inputs = []
-			build_time = 1
+			push_error(DEBUG_NAME,"SetConstructionType -> [color=999966]Structure cannot be BLANK! Cancelling")
+			return false
 		StructureManager.StructureType.HOLE:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = HOLE...")
 			inputs = []
@@ -68,9 +67,18 @@ func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 				ObjectManager.ObjectType.ROYAL_JELLY,
 				ObjectManager.ObjectType.ROYAL_JELLY,
 				ObjectManager.ObjectType.NECTAR, 
-				ObjectManager.ObjectType.POLLEN]
+				ObjectManager.ObjectType.NECTAR]
 			build_time = 2
-			check_inputs()
+		StructureManager.StructureType.KISS_STATION:
+			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = KISS_STATION...")
+			inputs = [
+				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.NECTAR, 
+				ObjectManager.ObjectType.NECTAR]
+			build_time = 10
+	
+	check_inputs()
 	
 	return true
 
@@ -82,7 +90,7 @@ func nectar_dropped_here(_nectar:Nectar) -> bool:
 		return false
 	
 	print_rich(DEBUG_NAME,"NectarDroppedHere > Removing a Nectar from the inputs...")
-	_nectar.queue_free()
+	ObjectManager.move_and_destroy(_nectar,hex.global_position)
 	
 	inputs.remove_at(inputs.rfind(ObjectManager.ObjectType.NECTAR))
 	check_inputs()
@@ -97,7 +105,7 @@ func pollen_dropped_here(_pollen:Pollen) -> bool:
 		return false
 	
 	print_rich(DEBUG_NAME,"PollenDroppedHere > Removing a Pollen from the inputs...")
-	_pollen.queue_free()
+	ObjectManager.move_and_destroy(_pollen,hex.global_position)
 	
 	inputs.remove_at(inputs.rfind(ObjectManager.ObjectType.POLLEN))
 	check_inputs()
@@ -111,8 +119,8 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 		print_rich(DEBUG_NAME,"RoyalJellyDroppedHere > Not present in inputs, returning false")
 		return false
 	
-	print_rich(DEBUG_NAME,"RoyalJellyDroppedHere > Removing a Royal Jelly from the inputs...")
-	_royal_jelly.queue_free()
+	print_rich(DEBUG_NAME,"RoyalJellyDroppedHere > Removing a Royal Jelly from the inputs...")	
+	ObjectManager.move_and_destroy(_royal_jelly,hex.global_position)
 	
 	inputs.remove_at(inputs.rfind(ObjectManager.ObjectType.ROYAL_JELLY))
 	check_inputs()
@@ -129,7 +137,8 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 		print_rich(DEBUG_NAME,"WorkerDroppedHere > Not present in inputs, returning false")
 		return false
 	
-	print_rich(DEBUG_NAME,"WorkerDroppedHere > Removing a Worker from the inputs...")
+	print_rich(DEBUG_NAME,"WorkerDroppedHere > Removing a Worker from the inputs...")	
+	ObjectManager.move_and_destroy(_worker,hex.global_position)
 	_worker.queue_free()
 	
 	inputs.remove_at(inputs.rfind(ObjectManager.ObjectType.WORKER))
@@ -139,6 +148,8 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 
 
 func check_inputs() -> void:
+	if !active || building: return
+	
 	await get_tree().process_frame
 	if inputs.size() == 0:
 		print_rich(DEBUG_NAME,"CheckInputs > No inputs remain! Starting build")
