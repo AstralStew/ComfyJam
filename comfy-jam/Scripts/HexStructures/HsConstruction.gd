@@ -2,7 +2,6 @@ class_name HexStructureConstruction extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsConstruction][/b] "
 
-var texture_1 : Texture = null
 var texture_2 : Texture = null
 
 var sprite : Sprite2D = null
@@ -27,8 +26,7 @@ func _setup() -> void:
 	
 	print_rich(DEBUG_NAME,"Setup > Yep!")
 	sprite = $HsConstruction
-	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
-	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
+	texture_2 = preload("res://Assets/Images/Structures/HS_UnderConstruction_Bee.png")
 	max_workers = 1
 
 func adjacent_hex_updated(_hex:Hex) -> bool:
@@ -149,7 +147,7 @@ func check_inputs() -> void:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning construction!")
-	sprite.texture = texture_1
+	sprite.texture = texture_2
 	active = true
 	
 	check_inputs()
@@ -177,5 +175,5 @@ func start_building() -> void:
 	
 
 func finish_building() -> void:
-	sprite.texture = texture_1
+	#sprite.texture = texture_1
 	await get_tree().create_timer(wrapup_time).timeout

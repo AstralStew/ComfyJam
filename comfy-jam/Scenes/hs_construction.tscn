@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drglakt16w3pq" path="res://Scripts/HexStructures/HsConstruction.gd" id="1_6t10m"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_cmamy"]
-[ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="3_ldro2"]
+[ext_resource type="Texture2D" uid="uid://cx77knfucweu3" path="res://Assets/Images/Structures/HS_UnderConstruction.png" id="3_6t10m"]
 
 [node name="HS_Construction" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_6t10m")
@@ -24,6 +24,5 @@ texture = ExtResource("2_cmamy")
 expand_mode = 1
 
 [node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
-modulate = Color(0.22149003, 0.22117391, 0, 1)
 position = Vector2(0, 1)
-texture = ExtResource("3_ldro2")
+texture = ExtResource("3_6t10m")

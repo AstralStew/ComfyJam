@@ -15,9 +15,10 @@ static var instance : HexManager = null
 @export var grid_spacing = 50
 @export var hexgrid : Dictionary[int,Array] = {}
 
-@export var starting_empty_holes = 7
-@export var starting_holes_with_workers = 1
-@export var starting_nurseries_with_workers = 1
+@export var starting_empty_holes = 0
+@export var starting_holes_with_workers = 0
+@export var starting_nurseries_with_workers = 0
+@export var starting_honeycomb_with_workers = 0
 
 
 @export_category("READ ONLY")
@@ -94,12 +95,12 @@ func _ready() -> void:
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting nursery with worker ("+_hex.name+")")
 	
 	# --- TEMP --- #
-	#for i in 5:
-		#_hex = get_random_hex(true)
-		#StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
-		#_hex.structure.assigned_workers = 1
-		#_hex.structure.activate()
-		#if debug: print_rich(DEBUG_NAME,"Ready > Created starting honeycomb with worker ("+_hex.name+")")
+	for i in starting_honeycomb_with_workers:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting honeycomb with worker ("+_hex.name+")")
 	# --- /TEMP --- #
 	
 	on_hex_clicked.connect(test_hex)
