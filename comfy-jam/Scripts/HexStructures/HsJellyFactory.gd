@@ -15,7 +15,9 @@ var bee_sprite : Sprite2D = null
 
 
 func _setup() -> void:
-	print_rich(DEBUG_NAME,"Setup > Yep!")
+	super()
+	
+	print_rich(DEBUG_NAME,"Setup(JellyFactory) > Yep!")
 	bee_sprite = $HsJellyFactory
 	texture = preload("res://Assets/Images/Structures/HS_JellyFactory_Bee.png")
 	

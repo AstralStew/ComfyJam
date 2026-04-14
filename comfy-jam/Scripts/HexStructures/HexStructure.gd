@@ -9,15 +9,26 @@ var hex : Hex = null
 @export var assigned_workers : int = 0
 
 @export var output_amount : int = 1
+@export var output_cooldown : float = 0.1
 @export var output_candidates : Array[ObjectManager.ObjectType] = []
 
+@export var adjacent_output_removal_delay : float = 0.5
 
 @export_category("READ ONLY")
 
 @export var active : bool = false
 @export var output : Node2D = null
 @export var _outputs : Array[ObjectManager.ObjectType] = []
+@export var output_on_cooldown : bool = false
 
+@export var at_max_workers : bool = false :
+	get: return assigned_workers >= max_workers
+
+
+
+signal on_output_object
+signal on_output_object_removed
+signal on_outputs_added
 signal on_outputs_empty
 
 ## Called when the node enters the scene tree for the first time.
@@ -28,16 +39,88 @@ signal on_outputs_empty
 
 
 func _setup() -> void:
-	print_rich(DEBUG_NAME,"Setup > Default (does nothing)")
+	print_rich(DEBUG_NAME,"Setup > Calculating adjacent hexes")
+	
+	on_output_object.connect(update_adjacent_hexes)
+	
+	on_outputs_added.connect(
+		func():
+			if HexManager.last_hovered_hex == hex:
+				Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
+	)
+	on_output_object_removed.connect(
+		func():
+			if HexManager.last_hovered_hex == hex:
+				Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
+	)
+	
+	
+	# Add signals from each adjacent hex structure 
+	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	_adacent_hexes.shuffle()
+	for _adjacent_hex:Hex in _adacent_hexes:
+		if _adjacent_hex.structure != null:
+			print_rich(DEBUG_NAME,"Setup > Checking adjacent hex '"+_adjacent_hex.name+"''s structure '"+_adjacent_hex.structure.name+"'")
+			#_adjacent_hex.structure.on_output_object.connect(adjacent_hex_updated.bind(_adjacent_hex))
+			#_adjacent_hex.structure.on_output_object_removed.connect(adjacent_hex_updated.bind(_adjacent_hex))
+			_adjacent_hex.structure.adjacent_hex_updated(hex)
+
+func update_adjacent_hexes() -> void:
+	await get_tree().create_timer(adjacent_output_removal_delay).timeout
+	
+	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	_adacent_hexes.shuffle()
+	for _adjacent_hex:Hex in _adacent_hexes:
+		if _adjacent_hex.structure != null:
+			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' has a structure, asking if it wants the object")
+			if _adjacent_hex.structure.adjacent_hex_updated(hex):
+				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+				return
+			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no.")
 
 
-func add_object_to_output() -> void:
-	if output_candidates.is_empty():
-		print_rich("AddObjectToOutput > No output candidates assigned, cancelling")
+func adjacent_hex_updated(_hex:Hex) -> bool:
+	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Checking adjacent hex '"+_hex.name+"'...")
+	
+	if _hex.structure == null:
+		print_rich(DEBUG_NAME,"AdjacentHexUpdated > Adjacent hex '"+_hex.name+"' has no structure, returning")
+		return false
+	
+	#if !_hex.structure.on_output_object.is_connected(adjacent_hex_updated.bind(_hex)):
+		#_hex.structure.on_output_object.connect(adjacent_hex_updated.bind(_hex))
+	#if !_hex.structure.on_output_object_removed.is_connected(adjacent_hex_updated.bind(_hex)):
+		#_hex.structure.on_output_object_removed.connect(adjacent_hex_updated.bind(_hex))
+	
+	if !_hex.structure.active:
+		print_rich(DEBUG_NAME,"AdjacentHexUpdated > Adjacent hex '"+_hex.name+"''s structure '"+_hex.structure.name+"' is not active, returning")
+		return false
+	
+	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Hex structure '"+_hex.structure.name+"' valid, checking its output")
+	#await get_tree().create_timer(adjacent_output_removal_delay).timeout
+	if _hex.structure.output != null:
+		if object_dropped_here(_hex.structure.output):
+			_hex.structure.output_removed(null)
+			return true
+	
+	return false
+	
+
+
+func add_object_to_output(_optional_object : int = -1) -> void:
+	if _optional_object != -1:
+		_outputs.append(_optional_object as ObjectManager.ObjectType)
+		on_outputs_added.emit()
 		return
 	
-	for i in output_amount:
-		_outputs.append(output_candidates.pick_random())
+	else:
+		if output_candidates.is_empty():
+			print_rich("AddObjectToOutput > No output candidates assigned, cancelling")
+			return
+		
+		for i in output_amount:
+			_outputs.append(output_candidates.pick_random())
+	
+	on_outputs_added.emit()
 
 
 func output_object() -> bool:
@@ -45,8 +128,15 @@ func output_object() -> bool:
 		print_rich("AddObjectToOutput > No outputs, cancelling")
 		return false
 	
+	if output != null:
+		print_rich("AddObjectToOutput > Already have an output ('"+output.name+"'), cancelling")
+		return false
+	
 	# Create an object from the last chosen returnable type
-	output = ObjectManager.create_object(_outputs.pop_back(),global_position)
+	output = ObjectManager.create_object(_outputs.pop_front(),global_position)
+	output.global_scale *= 0.8
+	
+	on_output_object.emit()
 	
 	print_rich(DEBUG_NAME,"OutputObject > Popped out '"+output.name+"'! Waiting for player to grab...")
 	
@@ -55,12 +145,24 @@ func output_object() -> bool:
 	return true
 
 
+
 func output_removed(_object:Node2D):
-	_object.on_dragged.disconnect(output_removed.bind(_object))
+	if _object != null: _object.on_dragged.disconnect(output_removed.bind(_object))
+	output = null
 	
-	if !output_object():
+	on_output_object_removed.emit()
+	
+	if _outputs.is_empty():
 		print_rich("OutputRemoved > No outputs left!")
 		on_outputs_empty.emit()
+		return
+	
+	output_on_cooldown = true
+	await get_tree().create_timer(output_cooldown).timeout
+	output_on_cooldown = false
+	
+	output_object()
+	
 
 
 

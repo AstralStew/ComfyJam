@@ -18,7 +18,9 @@ var sprite : Sprite2D = null
 
 
 func _setup() -> void:
-	print_rich(DEBUG_NAME,"Setup > Yep!")
+	super()
+	
+	print_rich(DEBUG_NAME,"Setup(Hole) > Yep!")
 	sprite = $BeeSprite
 	
 	max_workers = 1

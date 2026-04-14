@@ -23,12 +23,17 @@ var sprite : Sprite2D = null
 @export var build_time : float = -1
 
 func _setup() -> void:
+	super()
+	
 	print_rich(DEBUG_NAME,"Setup > Yep!")
 	sprite = $HsConstruction
 	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
-	
 	max_workers = 1
+
+func adjacent_hex_updated(_hex:Hex) -> bool:
+	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Ignoring adjacent hex '"+_hex.name+"' due to being a Construction and not caring")
+	return false
 
 func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 	construction_type = _structure
@@ -59,6 +64,15 @@ func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 				ObjectManager.ObjectType.POLLEN, 
 				ObjectManager.ObjectType.POLLEN]
 			build_time = 2
+		StructureManager.StructureType.HONEYCOMB:
+			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = HONEYCOMB...")
+			inputs = [
+				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.NECTAR, 
+				ObjectManager.ObjectType.POLLEN]
+			build_time = 2
+			check_inputs()
 	
 	return true
 
@@ -137,6 +151,8 @@ func activate() -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning construction!")
 	sprite.texture = texture_1
 	active = true
+	
+	check_inputs()
 
 
 func build() -> void:

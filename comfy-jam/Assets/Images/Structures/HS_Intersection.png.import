@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwjgfuxfq7e2k"
-path="res://.godot/imported/larvae_test.png-c3d172b0cef85821454092297a345613.ctex"
+uid="uid://casqtunqdikve"
+path="res://.godot/imported/HS_Intersection.png-bb3456a189cb715a0933e5a44374cc6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Objects/larvae_test.png"
-dest_files=["res://.godot/imported/larvae_test.png-c3d172b0cef85821454092297a345613.ctex"]
+source_file="res://Assets/Images/Structures/HS_Intersection.png"
+dest_files=["res://.godot/imported/HS_Intersection.png-bb3456a189cb715a0933e5a44374cc6b.ctex"]
 
 [params]
 

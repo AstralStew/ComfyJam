@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://by7navwjmhwp1" path="res://Assets/Images/Prototyping/brainstorm canvas.png" id="4_frvg8"]
 [ext_resource type="Script" uid="uid://b27okm36wcnw4" path="res://Scripts/ObjectManager.gd" id="4_hbc4g"]
 [ext_resource type="Texture2D" uid="uid://dy24abwgqu18u" path="res://Assets/Images/Prototyping/initialconcept.png" id="5_hbc4g"]
-[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Objects/bee_test.png" id="6_7s54b"]
+[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="6_7s54b"]
 [ext_resource type="Script" uid="uid://dgo8ptrgtqwv1" path="res://Scripts/fadetest.gd" id="7_csxaf"]
 [ext_resource type="Texture2D" uid="uid://cncx2fwukf76l" path="res://Assets/Images/Prototyping/TestBackground.png" id="8_frvg8"]
 [ext_resource type="Texture2D" uid="uid://bkwfv00k7oauy" path="res://Assets/Images/Prototyping/FarBackgroundTest.png" id="9_08nax"]
@@ -20,7 +20,9 @@
 [ext_resource type="Script" uid="uid://djkmutrigu2xm" path="res://Scripts/Tooltip.gd" id="15_kvkj5"]
 [ext_resource type="FontFile" uid="uid://2q1ijkryfqsx" path="res://Assets/Fonts/04B25-VrZ.ttf" id="18_lxibn"]
 [ext_resource type="Script" uid="uid://0k0hq0t6if6i" path="res://Scripts/BuildMenu.gd" id="19_lrhcs"]
+[ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="21_ivwil"]
 [ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="21_j5hfv"]
+[ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="21_k6nk5"]
 [ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
 [ext_resource type="PackedScene" uid="uid://8vi6vmat5vwl" path="res://Scenes/larvae.tscn" id="24_k6nk5"]
 
@@ -195,6 +197,7 @@ metadata/_edit_vertical_guides_ = [427.0, 469.0]
 script = ExtResource("1_3ey1d")
 grid_height = 7
 grid_width = 6
+starting_empty_holes = 0
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
 
 [node name="StructureManager" type="Node" parent="." unique_id=1466089573]
@@ -256,30 +259,39 @@ y_sort_enabled = true
 
 [node name="WorkerBee" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1959467300 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(104, 536)
+fall_on_setup = true
 
 [node name="WorkerBee2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1856649126 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(192, 536)
+fall_on_setup = true
 
 [node name="WorkerBee3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=738024063 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(312, 536)
+fall_on_setup = true
 
 [node name="WorkerBee4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1955594594 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(400, 536)
+fall_on_setup = true
 
 [node name="WorkerBee5" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=352277619 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(488, 536)
+fall_on_setup = true
 
 [node name="Nectar" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=2092266365 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(64, 552)
+fall_on_setup = true
 
 [node name="Pollen" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=395431437 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(176, 536)
+fall_on_setup = true
 
 [node name="Royal Jelly" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=808926887 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(224, 544)
+fall_on_setup = true
 
 [node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 instance=ExtResource("24_k6nk5")]
 position = Vector2(153, 570)
+fall_on_setup = true
 
 [node name="Old" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1025313271]
 
@@ -465,8 +477,6 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
-unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 364.0
@@ -476,7 +486,6 @@ offset_bottom = 432.0
 script = ExtResource("19_lrhcs")
 
 [node name="TL" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
-visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -492,8 +501,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
 
+[node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/TL" unique_id=1858676053]
+position = Vector2(12.999999, 12.999999)
+scale = Vector2(0.17587829, 0.17587829)
+texture = ExtResource("21_ivwil")
+
 [node name="TR" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
-visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -508,6 +521,12 @@ offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
+[node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/TR" unique_id=502927539]
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
+position = Vector2(13, 13)
+scale = Vector2(0.74, 0.74)
+texture = ExtResource("21_k6nk5")
 
 [node name="L" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
 custom_minimum_size = Vector2(10, 10)
@@ -583,6 +602,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
 
+[node name="BR2" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=305304209]
+visible = false
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = 99.0
+offset_right = 13.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_08nax")
+
 [node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1217251974]
 visible = false
 layout_mode = 0
@@ -605,10 +641,10 @@ script = ExtResource("15_kvkj5")
 z_index = 1
 clip_contents = false
 custom_minimum_size = Vector2(64, 0)
-layout_mode = 0
+layout_mode = 1
 offset_left = 24.0
 offset_top = 8.0
-offset_right = 60.0
+offset_right = 300.0
 offset_bottom = 23.0
 mouse_filter = 2
 theme_override_colors/default_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
@@ -637,5 +673,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Tooltip" unique_id=871188018]
+visible = false
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+mouse_filter = 2
+
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TL" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tl_gui_input"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/TR" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_tr_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/L" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_l_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/R" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_r_gui_input"]

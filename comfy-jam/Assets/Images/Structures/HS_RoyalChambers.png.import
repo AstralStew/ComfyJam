@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blcunlc1bq5yw"
-path="res://.godot/imported/BeeNectar.png-896b9773e53a1bac40059dab87ff4474.ctex"
+uid="uid://c4srvw7wat02a"
+path="res://.godot/imported/HS_RoyalChambers.png-1a0e7d311b9dd7cb9b71c4bcef0bff92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Objects/BeeNectar.png"
-dest_files=["res://.godot/imported/BeeNectar.png-896b9773e53a1bac40059dab87ff4474.ctex"]
+source_file="res://Assets/Images/Structures/HS_RoyalChambers.png"
+dest_files=["res://.godot/imported/HS_RoyalChambers.png-1a0e7d311b9dd7cb9b71c4bcef0bff92.ctex"]
 
 [params]
 

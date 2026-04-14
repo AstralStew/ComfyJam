@@ -47,6 +47,15 @@ static func build_structure(_hex:Hex) -> void:
 
 
 
+func _on_tl_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse && event.is_action_pressed("Click"):
+		print_rich(DEBUG_NAME,"OnTLGuiInput > Mouse click recieved!")
+		build.emit(StructureManager.StructureType.HOLE)
+
+func _on_tr_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse && event.is_action_pressed("Click"):
+		print_rich(DEBUG_NAME,"OnTRGuiInput > Mouse click recieved!")
+		build.emit(StructureManager.StructureType.HONEYCOMB)
 
 func _on_l_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouse && event.is_action_pressed("Click"):

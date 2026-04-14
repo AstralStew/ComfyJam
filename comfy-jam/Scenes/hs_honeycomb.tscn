@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bl47uw650lkc"]
+
+[ext_resource type="Script" uid="uid://c1ddnwi61ciks" path="res://Scripts/HexStructures/HsHoneycomb.gd" id="1_0bhcy"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_bcsvd"]
+[ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_o8x1l"]
+[ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="4_0bhcy"]
+
+[node name="HS_Honeycomb" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_0bhcy")
+output_cooldown = 1.0
+output_candidates = Array[int]([4])
+adjacent_output_removal_delay = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+visible = false
+self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bcsvd")
+expand_mode = 1
+
+[node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=990959636]
+visible = false
+offset_left = -43.0
+offset_top = -46.0
+offset_right = 43.0
+offset_bottom = 46.0
+pivot_offset = Vector2(43, 46)
+mouse_filter = 2
+max_value = 12.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_o8x1l")
+tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
+
+[node name="HsHoneycomb" type="Sprite2D" parent="." unique_id=440202702]
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
+scale = Vector2(0.825, 0.825)
+texture = ExtResource("4_0bhcy")

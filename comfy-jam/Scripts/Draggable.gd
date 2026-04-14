@@ -16,6 +16,9 @@ signal on_drag_end
 
 signal on_area_entered(area)
 
+signal on_hover_start
+signal on_hover_end
+
 #region Internal functions
 
 func _ready() -> void:
@@ -59,12 +62,26 @@ func _process(delta: float) -> void:
 
 func _on_mouse_entered() -> void:
 	hovered = true
+	#if SelectionManager.current_hover == null:
+	SelectionManager.set_current_hover(get_parent())
+	SelectionManager.instance.on_hover_change.connect(end_hover)
 	Tooltip.set_tooltip_type(Tooltip.TooltipType.OBJECT,get_parent())
+	on_hover_start.emit()
+
 
 func _on_mouse_exited() -> void:
-	hovered = false
-	Tooltip.hide_tooltip()
+	if hovered:
+		SelectionManager.instance.on_hover_change.disconnect(end_hover)
+		if SelectionManager.current_hover == get_parent():
+			Tooltip.hide_tooltip()
+			SelectionManager.set_current_hover(null)
+		hovered = false
+		on_hover_end.emit()
 
+func end_hover(_new_object) -> void:
+	SelectionManager.instance.on_hover_change.disconnect(end_hover)
+	hovered = false
+	on_hover_end.emit()
 
 func _on_area_entered(_area: Area2D) -> void:
 	on_area_entered.emit(_area)

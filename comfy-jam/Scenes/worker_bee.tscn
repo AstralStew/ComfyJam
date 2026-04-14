@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://lxg7t6b2ob6x"]
 
 [ext_resource type="Script" uid="uid://c51ypulm8tjms" path="res://Scripts/Objects/WorkerBee.gd" id="1_fuhfs"]
-[ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Objects/bee_test.png" id="2_kthol"]
+[ext_resource type="Material" uid="uid://eq0rmrgvefkq" path="res://Assets/Materials/selection_material.tres" id="2_ugjxm"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_ugjxm"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_qndmq"]
 [ext_resource type="Script" uid="uid://cfk5o6ob6vw13" path="res://Scripts/Crawlable.gd" id="5_kthol"]
+[ext_resource type="Texture2D" uid="uid://bff50ke8pstju" path="res://Assets/Images/Objects/WorkerBee.png" id="6_ugjxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3h87t"]
 radius = 16.0
@@ -16,9 +17,10 @@ midpoint = 580
 floor_width = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=808300566]
-position = Vector2(0.31249997, -23.999998)
-scale = Vector2(0.625, 0.625)
-texture = ExtResource("2_kthol")
+material = ExtResource("2_ugjxm")
+position = Vector2(1.4999988, -19.187494)
+scale = Vector2(0.50500005, 0.50500005)
+texture = ExtResource("6_ugjxm")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=335325692]
 position = Vector2(0.3125, -24)
@@ -40,6 +42,13 @@ metadata/_custom_type_script = "uid://bd0txc82jo681"
 script = ExtResource("5_kthol")
 crawl_speed = Vector2(15, 0.2)
 metadata/_custom_type_script = "uid://cfk5o6ob6vw13"
+
+[node name="Bee" type="Sprite2D" parent="." unique_id=66388365]
+visible = false
+position = Vector2(1, -19)
+scale = Vector2(0.515, 0.515)
+texture = ExtResource("6_ugjxm")
+flip_h = true
 
 [connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
 [connection signal="input_event" from="Draggable" to="Draggable" method="_on_input_event"]

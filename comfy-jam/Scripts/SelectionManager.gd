@@ -6,8 +6,10 @@ static var has_selection : bool = false :
 	get: return current_selection != null
 
 static var current_selection : Node2D = null
+static var current_hover : Node2D = null
 
 signal on_selection_change(new_selection)
+signal on_hover_change(new_hover)
 
 
 func _enter_tree() -> void:
@@ -28,3 +30,11 @@ static func set_current_selection(_new_selection:Node2D):
 	
 	current_selection = _new_selection
 	instance.on_selection_change.emit(_new_selection)
+
+static func set_current_hover(_new_hover:Node2D):
+	if current_hover == _new_hover:
+		print_rich(DEBUG_NAME,"SetCurrentHover > Same as old hover, ignoring")
+		return
+	
+	current_hover = _new_hover
+	instance.on_hover_change.emit(_new_hover)

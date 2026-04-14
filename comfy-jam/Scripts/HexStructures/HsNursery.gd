@@ -20,13 +20,14 @@ var sprite : Sprite2D = null
 @export var producing : bool = false
 
 func _setup() -> void:
-	print_rich(DEBUG_NAME,"Setup > Yep!")
+	super()
+	
+	print_rich(DEBUG_NAME,"Setup(Nursery) > Yep!")
 	sprite = $HsNursery
 	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
 	
 	max_workers = 1
-	
 
 
 func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:

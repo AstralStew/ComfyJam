@@ -1,6 +1,8 @@
 class_name HexManager extends Node
 const DEBUG_NAME : String = "[b][HexManager][/b] "
 
+@export var debug : bool = false
+
 enum HexDirection {TopL,TopR,MidL,MidR,BotL,BotR}
 
 static var instance : HexManager = null
@@ -64,6 +66,9 @@ func _ready() -> void:
 			_hex.position = Vector2(grid_width,0) * grid_spacing
 			_hex.on_hex_clicked.connect(on_hex_clicked.emit.bind(_hex))
 			_hex.on_hex_unclicked.connect(on_hex_unclicked.emit.bind(_hex))
+			
+			# Add hex to this row's column array
+			_columns.append(_hex)
 		
 		hexgrid[_row] = _columns.duplicate()
 		_columns.clear()
@@ -72,29 +77,38 @@ func _ready() -> void:
 	
 	for i in starting_empty_holes:
 		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.HOLE)
-		print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
 		
 	for i in starting_holes_with_workers:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.HOLE)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
-		print_rich(DEBUG_NAME,"Ready > Created starting hole with worker ("+_hex.name+")")
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting hole with worker ("+_hex.name+")")
 	
 	for i in starting_nurseries_with_workers:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.NURSERY)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
-		print_rich(DEBUG_NAME,"Ready > Created starting nursery with worker ("+_hex.name+")")
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting nursery with worker ("+_hex.name+")")
+	
+	# --- TEMP --- #
+	#for i in 5:
+		#_hex = get_random_hex(true)
+		#StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
+		#_hex.structure.assigned_workers = 1
+		#_hex.structure.activate()
+		#if debug: print_rich(DEBUG_NAME,"Ready > Created starting honeycomb with worker ("+_hex.name+")")
+	# --- /TEMP --- #
 	
 	on_hex_clicked.connect(test_hex)
 	
 
 
 func test_hex(_hex:Hex) -> void:
-	print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
-	print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
+	if debug: print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
+	#print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
 	
 	BuildMenu.build_structure(_hex)
 
@@ -124,13 +138,13 @@ func get_random_hex(empty_only:bool=false) -> Hex:
 		var _hex : Hex = null
 		while _hex == null:
 			_hex = hexgrid[randi() % hexgrid.size()].pick_random()
-			print_rich(DEBUG_NAME,"GetRandomHex > Hex is still null, checking hex("+_hex.name+")")
+			if debug: print_rich(DEBUG_NAME,"GetRandomHex > Hex is still null, checking hex("+_hex.name+")")
 			if _hex.structure == null:
-				print_rich(DEBUG_NAME,"GetRandomHex > Hex("+_hex.name+") structure is null! Returning this hex...")
+				if debug: print_rich(DEBUG_NAME,"GetRandomHex > Hex("+_hex.name+") structure is null! Returning this hex...")
 				return _hex
 			else: _hex = null
 	
-	print_rich(DEBUG_NAME,"GetRandomHex > Returning any random hex")
+	if debug: print_rich(DEBUG_NAME,"GetRandomHex > Returning any random hex")
 	return hexgrid[randi() % hexgrid.size()].pick_random()
 	
 
@@ -140,17 +154,17 @@ func get_random_hex(empty_only:bool=false) -> Hex:
 func check_coords(_coords:Vector2i) -> bool:
 		# Make sure the coords exist on the grid
 		if _coords.y < 0 || _coords.y >= hexgrid.size():
-			print_rich(DEBUG_NAME,"CheckCoords > [color=ff0000] Bad row / y coords(",str(_coords.y),">",str(hexgrid.size()),"), returning false")
+			if debug: print_rich(DEBUG_NAME,"CheckCoords > [color=ff0000] Bad row / y coords(",str(_coords.y),">",str(hexgrid.size()),"), returning false")
 			return false
 		if _coords.x < 0 || _coords.x >= hexgrid[_coords.y].size():
-			print_rich(DEBUG_NAME,"CheckCoords > [color=ff0000] Bad column / x coords(",str(_coords.x),">",str(hexgrid[_coords.y].size()),"), returning false")
+			if debug: print_rich(DEBUG_NAME,"CheckCoords > [color=ff0000] Bad column / x coords(",str(_coords.x),">",str(hexgrid[_coords.y].size()),"), returning false")
 			return false
-		print_rich(DEBUG_NAME,"CheckCoords > Coords(",str(_coords),") check out!")
+		if debug: print_rich(DEBUG_NAME,"CheckCoords > Coords(",str(_coords),") check out!")
 		return true
 
 func get_adjacent_coord(_coords:Vector2i,_direction:HexDirection) -> Vector2i:
 	if !check_coords(_coords):
-		print_rich(DEBUG_NAME,"GetAdjacentHex > [color=ff0000] Bad coords, returning invalid Vector2")
+		if debug: print_rich(DEBUG_NAME,"GetAdjacentHex > [color=ff0000] Bad coords, returning invalid Vector2")
 		return Vector2i(-1,-1)
 	
 	var _dir : Vector2i = Vector2i.ZERO
@@ -175,7 +189,7 @@ func get_adjacent_coord(_coords:Vector2i,_direction:HexDirection) -> Vector2i:
 			else: _dir += Vector2i(0,1)
 	
 	if !check_coords(_coords+_dir):
-		print_rich(DEBUG_NAME,"GetAdjacentCoord > No hex at coords(",str(_coords+_dir),"), returning invalid Vector2")
+		if debug: print_rich(DEBUG_NAME,"GetAdjacentCoord > No hex at coords(",str(_coords+_dir),"), returning invalid Vector2")
 		return Vector2i(-1,-1)
 	
 	print_rich(DEBUG_NAME,"GetAdjacentCoord > Success, returning coords(",str(_coords+_dir),")")
@@ -186,16 +200,16 @@ func get_adjacent_coord(_coords:Vector2i,_direction:HexDirection) -> Vector2i:
 
 func get_hex(_coords:Vector2i) -> Hex:
 	if !check_coords(_coords):
-		print_rich(DEBUG_NAME,"GetHex > [color=ff0000] Bad coords, returning null")
+		if debug: print_rich(DEBUG_NAME,"GetHex > [color=ff0000] Bad coords, returning null")
 		return null
 	return hexgrid[_coords.y][_coords.x]
 
 
-func get_adjacent_hex(_hex:Hex,_direction:HexDirection) -> Hex:
-	return get_hex(get_adjacent_coord(_hex.coords,_direction))
+static func get_adjacent_hex(_hex:Hex,_direction:HexDirection) -> Hex:
+	return instance.get_hex(instance.get_adjacent_coord(_hex.coords,_direction))
 
 
-func get_adjacent_hexes(_hex:Hex) -> Array[Hex]:
+static func get_adjacent_hexes(_hex:Hex) -> Array[Hex]:
 	var _coords = _hex.coords
 	
 	var _adjacent_hexes : Array[Hex] = []

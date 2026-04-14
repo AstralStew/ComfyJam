@@ -6,7 +6,7 @@ var _sprite : Sprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
 var _crawlable : Crawlable = null
-var _fall_on_setup : bool = false
+@export var fall_on_setup : bool = false
 
 @export var midpoint : int = 600
 @export var floor_width : int = 30
@@ -42,11 +42,13 @@ func setup() -> void:
 	_draggable.on_drag_end.connect(_fallable.set_falling.bind(true))
 	_draggable.on_drag_end.connect(drag_end)
 	_draggable.on_drag_move.connect(on_dragged.emit)
+	_draggable.on_hover_start.connect(hover_start)
+	_draggable.on_hover_end.connect(hover_end)
 	
 	
 	_fallable.on_falling_start.connect(fall_start)
 	_fallable.on_falling_end.connect(fall_end)
-	_fallable.set_falling(_fall_on_setup)
+	_fallable.set_falling(fall_on_setup)
 	_fallable.midpoint = midpoint
 	_fallable.floor_width = floor_width
 	
@@ -73,16 +75,22 @@ func fall_start() -> void:
 
 func fall_end() -> void:
 	_draggable.can_drag = true
-	_crawlable.crawl(!_sprite.flip_h)
+	_crawlable.crawl(_sprite.flip_h)
 
 func crawl_start() -> void:
 	pass
 
 func crawl_flip(_moving_right:bool) -> void:
-	_sprite.flip_h = !_moving_right
+	_sprite.flip_h = _moving_right
 
 func crawl_end() -> void:
 	pass
+
+func hover_start() -> void:
+	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
+	
+func hover_end() -> void:
+	_sprite.material = null
 
 func area_entered(_area:Area2D) -> void:
 	if _draggable.dragging: return
@@ -119,7 +127,7 @@ func eat_nectar() -> void:
 	_sprite.modulate = Color.WHITE
 	
 	_draggable.can_drag = true
-	_crawlable.crawl(!_sprite.flip_h)
+	_crawlable.crawl(_sprite.flip_h)
 	
 	cooldown()
 	
@@ -139,7 +147,7 @@ func eat_pollen() -> void:
 	_sprite.modulate = Color.WHITE
 	
 	_draggable.can_drag = true
-	_crawlable.crawl(!_sprite.flip_h)
+	_crawlable.crawl(_sprite.flip_h)
 	
 	cooldown()
 
