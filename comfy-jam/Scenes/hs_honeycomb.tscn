@@ -15,7 +15,6 @@ script = ExtResource("1_0bhcy")
 capacity = 6
 output_cooldown = 1.0
 output_candidates = Array[int]([4])
-output_notify_delay = 1.5
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
 visible = false

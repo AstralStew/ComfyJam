@@ -29,6 +29,10 @@ func _ready() -> void:
 
 static func activate() -> void:
 	active = true
+	
+	# PAUSE TIME
+	instance.get_tree().paused = true
+	
 	instance.visible = true
 	instance.overlay.visible = true
 
@@ -50,7 +54,12 @@ static func build_structure(_hex:Hex) -> void:
 	
 	#var _structure_type = await instance.build
 	
-	var _result = await on_build_or_cancel()
+	var _result = await on_build_or_cancel()	
+	
+	# UNPAUSE TIME
+	instance.get_tree().paused = false
+	await instance.get_tree().process_frame
+	
 	if _result[0] == instance.build:
 		var _structure_type = _result[1][0] as StructureManager.StructureType
 		if _structure_type != StructureManager.StructureType.BLANK:

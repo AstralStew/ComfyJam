@@ -1,7 +1,7 @@
 class_name StructureManager extends Node
 const DEBUG_NAME : String = "[b][StructureManager][/b] "
 
-enum StructureType {BLANK,HOLE,JELLY_FACTORY,NURSERY,CONSTRUCTION,HONEYCOMB,IMPASSABLE,KISS_STATION}
+enum StructureType {BLANK,HOLE,JELLY_FACTORY,NURSERY,CONSTRUCTION,HONEYCOMB,IMPASSABLE,KISS_STATION,ROYAL_CHAMBERS}
 
 static var instance : StructureManager = null
 
@@ -12,6 +12,7 @@ static var construction_prefab = preload("res://Scenes/hs_construction.tscn")
 static var honeycomb_prefab = preload("res://Scenes/hs_honeycomb.tscn")
 static var impassable_prefab = preload("res://Scenes/hs_impassable.tscn")
 static var kiss_station_prefab = preload("res://Scenes/hs_kiss_station.tscn")
+static var royal_chambers_prefab = preload("res://Scenes/hs_royal_chambers.tscn")
 
 static var build_menu : BuildMenu = null
 
@@ -74,9 +75,15 @@ static func set_structure(_hex:Hex,_type:StructureType,_construction_type:Struct
 			_hex.add_child(_new_structure)
 			_hex.structure = _new_structure
 			_hex.structure._setup()
+		StructureType.ROYAL_CHAMBERS:
+			print_rich(DEBUG_NAME,"SetStructure > Type = ROYAL_CHAMBERS, creating the Royal Chambers structure ")
+			_new_structure = royal_chambers_prefab.instantiate()
+			_hex.add_child(_new_structure)
+			_hex.structure = _new_structure
+			_hex.structure._setup()
 	
 	#Temporary
-	if _type != StructureType.CONSTRUCTION && _type != StructureType.IMPASSABLE && !_hex.structure.active:
+	if _type != StructureType.CONSTRUCTION && _type != StructureType.IMPASSABLE && _type != StructureType.ROYAL_CHAMBERS && !_hex.structure.active:
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
 	

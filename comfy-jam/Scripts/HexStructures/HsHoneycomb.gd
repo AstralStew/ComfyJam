@@ -186,7 +186,10 @@ func offer_my_output() -> void:
 				else:
 					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' said no or that direction is closed")
 	
-	await get_tree().process_frame
+	await get_tree().process_frame	
+	while get_tree().paused:
+		await get_tree().process_frame
+	
 	is_waiting_to_offer_my_output = false
 
 

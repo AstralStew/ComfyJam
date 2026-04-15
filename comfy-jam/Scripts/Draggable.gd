@@ -42,15 +42,16 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	
 
 func wait_for_unclick() -> void:
-	await get_tree().process_frame
 	while (dragging):
+		await get_tree().process_frame
+		if get_tree().paused: continue
 		if !Input.is_action_pressed("LeftClick"):
 			print_rich(_debug_name, "OnInputEvent > Stopping drag.")
 			dragging = false
 			SelectionManager.set_current_selection(null)
 			get_parent().z_index = 0
 			on_drag_end.emit()
-		await get_tree().process_frame
+		
 
 
 func _process(delta: float) -> void:

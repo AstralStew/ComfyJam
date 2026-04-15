@@ -81,7 +81,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 				if SelectionManager.has_selection:
 					if SelectionManager.current_selection is WorkerBee && _hex.structure.assigned_workers == 0:
 						_tooltip[0] =  "Assign Worker to Nursery"
-					elif SelectionManager.current_selection is RoyalJelly && !_hex.structure.producing:
+					elif SelectionManager.current_selection is RoyalJelly && !_hex.structure.nurturing:
 						_tooltip[0] =  "Nurture with Royal Jelly"
 					else:
 						BuildMenu.hide_build_button()
@@ -92,8 +92,8 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 					_tooltip[1] = "NURSERY"
 					_tooltip[2] = (
 						"Worker" if _hex.structure.assigned_workers == 0 else "" +
-						"\n" if _hex.structure.assigned_workers == 0 && !_hex.structure.producing else "" +
-						"Royal Jelly" if !_hex.structure.producing else ""
+						"\n" if _hex.structure.assigned_workers == 0 && !_hex.structure.nurturing else "" +
+						"Royal Jelly" if !_hex.structure.nurturing else ""
 					)
 					if _hex.structure.assigned_workers == 0: _tooltip[2] = "Worker"
 			elif _hex.structure is HexStructureConstruction:
@@ -159,15 +159,30 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] = "- Slowly converts Nectar into Honey"
+					_tooltip[0] = "Slowly converts Nectar into Honey"
+					if _hex.structure.kissing_cooldowning: _tooltip[0] += "\n~ cooling down ~"
 					_tooltip[1] = "KISS STATION"
 					_tooltip[2] = (
 						"Worker" if _hex.structure.assigned_workers == 0 else "" +
-						"\n" if _hex.structure.assigned_workers == 0 && !_hex.structure.kissing else "" +
-						"Nectar" if !_hex.structure.kissing else ""
+						"\n" if _hex.structure.assigned_workers == 0 && (!_hex.structure.kissing && !_hex.structure.kissing_cooldowning) else "" +
+						"Nectar" if !_hex.structure.kissing && !_hex.structure.kissing_cooldowning else ""
 					)
 					if _hex.structure.assigned_workers == 0: _tooltip[2] = "Worker"
-				
+			elif _hex.structure is HexStructureRoyalChambers:
+				#if SelectionManager.has_selection:
+					#if SelectionManager.current_selection is WorkerBee && _hex.structure.assigned_workers == 0:
+						#_tooltip[0] =  "Gift Worker to Royal Chambers"
+					#else:
+						#BuildMenu.hide_build_button()
+						#Tooltip.hide_tooltip()
+						#return
+				#else:
+				_tooltip[0] =  "~lil queen sounds~"
+				_tooltip[1] = "ROYAL CHAMBERS"
+				if _hex.structure.order_recipe.size() > 0:
+					for i in _hex.structure.order_recipe.size():
+						if _tooltip[2] != "" || i > 0: _tooltip[2] += "\n"
+						_tooltip[2] += str(ObjectManager.ObjectType.keys()[_hex.structure.order_recipe[i]]).to_lower().capitalize()
 		
 		TooltipType.OBJECT:
 			if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Type is an object!")
@@ -189,6 +204,8 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 			elif _element is Nectar:
 				if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Element is Nectar!")
 				_tooltip[0] =  "- Resource for building\n- Eaten by Larvae"
+				if _element.kissed_level != Nectar.KissLevel.UNKISSED:
+					_tooltip[0] += "\n [color=a75b80][b]Kiss Level:[/b] " + str(Nectar.KissLevel.keys()[_element.kissed_level]).to_lower().capitalize() +"[/color]"
 				_tooltip[1] = "NECTAR"
 			
 			elif _element is Pollen:

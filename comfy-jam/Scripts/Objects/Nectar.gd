@@ -2,6 +2,8 @@ class_name Nectar extends Node2D
 var DEBUG_NAME : String :
 	get: return "[b][" + name + "/Nectar][/b] "
 
+enum KissLevel {UNKISSED,LIGHTLY_KISSED,FAIRLY_KISSED,VERY_KISSED}
+
 var _sprite : Sprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
@@ -10,6 +12,8 @@ var _fallable : Fallable = null
 @export_category("READ ONLY")
 @export var usable : bool = false :
 	get: return !_fallable.falling #!_draggable.dragging && !_fallable.falling
+
+@export var kissed_level : KissLevel = KissLevel.UNKISSED
 
 signal on_dragged
 

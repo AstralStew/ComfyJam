@@ -29,9 +29,9 @@ func _setup() -> void:
 	texture_2 = preload("res://Assets/Images/Structures/HS_UnderConstruction_Bee.png")
 	max_workers = 1
 
-func adjacent_hex_updated(_hex:Hex) -> bool:
-	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Ignoring adjacent hex '"+_hex.name+"' due to being a Construction and not caring")
-	return false
+#func adjacent_hex_updated(_hex:Hex) -> bool:
+	#print_rich(DEBUG_NAME,"AdjacentHexUpdated > Ignoring adjacent hex '"+_hex.name+"' due to being a Construction and not caring")
+	#return false
 
 func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 	construction_type = _structure
@@ -46,37 +46,35 @@ func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 		StructureManager.StructureType.HOLE:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = HOLE...")
 			inputs = []
-			build_time = 1
+			build_time = 15
 		StructureManager.StructureType.JELLY_FACTORY:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = JELLY FACTORY...")
 			inputs = [
 				ObjectManager.ObjectType.NECTAR,
 				ObjectManager.ObjectType.POLLEN ]
-			build_time = 4
+			build_time = 15
 		StructureManager.StructureType.NURSERY:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = NURSERY...")
 			inputs = [
+				ObjectManager.ObjectType.ROYAL_JELLY,
 				ObjectManager.ObjectType.NECTAR,
-				ObjectManager.ObjectType.NECTAR,
-				ObjectManager.ObjectType.POLLEN, 
-				ObjectManager.ObjectType.POLLEN]
-			build_time = 2
+				ObjectManager.ObjectType.POLLEN ]
+			build_time = 15
 		StructureManager.StructureType.HONEYCOMB:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = HONEYCOMB...")
 			inputs = [
-				ObjectManager.ObjectType.ROYAL_JELLY,
-				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.NECTAR,
 				ObjectManager.ObjectType.NECTAR, 
-				ObjectManager.ObjectType.NECTAR]
-			build_time = 2
+				ObjectManager.ObjectType.POLLEN]
+			build_time = 15
 		StructureManager.StructureType.KISS_STATION:
 			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = KISS_STATION...")
 			inputs = [
 				ObjectManager.ObjectType.ROYAL_JELLY,
-				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.NECTAR,
 				ObjectManager.ObjectType.NECTAR, 
-				ObjectManager.ObjectType.NECTAR]
-			build_time = 10
+				ObjectManager.ObjectType.POLLEN]
+			build_time = 15
 	
 	check_inputs()
 	
@@ -139,7 +137,6 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 	
 	print_rich(DEBUG_NAME,"WorkerDroppedHere > Removing a Worker from the inputs...")	
 	ObjectManager.move_and_destroy(_worker,hex.global_position)
-	_worker.queue_free()
 	
 	inputs.remove_at(inputs.rfind(ObjectManager.ObjectType.WORKER))
 	check_inputs()
@@ -150,7 +147,11 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 func check_inputs() -> void:
 	if !active || building: return
 	
+	update_tooltip_info()
+	
 	await get_tree().process_frame
+	while get_tree().paused:
+		await get_tree().process_frame
 	if inputs.size() == 0:
 		print_rich(DEBUG_NAME,"CheckInputs > No inputs remain! Starting build")
 		build()

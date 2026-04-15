@@ -7,7 +7,8 @@
 
 [node name="HS_Kiss_Station" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pospv")
-production_time = 20.0
+startup_time = 0.5
+wrapup_time = 0.5
 output_candidates = Array[int]([2])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]

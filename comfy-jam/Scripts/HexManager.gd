@@ -76,7 +76,21 @@ func _ready() -> void:
 		hexgrid[_row] = _columns.duplicate()
 		_columns.clear()
 	
+	
 	# Add some specific hexes
+	
+	
+	if debug: print_rich(DEBUG_NAME,"Ready > Adding the Royal Chambers, populating hexes around it with Impassable")
+	_hex = get_random_hex(true)
+	StructureManager.set_structure(_hex,StructureManager.StructureType.ROYAL_CHAMBERS)
+	_hex.structure.activate()
+	var _adjacent_hexes = get_adjacent_hexes(_hex)
+	_adjacent_hexes.shuffle()
+	for i in _adjacent_hexes.size():
+		if i == 0 || i == 1: continue
+		StructureManager.set_structure(_adjacent_hexes[i],StructureManager.StructureType.IMPASSABLE)
+		if debug: print_rich(DEBUG_NAME,"Ready > Created Impassable around Royal Chambers")
+	
 	
 	for i in starting_impassable:
 		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.IMPASSABLE)
@@ -199,7 +213,7 @@ func get_adjacent_coord(_coords:Vector2i,_direction:HexDirection) -> Vector2i:
 		if debug: print_rich(DEBUG_NAME,"GetAdjacentCoord > No hex at coords(",str(_coords+_dir),"), returning invalid Vector2")
 		return Vector2i(-1,-1)
 	
-	print_rich(DEBUG_NAME,"GetAdjacentCoord > Success, returning coords(",str(_coords+_dir),")")
+	if debug: print_rich(DEBUG_NAME,"GetAdjacentCoord > Success, returning coords(",str(_coords+_dir),")")
 	return _coords+_dir
 
 

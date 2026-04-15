@@ -28,11 +28,16 @@ signal on_crawling_flip(moving_right)
 #region Internal functions
 
 
+
+
 func crawl(_moving_right:bool) -> void:
 	crawling = true
 	var _vert : float = (get_parent() as Node2D).global_position.y
 	var _move_vector := Vector2.ZERO
 	while(crawling):
+		await get_tree().process_frame
+		if get_tree().paused: continue
+		
 		_vert += crawl_speed.y * get_process_delta_time()
 		_move_vector = Vector2((1 if _moving_right else -1) * crawl_speed.x * get_process_delta_time(),0)
 		(get_parent() as Node2D).position = Vector2(_move_vector.x + (get_parent() as Node2D).position.x,midpoint + (sin(_vert) * floor_width))
@@ -41,7 +46,6 @@ func crawl(_moving_right:bool) -> void:
 			_moving_right = !_moving_right
 			on_crawling_flip.emit(_moving_right)
 		
-		await get_tree().process_frame
 	crawling = false
 
 

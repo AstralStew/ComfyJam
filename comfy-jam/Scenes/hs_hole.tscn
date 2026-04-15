@@ -17,6 +17,7 @@ shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.03)
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
+forage_time = Vector2(10, 30)
 max_workers = 1
 output_candidates = Array[int]([2, 3])
 

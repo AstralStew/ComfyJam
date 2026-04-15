@@ -229,7 +229,7 @@ metadata/_edit_vertical_guides_ = [307.0, 353.0]
 script = ExtResource("1_3ey1d")
 grid_height = 8
 grid_width = 7
-starting_impassable = 3
+starting_impassable = 5
 starting_holes_with_workers = 1
 starting_nurseries_with_workers = 1
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
@@ -247,6 +247,7 @@ script = ExtResource("4_hbc4g")
 metadata/_custom_type_script = "uid://b27okm36wcnw4"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1829435906]
+process_mode = 3
 material = SubResource("ShaderMaterial_shopd")
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,6 +257,7 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=718486309]
+process_mode = 3
 handle_input_locally = false
 physics_object_picking = true
 size = Vector2i(640, 640)
@@ -505,19 +507,13 @@ modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.45923, 339.67413)
 
 [node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
-position = Vector2(344, 392)
-scale = Vector2(2.775, 1.505)
+position = Vector2(306, 771.0001)
+rotation = -3.1415927
+scale = Vector2(2.325, 1.41)
 texture = ExtResource("8_frvg8")
 
-[node name="Vignette" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1228271874]
-modulate = Color(1, 1, 1, 0.69803923)
-offset_left = -164.0
-offset_top = -219.0
-offset_right = 802.0
-offset_bottom = 838.0
-texture = SubResource("GradientTexture2D_pylrw")
-
 [node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
+process_mode = 1
 position = Vector2(99, 88)
 scale = Vector2(1.25, 1.25)
 
@@ -530,6 +526,7 @@ offset_bottom = 371.63806
 color = Color(0.2, 0.08235294, 0.25490198, 1)
 
 [node name="SpawnedObjects" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=573064140]
+process_mode = 1
 y_sort_enabled = true
 
 [node name="WorkerBee" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1959467300 groups=["Workers"] instance=ExtResource("10_spxe2")]
@@ -603,6 +600,15 @@ fall_on_setup = true
 [node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 instance=ExtResource("24_k6nk5")]
 position = Vector2(153, 570)
 fall_on_setup = true
+
+[node name="Vignette" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1228271874]
+modulate = Color(1, 1, 1, 0.69803923)
+offset_left = -164.0
+offset_top = -219.0
+offset_right = 802.0
+offset_bottom = 838.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_pylrw")
 
 [node name="Old" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1025313271]
 
@@ -788,6 +794,7 @@ horizontal_alignment = 1
 vertical_alignment = 3
 
 [node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -965,6 +972,7 @@ offset_bottom = 20.0
 color = Color(1, 0, 0, 1)
 
 [node name="Tooltip" type="Control" parent="SubViewportContainer/SubViewport" unique_id=498368713]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0

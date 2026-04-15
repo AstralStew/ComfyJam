@@ -13,7 +13,7 @@ var hex : Hex = null
 @export var output_scale : float = 0.64
 @export var output_candidates : Array[ObjectManager.ObjectType] = []
 
-@export var output_notify_delay : float = 1
+@export var output_notify_delay : float = 2
 
 @export_category("READ ONLY")
 
@@ -50,18 +50,14 @@ func _setup() -> void:
 	
 	on_output_able_to_be_taken.connect(offer_my_output)
 	on_activate.connect(ask_others_to_offer_their_output)
-	#on_output_object_removed.connect(ask_others_to_update_adjacent_hexes)
+	on_output_object_removed.connect(ask_others_to_offer_their_output)
 	
-	on_outputs_added.connect(
-		func():
-			if HexManager.last_hovered_hex == hex:
-				Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
-	)
-	on_output_object_removed.connect(
-		func():
-			if HexManager.last_hovered_hex == hex:
-				Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
-	)
+	on_outputs_added.connect(update_tooltip_info)
+	on_output_object_removed.connect(update_tooltip_info)
+		#func():
+			#if HexManager.last_hovered_hex == hex:
+				#Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
+	#)
 	
 	
 	# Add signals from each adjacent hex structure 
@@ -73,6 +69,10 @@ func _setup() -> void:
 			_adjacent_hex.structure.adjacent_hex_updated(hex)
 	
 	#ask_others_to_offer_their_output()
+
+func update_tooltip_info() -> void:
+	if HexManager.last_hovered_hex == hex:
+		Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,hex)
 
 func offer_my_output() -> void:
 	if is_waiting_to_offer_my_output:
@@ -218,6 +218,9 @@ func waiting_for_output_removed() -> void:
 		output_removed(output)
 		return
 	
+	if is_waiting_for_output_removed_by_player:
+		push_error(DEBUG_NAME,"[color=red]WaitingForOutputRemoved SHOULD NOT BE POSSIBLE")
+	
 	if !ObjectManager.check_if_object_is_ours(output):
 		print_rich(DEBUG_NAME,"[color=green] WaitingForOutputRemoved > Is this a problem?")
 		is_waiting_for_output_removed = false
@@ -240,6 +243,8 @@ func waiting_for_output_removed() -> void:
 func output_removed(_object:Node2D):
 	output_on_cooldown = true
 	await get_tree().process_frame
+	while get_tree().paused:
+		await get_tree().process_frame
 	#if _object != null: _object.on_dragged.disconnect(output_removed.bind(_object))
 	is_waiting_for_output_removed = false
 	is_waiting_for_output_removed_by_player = false
@@ -263,7 +268,10 @@ func output_removed(_object:Node2D):
 
 func object_dropped_here(_object:Node2D) -> bool:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Object = '",_object.name,"'")
-	if (_object as WorkerBee) != null:
+	if (_object as Larvae) != null:
+		print_rich(DEBUG_NAME,"ObjectDroppedHere > It's a Larvae...")
+		return larvae_dropped_here(_object as Larvae)
+	elif (_object as WorkerBee) != null:
 		print_rich(DEBUG_NAME,"ObjectDroppedHere > It's a WorkerBee...")
 		return worker_dropped_here(_object as WorkerBee)
 	elif (_object as Nectar) != null:
@@ -299,10 +307,17 @@ func activate() -> void:
 	on_activate.emit()
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
+	print_rich(DEBUG_NAME,"NectarDroppedHere(super) > (oops, I don't do anything with this...)")
 	return false
 
 func pollen_dropped_here(_pollen:Pollen) -> bool:
+	print_rich(DEBUG_NAME,"PollenDroppedHere(super) > (oops, I don't do anything with this...)")
 	return false
 
 func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
+	print_rich(DEBUG_NAME,"RoyalJellyDroppedHere(super) > (oops, I don't do anything with this...)")
+	return false
+
+func larvae_dropped_here(_larvae:Larvae) -> bool:
+	print_rich(DEBUG_NAME,"LarvaeDroppedHere(super) > (oops, I don't do anything with this...)")
 	return false

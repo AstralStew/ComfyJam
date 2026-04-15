@@ -47,10 +47,12 @@ func fall() -> void:
 	
 	falling = true
 	while(falling):
+		await get_tree().process_frame
+		if get_tree().paused: continue
+		
 		_current_fall_speed += Vector2(0,fall_speed)
 		(get_parent() as Node2D).global_position += _current_fall_speed
 		if (get_parent() as Node2D).global_position.y >= _floor_height:
 			(get_parent() as Node2D).global_position.y = _floor_height
 			break
-		await get_tree().process_frame
 	falling = false
