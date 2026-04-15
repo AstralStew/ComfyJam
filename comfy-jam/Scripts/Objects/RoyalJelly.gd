@@ -38,7 +38,11 @@ func setup() -> void:
 	
 	_setup_complete = true
 
+func show_outline() -> void:
+	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
 
+func hide_outline() -> void:
+	_sprite.material = null
 
 func drag_start() -> void:
 	scale = Vector2(0.8,0.8)
@@ -53,10 +57,12 @@ func fall_end() -> void:
 	_draggable.can_drag = true
 
 func hover_start() -> void:
-	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
+	if self != SelectionManager.current_selection:
+		show_outline()
 	
 func hover_end() -> void:
-	_sprite.material = null
+	if self != SelectionManager.current_selection:
+		hide_outline()
 
 func area_entered(_area:Area2D) -> void:	
 	if _draggable.dragging: return

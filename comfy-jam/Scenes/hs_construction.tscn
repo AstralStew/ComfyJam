@@ -25,4 +25,5 @@ expand_mode = 1
 
 [node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
 position = Vector2(0, 1)
+scale = Vector2(0.945, 0.945)
 texture = ExtResource("3_6t10m")

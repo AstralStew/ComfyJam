@@ -10,6 +10,7 @@ var hex : Hex = null
 
 @export var output_amount : int = 1
 @export var output_cooldown : float = 0.1
+@export var output_scale : float = 0.64
 @export var output_candidates : Array[ObjectManager.ObjectType] = []
 
 @export var adjacent_output_removal_delay : float = 0.5
@@ -25,7 +26,7 @@ var hex : Hex = null
 	get: return assigned_workers >= max_workers
 
 
-
+signal on_activate
 signal on_output_object
 signal on_output_object_removed
 signal on_outputs_added
@@ -42,6 +43,8 @@ func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup > Calculating adjacent hexes")
 	
 	on_output_object.connect(update_adjacent_hexes)
+	on_activate.connect(update_adjacent_hexes)
+	on_output_object_removed.connect(ask_others_to_update_adjacent_hexes)
 	
 	on_outputs_added.connect(
 		func():
@@ -70,14 +73,23 @@ func update_adjacent_hexes() -> void:
 	
 	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
 	_adacent_hexes.shuffle()
+	var _took_object_from_me : bool = false
 	for _adjacent_hex:Hex in _adacent_hexes:
 		if _adjacent_hex.structure != null:
-			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' has a structure, asking if it wants the object")
-			if _adjacent_hex.structure.adjacent_hex_updated(hex):
-				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
-				return
+			#if _adjacent_hex.structure is not HexStructureHoneycomb: adjacent_hex_updated(_adjacent_hex)
+			if !_took_object_from_me:
+				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' has a structure, asking if it wants the object")
+				if _adjacent_hex.structure.adjacent_hex_updated(hex):
+					print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+					_took_object_from_me = true
 			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no.")
 
+func ask_others_to_update_adjacent_hexes() -> void:
+	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
+	_adacent_hexes.shuffle()
+	for _adjacent_hex:Hex in _adacent_hexes:
+		if _adjacent_hex.structure != null:
+			_adjacent_hex.structure.update_adjacent_hexes()
 
 func adjacent_hex_updated(_hex:Hex) -> bool:
 	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Checking adjacent hex '"+_hex.name+"'...")
@@ -86,17 +98,13 @@ func adjacent_hex_updated(_hex:Hex) -> bool:
 		print_rich(DEBUG_NAME,"AdjacentHexUpdated > Adjacent hex '"+_hex.name+"' has no structure, returning")
 		return false
 	
-	#if !_hex.structure.on_output_object.is_connected(adjacent_hex_updated.bind(_hex)):
-		#_hex.structure.on_output_object.connect(adjacent_hex_updated.bind(_hex))
-	#if !_hex.structure.on_output_object_removed.is_connected(adjacent_hex_updated.bind(_hex)):
-		#_hex.structure.on_output_object_removed.connect(adjacent_hex_updated.bind(_hex))
 	
 	if !_hex.structure.active:
 		print_rich(DEBUG_NAME,"AdjacentHexUpdated > Adjacent hex '"+_hex.name+"''s structure '"+_hex.structure.name+"' is not active, returning")
 		return false
 	
 	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Hex structure '"+_hex.structure.name+"' valid, checking its output")
-	#await get_tree().create_timer(adjacent_output_removal_delay).timeout
+	
 	if _hex.structure.output != null:
 		if object_dropped_here(_hex.structure.output):
 			_hex.structure.output_removed(null)
@@ -133,8 +141,9 @@ func output_object() -> bool:
 		return false
 	
 	# Create an object from the last chosen returnable type
-	output = ObjectManager.create_object(_outputs.pop_front(),global_position)
-	output.global_scale *= 0.8
+	output = ObjectManager.create_object(_outputs.pop_front(),global_position - Vector2(0,6))
+	output.global_scale *= output_scale
+	output.show_outline() # .material = preload("res://Assets/Materials/selection_material.tres")
 	
 	on_output_object.emit()
 	
@@ -200,7 +209,8 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 
 
 func activate() -> void:
-	pass
+	print_rich(DEBUG_NAME,"Activate(super) > Finished activating!")
+	on_activate.emit()
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
 	return false

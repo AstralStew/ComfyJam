@@ -8,15 +8,27 @@ script = ExtResource("1_tje73")
 
 [node name="ClickableArea" type="TextureRect" parent="." unique_id=1007952217]
 modulate = Color(0.4509804, 0.1764706, 0.44705883, 0.101960786)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -26.0
-offset_right = 23.0
-offset_bottom = 26.0
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_23esk")
+expand_mode = 1
+
+[node name="ClickableArea2" type="TextureRect" parent="ClickableArea" unique_id=963089291]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -4.0
+offset_right = 43.0
+offset_bottom = 48.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("2_23esk")
 expand_mode = 1
 

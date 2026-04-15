@@ -33,6 +33,7 @@ func _ready() -> void:
 
 static func set_tooltip_type(_type:TooltipType, _element:Variant):
 	
+	
 	if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > [color=orange] _type = ",str(_type),str(_element))
 	
 	var _tooltip : Array[String] = ["","",""]
@@ -147,6 +148,25 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 				else:
 					_tooltip[0] =  "- Cannot be built on (yet)"
 					_tooltip[1] = "IMPASSABLE"
+			elif _hex.structure is HexStructureKissStation:
+				if SelectionManager.has_selection:
+					if SelectionManager.current_selection is WorkerBee && _hex.structure.assigned_workers == 0:
+						_tooltip[0] =  "Assign Worker to Kiss Station"
+					elif SelectionManager.current_selection is Nectar && !_hex.structure.kissing:
+						_tooltip[0] =  "Start kissing this Nectar"
+					else:
+						BuildMenu.hide_build_button()
+						Tooltip.hide_tooltip()
+						return
+				else:
+					_tooltip[0] = "- Slowly converts Nectar into Honey"
+					_tooltip[1] = "KISS STATION"
+					_tooltip[2] = (
+						"Worker" if _hex.structure.assigned_workers == 0 else "" +
+						"\n" if _hex.structure.assigned_workers == 0 && !_hex.structure.kissing else "" +
+						"Nectar" if !_hex.structure.kissing else ""
+					)
+					if _hex.structure.assigned_workers == 0: _tooltip[2] = "Worker"
 				
 		
 		TooltipType.OBJECT:
@@ -180,6 +200,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 				if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Element is RoyalJelly!")
 				_tooltip[0] =  "- Resource for building"
 				_tooltip[1] = "ROYAL JELLY"
+	
 	
 	if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Final texts = '"+_tooltip[0]+"', '"+_tooltip[1]+"', '"+_tooltip[2])
 	

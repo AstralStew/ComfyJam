@@ -28,6 +28,7 @@ static var last_hovered_hex : Hex = null
 signal on_hex_clicked(hex)
 signal on_hex_unclicked(hex)
 
+
 func _enter_tree() -> void:
 	instance = self
 
