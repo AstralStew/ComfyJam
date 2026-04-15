@@ -121,8 +121,10 @@ func set_edge(_direction:HexManager.HexDirection, _open:bool) -> void:
 			br_open = _open
 			edge_br.text = _text
 			edge_br.modulate = _color
-
-	update_adjacent_hexes()
+	
+	if !is_waiting_for_output_removed_by_player:
+		offer_my_output()
+	
 
 func get_edge_open(_direction:HexManager.HexDirection) -> bool:
 	match _direction:
@@ -137,8 +139,34 @@ func get_edge_open(_direction:HexManager.HexDirection) -> bool:
 	return false
 
 
-func update_adjacent_hexes() -> void:
-	await get_tree().create_timer(adjacent_output_removal_delay).timeout
+func offer_my_output() -> void:
+	if is_waiting_to_offer_my_output:
+		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Already waiting to update adjacent hexes, cancelling.")
+		return
+	if !is_waiting_for_output_removed:
+		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > We aren't even waiting for output to be removed, cancelling.")
+		return
+	if is_waiting_for_output_removed_by_player:
+		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Still waiting for output to be removed by player, cancelling")
+		return
+	
+	is_waiting_to_offer_my_output = true
+	
+	#print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Waiting for output notify delay...")
+	#
+	#await get_tree().create_timer(output_notify_delay).timeout
+	#
+	#
+	#if !is_waiting_for_output_removed:
+		#print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > We apparently no longer waiting for output to be removed, waiting a frame then flagging that I'm no longer waiting to update adjacent hexes.")
+		#await get_tree().process_frame
+		#print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Finished waiting a frame, flagging that I'm no longer waiting to update adjacent hexes.")
+		#is_waiting_to_offer_my_output = false
+		#return
+	#
+	#print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Still waiting for output to be removed!")
+	#
+	
 	#HexManager.get_adjacent_hex(hex,)
 	#var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
 	var _adjacent_hex : Hex = null
@@ -151,12 +179,15 @@ func update_adjacent_hexes() -> void:
 		if _adjacent_hex != null && _adjacent_hex.structure != null:
 			#adjacent_hex_updated(_adjacent_hex)
 			if !_took_object_from_me && get_edge_open(_direction):
-				print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' is OPEN and has a structure, asking if it wants the object")
+				print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' is OPEN and has a structure, asking if it wants the object")
 				if _adjacent_hex.structure.adjacent_hex_updated(hex):
-					print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
 					_took_object_from_me = true
-			print_rich(DEBUG_NAME,"UpdateAdjacentHexes > Adjacent hex '"+_adjacent_hex.name+"' said no or that direction is closed")
+				else:
+					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' said no or that direction is closed")
 	
+	await get_tree().process_frame
+	is_waiting_to_offer_my_output = false
 
 
 
@@ -204,7 +235,7 @@ func activate() -> void:
 
 var _dispensing : bool = false
 func dispense() -> void:
-	if _dispensing: return
+	if _dispensing || is_waiting_for_output_removed || output_on_cooldown: return
 	
 	_dispensing = true
 	await get_tree().create_timer(cooldown_time).timeout

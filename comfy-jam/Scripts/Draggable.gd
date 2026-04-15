@@ -75,7 +75,8 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	if hovered:
-		SelectionManager.instance.on_hover_change.disconnect(end_hover)
+		if SelectionManager.instance.on_hover_change.is_connected(end_hover):
+			SelectionManager.instance.on_hover_change.disconnect(end_hover)
 		if SelectionManager.current_hover == get_parent():
 			Tooltip.hide_tooltip()
 			SelectionManager.set_current_hover(null)
@@ -88,7 +89,8 @@ func _on_mouse_exited() -> void:
 	
 
 func end_hover(_new_object) -> void:
-	SelectionManager.instance.on_hover_change.disconnect(end_hover)
+	if SelectionManager.instance.on_hover_change.is_connected(end_hover):
+		SelectionManager.instance.on_hover_change.disconnect(end_hover)
 	hovered = false
 	on_hover_end.emit()
 

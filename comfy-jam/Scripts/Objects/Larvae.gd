@@ -27,7 +27,8 @@ signal on_dragged
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if !_setup_complete: setup()
+	if !_setup_complete:
+		setup()
 
 var _setup_complete := false
 func setup() -> void:
@@ -41,7 +42,6 @@ func setup() -> void:
 	_draggable.on_drag_start.connect(drag_start)
 	_draggable.on_drag_end.connect(_fallable.set_falling.bind(true))
 	_draggable.on_drag_end.connect(drag_end)
-	_draggable.on_drag_move.connect(on_dragged.emit)
 	_draggable.on_hover_start.connect(hover_start)
 	_draggable.on_hover_end.connect(hover_end)
 	
@@ -60,6 +60,19 @@ func setup() -> void:
 	
 	_setup_complete = true
 
+var _tween : Tween
+func spawning_animation(_duration:float=1.0) -> void:
+	if _tween: return
+	# Startup animation
+	print_rich(DEBUG_NAME,"StartingAnimation > [color=cyan]Got here")
+	var _starting_scale:Vector2 = scale
+	var _scale_multiplier:float = 1.2
+	_tween = create_tween().set_parallel(true)
+	_tween.tween_property(self, "scale", scale * _scale_multiplier,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	_tween.tween_property(self, "scale", _starting_scale,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT).set_delay(_duration/2)
+
+
+
 func show_outline() -> void:
 	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
 
@@ -67,10 +80,13 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
+	if _tween: _tween.kill()
+	
 	scale = Vector2(0.8,0.8)
 	_crawlable.stop()
 	_sprite.flip_h = randi() % 2 == 0
 	show_outline()
+	on_dragged.emit()
 
 func drag_end() -> void:
 	scale = Vector2(1,1)

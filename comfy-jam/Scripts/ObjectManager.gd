@@ -105,15 +105,18 @@ static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7
 	
 	_object.queue_free()
 	
-	#if _object is WorkerBee:
-		#pass
-	#elif _object is Larvae:
-		#pass
-	#elif _object is Nectar:
-		#pass
-	#elif _object is Pollen:
-		#pass
-	#elif _object is RoyalJelly:
-		#pass
+
+
+static func check_if_object_is_ours(_object:Node2D) -> bool:
+	if _object is WorkerBee:
+		return true
+	elif _object is Larvae:
+		return true
+	elif _object is Nectar:
+		return true
+	elif _object is Pollen:
+		return true
+	elif _object is RoyalJelly:
+		return true
 	
-	
+	return false
