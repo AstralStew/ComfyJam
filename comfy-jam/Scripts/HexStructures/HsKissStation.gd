@@ -22,6 +22,11 @@ var sprite : Sprite2D = null
 @export var kissing_cooldowning : bool = false
 @export var last_nectar_kiss_level : Nectar.KissLevel = Nectar.KissLevel.UNKISSED
 
+func get_missing_objects() -> Array[ObjectManager.ObjectType]:
+	var _missing_objects : Array[ObjectManager.ObjectType] = super()
+	if !kissing && !kissing_cooldowning: _missing_objects.append(ObjectManager.ObjectType.NECTAR)
+	return _missing_objects
+
 func _setup() -> void:
 	super()
 	
@@ -52,8 +57,12 @@ func activate() -> void:
 	super()
 
 
+
+
 func kiss() -> void:
 	kissing = true
+	var _outputted_honey : bool = false
+	var _nectar_output : Nectar = null
 	update_tooltip_info()
 	
 	await start_kissing()
@@ -64,14 +73,18 @@ func kiss() -> void:
 	
 	kissing = false
 	
-	add_object_to_output()
-	output_object()
-	
-	# Check if nectar is kissed enough
-	var _nectar_output = (output as Nectar)
 	if last_nectar_kiss_level == Nectar.KissLevel.VERY_KISSED:
 		print_rich(DEBUG_NAME,"Kiss > We've kissed the nectar into Honey!")
+		_outputted_honey = true
+		add_object_to_output(ObjectManager.ObjectType.HONEY)
+		output_object()
+	
 	else:
+		add_object_to_output()
+		output_object()
+		
+		# Check if nectar is kissed enough
+		_nectar_output = (output as Nectar)
 		_nectar_output.kissed_level = Nectar.KissLevel.values()[(last_nectar_kiss_level as int) + 1]
 		print_rich(DEBUG_NAME,"Kiss > Kissed nectar up to " + str(Nectar.KissLevel.values()[_nectar_output.kissed_level]))
 	
@@ -84,17 +97,17 @@ func kiss() -> void:
 	kissing_cooldowning = false
 	update_tooltip_info()
 	
-	if output == _nectar_output:
-		print_rich(DEBUG_NAME,"[color=orange] Kiss > Our nectar is still here, trying to kiss again")
-		output = null
-		is_waiting_for_output_removed = false
-		is_waiting_for_output_removed_by_player = false
-		last_nectar_kiss_level = _nectar_output.kissed_level
-		ObjectManager.move_and_destroy(_nectar_output,hex.global_position)
-		kiss()
-	
-	else:
-		ask_others_to_offer_their_output()
+	if !_outputted_honey:
+		if is_instance_valid(_nectar_output) && output == _nectar_output:
+			print_rich(DEBUG_NAME,"[color=orange] Kiss > Our nectar is still here, trying to kiss again")
+			output = null
+			is_waiting_for_output_removed = false
+			is_waiting_for_output_removed_by_player = false
+			last_nectar_kiss_level = _nectar_output.kissed_level
+			ObjectManager.move_and_destroy(_nectar_output,hex.global_position)
+			kiss()
+		else:
+			ask_others_to_offer_their_output()
 
 
 func start_kissing() -> void:

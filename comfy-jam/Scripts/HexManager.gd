@@ -8,7 +8,7 @@ enum HexDirection {TopL,TopR,MidL,MidR,BotL,BotR}
 static var instance : HexManager = null
 
 @export var hex_prefab = preload("res://Scenes/hex.tscn")
-@onready var hex_parent = $"../SubViewportContainer/SubViewport/Hexes"
+var hex_parent : Node = null
 
 @export var grid_height = 10
 @export var grid_width = 10
@@ -24,6 +24,7 @@ static var instance : HexManager = null
 
 @export_category("READ ONLY")
 static var last_hovered_hex : Hex = null
+#static var royal_chambers_hex : Hex = null
 
 signal on_hex_clicked(hex)
 signal on_hex_unclicked(hex)
@@ -33,7 +34,11 @@ func _enter_tree() -> void:
 	instance = self
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+static func initialise() -> bool: return instance._initialise()
+func _initialise() -> bool:
+	
+	hex_parent = $"../SubViewportContainer/SubViewport/Hexes"
+	
 	var _columns : Array[Node2D] = []
 	var _row_node : Node2D = null
 	var _hex : Hex = null
@@ -90,7 +95,7 @@ func _ready() -> void:
 		if i == 0 || i == 1: continue
 		StructureManager.set_structure(_adjacent_hexes[i],StructureManager.StructureType.IMPASSABLE)
 		if debug: print_rich(DEBUG_NAME,"Ready > Created Impassable around Royal Chambers")
-	
+	#royal_chambers_hex = _hex
 	
 	for i in starting_impassable:
 		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.IMPASSABLE)
@@ -123,17 +128,22 @@ func _ready() -> void:
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting honeycomb with worker ("+_hex.name+")")
 	# --- /TEMP --- #
 	
-	on_hex_clicked.connect(test_hex)
+	on_hex_clicked.connect(on_click_hex)
+	on_hex_unclicked.connect(on_unclick_hex)
 	
+	return true
 
 
-func test_hex(_hex:Hex) -> void:
-	if debug: print_rich(DEBUG_NAME,"TestHex > Testing hex '",_hex.name,"'...")
+func on_click_hex(_hex:Hex) -> void:
+	if debug: print_rich(DEBUG_NAME,"OnClickHex > Clicked hex '",_hex.name,"' (does nothing)")
 	#print_rich(DEBUG_NAME,"TestHex > Adjacent hexes = ",get_adjacent_hexes(_hex))
 	
-	BuildMenu.build_structure(_hex)
 
-
+func on_unclick_hex(_hex:Hex) -> void:
+	if debug: print_rich(DEBUG_NAME,"TestHex > Unlicked hex '",_hex.name,"', showing tooltip")
+	Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,_hex)
+	#if (SelectionManager.current_selection as WorkerBee) != null:
+		#BuildMenu.build_structure(_hex)
 
 #func test() -> void:
 	#await get_tree().create_timer(1).timeout

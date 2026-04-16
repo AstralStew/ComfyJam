@@ -10,7 +10,7 @@ var hex : Hex = null
 
 @export var output_amount : int = 1
 @export var output_cooldown : float = 0.1
-@export var output_scale : float = 0.64
+@export var output_scale : float = 0.69
 @export var output_candidates : Array[ObjectManager.ObjectType] = []
 
 @export var output_notify_delay : float = 2
@@ -24,6 +24,12 @@ var hex : Hex = null
 
 @export var at_max_workers : bool = false :
 	get: return assigned_workers >= max_workers
+
+
+
+func get_missing_objects() -> Array[ObjectManager.ObjectType]:
+	if assigned_workers < max_workers: return[ObjectManager.ObjectType.WORKER]
+	else: return []
 
 
 var is_waiting_to_offer_my_output : bool = false
@@ -43,6 +49,9 @@ signal on_outputs_empty
 	#_setup()
 	
 
+func activate() -> void:
+	print_rich(DEBUG_NAME,"Activate(super) > Finished activating!")
+	on_activate.emit()
 
 
 func _setup() -> void:
@@ -67,6 +76,8 @@ func _setup() -> void:
 		if _adjacent_hex.structure != null:
 			print_rich(DEBUG_NAME,"Setup > Checking adjacent hex '"+_adjacent_hex.name+"''s structure '"+_adjacent_hex.structure.name+"'")
 			_adjacent_hex.structure.adjacent_hex_updated(hex)
+	
+	update_tooltip_info()
 	
 	#ask_others_to_offer_their_output()
 
@@ -283,6 +294,9 @@ func object_dropped_here(_object:Node2D) -> bool:
 	elif (_object as RoyalJelly) != null:
 		print_rich(DEBUG_NAME,"ObjectDroppedHere > It's a Royal Jelly...")
 		return royal_jelly_dropped_here(_object as RoyalJelly)
+	elif (_object as Honey) != null:
+		print_rich(DEBUG_NAME,"ObjectDroppedHere > It's a Honey...")
+		return honey_dropped_here(_object as Honey)
 	return false
 
 
@@ -301,10 +315,9 @@ func worker_dropped_here(_worker:WorkerBee) -> bool:
 	
 	return true
 
-
-func activate() -> void:
-	print_rich(DEBUG_NAME,"Activate(super) > Finished activating!")
-	on_activate.emit()
+func larvae_dropped_here(_larvae:Larvae) -> bool:
+	print_rich(DEBUG_NAME,"LarvaeDroppedHere(super) > (oops, I don't do anything with this...)")
+	return false
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
 	print_rich(DEBUG_NAME,"NectarDroppedHere(super) > (oops, I don't do anything with this...)")
@@ -318,6 +331,6 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 	print_rich(DEBUG_NAME,"RoyalJellyDroppedHere(super) > (oops, I don't do anything with this...)")
 	return false
 
-func larvae_dropped_here(_larvae:Larvae) -> bool:
-	print_rich(DEBUG_NAME,"LarvaeDroppedHere(super) > (oops, I don't do anything with this...)")
+func honey_dropped_here(_honey:Honey) -> bool:
+	print_rich(DEBUG_NAME,"HoneyDroppedHere(super) > (oops, I don't do anything with this...)")
 	return false

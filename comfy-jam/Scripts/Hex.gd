@@ -28,7 +28,10 @@ signal on_hex_unhovered
 
 func object_dropped_here(_object:Node2D) -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Object = '",_object.name,"'")
-	if structure != null:
+	if structure == null:
+		if _object is WorkerBee:
+			BuildMenu.build_structure(self,_object)
+	else:
 		structure.object_dropped_here(_object)
 
 
@@ -51,7 +54,9 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_entered() -> void:
 	if HexManager.last_hovered_hex != self:
 		HexManager.last_hovered_hex = self
-		$ClickableArea.modulate = Color(1.0, 1.0, 1.0, 0.239)
+		
+		if SelectionManager.has_selection:
+			$ClickableArea.modulate = Color(1.0, 1.0, 1.0, 0.239)
 		
 		Tooltip.set_tooltip_type(Tooltip.TooltipType.HEX,self)
 		

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://sdiushi1rssh" path="res://Scripts/Objects/Pollen.gd" id="1_6naop"]
 [ext_resource type="Texture2D" uid="uid://cy6stu1lb8q4v" path="res://Assets/Images/Objects/Pollen.png" id="2_w85s6"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_rcm0y"]
+[ext_resource type="SpriteFrames" uid="uid://w2b78ndrimr5" path="res://Assets/Animations/pollen_frames.tres" id="3_w85s6"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_kdfb2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6naop"]
@@ -12,7 +13,13 @@ height = 40.0
 [node name="Pollen" type="Node2D" unique_id=395431437]
 script = ExtResource("1_6naop")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1350525125]
+position = Vector2(1, -12)
+sprite_frames = ExtResource("3_w85s6")
+autoplay = "default"
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2110981204]
+visible = false
 position = Vector2(0, -13)
 scale = Vector2(0.23, 0.23)
 texture = ExtResource("2_w85s6")

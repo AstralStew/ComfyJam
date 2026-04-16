@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cm7621g4ffqa"]
 
 [ext_resource type="Script" uid="uid://cwtg10bl2no3l" path="res://Scripts/HexManager.gd" id="1_3ey1d"]
+[ext_resource type="Script" uid="uid://chxwn46ba28q2" path="res://Scripts/HiveManager.gd" id="1_jsr6p"]
 [ext_resource type="Shader" uid="uid://celqbl7q2y4x6" path="res://Assets/Shaders/pixel_dither.gdshader" id="2_5uyql"]
 [ext_resource type="Script" uid="uid://dcdvp81o3g0on" path="res://Scripts/StructureManager.gd" id="2_hbc4g"]
 [ext_resource type="Script" uid="uid://by4a06jffcty7" path="res://Scripts/SelectionManager.gd" id="3_7s54b"]
@@ -47,7 +48,6 @@ width = 32
 height = 32
 fill = 1
 fill_from = Vector2(0.5, 0.52)
-fill_to = Vector2(1.075, 0)
 
 [sub_resource type="FontVariation" id="FontVariation_pylrw"]
 base_font = ExtResource("18_lxibn")
@@ -142,7 +142,7 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdl44"]
-bg_color = Color(0.06119998, 0.039, 0.15, 0.44705883)
+bg_color = Color(0.06100855, 0.03876, 0.15170373, 1)
 corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5hfv"]
@@ -177,17 +177,83 @@ variation_embolden = -1.13
 spacing_space = -2
 spacing_top = -2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pylrw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsr6p"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.44297108, 1, 0.72135246, 1)
+bg_color = Color(1, 0.8666667, 0.79607844, 1)
 border_width_left = 6
 border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 2
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 1.278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51pau"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9529412, 0.70980394, 0.65882355, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.4509804, 0.1764706, 0.44705883, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 2
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 1.278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37gmy"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1764706, 0.3254902, 0.35686275, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.5529412, 0.32941177, 0.5372549, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 2
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 1.278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qak4p"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.5529412, 0.32941177, 0.5372549, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.5254902, 0.75686276, 0.6392157, 1)
 border_blend = true
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -221,12 +287,39 @@ shadow_size = 4
 shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mtk7"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.654902, 0.35686275, 0.5019608, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 2
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 1.278
+
 [node name="Hive" type="CanvasLayer" unique_id=615366674]
 metadata/_edit_horizontal_guides_ = [466.0]
 metadata/_edit_vertical_guides_ = [307.0, 353.0]
 
+[node name="HiveManager" type="Node" parent="." unique_id=1316011348]
+script = ExtResource("1_jsr6p")
+metadata/_custom_type_script = "uid://chxwn46ba28q2"
+
 [node name="HexManager" type="Node" parent="." unique_id=715828618]
 script = ExtResource("1_3ey1d")
+debug = true
 grid_height = 8
 grid_width = 7
 starting_impassable = 5
@@ -597,7 +690,7 @@ fall_on_setup = true
 position = Vector2(292, 479)
 fall_on_setup = true
 
-[node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 instance=ExtResource("24_k6nk5")]
+[node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 groups=["Larvae"] instance=ExtResource("24_k6nk5")]
 position = Vector2(153, 570)
 fall_on_setup = true
 
@@ -741,6 +834,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_kvkj5")
 
 [node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=871287542]
 visible = false
+modulate = Color(0.061800003, 0.041999996, 0.15, 0.29411766)
 custom_minimum_size = Vector2(10, 10)
 anchors_preset = 15
 anchor_right = 1.0
@@ -818,7 +912,6 @@ scale = Vector2(1.375, 1.375)
 texture = ExtResource("20_pylrw")
 
 [node name="Hole" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -832,7 +925,7 @@ offset_right = -11.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pylrw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_jsr6p")
 
 [node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Hole" unique_id=1858676053]
 position = Vector2(23, 23)
@@ -840,7 +933,6 @@ scale = Vector2(0.17587829, 0.17587829)
 texture = ExtResource("21_ivwil")
 
 [node name="Honeycomb" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -854,7 +946,7 @@ offset_right = 57.0
 offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
 [node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" unique_id=502927539]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
@@ -863,7 +955,6 @@ scale = Vector2(0.74, 0.74)
 texture = ExtResource("21_k6nk5")
 
 [node name="Nursery" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -877,7 +968,7 @@ offset_right = -44.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_37gmy")
 
 [node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Nursery" unique_id=1446871648]
 position = Vector2(23.000015, 24)
@@ -899,7 +990,7 @@ offset_right = 90.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qak4p")
 
 [node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" unique_id=1279538699]
 position = Vector2(23.000015, 24)
@@ -924,7 +1015,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
 [node name="Kiss Station" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -938,7 +1028,7 @@ offset_right = 57.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mtk7")
 
 [node name="HsKissStation" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" unique_id=264155649]
 position = Vector2(22.999998, 23)

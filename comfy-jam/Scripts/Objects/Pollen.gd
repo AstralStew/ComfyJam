@@ -2,7 +2,7 @@ class_name Pollen extends Node2D
 var DEBUG_NAME : String :
 	get: return "[b][" + name + "/Pollen][/b] "
 
-var _sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
 @export var fall_on_setup : bool = false
@@ -20,9 +20,12 @@ func _ready() -> void:
 
 var _setup_complete := false
 func setup() -> void:
-	_sprite = $Sprite2D
+	_sprite = $AnimatedSprite2D
 	_draggable = $Draggable
 	_fallable = $Fallable
+	
+	_sprite.flip_h = (randi() % 2) as bool
+	_sprite.frame = randi() % 2
 	
 	_draggable.on_area_entered.connect(area_entered)
 	_draggable.on_drag_start.connect(_fallable.set_falling.bind(false))

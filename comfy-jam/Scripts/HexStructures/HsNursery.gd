@@ -7,6 +7,7 @@ var texture_2 : Texture = null
 
 var sprite : Sprite2D = null
 
+var progress_hex : TextureProgressBar  = null
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 3
@@ -19,11 +20,17 @@ var sprite : Sprite2D = null
 
 @export var nurturing : bool = false
 
+func get_missing_objects() -> Array[ObjectManager.ObjectType]:
+	var _missing_objects : Array[ObjectManager.ObjectType] = super()
+	if !nurturing: _missing_objects.append(ObjectManager.ObjectType.ROYAL_JELLY)
+	return _missing_objects
+
 func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(Nursery) > Yep!")
 	sprite = $HsNursery
+	progress_hex = $ProgressHex
 	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
 	
@@ -48,14 +55,24 @@ func activate() -> void:
 	super()
 
 
+var _tween : Tween = null
 func nurture() -> void:
 	nurturing = true
 	
 	await start_nurturing()
-		
+	
+	progress_hex.visible = true
+	
+	if _tween: _tween.kill()
+	_tween = create_tween().set_parallel()
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,nurturing_time * speed_multiplier)
+	
 	await get_tree().create_timer(nurturing_time * speed_multiplier).timeout
 	
 	await finish_nurturing()
+	
+	progress_hex.visible = false
+	progress_hex.value = 0
 	
 	nurturing = false
 	

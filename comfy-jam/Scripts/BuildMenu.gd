@@ -9,7 +9,7 @@ static var instance : BuildMenu = null
 
 static var active : bool = false
 
-@export var default_colour : Color = Color(0.576, 0.784, 0.678)
+@export var default_colour : Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var hover_colour : Color = Color.WHITE
 
 signal build(structure_type)
@@ -43,10 +43,12 @@ static func deactivate() -> void:
 
 
 
-static func build_structure(_hex:Hex) -> void:
+static func build_structure(_hex:Hex,_worker:WorkerBee=null) -> void:
 	if _hex.structure != null:
 		print_rich(DEBUG_NAME,"BuildStructure > [color=red] Hex already has structure, cancelling")
 		return
+	
+	_worker.visible = false
 	
 	instance.global_position = _hex.global_position
 	activate()
@@ -54,7 +56,7 @@ static func build_structure(_hex:Hex) -> void:
 	
 	#var _structure_type = await instance.build
 	
-	var _result = await on_build_or_cancel()	
+	var _result = await on_build_or_cancel()
 	
 	# UNPAUSE TIME
 	instance.get_tree().paused = false
@@ -64,8 +66,9 @@ static func build_structure(_hex:Hex) -> void:
 		var _structure_type = _result[1][0] as StructureManager.StructureType
 		if _structure_type != StructureManager.StructureType.BLANK:
 			StructureManager.set_structure(_hex,StructureManager.StructureType.CONSTRUCTION, _structure_type)
-	#else:
-		#deactivate()
+			if _worker != null: _hex.structure.object_dropped_here(_worker)
+	else:
+		_worker.visible = true
 	
 	
 	deactivate()

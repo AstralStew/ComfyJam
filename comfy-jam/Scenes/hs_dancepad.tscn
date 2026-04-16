@@ -50,17 +50,18 @@ position = Vector2(0, 1)
 texture = ExtResource("4_2opmt")
 
 [node name="Edge_tl" type="Label" parent="." unique_id=1018495924]
-modulate = Color(0.93, 0.7006, 0.2418, 1)
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 light_mask = 32769
-offset_left = -4.999999
-offset_top = -15.0
-offset_right = 3.000001
-offset_bottom = 12.0
+offset_left = -5.0
+offset_top = -14.000001
+offset_right = 3.0
+offset_bottom = 17.0
 rotation = -3.6639445
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -75,17 +76,18 @@ offset_bottom = 10.704737
 mouse_filter = 1
 
 [node name="Edge_tr" type="Label" parent="." unique_id=573854910]
-modulate = Color(1, 0.71000004, 0.8985, 1)
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 light_mask = 32769
 offset_left = 12.0
-offset_top = -11.0
+offset_top = -10.0
 offset_right = 21.0
-offset_bottom = 16.0
+offset_bottom = 21.0
 rotation = -2.5743606
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -100,17 +102,18 @@ offset_bottom = 10.704735
 mouse_filter = 1
 
 [node name="Edge_l" type="Label" parent="." unique_id=971121510]
-modulate = Color(0.92941177, 0.7019608, 0.24313726, 1)
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 light_mask = 32769
-offset_left = -16.0
+offset_left = -14.0
 offset_top = -4.0
-offset_right = -8.0
-offset_bottom = 23.0
+offset_right = -6.0
+offset_bottom = 25.0
 rotation = 1.6091936
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -125,16 +128,17 @@ offset_bottom = 10.704736
 mouse_filter = 1
 
 [node name="Edge_r" type="Label" parent="." unique_id=1948580910]
-modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
-offset_left = 15.999998
-offset_top = 4.000001
-offset_right = 23.999998
-offset_bottom = 31.0
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
+offset_left = 14.0
+offset_top = 3.000001
+offset_right = 22.0
+offset_bottom = 32.0
 rotation = -1.5550884
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -149,16 +153,17 @@ offset_bottom = 10.704737
 mouse_filter = 1
 
 [node name="Edge_bl" type="Label" parent="." unique_id=557388437]
-modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
-offset_left = -12.0
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
+offset_left = -10.000001
 offset_top = 11.0
-offset_right = -4.0
-offset_bottom = 38.0
+offset_right = -2.000001
+offset_bottom = 42.0
 rotation = 0.715585
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -166,23 +171,24 @@ horizontal_alignment = 1
 [node name="Clickable" type="ColorRect" parent="Edge_bl" unique_id=1715867000]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 0.46742082
-offset_top = 1.3347366
-offset_right = 6.5374203
-offset_bottom = 10.704736
+offset_left = -0.18863845
+offset_top = 0.58002543
+offset_right = 5.881361
+offset_bottom = 9.950025
 mouse_filter = 1
 
 [node name="Edge_br" type="Label" parent="." unique_id=411585020]
-modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
-offset_left = 5.0
-offset_top = 16.0
-offset_right = 13.000003
-offset_bottom = 43.0
+modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
+offset_left = 5.000001
+offset_top = 15.0
+offset_right = 13.000005
+offset_bottom = 46.0
 rotation = -0.62133723
 mouse_filter = 1
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
+theme_override_constants/outline_size = 3
 theme_override_fonts/font = SubResource("FontVariation_o8x1l")
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 12
 text = "V
 "
 horizontal_alignment = 1
@@ -190,10 +196,10 @@ horizontal_alignment = 1
 [node name="Clickable" type="ColorRect" parent="Edge_br" unique_id=402829596]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 0.46742082
-offset_top = 1.3347366
-offset_right = 6.5374203
-offset_bottom = 10.704736
+offset_left = 1.0495436
+offset_top = 0.5216358
+offset_right = 7.119543
+offset_bottom = 9.891635
 mouse_filter = 1
 
 [connection signal="gui_input" from="Edge_tl/Clickable" to="." method="_tl_gui_event"]

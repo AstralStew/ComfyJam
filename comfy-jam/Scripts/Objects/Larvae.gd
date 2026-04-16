@@ -23,6 +23,9 @@ var _crawlable : Crawlable = null
 @export var usable : bool = false :
 	get: return !_draggable.dragging && !_fallable.falling
 
+var can_eat : bool = false
+
+
 signal on_dragged
 
 # Called when the node enters the scene tree for the first time.
@@ -81,8 +84,9 @@ func hide_outline() -> void:
 
 func drag_start() -> void:
 	if _tween: _tween.kill()
+	if !can_eat: can_eat = true
 	
-	scale = Vector2(0.8,0.8)
+	scale = Vector2(0.69,0.69)
 	_crawlable.stop()
 	_sprite.flip_h = randi() % 2 == 0
 	show_outline()
@@ -118,24 +122,23 @@ func hover_end() -> void:
 
 
 func area_entered(_area:Area2D) -> void:
-	if _draggable.dragging: return
+	if _draggable.dragging || _fallable.falling || eating_on_cooldown || !can_eat: return
 	
 	var _object : Node2D = _area.get_parent()
 	
-	if !_fallable.falling:
-		if !eating_on_cooldown && _object.is_in_group("Nectar"):
-			var _nectar = (_object as Nectar)
-			if _nectar.usable:
-				_object.queue_free()
-				eat_nectar()
-			return
-		
-		if !eating_on_cooldown && _object.is_in_group("Pollen"):
-			var _pollen = (_object as Pollen)
-			if _pollen.usable:
-				_object.queue_free()
-				eat_pollen()
-			return
+	if _object.is_in_group("Nectar"):
+		var _nectar = (_object as Nectar)
+		if _nectar.usable:
+			_object.queue_free()
+			eat_nectar()
+		return
+	
+	if _object.is_in_group("Pollen"):
+		var _pollen = (_object as Pollen)
+		if _pollen.usable:
+			_object.queue_free()
+			eat_pollen()
+		return
 
 func eat_nectar() -> void:
 	eating_on_cooldown = true

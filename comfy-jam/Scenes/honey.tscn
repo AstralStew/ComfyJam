@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dt6r66q07741o"]
+
+[ext_resource type="Script" uid="uid://c6pb0libk1dbc" path="res://Scripts/Objects/Honey.gd" id="1_18sfh"]
+[ext_resource type="SpriteFrames" uid="uid://dmgngxqnd3mqd" path="res://Assets/Animations/honey_frames.tres" id="2_18sfh"]
+[ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="4_0anuf"]
+[ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="5_3wkve"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_spxe2"]
+radius = 12.54
+height = 44.0
+
+[node name="Honey" type="Node2D" unique_id=2092266365]
+script = ExtResource("1_18sfh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895527369]
+position = Vector2(1, -15)
+sprite_frames = ExtResource("2_18sfh")
+autoplay = "default"
+
+[node name="Draggable" type="Area2D" parent="." unique_id=1206883716]
+position = Vector2(0, -20)
+collision_layer = 16
+collision_mask = 256
+script = ExtResource("4_0anuf")
+can_drag = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=1646303070]
+position = Vector2(0, 6)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_spxe2")
+
+[node name="Fallable" type="Node" parent="." unique_id=2006113861]
+script = ExtResource("5_3wkve")
+can_fall = true
+midpoint = 620
+floor_width = 10
+metadata/_custom_type_script = "uid://bd0txc82jo681"
+
+[connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
+[connection signal="input_event" from="Draggable" to="Draggable" method="_on_input_event"]

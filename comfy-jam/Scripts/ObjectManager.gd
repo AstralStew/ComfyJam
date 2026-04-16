@@ -3,7 +3,7 @@ const DEBUG_NAME : String = "[b][ObjectManager][/b] "
 
 static var instance : ObjectManager = null
 
-enum ObjectType {LARVAE,WORKER,NECTAR,POLLEN,ROYAL_JELLY}
+enum ObjectType {LARVAE,WORKER,NECTAR,POLLEN,ROYAL_JELLY,HONEY}
 static var spawned_objects : Node
 
 static var larvae_prefab = preload("res://Scenes/larvae.tscn")
@@ -12,6 +12,7 @@ static var worker_prefab = preload("res://Scenes/worker_bee.tscn")
 static var nectar_prefab = preload("res://Scenes/nectar.tscn")
 static var pollen_prefab = preload("res://Scenes/pollen.tscn")
 static var royal_jelly_prefab = preload("res://Scenes/royal_jelly.tscn")
+static var honey_prefab = preload("res://Scenes/honey.tscn")
 
 
 func _enter_tree() -> void:
@@ -70,6 +71,16 @@ static func create_royal_jelly(_position:Vector2,_auto_fall:bool=false) -> Royal
 	_new_jelly.global_position = _position - _new_jelly._draggable.position
 	return _new_jelly
 
+static func create_honey(_position:Vector2,_auto_fall:bool=false) -> Honey:
+	var _new_honey : Honey = honey_prefab.instantiate()
+	_new_honey.name = "Honey"
+	_new_honey.add_to_group("Honey")
+	_new_honey.fall_on_setup = _auto_fall
+	spawned_objects.add_child(_new_honey)
+	#_new_jelly.setup()
+	_new_honey.global_position = _position - _new_honey._draggable.position
+	return _new_honey
+
 static func create_object(_type:ObjectType,_position:Vector2) -> Node2D:
 	match _type:
 		ObjectType.LARVAE:
@@ -82,6 +93,8 @@ static func create_object(_type:ObjectType,_position:Vector2) -> Node2D:
 			return create_pollen(_position)
 		ObjectType.ROYAL_JELLY:
 			return create_royal_jelly(_position)
+		ObjectType.HONEY:
+			return create_honey(_position)
 	
 	print_rich(DEBUG_NAME,"CreateObject > [color=red]Bad object type recieved, cancelling.")
 	return null
@@ -106,6 +119,21 @@ static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7
 	_object.queue_free()
 	
 
+static func get_type_of_object(_object:Node2D) -> ObjectType:
+	if _object is WorkerBee:
+		return ObjectType.WORKER
+	elif _object is Larvae:
+		return ObjectType.LARVAE
+	elif _object is Nectar:
+		return ObjectType.NECTAR
+	elif _object is Pollen:
+		return ObjectType.POLLEN
+	elif _object is RoyalJelly:
+		return ObjectType.ROYAL_JELLY
+	elif _object is Honey:
+		return ObjectType.HONEY
+	
+	return -1
 
 static func check_if_object_is_ours(_object:Node2D) -> bool:
 	if _object is WorkerBee:
@@ -117,6 +145,8 @@ static func check_if_object_is_ours(_object:Node2D) -> bool:
 	elif _object is Pollen:
 		return true
 	elif _object is RoyalJelly:
+		return true
+	elif _object is Honey:
 		return true
 	
 	return false

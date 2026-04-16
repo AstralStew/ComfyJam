@@ -69,7 +69,7 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
-	scale = Vector2(0.8,0.8)
+	scale = Vector2(0.69,0.69)
 	_crawlable.stop()
 	_sprite.flip_h = randi() % 2 == 0
 	show_outline()

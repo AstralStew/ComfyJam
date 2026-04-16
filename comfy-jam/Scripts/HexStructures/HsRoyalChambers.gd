@@ -12,6 +12,7 @@ func _debug_name() -> String:
 @export var speed_multiplier : float = 1
 
 
+var game_time_hex : TextureProgressBar  = null
 
 
 
@@ -24,6 +25,10 @@ func _debug_name() -> String:
 
 @export var order_recipe : Array[ObjectManager.ObjectType] = []
 
+func get_missing_objects() -> Array[ObjectManager.ObjectType]:
+	if !cooling_down: return order_recipe
+	return []
+
 var number_of_orders : float = 0
 var order_number : float = 0
 
@@ -33,6 +38,8 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(RoyalChambers) > Yep!")
+	
+	game_time_hex = $GameTimeHex
 	
 	number_of_orders = order_level + 3
 	
@@ -54,7 +61,9 @@ func create_order() -> void:
 	order_level += 1
 	
 
-
+func _process(delta: float) -> void:
+	
+	game_time_hex.value = (HiveManager.game_time / HiveManager.game_length) * game_time_hex.max_value
 
 
 
@@ -62,12 +71,15 @@ func create_order() -> void:
 func check_order() -> void:
 	if !active || cooling_down: return
 	
+	update_tooltip_info()
+	
 	await get_tree().process_frame
 	while get_tree().paused:
 		await get_tree().process_frame
 	if order_recipe.size() == 0:
 		print_rich(DEBUG_NAME,"Checkorder > No order remain! Completing order")
 		complete_order()
+	
 
 
 func activate() -> void:

@@ -1,6 +1,7 @@
-class_name RoyalJelly extends Node2D
+class_name Honey extends Node2D
 var DEBUG_NAME : String :
-	get: return "[b][" + name + "/RoyalJelly][/b] "
+	get: return "[b][" + name + "/Honey][/b] "
+
 
 var _sprite : AnimatedSprite2D = null
 var _draggable : Draggable = null
@@ -11,8 +12,10 @@ var _fallable : Fallable = null
 @export var usable : bool = false :
 	get: return !_fallable.falling #!_draggable.dragging && !_fallable.falling
 
+
 signal on_dragged
 
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if !_setup_complete:
 		setup()
@@ -25,6 +28,7 @@ func setup() -> void:
 	
 	_sprite.flip_h = (randi() % 2) as bool
 	_sprite.frame = randi() % 2
+	
 	
 	_draggable.on_area_entered.connect(area_entered)
 	_draggable.on_drag_start.connect(_fallable.set_falling.bind(false))
@@ -41,7 +45,6 @@ func setup() -> void:
 	
 	_setup_complete = true
 
-
 var _tween : Tween
 func spawning_animation(_duration:float=1.0) -> void:
 	# Startup animation
@@ -52,7 +55,6 @@ func spawning_animation(_duration:float=1.0) -> void:
 	_tween.tween_property(self, "scale", scale * _scale_multiplier,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	_tween.tween_property(self, "scale", _starting_scale,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT).set_delay(_duration/2)
 
-
 func show_outline() -> void:
 	_sprite.material = preload("res://Assets/Materials/selection_material.tres")
 
@@ -60,6 +62,8 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
+	if _tween: _tween.kill()
+	
 	scale = Vector2(0.8,0.8)
 	show_outline()
 	on_dragged.emit()
@@ -82,7 +86,7 @@ func hover_end() -> void:
 	if self != SelectionManager.current_selection:
 		hide_outline()
 
-func area_entered(_area:Area2D) -> void:	
+func area_entered(_area:Area2D) -> void:
 	if _draggable.dragging: return
 	
 	var _object : Node2D = _area.get_parent()

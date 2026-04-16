@@ -9,7 +9,8 @@ var edge_r : Label = null
 var edge_bl : Label = null
 var edge_br : Label = null
 
-var texture : Texture = null
+var texture_1 : Texture = null
+var texture_2 : Texture = null
 
 var dancepad_sprite : Sprite2D = null
 
@@ -19,8 +20,8 @@ var dancepad_sprite : Sprite2D = null
 
 @export var filter : ObjectManager.ObjectType = ObjectManager.ObjectType.LARVAE
 
-@export var edge_filtered_color = Color(0.929, 0.702, 0.243)
-@export var edge_unfiltered_color = Color(0.702, 0.498, 0.631, 1.0)
+@export var edge_filtered_color = Color(0.578, 0.784, 0.679, 1.0)
+@export var edge_unfiltered_color = Color(0.804, 0.478, 0.529, 1.0)
 
 
 @export var tl_filtered : bool = false
@@ -49,7 +50,8 @@ func _setup() -> void:
 	set_edge(HexManager.HexDirection.BotR,false)
 	
 	dancepad_sprite = $HsDancepad
-	texture = preload("res://Assets/Images/Structures/HS_Dancepad.png")
+	texture_1 = preload("res://Assets/Images/Structures/HS_Dancepad.png")
+	texture_2 = preload("res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png")
 	
 	max_workers = 1
 	
@@ -140,7 +142,6 @@ func nectar_dropped_here(_nectar:Nectar) -> bool:
 	if !active:
 		return false
 	
-	#_nectar.queue_free()
 	ObjectManager.move_and_destroy(_nectar,hex.global_position)
 	filter = ObjectManager.ObjectType.NECTAR
 	
@@ -150,7 +151,6 @@ func pollen_dropped_here(_pollen:Pollen) -> bool:
 	if !active:
 		return false
 	
-	#_pollen.queue_free()	
 	ObjectManager.move_and_destroy(_pollen,hex.global_position)
 	filter = ObjectManager.ObjectType.POLLEN
 	
@@ -161,7 +161,6 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 		print_rich(DEBUG_NAME,"RoyalJellyDroppedHere > No space for RoyalJelly! Returning false")
 		return false
 	
-	#_royal_jelly.queue_free()
 	ObjectManager.move_and_destroy(_royal_jelly,hex.global_position)
 	filter = ObjectManager.ObjectType.ROYAL_JELLY
 	
@@ -170,7 +169,7 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
-	dancepad_sprite.texture = texture
+	dancepad_sprite.texture = texture_2
 	active = true
 	
 	super()

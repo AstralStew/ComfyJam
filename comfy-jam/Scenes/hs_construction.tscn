@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://drglakt16w3pq" path="res://Scripts/HexStructures/HsConstruction.gd" id="1_6t10m"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_cmamy"]
 [ext_resource type="Texture2D" uid="uid://cx77knfucweu3" path="res://Assets/Images/Structures/HS_UnderConstruction.png" id="3_6t10m"]
+[ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_cmamy"]
 
 [node name="HS_Construction" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_6t10m")
@@ -23,7 +24,21 @@ mouse_filter = 2
 texture = ExtResource("2_cmamy")
 expand_mode = 1
 
+[node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=955598865]
+visible = false
+offset_left = -41.0
+offset_top = -44.0
+offset_right = 41.0
+offset_bottom = 44.0
+pivot_offset = Vector2(41, 44)
+mouse_filter = 2
+max_value = 60.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_cmamy")
+tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
+
 [node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
-position = Vector2(0, 1)
-scale = Vector2(0.945, 0.945)
+position = Vector2(0, 0.5)
+scale = Vector2(0.855, 0.855)
 texture = ExtResource("3_6t10m")

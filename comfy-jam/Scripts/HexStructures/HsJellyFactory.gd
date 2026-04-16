@@ -21,6 +21,13 @@ var bee_sprite : Sprite2D = null
 
 @export var items_inputted : float = 0
 
+func get_missing_objects() -> Array[ObjectManager.ObjectType]:
+	var _missing_objects : Array[ObjectManager.ObjectType] = super()
+	if !producing && items_inputted < 1: _missing_objects.append(ObjectManager.ObjectType.POLLEN)
+	if !producing && items_inputted < 2: _missing_objects.append(ObjectManager.ObjectType.POLLEN)
+	return _missing_objects
+
+
 func _setup() -> void:
 	super()
 	
@@ -64,15 +71,18 @@ func produce() -> void:
 	
 	await start_production()
 	
+	progress_hex.visible = true
+	
 	if _tween: _tween.kill()
 	_tween = create_tween().set_parallel()
-	_tween.tween_property(progress_hex,"value",12,production_time * speed_multiplier)
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,production_time * speed_multiplier)
 	
 	await get_tree().create_timer(production_time * speed_multiplier).timeout
 	
 	await finish_production()
 	
 	progress_hex.value = 0
+	progress_hex.visible = false
 	
 	producing = false
 	
