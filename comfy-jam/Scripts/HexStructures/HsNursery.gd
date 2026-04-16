@@ -35,7 +35,7 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 	
 	print_rich(DEBUG_NAME,"RoyalJellyDroppedHere > Using Royal Jelly to start nurturing...")
 	ObjectManager.move_and_destroy(_royal_jelly,hex.global_position)
-	produce()
+	nurture()
 	
 	return true
 
@@ -48,7 +48,7 @@ func activate() -> void:
 	super()
 
 
-func produce() -> void:
+func nurture() -> void:
 	nurturing = true
 	
 	await start_nurturing()

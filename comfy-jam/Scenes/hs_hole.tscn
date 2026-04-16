@@ -1,19 +1,11 @@
 [gd_scene format=3 uid="uid://dxlsfguauhwiq"]
 
 [ext_resource type="Script" uid="uid://ctr8i5u45e370" path="res://Scripts/HexStructures/HsHole.gd" id="1_pnbf6"]
-[ext_resource type="Shader" uid="uid://c1mbike56b781" path="res://Assets/Shaders/gradient_outline.gdshader" id="2_yv856"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_405aw"]
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="3_r64se"]
+[ext_resource type="Material" uid="uid://b4vmpetqcuwva" path="res://Assets/Materials/light_glow_material.tres" id="3_ws02s"]
 [ext_resource type="Texture2D" uid="uid://deqj5res2bdkg" path="res://Assets/Images/Prototyping/bee_test.png" id="3_yv856"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r64se"]
-shader = ExtResource("2_yv856")
-shader_parameter/max_line_width = 18.0
-shader_parameter/min_line_width = 10.0
-shader_parameter/freq = 5.0
-shader_parameter/block_size = 1.0
-shader_parameter/starting_colour = Vector4(1, 0.7, 0.5, 0.415)
-shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.03)
+[ext_resource type="Material" uid="uid://ci0hsg3yqay3k" path="res://Assets/Materials/bg_scroll_material.tres" id="5_1h2gx"]
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
@@ -27,7 +19,25 @@ texture = ExtResource("3_r64se")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
 self_modulate = Color(1, 0.8666667, 0.79607844, 1)
-material = SubResource("ShaderMaterial_r64se")
+material = ExtResource("3_ws02s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.999996
+offset_top = -45.999996
+offset_right = 43.000004
+offset_bottom = 46.000004
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.86, 0.86)
+pivot_offset = Vector2(43, 46)
+mouse_filter = 2
+texture = ExtResource("3_405aw")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=301110292]
+self_modulate = Color(0.59000003, 1, 0.78816664, 1)
+material = ExtResource("5_1h2gx")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -76,7 +76,13 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 				else:
 					_tooltip[0] =  "- Produces Royal Jelly"
 					_tooltip[1] = "JELLY FACTORY"
-					if _hex.structure.assigned_workers == 0: _tooltip[2] = "Worker"
+					_tooltip[2] = (
+						"Worker" if _hex.structure.assigned_workers == 0 else "" +
+						"\n" if _hex.structure.assigned_workers == 0 && !_hex.structure.producing else "" +
+						("Pollen" if _hex.structure.active && !_hex.structure.producing && _hex.structure.items_inputted < 2 else "") +
+						("\n" if !_hex.structure.producing && !_hex.structure.producing && _hex.structure.items_inputted < 2 else "") +
+						("Pollen" if _hex.structure.active && !_hex.structure.producing && _hex.structure.items_inputted < 1 else "")
+					)
 			elif _hex.structure is HexStructureNursery:
 				if SelectionManager.has_selection:
 					if SelectionManager.current_selection is WorkerBee && _hex.structure.assigned_workers == 0:

@@ -57,7 +57,7 @@ func kiss() -> void:
 	update_tooltip_info()
 	
 	await start_kissing()
-		
+	
 	await get_tree().create_timer(kissing_time * speed_multiplier).timeout
 	
 	await finish_kissing()

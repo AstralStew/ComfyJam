@@ -10,8 +10,7 @@ script = ExtResource("1_28kgw")
 production_time = 20.0
 output_candidates = Array[int]([4])
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1216747182]
 self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,17 +26,17 @@ texture = ExtResource("2_uaxht")
 expand_mode = 1
 
 [node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=990959636]
-offset_left = -43.0
-offset_top = -46.0
-offset_right = 43.0
-offset_bottom = 46.0
+offset_left = -41.0
+offset_top = -45.0
+offset_right = 41.0
+offset_bottom = 44.0
 pivot_offset = Vector2(43, 46)
 mouse_filter = 2
 max_value = 12.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_uaxht")
-tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
+tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
 
 [node name="HsJellyFactory" type="Sprite2D" parent="." unique_id=440202702]
 texture = ExtResource("3_28kgw")

@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b4vmpetqcuwva"]
+
+[ext_resource type="Shader" uid="uid://c1mbike56b781" path="res://Assets/Shaders/gradient_outline.gdshader" id="1_50ymb"]
+
+[resource]
+shader = ExtResource("1_50ymb")
+shader_parameter/max_line_width = 18.0
+shader_parameter/min_line_width = 10.0
+shader_parameter/freq = 5.0
+shader_parameter/block_size = 1.0
+shader_parameter/starting_colour = Vector4(1, 0.7, 0.5, 0.415)
+shader_parameter/ending_colour = Vector4(1, 0.7, 0.5, 0.03)

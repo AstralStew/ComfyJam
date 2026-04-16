@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ci0hsg3yqay3k"]
+
+[ext_resource type="Shader" uid="uid://ddbqbe12par7e" path="res://Assets/Shaders/animated_scroll.gdshader" id="1_1wcro"]
+
+[resource]
+shader = ExtResource("1_1wcro")
+shader_parameter/wind_dir_angle = 0.0
+shader_parameter/wind_speed = 4.2
+shader_parameter/use_wind_gusts = false
+shader_parameter/patch_width_px = 26.29
+shader_parameter/patch_height_px = 1.23
+shader_parameter/pixel_size_px = 1.0
+shader_parameter/rotation_degrees = 0.0
+shader_parameter/threshold = 0.345
+shader_parameter/opacity = 0.91
