@@ -1,0 +1,216 @@
+[gd_scene format=3 uid="uid://cl5bcsp5targy"]
+
+[ext_resource type="Script" uid="uid://ckkmfm3edxuh2" path="res://Scripts/HexStructures/HsDancepad.gd" id="1_8ugku"]
+[ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_2opmt"]
+[ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_lq1oc"]
+[ext_resource type="Texture2D" uid="uid://cqtia7cjg0j6w" path="res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png" id="4_2opmt"]
+[ext_resource type="FontFile" uid="uid://gdxm02kup507" path="res://Assets/Fonts/singleday.ttf" id="5_u5mkj"]
+
+[sub_resource type="FontVariation" id="FontVariation_o8x1l"]
+base_font = ExtResource("5_u5mkj")
+variation_embolden = 1.0
+
+[node name="HS_Dancepad" type="Node2D" unique_id=1869955823]
+script = ExtResource("1_8ugku")
+metadata/_edit_vertical_guides_ = [-7.0, 7.0]
+metadata/_edit_horizontal_guides_ = [-14.0, 14.0]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+visible = false
+self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -26.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_2opmt")
+expand_mode = 1
+
+[node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=990959636]
+visible = false
+offset_left = -43.0
+offset_top = -46.0
+offset_right = 43.0
+offset_bottom = 46.0
+pivot_offset = Vector2(43, 46)
+mouse_filter = 2
+max_value = 12.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_lq1oc")
+tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
+
+[node name="HsDancepad" type="Sprite2D" parent="." unique_id=440202702]
+position = Vector2(0, 1)
+texture = ExtResource("4_2opmt")
+
+[node name="Edge_tl" type="Label" parent="." unique_id=1018495924]
+modulate = Color(0.93, 0.7006, 0.2418, 1)
+light_mask = 32769
+offset_left = -4.999999
+offset_top = -15.0
+offset_right = 3.000001
+offset_bottom = 12.0
+rotation = -3.6639445
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_tl" unique_id=1624772338]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.537421
+offset_bottom = 10.704737
+mouse_filter = 1
+
+[node name="Edge_tr" type="Label" parent="." unique_id=573854910]
+modulate = Color(1, 0.71000004, 0.8985, 1)
+light_mask = 32769
+offset_left = 12.0
+offset_top = -11.0
+offset_right = 21.0
+offset_bottom = 16.0
+rotation = -2.5743606
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_tr" unique_id=1227382389]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347352
+offset_right = 6.537421
+offset_bottom = 10.704735
+mouse_filter = 1
+
+[node name="Edge_l" type="Label" parent="." unique_id=971121510]
+modulate = Color(0.92941177, 0.7019608, 0.24313726, 1)
+light_mask = 32769
+offset_left = -16.0
+offset_top = -4.0
+offset_right = -8.0
+offset_bottom = 23.0
+rotation = 1.6091936
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_l" unique_id=650429131]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.537421
+offset_bottom = 10.704736
+mouse_filter = 1
+
+[node name="Edge_r" type="Label" parent="." unique_id=1948580910]
+modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
+offset_left = 15.999998
+offset_top = 4.000001
+offset_right = 23.999998
+offset_bottom = 31.0
+rotation = -1.5550884
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_r" unique_id=807313091]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704737
+mouse_filter = 1
+
+[node name="Edge_bl" type="Label" parent="." unique_id=557388437]
+modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
+offset_left = -12.0
+offset_top = 11.0
+offset_right = -4.0
+offset_bottom = 38.0
+rotation = 0.715585
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_bl" unique_id=1715867000]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704736
+mouse_filter = 1
+
+[node name="Edge_br" type="Label" parent="." unique_id=411585020]
+modulate = Color(0.5529412, 0.32941177, 0.5372549, 1)
+offset_left = 5.0
+offset_top = 16.0
+offset_right = 13.000003
+offset_bottom = 43.0
+rotation = -0.62133723
+mouse_filter = 1
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("FontVariation_o8x1l")
+theme_override_font_sizes/font_size = 11
+text = "V
+"
+horizontal_alignment = 1
+
+[node name="Clickable" type="ColorRect" parent="Edge_br" unique_id=402829596]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 0.46742082
+offset_top = 1.3347366
+offset_right = 6.5374203
+offset_bottom = 10.704736
+mouse_filter = 1
+
+[connection signal="gui_input" from="Edge_tl/Clickable" to="." method="_tl_gui_event"]
+[connection signal="mouse_entered" from="Edge_tl/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_tl/Clickable" to="." method="_on_direction_mouse_exited"]
+[connection signal="gui_input" from="Edge_tr/Clickable" to="." method="_tr_gui_event"]
+[connection signal="mouse_entered" from="Edge_tr/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_tr/Clickable" to="." method="_on_direction_mouse_exited"]
+[connection signal="gui_input" from="Edge_l/Clickable" to="." method="_l_gui_event"]
+[connection signal="mouse_entered" from="Edge_l/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_l/Clickable" to="." method="_on_direction_mouse_exited"]
+[connection signal="gui_input" from="Edge_r/Clickable" to="." method="_r_gui_event"]
+[connection signal="mouse_entered" from="Edge_r/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_r/Clickable" to="." method="_on_direction_mouse_exited"]
+[connection signal="gui_input" from="Edge_bl/Clickable" to="." method="_bl_gui_event"]
+[connection signal="mouse_entered" from="Edge_bl/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_bl/Clickable" to="." method="_on_direction_mouse_exited"]
+[connection signal="gui_input" from="Edge_br/Clickable" to="." method="_br_gui_event"]
+[connection signal="mouse_entered" from="Edge_br/Clickable" to="." method="_on_direction_mouse_entered"]
+[connection signal="mouse_exited" from="Edge_br/Clickable" to="." method="_on_direction_mouse_exited"]

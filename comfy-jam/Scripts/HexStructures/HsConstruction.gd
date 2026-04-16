@@ -75,6 +75,14 @@ func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 				ObjectManager.ObjectType.NECTAR, 
 				ObjectManager.ObjectType.POLLEN]
 			build_time = 15
+		StructureManager.StructureType.DANCEPAD:
+			print_rich(DEBUG_NAME,"SetConstructionType -> Construction type = DANCEPAD...")
+			inputs = [
+				ObjectManager.ObjectType.ROYAL_JELLY,
+				ObjectManager.ObjectType.NECTAR,
+				ObjectManager.ObjectType.NECTAR, 
+				ObjectManager.ObjectType.POLLEN]
+			build_time = 15
 	
 	check_inputs()
 	

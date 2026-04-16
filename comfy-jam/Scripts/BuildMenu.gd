@@ -141,7 +141,7 @@ func _on_jelly_factory_gui_input(event: InputEvent) -> void:
 func _on_dancepad_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
 		print_rich(DEBUG_NAME,"OnDancepadGuiInput > LeftClick recieved!")
-		#build.emit(StructureManager.StructureType.DANCEPAD)
+		build.emit(StructureManager.StructureType.DANCEPAD)
 
 func _on_kiss_station_factory_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouse && event.is_action_pressed("LeftClick"):
