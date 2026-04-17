@@ -209,3 +209,19 @@ func larvae_dropped_here(_larvae:Larvae) -> bool:
 	check_order()
 	
 	return true
+
+
+func honey_dropped_here(_honey:Honey) -> bool:
+	if !active || cooling_down: return false
+	
+	if !order_recipe.has(ObjectManager.ObjectType.HONEY):
+		print_rich(DEBUG_NAME,"HoneyDroppedHere > Not present in order, returning false")
+		return false
+	
+	print_rich(DEBUG_NAME,"HoneyDroppedHere > Removing a Honey from the order...")	
+	ObjectManager.move_and_destroy(_honey,hex.global_position)
+	
+	order_recipe.remove_at(order_recipe.rfind(ObjectManager.ObjectType.HONEY))
+	check_order()
+	
+	return true
