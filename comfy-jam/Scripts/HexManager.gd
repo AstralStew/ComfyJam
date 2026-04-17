@@ -30,14 +30,18 @@ signal on_hex_clicked(hex)
 signal on_hex_unclicked(hex)
 
 
-func _enter_tree() -> void:
+func reset() -> void:
 	instance = self
+	last_hovered_hex = null
+
+func _enter_tree() -> void:
+	reset() 
 
 # Called when the node enters the scene tree for the first time.
 static func initialise() -> bool: return instance._initialise()
 func _initialise() -> bool:
 	
-	hex_parent = $"../SubViewportContainer/SubViewport/Hexes"
+	hex_parent = $"../SubViewportContainer/SubViewport/HiveNodes/Hexes"
 	
 	var _columns : Array[Node2D] = []
 	var _row_node : Node2D = null

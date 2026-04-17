@@ -15,9 +15,14 @@ static var royal_jelly_prefab = preload("res://Scenes/royal_jelly.tscn")
 static var honey_prefab = preload("res://Scenes/honey.tscn")
 
 
-func _enter_tree() -> void:
+func reset() -> void:
 	instance = self
-	spawned_objects = $"../SubViewportContainer/SubViewport/SpawnedObjects"
+	instance = self
+	spawned_objects = $"../SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects"
+
+func _enter_tree() -> void:
+	reset()
+	
 	print_rich(DEBUG_NAME,"EnterTree > SpawnedObjects = "+spawned_objects.name)
 	
 
