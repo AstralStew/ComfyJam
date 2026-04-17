@@ -17,9 +17,15 @@ var _crawlable : Crawlable = null
 @export var chew_time_per_nectar : float = 2
 @export var growth_per_pollen : float = 0.25
 @export var chew_time_per_pollen : float = 3
+@export var growth_per_honey : float = 1
+@export var chew_time_per_honey : float = 1
 @export var eat_cooldown : float = 5.0
 
 @export_category("READ ONLY")
+
+@export var speed_multiplier : float = 0.0
+@export var crawl_speed : Vector2 = Vector2(10,0.2)
+@export var growth_target : float = 1.0
 @export var growth : float = 0.0
 @export var eating_on_cooldown : bool = false
 @export var usable : bool = false :
@@ -60,6 +66,10 @@ func setup() -> void:
 	_crawlable.on_crawling_flip.connect(crawl_flip)
 	_crawlable.midpoint = midpoint
 	_crawlable.floor_width = floor_width
+	
+	speed_multiplier = HiveManager.upgrade_global_speed_multiplier
+	growth_target = HiveManager.upgrade_larvae_amount_of_food_needed
+	crawl_speed = _crawlable.crawl_speed * HiveManager.upgrade_larvae_move_speed
 	
 	_setup_complete = true
 
@@ -140,6 +150,13 @@ func area_entered(_area:Area2D) -> void:
 			_object.queue_free()
 			eat_pollen()
 		return
+	
+	if _object.is_in_group("Honey"):
+		var _honey = (_object as Honey)
+		if _honey.usable:
+			_object.queue_free()
+			eat_pollen()
+		return
 
 func eat_nectar() -> void:
 	eating_on_cooldown = true
@@ -149,7 +166,7 @@ func eat_nectar() -> void:
 	
 	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
 	
-	await get_tree().create_timer(chew_time_per_nectar).timeout
+	await get_tree().create_timer(chew_time_per_nectar / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
 	growth += growth_per_nectar
 	test_growth()
 		
@@ -169,7 +186,7 @@ func eat_pollen() -> void:
 	
 	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
 	
-	await get_tree().create_timer(chew_time_per_pollen).timeout
+	await get_tree().create_timer(chew_time_per_pollen / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
 	growth += growth_per_pollen
 	test_growth()
 	
@@ -180,12 +197,32 @@ func eat_pollen() -> void:
 	
 	cooldown()
 
+func eat_honey() -> void:
+	eating_on_cooldown = true
+	
+	_draggable.can_drag = false
+	_crawlable.stop()
+	
+	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	
+	await get_tree().create_timer(chew_time_per_honey / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
+	growth += growth_per_honey
+	test_growth()
+	
+	_sprite.modulate = Color.WHITE
+	
+	_draggable.can_drag = true
+	_crawlable.crawl(_sprite.flip_h)
+	
+	cooldown()
+
+
 func cooldown() -> void:
-	await get_tree().create_timer(eat_cooldown).timeout
+	await get_tree().create_timer(eat_cooldown / speed_multiplier).timeout
 	eating_on_cooldown = false
 
 func test_growth() -> void:
-	if growth >= 1.0:
+	if growth >= growth_target:
 		var _worker = ObjectManager.create_worker(global_position, true)
 		_worker.add_to_group("Workers")
 		queue_free()

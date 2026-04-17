@@ -1,6 +1,9 @@
-class_name ScoreMeter extends Node
+class_name ScoreMeter extends Control
 const DEBUG_NAME : String = "[b][ScoreMeter][/b] "
 static var instance : ScoreMeter = null
+
+@export var score_added_scale_multiplier : float = 1.5
+@export var score_added_scale_duration : float = 1
 
 @export var larvae_score : int = 1
 @export var nectar_score : int = 2
@@ -13,7 +16,24 @@ var score_hex_parent : Control = null
 var odd_score_prefab : Control = null
 var even_score_prefab : Control = null 
 
+
+@export var _starting_scale : Vector2 = Vector2.ONE
+
 @export_category("READ ONLY")
+@export var meta_score : int = -1 :
+	get: return meta_score
+	set(value):
+		var _current_score_hex_value = current_score_hex.value
+		current_score_hex.value = 44
+		current_score_hex = add_score_hex()
+		current_score_hex.value = _current_score_hex_value
+		
+		if _score_added_tween: _score_added_tween.kill()
+		_score_added_tween = create_tween().set_parallel().set_trans(Tween.TRANS_QUART)
+		_score_added_tween.tween_property(instance,"scale",_starting_scale * score_added_scale_multiplier,score_added_scale_duration/2).set_ease(Tween.EASE_OUT)
+		_score_added_tween.tween_property(instance,"scale",_starting_scale,score_added_scale_duration/2).set_ease(Tween.EASE_IN).set_delay(score_added_scale_duration/2)
+
+
 @export var current_score : float = 0 :
 	get: return current_score
 	set(value):
@@ -24,12 +44,18 @@ var even_score_prefab : Control = null
 				_leftover -= current_score_capacity
 				current_score_hex.value = 44
 				current_score_hex = add_score_hex()
-				current_score_capacity = starting_score_capacity * (score_hexes.size() * 0.75)
+				current_score_capacity = starting_score_capacity * (score_hexes.size())
+				meta_score += 1
 				#current_score_hex.max_value = current_score_capacity
 			current_score = clamp(_leftover,0,current_score_capacity)
 		else:
 			current_score = value
 		current_score_hex.value = remap(current_score,0,current_score_capacity,18,44)
+		
+		if _score_added_tween: _score_added_tween.kill()
+		_score_added_tween = create_tween().set_parallel().set_trans(Tween.TRANS_QUART)
+		_score_added_tween.tween_property(instance,"scale",_starting_scale * score_added_scale_multiplier,score_added_scale_duration/2).set_ease(Tween.EASE_OUT)
+		_score_added_tween.tween_property(instance,"scale",_starting_scale,score_added_scale_duration/2).set_ease(Tween.EASE_IN).set_delay(score_added_scale_duration/2)
 
 
 @export var score_hexes : Array[Control] = []
@@ -38,6 +64,10 @@ var current_score_hex : TextureProgressBar = null
 var current_score_capacity : float = 0
 
 var starting_score_capacity : float = 12
+
+
+var _score_added_tween : Tween = null
+
 
 func _enter_tree() -> void:
 	instance = self
@@ -50,6 +80,7 @@ func _ready() -> void:
 	current_score_hex = add_score_hex()
 	current_score_capacity = starting_score_capacity 
 	
+	_starting_scale = scale
 	
 	#test()
 #
@@ -72,7 +103,7 @@ func add_score_hex() -> TextureProgressBar:
 	score_hex_parent.add_child(_prefab)
 	
 	_new_score_hex = _prefab.get_child(1).get_child(0) if score_hexes.size() % 2 == 0 else _prefab.get_child(0)
-	_new_score_hex.value = 18
+	_new_score_hex.value = 17
 	score_hexes.append(_new_score_hex)
 	
 	_prefab.visible = true
@@ -92,3 +123,6 @@ static func worker_scored() -> void:
 	instance.current_score += instance.worker_score
 static func honey_scored() -> void:
 	instance.current_score += instance.honey_score
+	
+static func royal_order_complete() -> void:
+	instance.meta_score += 1

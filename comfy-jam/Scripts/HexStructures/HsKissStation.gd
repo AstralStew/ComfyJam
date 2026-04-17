@@ -12,11 +12,11 @@ var sprite : Sprite2D = null
 @export var wrapup_time : float = 3
 
 @export var kissing_time : float = 5
-@export var kissing_cooldown : float = 15
 
-@export var speed_multiplier : float = 1
 
 @export_category("READ ONLY")
+@export var speed_multiplier : float = 1
+@export var kissing_cooldown : float = 15
 
 @export var kissing : bool = false
 @export var kissing_cooldowning : bool = false
@@ -34,6 +34,10 @@ func _setup() -> void:
 	sprite = $HsKissStation
 	texture_1 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee_kiss.png")
+	
+	
+	speed_multiplier = HiveManager.upgrade_kiss_station_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
+	kissing_cooldown = HiveManager.upgrade_kiss_station_cooldown
 	
 	max_workers = 1
 
@@ -67,7 +71,7 @@ func kiss() -> void:
 	
 	await start_kissing()
 	
-	await get_tree().create_timer(kissing_time * speed_multiplier).timeout
+	await get_tree().create_timer(kissing_time / speed_multiplier).timeout
 	
 	await finish_kissing()
 	
@@ -92,7 +96,7 @@ func kiss() -> void:
 	kissing_cooldowning = true
 	update_tooltip_info()
 	sprite.modulate = Color(1,1,1,0.7)
-	await get_tree().create_timer(kissing_cooldown * speed_multiplier).timeout
+	await get_tree().create_timer(kissing_cooldown).timeout
 	sprite.modulate = Color(1,1,1,1)
 	kissing_cooldowning = false
 	update_tooltip_info()

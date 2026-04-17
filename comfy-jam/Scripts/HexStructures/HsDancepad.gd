@@ -14,9 +14,11 @@ var texture_2 : Texture = null
 
 var dancepad_sprite : Sprite2D = null
 
+
+@export_category("READ ONLY")
+
 @export var cooldown_time : float = 1
 
-@export var speed_multiplier : float = 1
 
 @export var filter : ObjectManager.ObjectType = ObjectManager.ObjectType.LARVAE
 
@@ -52,6 +54,8 @@ func _setup() -> void:
 	dancepad_sprite = $HsDancepad
 	texture_1 = preload("res://Assets/Images/Structures/HS_Dancepad.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png")
+	
+	cooldown_time = HiveManager.upgrade_dancepad_cooldown
 	
 	max_workers = 1
 	

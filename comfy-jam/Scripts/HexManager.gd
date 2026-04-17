@@ -15,11 +15,11 @@ var hex_parent : Node = null
 @export var grid_spacing = 50
 @export var hexgrid : Dictionary[int,Array] = {}
 
-@export var starting_impassable = 0
-@export var starting_empty_holes = 0
-@export var starting_holes_with_workers = 0
-@export var starting_nurseries_with_workers = 0
-@export var starting_honeycomb_with_workers = 0
+#@export var starting_impassable = 0
+#@export var starting_empty_holes = 0
+#@export var starting_holes_with_workers = 0
+#@export var starting_nurseries_with_workers = 0
+#@export var starting_honeycomb_with_workers = 0
 
 
 @export_category("READ ONLY")
@@ -101,36 +101,56 @@ func _initialise() -> bool:
 		if debug: print_rich(DEBUG_NAME,"Ready > Created Impassable around Royal Chambers")
 	#royal_chambers_hex = _hex
 	
-	for i in starting_impassable:
+	for i in HiveManager.upgrade_starting_number_of_impassable:
 		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.IMPASSABLE)
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting impassable")
 	
-	for i in starting_empty_holes:
-		StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.HOLE)
-		if debug: print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
+	#for i in starting_empty_holes:
+		#StructureManager.set_structure(get_random_hex(true),StructureManager.StructureType.HOLE)
+		#if debug: print_rich(DEBUG_NAME,"Ready > Created starting empty hole")
 	
-	for i in starting_holes_with_workers:
+	for i in HiveManager.upgrade_starting_number_of_holes:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.HOLE)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting hole with worker ("+_hex.name+")")
 	
-	for i in starting_nurseries_with_workers:
+	for i in HiveManager.upgrade_starting_number_of_nurseries:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.NURSERY)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting nursery with worker ("+_hex.name+")")
 	
-	# --- TEMP --- #
-	for i in starting_honeycomb_with_workers:
+	for i in HiveManager.upgrade_starting_number_of_honeycombs:
 		_hex = get_random_hex(true)
 		StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting honeycomb with worker ("+_hex.name+")")
-	# --- /TEMP --- #
+	
+	for i in HiveManager.upgrade_starting_number_of_jelly_factories:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting jelly factory with worker ("+_hex.name+")")
+	
+	for i in HiveManager.upgrade_starting_number_of_kiss_stations:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.KISS_STATION)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting kiss station with worker ("+_hex.name+")")
+	
+	for i in HiveManager.upgrade_starting_number_of_dancepads:
+		_hex = get_random_hex(true)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.DANCEPAD)
+		_hex.structure.assigned_workers = 1
+		_hex.structure.activate()
+		if debug: print_rich(DEBUG_NAME,"Ready > Created starting dancepad with worker ("+_hex.name+")")
+	
 	
 	on_hex_clicked.connect(on_click_hex)
 	on_hex_unclicked.connect(on_unclick_hex)

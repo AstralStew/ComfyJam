@@ -13,6 +13,8 @@ var sprite : Sprite2D = null
 
 @export var forage_time : Vector2 = Vector2(5,10)
 
+@export_category("READ ONLY")
+
 @export var speed_multiplier : float = 1
 
 
@@ -22,6 +24,9 @@ func _setup() -> void:
 	
 	print_rich(DEBUG_NAME,"Setup(Hole) > Yep!")
 	sprite = $BeeSprite
+	
+	speed_multiplier = HiveManager.upgrade_hole_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
+	output_amount = HiveManager.upgrade_hole_output_number
 	
 	max_workers = 1
 	
@@ -54,7 +59,7 @@ func foraging() -> void:
 		
 		await start_forage()
 		
-		await get_tree().create_timer(randf_range(forage_time.x,forage_time.y) * speed_multiplier).timeout
+		await get_tree().create_timer(randf_range(forage_time.x,forage_time.y) / speed_multiplier).timeout
 		
 		await finish_forage()
 		

@@ -7,7 +7,6 @@ func _debug_name() -> String:
 @export var startup_time : float = 0.1
 @export var wrapup_time : float = 0.1
 
-@export var cooldown_time : float = 25
 
 @export var speed_multiplier : float = 1
 
@@ -20,6 +19,8 @@ var game_time_hex : TextureProgressBar  = null
 
 
 @export_category("READ ONLY")
+
+@export var cooldown_time : float = 25
 
 @export var cooling_down : bool = false
 
@@ -40,6 +41,9 @@ func _setup() -> void:
 	print_rich(DEBUG_NAME,"Setup(RoyalChambers) > Yep!")
 	
 	game_time_hex = $GameTimeHex
+	
+	cooldown_time = HiveManager.upgrade_royal_chambers_order_cooldown
+	speed_multiplier = HiveManager.upgrade_global_speed_multiplier
 	
 	number_of_orders = order_level + 3
 	
@@ -94,6 +98,7 @@ func activate() -> void:
 
 func complete_order() -> void:
 	print_rich(DEBUG_NAME,"CompleteOrder > Order has been completed!")
+	ScoreMeter.royal_order_complete()
 	cooldown()
 
 func cooldown() -> void:
@@ -104,7 +109,7 @@ func cooldown() -> void:
 	
 	await start_cooling_down()
 		
-	await get_tree().create_timer(cooldown_time * speed_multiplier).timeout
+	await get_tree().create_timer(cooldown_time / speed_multiplier).timeout
 	
 	await finish_cooling_down()
 	

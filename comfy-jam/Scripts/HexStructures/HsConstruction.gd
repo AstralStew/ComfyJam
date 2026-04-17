@@ -35,6 +35,9 @@ func _setup() -> void:
 	sprite = $HsConstruction
 	progress_hex = $ProgressHex
 	texture_2 = preload("res://Assets/Images/Structures/HS_UnderConstruction_Bee.png")
+	
+	speed_multiplier = HiveManager.upgrade_construction_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
+	
 	max_workers = 1
 
 #func adjacent_hex_updated(_hex:Hex) -> bool:
@@ -209,7 +212,7 @@ func build() -> void:
 	_tween = create_tween().set_parallel()
 	_tween.tween_property(progress_hex,"value",progress_hex.max_value,build_time * speed_multiplier)
 	
-	await get_tree().create_timer(build_time * speed_multiplier).timeout
+	await get_tree().create_timer(build_time / speed_multiplier).timeout
 	
 	await finish_building()
 	

@@ -17,13 +17,14 @@ var honeycomb_sprite : Sprite2D = null
 
 @export var speed_multiplier : float = 1
 
-@export var capacity : int = 4
 
 @export var edge_open_color = Color(0.525, 0.757, 0.639, 1.0)
 @export var edge_closed_color = Color(0.953, 0.71, 0.659, 1.0)
 
 
 @export_category("READ ONLY")
+@export var capacity : int = 4
+
 @export var is_full : bool = false :
 	get: return _outputs.size() + (1 if output != null else 0) >= capacity
 
@@ -55,6 +56,8 @@ func _setup() -> void:
 	
 	honeycomb_sprite = $HsHoneycomb
 	texture = preload("res://Assets/Images/Structures/HS_Honeycomb.png")
+	
+	capacity = HiveManager.upgrade_honeycomb_capacity
 	
 	max_workers = 1
 	

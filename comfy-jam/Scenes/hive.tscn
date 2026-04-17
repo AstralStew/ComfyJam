@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dgo8ptrgtqwv1" path="res://Scripts/fadetest.gd" id="7_csxaf"]
 [ext_resource type="Texture2D" uid="uid://cncx2fwukf76l" path="res://Assets/Images/Prototyping/TestBackground.png" id="8_frvg8"]
 [ext_resource type="PackedScene" uid="uid://ce3w4m5r432fb" path="res://Scenes/hs_impassable.tscn" id="8_pylrw"]
+[ext_resource type="Texture2D" uid="uid://rqujlqgewlrg" path="res://Assets/Images/Structures/HS_Impassable.png" id="9_2mtk7"]
 [ext_resource type="Texture2D" uid="uid://bkwfv00k7oauy" path="res://Assets/Images/Prototyping/FarBackgroundTest.png" id="9_08nax"]
 [ext_resource type="PackedScene" uid="uid://lxg7t6b2ob6x" path="res://Scenes/worker_bee.tscn" id="10_spxe2"]
 [ext_resource type="PackedScene" uid="uid://cgm50ypwkds26" path="res://Scenes/nectar.tscn" id="11_frvg8"]
@@ -30,7 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://1qt5pb31h71x" path="res://Assets/Images/Structures/HS_KissingBooth.png" id="26_fdwxk"]
 [ext_resource type="Script" uid="uid://j0ri86wqy2m8" path="res://Scripts/NewQueenPlus.gd" id="29_51pau"]
 [ext_resource type="Texture2D" uid="uid://c7qkqg7d4pt3t" path="res://Assets/Images/GUI/hexagon_outline.png" id="30_37gmy"]
+[ext_resource type="Script" uid="uid://6nh8g2j182q5" path="res://Scripts/Upgrade.gd" id="30_hsfs2"]
 [ext_resource type="Script" uid="uid://cdp36626mb2jl" path="res://Scripts/ScoreMeter.gd" id="30_qak4p"]
+[ext_resource type="Texture2D" uid="uid://dhp5maapl6a3n" path="res://Assets/Images/Prototyping/hexgrid.png" id="33_vxcii"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -339,8 +342,6 @@ shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
 [node name="Hive" type="CanvasLayer" unique_id=615366674]
-metadata/_edit_horizontal_guides_ = [466.0]
-metadata/_edit_vertical_guides_ = [307.0, 353.0]
 
 [node name="HiveManager" type="Node" parent="." unique_id=1316011348]
 script = ExtResource("1_jsr6p")
@@ -350,9 +351,6 @@ metadata/_custom_type_script = "uid://chxwn46ba28q2"
 script = ExtResource("1_3ey1d")
 grid_height = 8
 grid_width = 7
-starting_impassable = 5
-starting_holes_with_workers = 1
-starting_nurseries_with_workers = 1
 metadata/_custom_type_script = "uid://cwtg10bl2no3l"
 
 [node name="StructureManager" type="Node" parent="." unique_id=1466089573]
@@ -381,6 +379,8 @@ stretch = true
 process_mode = 3
 handle_input_locally = false
 physics_object_picking = true
+physics_object_picking_sort = true
+physics_object_picking_first_only = true
 size = Vector2i(640, 640)
 render_target_update_mode = 4
 
@@ -391,243 +391,259 @@ position = Vector2(320, 320)
 texture = ExtResource("9_08nax")
 
 [node name="BackHexes" type="Node2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1109020140]
+modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(99, 88)
 scale = Vector2(1.25, 1.25)
 
-[node name="HS_Impassable" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=762167946 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1268797718]
 position = Vector2(-24.444447, -2.2222214)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable33" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=153677764 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-48.148148, -43.703697)
+[node name="HsImpassable2" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=363108003]
+position = Vector2(-48.148144, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable48" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2111219871 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-98.51852, -43.703697)
+[node name="HsImpassable3" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1422057659]
+position = Vector2(-98.51851, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable34" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=937086966 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(0, -43.703697)
+[node name="HsImpassable4" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=861675613]
+position = Vector2(0, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable35" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=637589488 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(50.37036, -43.703697)
+[node name="HsImpassable5" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1867235379]
+position = Vector2(50.37036, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable36" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1185364750 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(100, -43.703697)
+[node name="HsImpassable6" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2115857618]
+position = Vector2(99.999985, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable37" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1414294079 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(149.62962, -43.703697)
+[node name="HsImpassable7" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=927261636]
+position = Vector2(149.62962, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable38" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=253411228 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(199.99998, -43.703697)
+[node name="HsImpassable8" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=866728058]
+position = Vector2(199.99998, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable39" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=957155314 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(251.1111, -42.96296)
+[node name="HsImpassable9" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2033203628]
+position = Vector2(251.11107, -42.962948)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable42" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1161834 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-24.8, 338.93347)
+[node name="HsImpassable10" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=961246593]
+position = Vector2(-24.8, 338.93344)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable43" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1589000638 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(25.570362, 338.93347)
+[node name="HsImpassable11" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1806866134]
+position = Vector2(25.570358, 338.93344)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable44" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=938149396 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(75.20001, 338.93347)
+[node name="HsImpassable12" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=534959714]
+position = Vector2(75.20001, 338.93344)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable45" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1282657361 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(124.82963, 338.93347)
+[node name="HsImpassable13" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1274549256]
+position = Vector2(124.829605, 338.93344)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable46" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1090466040 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(175.2, 338.93347)
+[node name="HsImpassable14" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1080486914]
+position = Vector2(175.19997, 338.93344)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable47" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=91566608 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(226.31111, 339.67413)
+[node name="HsImpassable15" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2121227771]
+position = Vector2(226.31108, 339.6741)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable40" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1086210280 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(350.37036, -42.96296)
+[node name="HsImpassable16" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=847096757]
+position = Vector2(350.37036, -42.962948)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable41" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=776056224 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(300.74072, -42.96296)
+[node name="HsImpassable17" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=486929735]
+position = Vector2(300.74072, -42.962948)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable2" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=263836719 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
+[node name="HsImpassable18" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1772411255]
 position = Vector2(-24.444447, 85.18518)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable3" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2036482899 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-24.444447, 169.62962)
+[node name="HsImpassable19" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1533585332]
+position = Vector2(-24.444447, 169.62961)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable4" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=809519041 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
+[node name="HsImpassable20" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=734303280]
 position = Vector2(-24.444447, 251.11108)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable9" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=712815337 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-48.88889, 40.74073)
+[node name="HsImpassable21" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1975063191]
+position = Vector2(-48.888885, 40.740723)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable10" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1906805242 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-48.88889, 128.14815)
+[node name="HsImpassable22" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=487863859]
+position = Vector2(-48.888885, 128.14813)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable11" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=815796462 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-48.88889, 212.59259)
+[node name="HsImpassable23" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=701589527]
+position = Vector2(-48.888885, 212.59256)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable12" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=53709653 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-48.88889, 294.07404)
+[node name="HsImpassable24" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=782707680]
+position = Vector2(-48.888885, 294.074)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable13" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1731828845 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-99.25926, 40.74073)
+[node name="HsImpassable25" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1273975235]
+position = Vector2(-99.259254, 40.740723)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable14" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1399054435 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-99.25926, 128.14815)
+[node name="HsImpassable26" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1754651387]
+position = Vector2(-99.259254, 128.14813)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable15" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1259977114 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-99.25926, 212.59259)
+[node name="HsImpassable27" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2145219057]
+position = Vector2(-99.259254, 212.59256)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable16" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1461391307 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-99.25926, 294.07404)
+[node name="HsImpassable28" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1441222786]
+position = Vector2(-99.259254, 294.074)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable5" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1939639387 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-73.333336, -1.4814796)
+[node name="HsImpassable29" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=166695180]
+position = Vector2(-73.33333, -1.4814835)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable6" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1091510197 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-73.333336, 85.92592)
+[node name="HsImpassable30" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1065342855]
+position = Vector2(-73.33333, 85.92592)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable7" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=212273775 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-73.333336, 170.37036)
+[node name="HsImpassable31" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1440484705]
+position = Vector2(-73.33333, 170.37033)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable8" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=926832354 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-73.333336, 253.33331)
+[node name="HsImpassable32" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1267876218]
+position = Vector2(-73.33333, 253.33328)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable52" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1869955823 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(399.19998, 296.474)
+[node name="HsImpassable33" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=825883155]
+position = Vector2(399.19995, 296.47397)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable57" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1566582406 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(424.00012, 338.87405)
+[node name="HsImpassable34" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1694414427]
+position = Vector2(424.00006, 338.874)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable53" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1838881812 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(423.52585, -1.4814796)
+[node name="HsImpassable35" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=238967887]
+position = Vector2(423.52582, -1.4814835)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable54" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=972599605 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(423.52585, 85.92592)
+[node name="HsImpassable36" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1247949154]
+position = Vector2(423.52582, 85.92592)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable55" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=959466419 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(423.52585, 170.37036)
+[node name="HsImpassable37" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1083438964]
+position = Vector2(423.52582, 170.37033)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable56" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2102694574 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(423.52582, 254.13335)
+[node name="HsImpassable38" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=481546355]
+position = Vector2(423.52582, 254.13333)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable51" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1538202595 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(-73.333336, 337.03702)
+[node name="HsImpassable39" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2123485588]
+position = Vector2(-73.33333, 337.037)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable17" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1556440035 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(374.07404, -2.2222214)
+[node name="HsImpassable40" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=23474689]
+position = Vector2(374.07397, -2.2222214)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable18" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1224070195 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(374.07404, 85.18518)
+[node name="HsImpassable41" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=792138015]
+position = Vector2(374.07397, 85.18518)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable19" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=677737131 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(374.07404, 169.62962)
+[node name="HsImpassable42" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=677305290]
+position = Vector2(374.07397, 169.62961)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable20" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1960990116 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(374.07404, 254.31107)
+[node name="HsImpassable43" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=292517614]
+position = Vector2(374.07397, 254.31104)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable21" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1565543321 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(349.62964, 40.740723)
+[node name="HsImpassable44" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=458380461]
+position = Vector2(324.8296, 339.6741)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable22" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=837017667 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(349.62964, 128.14815)
+[node name="HsImpassable45" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1429968358]
+position = Vector2(274.4593, 339.6741)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable23" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=979102975 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(349.62964, 212.59259)
+[node name="HsImpassable46" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=318070361]
+position = Vector2(400, -43.70369)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable24" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1058336881 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(324.82965, 339.67413)
+[node name="HsImpassable47" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1901667275]
+position = Vector2(399.25922, 40.740723)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable28" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1021668635 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(274.4593, 339.67413)
+[node name="HsImpassable48" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=940979667]
+position = Vector2(399.25922, 128.14813)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable29" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=68204715 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(325.18518, -1.4814911)
+[node name="HsImpassable49" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=296413060]
+position = Vector2(399.2591, 211.79257)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
-[node name="HS_Impassable30" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1400807000 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(325.18518, 85.92592)
-
-[node name="HS_Impassable31" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=591012842 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(325.18518, 170.37036)
-
-[node name="HS_Impassable32" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=154979724 instance=ExtResource("8_pylrw")]
-visible = false
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(325.18518, 253.33331)
-
-[node name="HS_Impassable49" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=562992466 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(400, -43.703697)
-
-[node name="HS_Impassable25" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1277003781 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(399.25922, 40.74073)
-
-[node name="HS_Impassable26" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1451561764 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(399.25922, 128.14815)
-
-[node name="HS_Impassable27" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1520826396 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(399.2592, 211.79259)
-
-[node name="HS_Impassable50" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=549818447 instance=ExtResource("8_pylrw")]
-modulate = Color(1, 0, 0.6302477, 0.48800004)
-position = Vector2(374.45923, 339.67413)
+[node name="HsImpassable50" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1719637589]
+position = Vector2(374.45923, 339.6741)
+scale = Vector2(0.9999998, 0.9999998)
+texture = ExtResource("9_2mtk7")
 
 [node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=825582064]
 position = Vector2(306, 771.0001)
@@ -1156,6 +1172,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("29_51pau")
+debug = true
 transition_start_pos = Vector2(-2318, -734)
 transition_mid_pos = Vector2(-692, -734)
 transition_end_pos = Vector2(937, -734)
@@ -1171,19 +1188,287 @@ rotation = 0.44680429
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vxcii")
 
-[node name="Button" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=362281789]
+[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=1409444246]
 visible = false
-layout_mode = 0
-offset_left = 277.0
-offset_top = 265.0
-offset_right = 388.0
-offset_bottom = 296.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 36
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer" unique_id=522294416]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="GlobalSpeed" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=846627256]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+script = ExtResource("30_hsfs2")
+debug = true
+
+[node name="StartingImpassable" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=938151217]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+script = ExtResource("30_hsfs2")
+debug = true
+
+[node name="StartingHoles" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=441971161]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+script = ExtResource("30_hsfs2")
+debug = true
+
+[node name="HoleSpeed" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1124360724]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+script = ExtResource("30_hsfs2")
+debug = true
+
+[node name="HoleOutput" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=744942398]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+script = ExtResource("30_hsfs2")
+debug = true
+
+[node name="Button2" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1825591681]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1712668965]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Button3" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1439603849]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button4" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2072003227]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button5" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=262387409]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button6" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1273367924]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button7" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=345745525]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button8" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=429427059]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button9" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2049473667]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1426601565]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Button3" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=829110271]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button4" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=528403103]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button3" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=661199442]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button4" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=148000770]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1696435950]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="Button3" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=295196014]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button5" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1542649820]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button4" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1226431531]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button5" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=214522796]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button6" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=125920469]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button7" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1414255477]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="Button8" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=1000807749]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_51pau")
+
+[node name="MoveToNextHive" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer" unique_id=362281789]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
 theme_override_constants/outline_size = 0
 theme_override_fonts/font = SubResource("FontVariation_csxaf")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_hsfs2")
-text = "Restart game"
+text = "Move to next hive"
 
 [node name="ScoreMeter" type="Control" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=172797947]
 anchors_preset = 0
@@ -1267,6 +1552,2748 @@ tint_under = Color(0.64, 0.044799995, 0.63007987, 1)
 tint_over = Color(0.9529412, 0.70980394, 0.65882355, 1)
 tint_progress = Color(0.95, 0.95, 0.95, 1)
 
+[node name="Honeycomb" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=1124331081]
+visible = false
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -79.0
+offset_right = 57.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+
+[node name="UpgradeMap" type="Node2D" parent="SubViewportContainer" unique_id=172471206]
+visible = false
+position = Vector2(318, 294)
+
+[node name="GlobalSpeed" parent="SubViewportContainer/UpgradeMap" unique_id=1906683750 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 1, 1, 1)
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/GlobalSpeed" unique_id=907813431]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Global Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Objects" type="Node2D" parent="SubViewportContainer/UpgradeMap" unique_id=955701502]
+position = Vector2(-273, -3)
+
+[node name="Larvae" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=1853824109]
+position = Vector2(449, 0)
+
+[node name="StartingLarvae" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae" unique_id=358760127]
+position = Vector2(-128, 86)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/StartingLarvae" unique_id=1620398453]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/StartingLarvae" unique_id=1305883332]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Larvae"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeEatSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae" unique_id=2054522226]
+position = Vector2(-31, -85)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeEatSpeed" unique_id=2067926808]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeEatSpeed" unique_id=346289963]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Eat Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeMove" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae" unique_id=1683102336]
+position = Vector2(-32, 85)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeMove" unique_id=1649889641]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeMove" unique_id=1247076833]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Move"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeHunger" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae" unique_id=712969272]
+position = Vector2(-80, 85)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeHunger" unique_id=370451653]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/Larvae/LarvaeHunger" unique_id=1509219396]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Hunger"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingNectar" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=1111616639]
+position = Vector2(224, -81)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/StartingNectar" unique_id=1286837418]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/StartingNectar" unique_id=620418276]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Nectar"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingPollen" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=2114267934]
+position = Vector2(322, -85)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/StartingPollen" unique_id=1079469796]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/StartingPollen" unique_id=95729043]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Pollen"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingJelly" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=660218986]
+position = Vector2(368, -1)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/StartingJelly" unique_id=1136655065]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/StartingJelly" unique_id=940295280]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Jelly"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingHoney" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=651773064]
+position = Vector2(175, 5)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/StartingHoney" unique_id=1412622957]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/StartingHoney" unique_id=1307111219]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Honey"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingWorkers" type="Node2D" parent="SubViewportContainer/UpgradeMap/Objects" unique_id=881083846]
+position = Vector2(226, 92)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Objects/StartingWorkers" unique_id=2118041809]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Objects/StartingWorkers" unique_id=1060685703]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Workers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Structures" type="Node2D" parent="SubViewportContainer/UpgradeMap" unique_id=1254488439]
+
+[node name="Hole" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=1549751314]
+position = Vector2(-69, -38)
+
+[node name="HoleSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole" unique_id=1826067925]
+position = Vector2(69, 126)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleSpeed" unique_id=1984041473]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleSpeed" unique_id=403488501]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole" unique_id=1305504586]
+position = Vector2(45, 165)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleStarting" unique_id=1160371092]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleStarting" unique_id=2012137282]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleOutput" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole" unique_id=775847331]
+position = Vector2(93, 165)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleOutput" unique_id=1697832297]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Hole/HoleOutput" unique_id=2147362776]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Output"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Nursery" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=941132530]
+position = Vector2(73, 41)
+
+[node name="NurserySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Nursery" unique_id=703615589]
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Nursery/NurserySpeed" unique_id=819010430]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Nursery/NurserySpeed" unique_id=994325171]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NurseryStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Nursery" unique_id=1624865912]
+position = Vector2(47, -1)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Nursery/NurseryStarting" unique_id=67088015]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Nursery/NurseryStarting" unique_id=1801546758]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -17.5
+offset_right = 19.25
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Jelly" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=3656105]
+position = Vector2(-69, 45)
+
+[node name="JellySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Jelly" unique_id=2134450179]
+position = Vector2(142, -92)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Jelly/JellySpeed" unique_id=937574766]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Jelly/JellySpeed" unique_id=29378775]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="JellyStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Jelly" unique_id=1300623131]
+position = Vector2(189, -93)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Jelly/JellyStarting" unique_id=523431343]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Jelly/JellyStarting" unique_id=464136854]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Kiss" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=276674823]
+position = Vector2(70, -41)
+
+[node name="KissSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss" unique_id=801499489]
+position = Vector2(-143, 89)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissSpeed" unique_id=1806498558]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissSpeed" unique_id=1567222859]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss" unique_id=138817095]
+position = Vector2(-192, 88)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissStarting" unique_id=2059752015]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissStarting" unique_id=277033680]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissChance" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss" unique_id=1414255772]
+position = Vector2(-167, 130)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissChance" unique_id=1238470986]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissChance" unique_id=478887485]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Chance"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss" unique_id=2137799719]
+position = Vector2(-216, 130)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissCooldown" unique_id=780814633]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Kiss/KissCooldown" unique_id=2126639500]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dancepad" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=1833032543]
+position = Vector2(56, -184)
+
+[node name="DancepadStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad" unique_id=1343885341]
+position = Vector2(-154, 102)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad/DancepadStarting" unique_id=1826734981]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad/DancepadStarting" unique_id=1202273986]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DancepadCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad" unique_id=548079200]
+position = Vector2(-202, 104)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad/DancepadCooldown" unique_id=1916628133]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Dancepad/DancepadCooldown" unique_id=1135750942]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ConstructionSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=798262845]
+position = Vector2(0, -87)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/ConstructionSpeed" unique_id=1107626980]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/ConstructionSpeed" unique_id=1004742295]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Construction Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Honeycomb" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=1586312004]
+position = Vector2(-127, -36)
+
+[node name="HoneycombStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb" unique_id=1743712842]
+position = Vector2(52, -4)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb/HoneycombStarting" unique_id=885553122]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb/HoneycombStarting" unique_id=1039705015]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoneycombCapacity" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb" unique_id=1750129451]
+position = Vector2(4, -2)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb/HoneycombCapacity" unique_id=1631999867]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Honeycomb/HoneycombCapacity" unique_id=1361972816]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Capacity"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=740257947]
+position = Vector2(97, -87)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/RoyalCooldown" unique_id=646792094]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/RoyalCooldown" unique_id=745081847]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalImpassable" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=1513386878]
+position = Vector2(24, -129)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/RoyalImpassable" unique_id=2123688736]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/RoyalImpassable" unique_id=945742792]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Impassable" type="Node2D" parent="SubViewportContainer/UpgradeMap/Structures" unique_id=895333572]
+position = Vector2(-25, -128)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap/Structures/Impassable" unique_id=1755972602]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap/Structures/Impassable" unique_id=1178987884]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Hexgrid" type="Sprite2D" parent="SubViewportContainer" unique_id=929017200]
+visible = false
+position = Vector2(306.99997, 312)
+rotation = 0.53407073
+scale = Vector2(3.435, 3.435)
+texture = ExtResource("33_vxcii")
+
+[node name="UpgradeMap2" type="Node2D" parent="SubViewportContainer" unique_id=1707374922]
+visible = false
+position = Vector2(318, 294)
+scale = Vector2(0.87, 0.87)
+
+[node name="GlobalSpeed" parent="SubViewportContainer/UpgradeMap2" unique_id=1869955823 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 1, 1, 1)
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/GlobalSpeed" unique_id=1019114971]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Global Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Objects" type="Node2D" parent="SubViewportContainer/UpgradeMap2" unique_id=1759573337]
+position = Vector2(-273, -3)
+
+[node name="Larvae" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=1431242034]
+position = Vector2(449, 0)
+
+[node name="StartingLarvae" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae" unique_id=2008794666]
+position = Vector2(-103.58621, 45.52871)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/StartingLarvae" unique_id=2084941898]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/StartingLarvae" unique_id=182573513]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Larvae"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeEatSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae" unique_id=1050173807]
+position = Vector2(40.09196, -34.93106)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeEatSpeed" unique_id=1227103377]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeEatSpeed" unique_id=1705498222]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Eat Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeMove" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae" unique_id=724075051]
+position = Vector2(40.09195, 46.67813)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeMove" unique_id=685425804]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeMove" unique_id=890756416]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Move"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeHunger" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae" unique_id=1093789724]
+position = Vector2(-105.88504, 128.28732)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeHunger" unique_id=2080162889]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/Larvae/LarvaeHunger" unique_id=1126018668]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Hunger"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingNectar" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=1042898881]
+position = Vector2(199.43677, -38.379333)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/StartingNectar" unique_id=1092964094]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/StartingNectar" unique_id=127505024]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Nectar"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingPollen" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=483220381]
+position = Vector2(274.1494, -80.908066)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/StartingPollen" unique_id=508290486]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/StartingPollen" unique_id=1027876577]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Pollen"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingJelly" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=2170055]
+position = Vector2(345.4138, -37.229904)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/StartingJelly" unique_id=881146531]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/StartingJelly" unique_id=674213186]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Jelly"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingHoney" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=1243589393]
+position = Vector2(198.28735, 46.67814)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/StartingHoney" unique_id=1280072108]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/StartingHoney" unique_id=5972759]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Honey"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingWorkers" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Objects" unique_id=1481272203]
+position = Vector2(270.70117, 88.05745)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Objects/StartingWorkers" unique_id=84857755]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Objects/StartingWorkers" unique_id=2142235551]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Workers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Structures" type="Node2D" parent="SubViewportContainer/UpgradeMap2" unique_id=2146055391]
+
+[node name="Hole" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=414374967]
+position = Vector2(-69, -38)
+
+[node name="HoleSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole" unique_id=278109441]
+position = Vector2(66.70115, 205.8161)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleSpeed" unique_id=306483944]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleSpeed" unique_id=1390232052]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole" unique_id=1119645627]
+position = Vector2(-5.712637, 241.44829)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleStarting" unique_id=2055077190]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleStarting" unique_id=450978216]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleOutput" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole" unique_id=714307983]
+position = Vector2(139.11496, 246.04596)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleOutput" unique_id=1246893364]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Hole/HoleOutput" unique_id=956349725]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Output"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Nursery" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1524726748]
+position = Vector2(73, 41)
+
+[node name="NurserySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery" unique_id=81533260]
+position = Vector2(69.528725, 42.90803)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery/NurserySpeed" unique_id=373922053]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery/NurserySpeed" unique_id=1232140304]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NurseryStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery" unique_id=448536037]
+position = Vector2(68.37929, 126.81607)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery/NurseryStarting" unique_id=927861568]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Nursery/NurseryStarting" unique_id=600287469]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -17.5
+offset_right = 19.25
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Jelly" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1691403641]
+position = Vector2(-69, 45)
+
+[node name="JellySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly" unique_id=1686592024]
+position = Vector2(212.67815, -127.75861)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly/JellySpeed" unique_id=206884165]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly/JellySpeed" unique_id=1382441422]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="JellyStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly" unique_id=1892601052]
+position = Vector2(211.52872, -43.850563)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly/JellyStarting" unique_id=1186185697]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Jelly/JellyStarting" unique_id=351873187]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Kiss" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1165745186]
+position = Vector2(70, -41)
+
+[node name="KissSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss" unique_id=1369765213]
+position = Vector2(-218.27585, 122.60922)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissSpeed" unique_id=1556582805]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissSpeed" unique_id=771251346]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss" unique_id=682850980]
+position = Vector2(-144.71265, 166.28735)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissStarting" unique_id=1607436154]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissStarting" unique_id=388062981]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissChance" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss" unique_id=1383092325]
+position = Vector2(-287.24136, 82.3793)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissChance" unique_id=427256144]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissChance" unique_id=1655297073]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Chance"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss" unique_id=1311938901]
+position = Vector2(-214.82758, 205.36781)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissCooldown" unique_id=2006954907]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Kiss/KissCooldown" unique_id=448532227]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dancepad" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=916555628]
+position = Vector2(56, -184)
+
+[node name="DancepadStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad" unique_id=1478975252]
+position = Vector2(-126.114944, -25.195396)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad/DancepadStarting" unique_id=330596569]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad/DancepadStarting" unique_id=1126820553]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DancepadCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad" unique_id=985611996]
+position = Vector2(16.413788, -20.597698)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad/DancepadCooldown" unique_id=1417513729]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Dancepad/DancepadCooldown" unique_id=943060943]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ConstructionSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=263118723]
+position = Vector2(2.2988505, -164.36781)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/ConstructionSpeed" unique_id=2004960871]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/ConstructionSpeed" unique_id=2119836942]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Construction Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Honeycomb" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1520072394]
+position = Vector2(-127, -36)
+
+[node name="HoneycombStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb" unique_id=993627872]
+position = Vector2(-17.827606, 34.85058)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb/HoneycombStarting" unique_id=625304588]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb/HoneycombStarting" unique_id=178770883]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoneycombCapacity" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb" unique_id=1455700444]
+position = Vector2(-92.54024, -6.5287294)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb/HoneycombCapacity" unique_id=1413055347]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Honeycomb/HoneycombCapacity" unique_id=625887318]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Capacity"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1488880515]
+position = Vector2(73.5632, -125.28736)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/RoyalCooldown" unique_id=1736858472]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/RoyalCooldown" unique_id=111841670]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalImpassable" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=1189747089]
+position = Vector2(-70.114944, -126.43678)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/RoyalImpassable" unique_id=1430892723]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/RoyalImpassable" unique_id=1642413141]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Impassable" type="Node2D" parent="SubViewportContainer/UpgradeMap2/Structures" unique_id=876443430]
+position = Vector2(-141.3793, -83.90804)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap2/Structures/Impassable" unique_id=2122938685]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap2/Structures/Impassable" unique_id=1554345549]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="UpgradeMap3" type="Node2D" parent="SubViewportContainer" unique_id=845545685]
+visible = false
+position = Vector2(318, 294)
+scale = Vector2(0.87, 0.87)
+
+[node name="GlobalSpeed" parent="SubViewportContainer/UpgradeMap3" unique_id=1953980342 instance=ExtResource("8_pylrw")]
+modulate = Color(1, 1, 1, 1)
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/GlobalSpeed" unique_id=298234623]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Global Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Objects" type="Node2D" parent="SubViewportContainer/UpgradeMap3" unique_id=894789093]
+position = Vector2(-273, -3)
+
+[node name="Larvae" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=1695853839]
+position = Vector2(449, 0)
+
+[node name="StartingLarvae" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae" unique_id=1152098998]
+position = Vector2(-150.71265, 44.379284)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/StartingLarvae" unique_id=1003119324]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/StartingLarvae" unique_id=1278229903]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Larvae"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeEatSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae" unique_id=1427947306]
+position = Vector2(-54.160908, -119.988525)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeEatSpeed" unique_id=1821672628]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeEatSpeed" unique_id=1197408409]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Eat Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeMove" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae" unique_id=342425677]
+position = Vector2(-59.908043, 213.34479)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeMove" unique_id=1395782743]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeMove" unique_id=1082122524]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Move"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LarvaeHunger" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae" unique_id=645441336]
+position = Vector2(-58.75861, 128.28732)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeHunger" unique_id=974707762]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/Larvae/LarvaeHunger" unique_id=964884509]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Larvae Hunger"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingNectar" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=1805801206]
+position = Vector2(248.86206, -38.379333)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/StartingNectar" unique_id=403780926]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/StartingNectar" unique_id=382229387]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Nectar"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingPollen" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=1666170410]
+position = Vector2(297.1379, -38.379333)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/StartingPollen" unique_id=869237779]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/StartingPollen" unique_id=599404164]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Pollen"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingJelly" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=1759039125]
+position = Vector2(321.27585, 2.9999774)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/StartingJelly" unique_id=741760536]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/StartingJelly" unique_id=1799726373]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Jelly"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingHoney" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=2114834629]
+position = Vector2(224.72414, 1.8505509)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/StartingHoney" unique_id=1967122449]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/StartingHoney" unique_id=260353549]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Honey"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartingWorkers" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Objects" unique_id=2145194821]
+position = Vector2(245.4138, 45.52871)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Objects/StartingWorkers" unique_id=1293801610]
+modulate = Color(0.7255919, 0.40849864, 1, 1)
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeObjectLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Objects/StartingWorkers" unique_id=1955310170]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.99999994, 0.7139683, 0.44314745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Starting Workers"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Structures" type="Node2D" parent="SubViewportContainer/UpgradeMap3" unique_id=300976562]
+
+[node name="Hole" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=870264255]
+position = Vector2(-69, -38)
+
+[node name="HoleSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole" unique_id=1172663457]
+position = Vector2(69, 126)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleSpeed" unique_id=419221912]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleSpeed" unique_id=472587061]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole" unique_id=748784361]
+position = Vector2(20.724144, 203.51724)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleStarting" unique_id=1334878471]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleStarting" unique_id=344296023]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoleOutput" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole" unique_id=372463675]
+position = Vector2(113.827576, 205.8161)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleOutput" unique_id=1096937536]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Hole/HoleOutput" unique_id=1447160064]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Hole Output"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Nursery" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=1638063213]
+position = Vector2(73, 41)
+
+[node name="NurserySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery" unique_id=1462809215]
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery/NurserySpeed" unique_id=1590147980]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery/NurserySpeed" unique_id=1608339345]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="NurseryStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery" unique_id=1180770176]
+position = Vector2(94.81606, 1.5287147)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery/NurseryStarting" unique_id=369083577]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Nursery/NurseryStarting" unique_id=1688380772]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -17.5
+offset_right = 19.25
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Nursery Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Jelly" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=1601454172]
+position = Vector2(-69, 45)
+
+[node name="JellySpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly" unique_id=1205218257]
+position = Vector2(142, -92)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly/JellySpeed" unique_id=621135672]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly/JellySpeed" unique_id=198996833]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="JellyStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly" unique_id=1796566506]
+position = Vector2(235.66664, -85.22987)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly/JellyStarting" unique_id=1401935645]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Jelly/JellyStarting" unique_id=2059837075]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Jelly Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Kiss" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=68547294]
+position = Vector2(70, -41)
+
+[node name="KissSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss" unique_id=1505334596]
+position = Vector2(-143, 89)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissSpeed" unique_id=844781211]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissSpeed" unique_id=1199920554]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss" unique_id=1702591735]
+position = Vector2(-240.11493, 82.379326)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissStarting" unique_id=648846173]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissStarting" unique_id=1338935655]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissChance" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss" unique_id=520978945]
+position = Vector2(-191.83908, 163.98851)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissChance" unique_id=1160996766]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissChance" unique_id=168118961]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Chance"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KissCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss" unique_id=1666305055]
+position = Vector2(-192.9885, 247.89656)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissCooldown" unique_id=423355164]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Kiss/KissCooldown" unique_id=478417186]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Kiss Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Dancepad" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=111889611]
+position = Vector2(56, -184)
+
+[node name="DancepadStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad" unique_id=179118255]
+position = Vector2(-173.24136, 57.563213)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad/DancepadStarting" unique_id=1797237814]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad/DancepadStarting" unique_id=8920776]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DancepadCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad" unique_id=1280434556]
+position = Vector2(-175.54024, -26.344818)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad/DancepadCooldown" unique_id=73302492]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Dancepad/DancepadCooldown" unique_id=1701293814]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Dance Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ConstructionSpeed" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=1572812381]
+position = Vector2(0, -87)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/ConstructionSpeed" unique_id=1379120894]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/ConstructionSpeed" unique_id=1657584836]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Construction Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Honeycomb" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=439424371]
+position = Vector2(-127, -36)
+
+[node name="HoneycombStarting" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb" unique_id=1476982865]
+position = Vector2(52, -4)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb/HoneycombStarting" unique_id=1310404257]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb/HoneycombStarting" unique_id=465336679]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Starting"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HoneycombCapacity" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb" unique_id=425501446]
+position = Vector2(-39.66667, -8.827589)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb/HoneycombCapacity" unique_id=434543482]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Honeycomb/HoneycombCapacity" unique_id=237971973]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Honeycomb Capacity"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalCooldown" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=6658934]
+position = Vector2(119.540215, -204.59769)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/RoyalCooldown" unique_id=638390152]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/RoyalCooldown" unique_id=95369145]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Cooldown"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RoyalImpassable" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=1802165148]
+position = Vector2(49.42528, -165.51723)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/RoyalImpassable" unique_id=79142863]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/RoyalImpassable" unique_id=1252532006]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Royal Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Impassable" type="Node2D" parent="SubViewportContainer/UpgradeMap3/Structures" unique_id=1628263669]
+position = Vector2(-45.977013, -166.66666)
+
+[node name="HsImpassable" type="Sprite2D" parent="SubViewportContainer/UpgradeMap3/Structures/Impassable" unique_id=2032023644]
+texture = ExtResource("9_2mtk7")
+
+[node name="UpgradeStructureLabel" type="Label" parent="SubViewportContainer/UpgradeMap3/Structures/Impassable" unique_id=367965735]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -13.5
+offset_right = 19.25
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9740955, 0.6424283, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 8
+text = "Impassables"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/DarkOverlay" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_overlay_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_hole_gui_input"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]
@@ -1286,4 +4313,33 @@ tint_progress = Color(0.95, 0.95, 0.95, 1)
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_kiss_station_factory_gui_input"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["KissStation"]]
 [connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["KissStation"]]
-[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/Button" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/GlobalSpeed" to="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/GlobalSpeed" method="_on_gui_input"]
+[connection signal="upgrade" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/GlobalSpeed" to="SubViewportContainer/SubViewport/NewQueenPlus" method="upgrade_global_speed_multiplier_level"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingImpassable" to="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingImpassable" method="_on_gui_input"]
+[connection signal="upgrade" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingImpassable" to="SubViewportContainer/SubViewport/NewQueenPlus" method="upgrade_starting_number_of_impassable_level"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingHoles" to="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingHoles" method="_on_gui_input"]
+[connection signal="upgrade" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/StartingHoles" to="SubViewportContainer/SubViewport/NewQueenPlus" method="upgrade_starting_number_of_holes_level"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleSpeed" to="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleSpeed" method="_on_gui_input"]
+[connection signal="upgrade" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleSpeed" to="SubViewportContainer/SubViewport/NewQueenPlus" method="upgrade_hole_speed_multiplier"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleOutput" to="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleOutput" method="_on_gui_input"]
+[connection signal="upgrade" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HoleOutput" to="SubViewportContainer/SubViewport/NewQueenPlus" method="upgrade_hole_output_number"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button2" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button3" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button4" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button5" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button6" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button7" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button8" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer/Button9" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer2/Button3" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer2/Button4" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button3" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button4" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3/Button3" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3/Button5" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/HBoxContainer3/Button4" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button5" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button6" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button7" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/Button8" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/MarginContainer/VBoxContainer/MoveToNextHive" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]

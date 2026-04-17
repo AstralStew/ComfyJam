@@ -13,9 +13,10 @@ var bee_sprite : Sprite2D = null
 
 @export var production_time : float = 10
 
-@export var speed_multiplier : float = 1
 
 @export_category("READ ONLY")
+
+@export var speed_multiplier : float = 1
 
 @export var producing : bool = false
 
@@ -35,7 +36,8 @@ func _setup() -> void:
 	bee_sprite = $HsJellyFactory
 	progress_hex = $ProgressHex
 	texture = preload("res://Assets/Images/Structures/HS_JellyFactory_Bee.png")
-	
+		
+	speed_multiplier = HiveManager.upgrade_jelly_factory_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
 	
 	max_workers = 1
 	
@@ -77,7 +79,7 @@ func produce() -> void:
 	_tween = create_tween().set_parallel()
 	_tween.tween_property(progress_hex,"value",progress_hex.max_value,production_time * speed_multiplier)
 	
-	await get_tree().create_timer(production_time * speed_multiplier).timeout
+	await get_tree().create_timer(production_time / speed_multiplier).timeout
 	
 	await finish_production()
 	

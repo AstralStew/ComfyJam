@@ -14,9 +14,10 @@ var progress_hex : TextureProgressBar  = null
 
 @export var nurturing_time : float = 30
 
-@export var speed_multiplier : float = 1
 
 @export_category("READ ONLY")
+
+@export var speed_multiplier : float = 1
 
 @export var nurturing : bool = false
 
@@ -33,6 +34,9 @@ func _setup() -> void:
 	progress_hex = $ProgressHex
 	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
+	
+	
+	speed_multiplier = HiveManager.upgrade_nursery_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
 	
 	max_workers = 1
 
@@ -67,7 +71,7 @@ func nurture() -> void:
 	_tween = create_tween().set_parallel()
 	_tween.tween_property(progress_hex,"value",progress_hex.max_value,nurturing_time * speed_multiplier)
 	
-	await get_tree().create_timer(nurturing_time * speed_multiplier).timeout
+	await get_tree().create_timer(nurturing_time / speed_multiplier).timeout
 	
 	await finish_nurturing()
 	
