@@ -4,7 +4,8 @@ static var instance : HiveManager = null
 
 
 
-static var game_length : float = 10
+static var game_length : float = 360
+static var max_number_of_each_object = 8
 
 static var upgrade_global_speed_multiplier : float = 1.0
 

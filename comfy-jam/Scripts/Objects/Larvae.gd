@@ -2,6 +2,8 @@ class_name Larvae extends Node2D
 var DEBUG_NAME : String :
 	get: return "[b][" + name + "/Larvae][/b] "
 
+var free_standing : bool = false
+
 var _sprite : Sprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
@@ -22,8 +24,6 @@ var _crawlable : Crawlable = null
 @export var eating_on_cooldown : bool = false
 @export var usable : bool = false :
 	get: return !_draggable.dragging && !_fallable.falling
-
-var can_eat : bool = false
 
 
 signal on_dragged
@@ -83,8 +83,9 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
+	if !free_standing: ObjectManager.free_stand_object(self)
+		
 	if _tween: _tween.kill()
-	if !can_eat: can_eat = true
 	
 	scale = Vector2(0.69,0.69)
 	_crawlable.stop()
@@ -122,7 +123,7 @@ func hover_end() -> void:
 
 
 func area_entered(_area:Area2D) -> void:
-	if _draggable.dragging || _fallable.falling || eating_on_cooldown || !can_eat: return
+	if !free_standing || _draggable.dragging || _fallable.falling || eating_on_cooldown : return
 	
 	var _object : Node2D = _area.get_parent()
 	
@@ -186,4 +187,5 @@ func cooldown() -> void:
 func test_growth() -> void:
 	if growth >= 1.0:
 		var _worker = ObjectManager.create_worker(global_position, true)
+		_worker.add_to_group("Workers")
 		queue_free()

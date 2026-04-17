@@ -2,6 +2,7 @@ class_name Honey extends Node2D
 var DEBUG_NAME : String :
 	get: return "[b][" + name + "/Honey][/b] "
 
+var free_standing : bool = false
 
 var _sprite : AnimatedSprite2D = null
 var _draggable : Draggable = null
@@ -62,6 +63,8 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
+	if !free_standing: ObjectManager.free_stand_object(self)
+		
 	if _tween: _tween.kill()
 	
 	scale = Vector2(0.8,0.8)

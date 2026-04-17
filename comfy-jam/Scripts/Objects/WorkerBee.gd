@@ -2,6 +2,8 @@ class_name WorkerBee extends Node2D
 var DEBUG_NAME : String :
 	get: return "[b][" + name + "/WorkerBee][/b] "
 
+var free_standing : bool = false
+
 var _sprite : Sprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
@@ -69,6 +71,8 @@ func hide_outline() -> void:
 	_sprite.material = null
 
 func drag_start() -> void:
+	if !free_standing: ObjectManager.free_stand_object(self)
+	
 	scale = Vector2(0.69,0.69)
 	_crawlable.stop()
 	_sprite.flip_h = randi() % 2 == 0
