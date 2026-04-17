@@ -26,7 +26,6 @@ texture = ExtResource("3_2e83q")
 expand_mode = 1
 
 [node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=1202735187]
-visible = false
 offset_left = -41.0
 offset_top = -44.0
 offset_right = 41.0

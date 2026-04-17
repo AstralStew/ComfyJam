@@ -20,7 +20,7 @@ static var build_menu : BuildMenu = null
 func _ready() -> void:
 	instance = self
 	
-	build_menu = $"../SubViewportContainer/SubViewport/BuildMenu"
+	build_menu = $"../SubViewportContainer/SubViewport/HiveNodes/BuildMenu"
 
 
 static func set_structure(_hex:Hex,_type:StructureType,_construction_type:StructureType=StructureType.BLANK) -> bool:

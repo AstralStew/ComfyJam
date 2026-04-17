@@ -12,8 +12,13 @@ signal on_selection_change(new_selection)
 signal on_hover_change(new_hover)
 
 
-func _enter_tree() -> void:
+func reset() -> void:
 	instance = self
+	current_selection = null
+	current_hover = null
+
+func _enter_tree() -> void:
+	reset()
 
 
 static func set_current_selection(_new_selection:Node2D):

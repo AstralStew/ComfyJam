@@ -1,6 +1,7 @@
 class_name BuildMenu extends Control
 const DEBUG_NAME : String = "[b][BuildMenu][/b] "
 
+
 static var instance : BuildMenu = null
 
 
@@ -25,7 +26,11 @@ static func hide_build_button() -> void:
 	instance.build_button.visible = false
 
 func _ready() -> void:
+	reset()
+
+func reset() -> void:
 	instance = self
+	active = false
 
 static func activate() -> void:
 	active = true

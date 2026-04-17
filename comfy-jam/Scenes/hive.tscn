@@ -28,6 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
 [ext_resource type="PackedScene" uid="uid://8vi6vmat5vwl" path="res://Scenes/larvae.tscn" id="24_k6nk5"]
 [ext_resource type="Texture2D" uid="uid://1qt5pb31h71x" path="res://Assets/Images/Structures/HS_KissingBooth.png" id="26_fdwxk"]
+[ext_resource type="Script" uid="uid://j0ri86wqy2m8" path="res://Scripts/NewQueenPlus.gd" id="29_51pau"]
+[ext_resource type="Texture2D" uid="uid://c7qkqg7d4pt3t" path="res://Assets/Images/GUI/hexagon_outline.png" id="30_37gmy"]
+[ext_resource type="Script" uid="uid://cdp36626mb2jl" path="res://Scripts/ScoreMeter.gd" id="30_qak4p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shopd"]
 shader = ExtResource("2_5uyql")
@@ -309,6 +312,32 @@ shadow_size = 4
 shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxcii"]
+bg_color = Color(0.06100855, 0.03876, 0.15170373, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsfs2"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.44297108, 1, 0.72135246, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 6
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 1.278
+
 [node name="Hive" type="CanvasLayer" unique_id=615366674]
 metadata/_edit_horizontal_guides_ = [466.0]
 metadata/_edit_vertical_guides_ = [307.0, 353.0]
@@ -319,7 +348,6 @@ metadata/_custom_type_script = "uid://chxwn46ba28q2"
 
 [node name="HexManager" type="Node" parent="." unique_id=715828618]
 script = ExtResource("1_3ey1d")
-debug = true
 grid_height = 8
 grid_width = 7
 starting_impassable = 5
@@ -356,261 +384,263 @@ physics_object_picking = true
 size = Vector2i(640, 640)
 render_target_update_mode = 4
 
-[node name="FarBackgroundTest" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=1942697853]
+[node name="HiveNodes" type="Node" parent="SubViewportContainer/SubViewport" unique_id=398718095]
+
+[node name="FarBackgroundTest" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1942697853]
 position = Vector2(320, 320)
 texture = ExtResource("9_08nax")
 
-[node name="BackHexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=1109020140]
+[node name="BackHexes" type="Node2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1109020140]
 position = Vector2(99, 88)
 scale = Vector2(1.25, 1.25)
 
-[node name="HS_Impassable" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=762167946 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=762167946 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-24.444447, -2.2222214)
 
-[node name="HS_Impassable33" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=153677764 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable33" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=153677764 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-48.148148, -43.703697)
 
-[node name="HS_Impassable48" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2111219871 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable48" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2111219871 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-98.51852, -43.703697)
 
-[node name="HS_Impassable34" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=937086966 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable34" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=937086966 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(0, -43.703697)
 
-[node name="HS_Impassable35" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=637589488 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable35" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=637589488 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(50.37036, -43.703697)
 
-[node name="HS_Impassable36" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1185364750 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable36" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1185364750 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(100, -43.703697)
 
-[node name="HS_Impassable37" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1414294079 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable37" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1414294079 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(149.62962, -43.703697)
 
-[node name="HS_Impassable38" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=253411228 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable38" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=253411228 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(199.99998, -43.703697)
 
-[node name="HS_Impassable39" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=957155314 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable39" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=957155314 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(251.1111, -42.96296)
 
-[node name="HS_Impassable42" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1161834 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable42" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1161834 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-24.8, 338.93347)
 
-[node name="HS_Impassable43" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1589000638 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable43" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1589000638 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(25.570362, 338.93347)
 
-[node name="HS_Impassable44" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=938149396 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable44" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=938149396 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(75.20001, 338.93347)
 
-[node name="HS_Impassable45" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1282657361 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable45" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1282657361 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(124.82963, 338.93347)
 
-[node name="HS_Impassable46" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1090466040 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable46" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1090466040 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(175.2, 338.93347)
 
-[node name="HS_Impassable47" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=91566608 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable47" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=91566608 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(226.31111, 339.67413)
 
-[node name="HS_Impassable40" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1086210280 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable40" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1086210280 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(350.37036, -42.96296)
 
-[node name="HS_Impassable41" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=776056224 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable41" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=776056224 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(300.74072, -42.96296)
 
-[node name="HS_Impassable2" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=263836719 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable2" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=263836719 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-24.444447, 85.18518)
 
-[node name="HS_Impassable3" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2036482899 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable3" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2036482899 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-24.444447, 169.62962)
 
-[node name="HS_Impassable4" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=809519041 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable4" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=809519041 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-24.444447, 251.11108)
 
-[node name="HS_Impassable9" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=712815337 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable9" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=712815337 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-48.88889, 40.74073)
 
-[node name="HS_Impassable10" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1906805242 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable10" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1906805242 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-48.88889, 128.14815)
 
-[node name="HS_Impassable11" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=815796462 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable11" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=815796462 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-48.88889, 212.59259)
 
-[node name="HS_Impassable12" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=53709653 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable12" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=53709653 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-48.88889, 294.07404)
 
-[node name="HS_Impassable13" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1731828845 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable13" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1731828845 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-99.25926, 40.74073)
 
-[node name="HS_Impassable14" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1399054435 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable14" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1399054435 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-99.25926, 128.14815)
 
-[node name="HS_Impassable15" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1259977114 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable15" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1259977114 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-99.25926, 212.59259)
 
-[node name="HS_Impassable16" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1461391307 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable16" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1461391307 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-99.25926, 294.07404)
 
-[node name="HS_Impassable5" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1939639387 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable5" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1939639387 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-73.333336, -1.4814796)
 
-[node name="HS_Impassable6" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1091510197 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable6" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1091510197 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-73.333336, 85.92592)
 
-[node name="HS_Impassable7" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=212273775 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable7" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=212273775 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-73.333336, 170.37036)
 
-[node name="HS_Impassable8" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=926832354 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable8" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=926832354 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-73.333336, 253.33331)
 
-[node name="HS_Impassable52" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1869955823 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable52" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1869955823 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(399.19998, 296.474)
 
-[node name="HS_Impassable57" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1566582406 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable57" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1566582406 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(424.00012, 338.87405)
 
-[node name="HS_Impassable53" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1838881812 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable53" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1838881812 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(423.52585, -1.4814796)
 
-[node name="HS_Impassable54" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=972599605 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable54" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=972599605 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(423.52585, 85.92592)
 
-[node name="HS_Impassable55" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=959466419 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable55" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=959466419 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(423.52585, 170.37036)
 
-[node name="HS_Impassable56" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=2102694574 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable56" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=2102694574 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(423.52582, 254.13335)
 
-[node name="HS_Impassable51" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1538202595 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable51" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1538202595 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(-73.333336, 337.03702)
 
-[node name="HS_Impassable17" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1556440035 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable17" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1556440035 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.07404, -2.2222214)
 
-[node name="HS_Impassable18" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1224070195 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable18" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1224070195 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.07404, 85.18518)
 
-[node name="HS_Impassable19" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=677737131 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable19" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=677737131 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.07404, 169.62962)
 
-[node name="HS_Impassable20" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1960990116 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable20" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1960990116 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.07404, 254.31107)
 
-[node name="HS_Impassable21" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1565543321 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable21" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1565543321 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(349.62964, 40.740723)
 
-[node name="HS_Impassable22" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=837017667 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable22" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=837017667 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(349.62964, 128.14815)
 
-[node name="HS_Impassable23" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=979102975 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable23" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=979102975 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(349.62964, 212.59259)
 
-[node name="HS_Impassable24" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1058336881 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable24" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1058336881 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(324.82965, 339.67413)
 
-[node name="HS_Impassable28" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1021668635 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable28" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1021668635 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(274.4593, 339.67413)
 
-[node name="HS_Impassable29" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=68204715 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable29" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=68204715 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(325.18518, -1.4814911)
 
-[node name="HS_Impassable30" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1400807000 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable30" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1400807000 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(325.18518, 85.92592)
 
-[node name="HS_Impassable31" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=591012842 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable31" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=591012842 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(325.18518, 170.37036)
 
-[node name="HS_Impassable32" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=154979724 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable32" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=154979724 instance=ExtResource("8_pylrw")]
 visible = false
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(325.18518, 253.33331)
 
-[node name="HS_Impassable49" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=562992466 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable49" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=562992466 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(400, -43.703697)
 
-[node name="HS_Impassable25" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1277003781 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable25" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1277003781 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(399.25922, 40.74073)
 
-[node name="HS_Impassable26" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1451561764 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable26" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1451561764 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(399.25922, 128.14815)
 
-[node name="HS_Impassable27" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=1520826396 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable27" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=1520826396 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(399.2592, 211.79259)
 
-[node name="HS_Impassable50" parent="SubViewportContainer/SubViewport/BackHexes" unique_id=549818447 instance=ExtResource("8_pylrw")]
+[node name="HS_Impassable50" parent="SubViewportContainer/SubViewport/HiveNodes/BackHexes" unique_id=549818447 instance=ExtResource("8_pylrw")]
 modulate = Color(1, 0, 0.6302477, 0.48800004)
 position = Vector2(374.45923, 339.67413)
 
-[node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport" unique_id=825582064]
+[node name="TestBackground" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=825582064]
 position = Vector2(306, 771.0001)
-rotation = -3.1415927
+rotation = 3.1415925
 scale = Vector2(2.325, 1.41)
 texture = ExtResource("8_frvg8")
 
-[node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=914902814]
+[node name="Hexes" type="Node2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=914902814]
 process_mode = 1
 position = Vector2(99, 88)
 scale = Vector2(1.25, 1.25)
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Hexes" unique_id=1045948358]
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/HiveNodes/Hexes" unique_id=1045948358]
 visible = false
 offset_left = -7.6923113
 offset_top = -23.076923
@@ -618,83 +648,83 @@ offset_right = 381.9467
 offset_bottom = 371.63806
 color = Color(0.2, 0.08235294, 0.25490198, 1)
 
-[node name="SpawnedObjects" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=573064140]
+[node name="SpawnedObjects" type="Node2D" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=573064140]
 process_mode = 1
 y_sort_enabled = true
 
-[node name="WorkerBee" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1959467300 groups=["Workers"] instance=ExtResource("10_spxe2")]
+[node name="WorkerBee" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1959467300 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(104, 536)
 fall_on_setup = true
 
-[node name="WorkerBee2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1856649126 groups=["Workers"] instance=ExtResource("10_spxe2")]
+[node name="WorkerBee2" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1856649126 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(192, 536)
 fall_on_setup = true
 
-[node name="WorkerBee3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=738024063 groups=["Workers"] instance=ExtResource("10_spxe2")]
+[node name="WorkerBee3" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=738024063 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(312, 536)
 fall_on_setup = true
 
-[node name="WorkerBee4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1955594594 groups=["Workers"] instance=ExtResource("10_spxe2")]
+[node name="WorkerBee4" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1955594594 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(400, 536)
 fall_on_setup = true
 
-[node name="WorkerBee5" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=352277619 groups=["Workers"] instance=ExtResource("10_spxe2")]
+[node name="WorkerBee5" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=352277619 groups=["Workers"] instance=ExtResource("10_spxe2")]
 position = Vector2(488, 536)
 fall_on_setup = true
 
-[node name="Nectar" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=2092266365 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+[node name="Nectar" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=2092266365 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(64, 552)
 fall_on_setup = true
 
-[node name="Pollen" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=395431437 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+[node name="Pollen" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=395431437 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(176, 536)
 fall_on_setup = true
 
-[node name="Royal Jelly" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=808926887 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+[node name="Royal Jelly" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=808926887 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(224, 544)
 fall_on_setup = true
 
-[node name="Nectar2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1031934735 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+[node name="Nectar2" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1031934735 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(251, 507)
 fall_on_setup = true
 
-[node name="Pollen2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1703529730 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+[node name="Pollen2" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1703529730 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(363, 491)
 fall_on_setup = true
 
-[node name="Royal Jelly2" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1608661769 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+[node name="Royal Jelly2" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1608661769 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(411, 499)
 fall_on_setup = true
 
-[node name="Nectar3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1610233612 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+[node name="Nectar3" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1610233612 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(421, 492)
 fall_on_setup = true
 
-[node name="Pollen3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1748823959 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+[node name="Pollen3" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1748823959 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(533, 476)
 fall_on_setup = true
 
-[node name="Royal Jelly3" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1967495802 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+[node name="Royal Jelly3" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1967495802 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(581, 484)
 fall_on_setup = true
 
-[node name="Nectar4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1151535108 groups=["Nectar"] instance=ExtResource("11_frvg8")]
+[node name="Nectar4" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1151535108 groups=["Nectar"] instance=ExtResource("11_frvg8")]
 position = Vector2(132, 487)
 fall_on_setup = true
 
-[node name="Pollen4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=635721852 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
+[node name="Pollen4" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=635721852 groups=["Pollen"] instance=ExtResource("12_hbc4g")]
 position = Vector2(244, 471)
 fall_on_setup = true
 
-[node name="Royal Jelly4" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=1589057186 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
+[node name="Royal Jelly4" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=1589057186 groups=["RoyalJelly"] instance=ExtResource("13_gdl44")]
 position = Vector2(292, 479)
 fall_on_setup = true
 
-[node name="Larvae" parent="SubViewportContainer/SubViewport/SpawnedObjects" unique_id=86959099 groups=["Larvae"] instance=ExtResource("24_k6nk5")]
+[node name="Larvae" parent="SubViewportContainer/SubViewport/HiveNodes/SpawnedObjects" unique_id=86959099 groups=["Larvae"] instance=ExtResource("24_k6nk5")]
 position = Vector2(153, 570)
 fall_on_setup = true
 
-[node name="Vignette" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1228271874]
+[node name="Vignette" type="TextureRect" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1228271874]
 modulate = Color(1, 1, 1, 0.69803923)
 offset_left = -164.0
 offset_top = -219.0
@@ -703,22 +733,22 @@ offset_bottom = 838.0
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_pylrw")
 
-[node name="Old" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1025313271]
+[node name="Old" type="Node" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1025313271]
 
-[node name="Initialconcept" type="Sprite2D" parent="SubViewportContainer/SubViewport/Old" unique_id=1548775164]
+[node name="Initialconcept" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=1548775164]
 visible = false
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("5_hbc4g")
 centered = false
 
-[node name="BeeTest" type="Sprite2D" parent="SubViewportContainer/SubViewport/Old" unique_id=1571100291]
+[node name="BeeTest" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=1571100291]
 visible = false
 position = Vector2(312.00003, 320)
 scale = Vector2(0.445, 0.445)
 texture = ExtResource("6_7s54b")
 script = ExtResource("7_csxaf")
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/Old" unique_id=1196006109]
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=1196006109]
 visible = false
 offset_left = 24.0
 offset_top = 488.0
@@ -726,20 +756,20 @@ offset_right = 624.0
 offset_bottom = 608.0
 color = Color(0.0627451, 0.043137256, 0.15294118, 1)
 
-[node name="BeeTest3" type="Sprite2D" parent="SubViewportContainer/SubViewport/Old" unique_id=768531548]
+[node name="BeeTest3" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=768531548]
 visible = false
 position = Vector2(544, 560.00006)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("6_7s54b")
 flip_h = true
 
-[node name="BeeTest4" type="Sprite2D" parent="SubViewportContainer/SubViewport/Old" unique_id=606323739]
+[node name="BeeTest4" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=606323739]
 visible = false
 position = Vector2(328, 584.00006)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("6_7s54b")
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Old" unique_id=469739349]
+[node name="RichTextLabel4" type="RichTextLabel" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=469739349]
 visible = false
 z_index = 1
 clip_contents = false
@@ -760,7 +790,7 @@ text = "[b]ASSIGN TO HOLE[/b]
 Worker will forage and return with nectar or pollen"
 scroll_active = false
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Old/RichTextLabel4" unique_id=1417141919]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/Old/RichTextLabel4" unique_id=1417141919]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -770,7 +800,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7s54b")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Old" unique_id=1279302166]
+[node name="RichTextLabel2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=1279302166]
 visible = false
 z_index = 1
 clip_contents = false
@@ -791,7 +821,7 @@ text = "[b]ASSIGN TO HOLE[/b]
 Worker will forage and return with nectar or pollen"
 scroll_active = false
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Old/RichTextLabel2" unique_id=1097580907]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/Old/RichTextLabel2" unique_id=1097580907]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -801,7 +831,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_csxaf")
 
-[node name="RichTextLabel5" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Old" unique_id=1064000644]
+[node name="RichTextLabel5" type="RichTextLabel" parent="SubViewportContainer/SubViewport/HiveNodes/Old" unique_id=1064000644]
 visible = false
 z_index = 1
 clip_contents = false
@@ -822,7 +852,7 @@ text = "[b]ASSIGN TO HOLE[/b]
 Worker will forage and return with nectar or pollen"
 scroll_active = false
 
-[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Old/RichTextLabel5" unique_id=1467916820]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/Old/RichTextLabel5" unique_id=1467916820]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -832,7 +862,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvkj5")
 
-[node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=871287542]
+[node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=871287542]
 visible = false
 modulate = Color(0.061800003, 0.041999996, 0.15, 0.29411766)
 custom_minimum_size = Vector2(10, 10)
@@ -843,7 +873,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gdl44")
 
-[node name="BuildButton" type="Panel" parent="SubViewportContainer/SubViewport" unique_id=533535366]
+[node name="BuildButton" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=533535366]
 visible = false
 custom_minimum_size = Vector2(2, 2)
 anchors_preset = 8
@@ -859,7 +889,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5hfv")
 
-[node name="Rtl_Plus" type="RichTextLabel" parent="SubViewportContainer/SubViewport/BuildButton" unique_id=1067509365]
+[node name="Rtl_Plus" type="RichTextLabel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildButton" unique_id=1067509365]
 modulate = Color(0.0627451, 0.043137256, 0.15294118, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -887,7 +917,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 3
 
-[node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport" unique_id=185479063]
+[node name="BuildMenu" type="Control" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=185479063]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -898,7 +928,7 @@ offset_right = 364.0
 offset_bottom = 432.0
 script = ExtResource("19_lrhcs")
 
-[node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=388707858]
+[node name="Line2D" type="Line2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=388707858]
 scale = Vector2(1.35, 1.35)
 points = PackedVector2Array(0, -25.18518, 22.222229, -11.851868, 22.222229, 12.59259, 0, 25.18518, -22.222214, 12.59259, -22.222214, -11.851868)
 closed = true
@@ -906,12 +936,12 @@ width = 3.0
 default_color = Color(0.78200006, 0.85, 0.71400005, 0.4392157)
 texture_mode = 2
 
-[node name="Overlay" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1372379963]
+[node name="Overlay" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1372379963]
 modulate = Color(1, 1, 1, 0.15686275)
 scale = Vector2(1.375, 1.375)
 texture = ExtResource("20_pylrw")
 
-[node name="Hole" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1125021120]
+[node name="Hole" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1125021120]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -927,12 +957,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jsr6p")
 
-[node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Hole" unique_id=1858676053]
+[node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" unique_id=1858676053]
 position = Vector2(23, 23)
 scale = Vector2(0.17587829, 0.17587829)
 texture = ExtResource("21_ivwil")
 
-[node name="Honeycomb" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=797986281]
+[node name="Honeycomb" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=797986281]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -948,13 +978,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
-[node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" unique_id=502927539]
+[node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Honeycomb" unique_id=502927539]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 position = Vector2(23, 23)
 scale = Vector2(0.74, 0.74)
 texture = ExtResource("21_k6nk5")
 
-[node name="Nursery" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1560722794]
+[node name="Nursery" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1560722794]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -970,12 +1000,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_37gmy")
 
-[node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Nursery" unique_id=1446871648]
+[node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Nursery" unique_id=1446871648]
 position = Vector2(23.000015, 24)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("21_j5hfv")
 
-[node name="Jelly Factory" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1975001900]
+[node name="Jelly Factory" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1975001900]
 self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
@@ -992,12 +1022,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qak4p")
 
-[node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" unique_id=1279538699]
+[node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Jelly Factory" unique_id=1279538699]
 position = Vector2(23.000015, 24)
 scale = Vector2(0.86, 0.86)
 texture = ExtResource("22_j5hfv")
 
-[node name="Dancepad" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=941321954]
+[node name="Dancepad" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=941321954]
 self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
@@ -1014,7 +1044,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="Kiss Station" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=186297737]
+[node name="Kiss Station" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=186297737]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1030,12 +1060,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2mtk7")
 
-[node name="HsKissStation" type="Sprite2D" parent="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" unique_id=264155649]
+[node name="HsKissStation" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" unique_id=264155649]
 position = Vector2(22.999998, 23)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("26_fdwxk")
 
-[node name="BR2" type="Panel" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=305304209]
+[node name="BR2" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=305304209]
 visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
@@ -1052,7 +1082,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/BuildMenu" unique_id=1217251974]
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1217251974]
 visible = false
 layout_mode = 0
 offset_left = -20.0
@@ -1116,22 +1146,144 @@ offset_right = 5.0
 offset_bottom = 5.0
 mouse_filter = 2
 
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/DarkOverlay" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_overlay_gui_input"]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_hole_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Hole" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Hole"]]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_honeycomb_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Honeycomb"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Honeycomb"]]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_nursery_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Nursery"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Nursery"]]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_jelly_factory_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["JellyFactory"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["JellyFactory"]]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_dancepad_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["Dancepad"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["Dancepad"]]
-[connection signal="gui_input" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_kiss_station_factory_gui_input"]
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_entered" binds= ["KissStation"]]
-[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/BuildMenu" method="_on_option_mouse_exited" binds= ["KissStation"]]
+[node name="NewQueenPlus" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1174238880]
+z_index = 15
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_51pau")
+transition_start_pos = Vector2(-2318, -734)
+transition_mid_pos = Vector2(-692, -734)
+transition_end_pos = Vector2(937, -734)
+
+[node name="Background" type="Panel" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=411315089]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_left = -692.0
+offset_top = -734.0
+offset_right = 1356.0
+offset_bottom = 1314.0
+rotation = 0.44680429
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxcii")
+
+[node name="Button" type="Button" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=362281789]
+visible = false
+layout_mode = 0
+offset_left = 277.0
+offset_top = 265.0
+offset_right = 388.0
+offset_bottom = 296.0
+theme_override_colors/font_color = Color(0.0627451, 0.043137256, 0.15294118, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_csxaf")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_hsfs2")
+text = "Restart game"
+
+[node name="ScoreMeter" type="Control" parent="SubViewportContainer/SubViewport/NewQueenPlus" unique_id=172797947]
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 5.0
+offset_right = 680.0
+offset_bottom = 45.0
+scale = Vector2(0.545, 0.545)
+size_flags_horizontal = 8
+script = ExtResource("30_qak4p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter" unique_id=1604629186]
+layout_mode = 0
+offset_right = 179.045
+offset_bottom = 71.0
+scale = Vector2(-1, 1)
+size_flags_vertical = 0
+theme_override_constants/separation = -16
+
+[node name="OddScoreHexHolder" type="VBoxContainer" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer" unique_id=1075096081]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 23
+
+[node name="Spacer" type="Control" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer/OddScoreHexHolder" unique_id=151766727]
+layout_mode = 2
+
+[node name="OddScoreHex" type="Control" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer/OddScoreHexHolder" unique_id=1436973316]
+custom_minimum_size = Vector2(56.67, 48.38)
+layout_mode = 2
+
+[node name="ScoreHex" type="TextureProgressBar" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer/OddScoreHexHolder/OddScoreHex" unique_id=1597492191]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.665001
+offset_top = -21.81
+offset_right = 14.665001
+offset_bottom = 21.810001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5235988
+pivot_offset = Vector2(43, 46)
+mouse_filter = 2
+max_value = 60.0
+value = 26.0
+texture_under = ExtResource("20_pylrw")
+texture_over = ExtResource("30_37gmy")
+texture_progress = ExtResource("20_pylrw")
+tint_under = Color(0.64, 0.044799995, 0.63007987, 1)
+tint_over = Color(0.9529412, 0.70980394, 0.65882355, 1)
+tint_progress = Color(0.95, 0.95, 0.95, 1)
+
+[node name="EvenScoreHex" type="Control" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer" unique_id=1495000276]
+visible = false
+custom_minimum_size = Vector2(58.725, 48.38)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ScoreHex2" type="TextureProgressBar" parent="SubViewportContainer/SubViewport/NewQueenPlus/ScoreMeter/HBoxContainer/EvenScoreHex" unique_id=403088455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.665001
+offset_top = -21.81
+offset_right = 14.665001
+offset_bottom = 21.810001
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5235988
+pivot_offset = Vector2(43, 46)
+mouse_filter = 2
+max_value = 60.0
+value = 26.0
+texture_under = ExtResource("20_pylrw")
+texture_over = ExtResource("30_37gmy")
+texture_progress = ExtResource("20_pylrw")
+tint_under = Color(0.64, 0.044799995, 0.63007987, 1)
+tint_over = Color(0.9529412, 0.70980394, 0.65882355, 1)
+tint_progress = Color(0.95, 0.95, 0.95, 1)
+
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/DarkOverlay" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_overlay_gui_input"]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_hole_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["Hole"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_honeycomb_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Honeycomb"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Honeycomb" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["Honeycomb"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_nursery_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Nursery"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Nursery" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["Nursery"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_jelly_factory_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["JellyFactory"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Jelly Factory" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["JellyFactory"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_dancepad_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Dancepad"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Dancepad" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["Dancepad"]]
+[connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_kiss_station_factory_gui_input"]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["KissStation"]]
+[connection signal="mouse_exited" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_exited" binds= ["KissStation"]]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/NewQueenPlus/Button" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_button_pressed"]
