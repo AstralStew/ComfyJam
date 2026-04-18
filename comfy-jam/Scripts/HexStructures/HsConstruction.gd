@@ -40,9 +40,9 @@ func _setup() -> void:
 	
 	max_workers = 1
 
-#func adjacent_hex_updated(_hex:Hex) -> bool:
-	#print_rich(DEBUG_NAME,"AdjacentHexUpdated > Ignoring adjacent hex '"+_hex.name+"' due to being a Construction and not caring")
-	#return false
+func adjacent_hex_updated(_hex:Hex) -> bool:
+	print_rich(DEBUG_NAME,"AdjacentHexUpdated > Ignoring adjacent hex '"+_hex.name+"' due to being a Construction and not caring")
+	return false
 
 func set_construction_type(_structure:StructureManager.StructureType) -> bool:
 	construction_type = _structure

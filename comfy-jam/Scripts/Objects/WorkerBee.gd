@@ -20,10 +20,10 @@ var _crawlable : Crawlable = null
 signal on_dragged
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if !_setup_complete: setup()
-
-var _setup_complete := false
+#func _ready() -> void:
+	#if !_setup_complete: setup()
+#
+#var _setup_complete := false
 func setup() -> void:
 	_sprite = $Sprite2D
 	_draggable = $Draggable
@@ -50,7 +50,7 @@ func setup() -> void:
 	_crawlable.midpoint = midpoint
 	_crawlable.floor_width = floor_width
 	
-	_setup_complete = true
+	#_setup_complete = true
 
 
 var _tween : Tween

@@ -1,5 +1,39 @@
 class_name NewQueenPlus extends Node
 const DEBUG_NAME : String = "[b][NewQueenPlus][/b] "
+static var instance : NewQueenPlus = null
+
+enum Upgrades {
+	upgrade_global_speed_multiplier,
+	upgrade_starting_number_of_impassable,
+	upgrade_starting_number_of_holes,
+	upgrade_hole_speed_multiplier,
+	upgrade_hole_output_number,
+	upgrade_starting_number_of_nurseries,
+	upgrade_nursery_speed_multiplier,
+	upgrade_starting_number_of_jelly_factories,
+	upgrade_jelly_factory_speed_multiplier,
+	upgrade_starting_number_of_kiss_stations,
+	upgrade_kiss_station_speed_multiplier,
+	upgrade_kiss_station_chance_to_double_kiss,
+	upgrade_kiss_station_cooldown,
+	upgrade_starting_number_of_honeycombs,
+	upgrade_honeycomb_capacity,
+	upgrade_starting_number_of_dancepads,
+	upgrade_dancepad_cooldown,
+	upgrade_construction_speed_multiplier,
+	upgrade_starting_number_of_impassable_around_royal_chambers,
+	upgrade_royal_chambers_order_cooldown,
+	upgrade_starting_number_of_larvae,
+	upgrade_starting_number_of_nectar,
+	upgrade_starting_number_of_pollen,
+	upgrade_starting_number_of_royal_jelly,
+	upgrade_starting_number_of_honey,
+	upgrade_starting_number_of_workers,
+	upgrade_larvae_amount_of_food_needed,
+	upgrade_larvae_eating_speed_multiplier,
+	upgrade_larvae_move_speed,
+}
+
 @export var debug : bool = false
 
 @onready var background : Panel 
@@ -13,6 +47,7 @@ const DEBUG_NAME : String = "[b][NewQueenPlus][/b] "
 var wipe_tween : Tween = null
 
 func _enter_tree() -> void:
+	instance = self
 	HiveManager.on_hive_start().connect(start_wipe)
 	HiveManager.on_hive_finish().connect(end_wipe)
 	
@@ -52,6 +87,11 @@ func end_wipe() -> void:
 	
 	await HiveManager.on_wipe_scene()
 	
+	for _upgrade in _upgrade_buttons:
+		reset_upgrade(_upgrade)
+	
+	check_meta_points()
+	
 	upgrade_screen.visible = true
 
 
@@ -65,19 +105,77 @@ func _on_button_pressed() -> void:
 
 #region STRUCTURE UPGRADE FUNCTIONS
 
+signal out_of_meta_points
+
+var _upgrade_buttons : Dictionary[Upgrades,Upgrade]
+
+static func register_upgrade_button(_upgrade_button:Upgrade,_type:Upgrades) -> bool:
+	if instance._upgrade_buttons.has(_type) && instance._upgrade_buttons[_type] != null:
+		push_error(DEBUG_NAME,"RegisterUpgrade > Upgrade '"+Upgrades.keys()[_type]+"' already registered!")
+		return false
+	
+	instance._upgrade_buttons[_type] = _upgrade_button
+	_upgrade_button.perform_upgrade.connect(instance.advance_upgrade)
+	instance.out_of_meta_points.connect(_upgrade_button.disable)
+	
+	return true
+
+
+func reset_upgrade(_upgrade_type:Upgrades) -> void:
+	var _level_list : Array = HiveManager.instance.get(Upgrades.keys()[_upgrade_type]+"_levels")
+	var _level = _level_list.find(HiveManager.instance.get(Upgrades.keys()[_upgrade_type]))
+	
+	if _level == -1:
+		push_error(DEBUG_NAME,"ResetUpgrade > Could not find upgrade '"+Upgrades.keys()[_upgrade_type]+"' :(")
+		return 
+	
+	if debug: print_rich(DEBUG_NAME,"ResetUpgrade > Resetting upgrade " + str(Upgrades.keys()[_upgrade_type]))
+	HiveManager.instance.set(Upgrades.keys()[_upgrade_type],_level_list[0])
+	
+
+func check_meta_points() -> bool:
+	if ScoreMeter.instance.meta_score < 1:
+		out_of_meta_points.emit()
+		return false
+	return true
+
+func advance_upgrade(_upgrade_type:Upgrades) -> bool:
+	if !check_meta_points(): return false
+	
+	#print_rich("list = " + Upgrades.keys()[_upgrade_type]+"_levels")
+	
+	var _level_list : Array = HiveManager.instance.get(Upgrades.keys()[_upgrade_type]+"_levels")
+	var _level = _level_list.find(HiveManager.instance.get(Upgrades.keys()[_upgrade_type]))
+	
+	if _level == -1:
+		push_error(DEBUG_NAME,"AdvanceUpgrade > Could not find upgrade '"+Upgrades.keys()[_upgrade_type]+"' :(")
+		return false
+	elif _level == _level_list.size() - 1:
+		if debug: print_rich(DEBUG_NAME,"AdvanceUpgrade > Upgrade at max level! Cancelling.")
+		return false
+	
+	if debug: print_rich(DEBUG_NAME,"AdvanceUpgrade > Success! Upgrading to level " + str(_level + 1))
+	HiveManager.instance.set(Upgrades.keys()[_upgrade_type],_level_list[_level + 1])
+	
+	ScoreMeter.instance.meta_score -= 1
+	check_meta_points()
+	return true
+
+
+
 
 func advance_upgrade_level(_current_value:Variant,_level_list:Array) -> Variant:
 	
 	var _level = _level_list.find(_current_value)
-	
+		
 	if _level == -1:
-		push_error(DEBUG_NAME,"AdvanceUpgradeFloatLevel > Could not find value '"+str(_current_value)+"' :(")
+		push_error(DEBUG_NAME,"AdvanceUpgradeLevel > Could not find value '"+str(_current_value)+"' :(")
 		return -1
 	elif _level == _level_list.size() - 1:
-		if debug: print_rich(DEBUG_NAME,"[color=orange]AdvanceUpgradeFloatLevel > Already at max level! Cancelling.")
+		if debug: print_rich(DEBUG_NAME,"[color=orange]AdvanceUpgradeLevel > Already at max level! Cancelling.")
 		return -1
 	
-	if debug: print_rich(DEBUG_NAME,"AdvanceUpgradeFloatLevel > Success! Upgrading to level " + str(_level + 1))
+	if debug: print_rich(DEBUG_NAME,"AdvanceUpgradeLevel > Success! Upgrading to level " + str(_level + 1))
 	return _level_list[_level + 1]
 
 

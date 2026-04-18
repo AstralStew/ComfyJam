@@ -16,11 +16,11 @@ var _fallable : Fallable = null
 signal on_dragged
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if !_setup_complete:
-		setup()
-
-var _setup_complete := false
+#func _ready() -> void:
+	#if !_setup_complete:
+		#setup()
+#
+#var _setup_complete := false
 func setup() -> void:
 	_sprite = $AnimatedSprite2D
 	_draggable = $Draggable
@@ -42,7 +42,7 @@ func setup() -> void:
 	_fallable.set_falling(fall_on_setup)
 	#_fallable.falling = _fall_on_setup
 	
-	_setup_complete = true
+	#_setup_complete = true
 
 
 var _tween : Tween

@@ -32,7 +32,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		if event.is_action_pressed("LeftClick"):
 			print_rich(_debug_name, "OnInputEvent > LeftClick pressed")
 			
-			if can_drag && !dragging && !SelectionManager.has_selection:
+			if can_drag && !dragging && !SelectionManager.has_selection && SelectionManager.current_hover == get_parent():
 				print_rich(_debug_name, "OnInputEvent > Starting drag...")
 				dragging = true
 				SelectionManager.set_current_selection(get_parent())

@@ -132,7 +132,7 @@ func _initialise() -> bool:
 	
 	for i in HiveManager.upgrade_starting_number_of_jelly_factories:
 		_hex = get_random_hex(true)
-		StructureManager.set_structure(_hex,StructureManager.StructureType.HONEYCOMB)
+		StructureManager.set_structure(_hex,StructureManager.StructureType.JELLY_FACTORY)
 		_hex.structure.assigned_workers = 1
 		_hex.structure.activate()
 		if debug: print_rich(DEBUG_NAME,"Ready > Created starting jelly factory with worker ("+_hex.name+")")

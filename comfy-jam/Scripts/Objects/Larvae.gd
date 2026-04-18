@@ -35,11 +35,11 @@ var _crawlable : Crawlable = null
 signal on_dragged
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if !_setup_complete:
-		setup()
+#func _ready() -> void:
+	#if !_setup_complete:
+		#setup()
 
-var _setup_complete := false
+#var _setup_complete := false
 func setup() -> void:
 	_sprite = $Sprite2D
 	_draggable = $Draggable
@@ -71,7 +71,7 @@ func setup() -> void:
 	growth_target = HiveManager.upgrade_larvae_amount_of_food_needed
 	crawl_speed = _crawlable.crawl_speed * HiveManager.upgrade_larvae_move_speed
 	
-	_setup_complete = true
+	#_setup_complete = true
 
 var _tween : Tween
 func spawning_animation(_duration:float=1.0) -> void:
@@ -155,7 +155,7 @@ func area_entered(_area:Area2D) -> void:
 		var _honey = (_object as Honey)
 		if _honey.usable:
 			_object.queue_free()
-			eat_pollen()
+			eat_honey()
 		return
 
 func eat_nectar() -> void:

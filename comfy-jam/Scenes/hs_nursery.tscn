@@ -8,6 +8,7 @@
 [node name="HS_Nursery" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_j6xyi")
 wrapup_time = 1.0
+output_amount = 2
 output_candidates = Array[int]([0])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]

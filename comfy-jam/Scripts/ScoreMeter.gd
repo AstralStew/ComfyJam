@@ -20,13 +20,20 @@ var even_score_prefab : Control = null
 @export var _starting_scale : Vector2 = Vector2.ONE
 
 @export_category("READ ONLY")
-@export var meta_score : int = -1 :
+@export var meta_score : int = 0 :
 	get: return meta_score
 	set(value):
-		var _current_score_hex_value = current_score_hex.value
-		current_score_hex.value = 44
-		current_score_hex = add_score_hex()
-		current_score_hex.value = _current_score_hex_value
+		print_rich(DEBUG_NAME,"MetaScore > Changing meta_score from "+str(meta_score)+" to "+str(value))
+		if meta_score > value:
+			current_score_hex = remove_score_hex()
+		elif meta_score < value:
+			var _current_score_hex_value = current_score_hex.value
+			current_score_hex.value = 44
+			current_score_hex = add_score_hex()
+			current_score_hex.value = 18 #_current_score_hex_value
+			current_score_capacity = current_score_capacity * 2
+		
+		meta_score = value
 		
 		if _score_added_tween: _score_added_tween.kill()
 		_score_added_tween = create_tween().set_parallel().set_trans(Tween.TRANS_QUART)
@@ -42,9 +49,9 @@ var even_score_prefab : Control = null
 			_leftover = value 
 			while _leftover >= current_score_capacity:
 				_leftover -= current_score_capacity
-				current_score_hex.value = 44
-				current_score_hex = add_score_hex()
-				current_score_capacity = starting_score_capacity * (score_hexes.size())
+				#current_score_hex.value = 44
+				#current_score_hex = add_score_hex()
+				#current_score_capacity = current_score_capacity * 2 #starting_score_capacity * (score_hexes.size())
 				meta_score += 1
 				#current_score_hex.max_value = current_score_capacity
 			current_score = clamp(_leftover,0,current_score_capacity)
@@ -63,7 +70,7 @@ var even_score_prefab : Control = null
 var current_score_hex : TextureProgressBar = null
 var current_score_capacity : float = 0
 
-var starting_score_capacity : float = 12
+var starting_score_capacity : float = 20
 
 
 var _score_added_tween : Tween = null
@@ -109,6 +116,27 @@ func add_score_hex() -> TextureProgressBar:
 	_prefab.visible = true
 	
 	return _new_score_hex
+
+
+func remove_score_hex() -> TextureProgressBar:
+	#var _last_score_hex : TextureProgressBar = null
+	#var _prefab : Control = even_score_prefab if score_hexes.size() % 2 == 0 else odd_score_prefab
+	
+	#_prefab = _prefab.duplicate()
+	#score_hex_parent.add_child(_prefab)
+	if score_hexes.size() < 2:
+		print_rich(DEBUG_NAME,"RemoveScoreHex > Not enough hexes left to remove! Cancelling")
+		return null
+	
+	var _new_score_hex : TextureProgressBar = score_hexes[score_hexes.size() - 2] 
+	_new_score_hex.value = current_score_hex.value
+	score_hexes.pop_back().queue_free()
+	
+	return _new_score_hex
+
+
+func adjust_meta_score(_amount:int) -> void:
+	meta_score += _amount
 
 
 static func larvae_scored() -> void:

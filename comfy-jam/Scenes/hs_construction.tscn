@@ -40,5 +40,5 @@ tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
 
 [node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
 position = Vector2(0, 0.5)
-scale = Vector2(0.855, 0.855)
+scale = Vector2(0.95, 0.95)
 texture = ExtResource("3_6t10m")

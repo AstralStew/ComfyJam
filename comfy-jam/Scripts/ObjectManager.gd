@@ -24,6 +24,37 @@ func _enter_tree() -> void:
 	reset()
 	
 	print_rich(DEBUG_NAME,"EnterTree > SpawnedObjects = "+spawned_objects.name)
+
+func _ready() -> void:
+	for i in HiveManager.upgrade_starting_number_of_larvae:
+		var _new_larvae = create_larvae(Vector2(randi_range(100,540),600),true)
+		_new_larvae.free_standing = true
+		_new_larvae.add_to_group("Larvae")
+	
+	for i in HiveManager.upgrade_starting_number_of_workers:
+		var _new_worker = create_worker(Vector2(randi_range(100,540),600),true)
+		_new_worker.free_standing = true
+		_new_worker.add_to_group("Workers")
+	
+	for i in HiveManager.upgrade_starting_number_of_nectar:
+		var _new_nectar = create_nectar(Vector2(randi_range(100,540),600),true)
+		_new_nectar.free_standing = true
+		_new_nectar.add_to_group("Nectar")
+	
+	for i in HiveManager.upgrade_starting_number_of_pollen:
+		var _new_pollen = create_pollen(Vector2(randi_range(100,540),600),true)
+		_new_pollen.free_standing = true
+		_new_pollen.add_to_group("Pollen")
+	
+	for i in HiveManager.upgrade_starting_number_of_royal_jelly:
+		var _new_royal_jelly = create_royal_jelly(Vector2(randi_range(100,540),600),true)
+		_new_royal_jelly.free_standing = true
+		_new_royal_jelly.add_to_group("RoyalJelly")
+	
+	for i in HiveManager.upgrade_starting_number_of_honey:
+		var _new_honey = create_honey(Vector2(randi_range(100,540),600),true)
+		_new_honey.free_standing = true
+		_new_honey.add_to_group("Honey")
 	
 
 
@@ -33,7 +64,7 @@ static func create_larvae(_position:Vector2,_auto_fall:bool=false) -> Larvae:
 	#_new_larvae.add_to_group("Larvae")
 	_new_larvae.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_larvae)
-	#_new_larvae.setup()
+	_new_larvae.setup()
 	_new_larvae.global_position = _position - _new_larvae._draggable.position
 	return _new_larvae
 
@@ -43,7 +74,7 @@ static func create_worker(_position:Vector2,_auto_fall:bool=false) -> WorkerBee:
 	#_new_worker.add_to_group("Workers")
 	_new_worker.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_worker)
-	#_new_worker.setup()
+	_new_worker.setup()
 	_new_worker.global_position = _position - _new_worker._draggable.position
 	return _new_worker
 
@@ -53,7 +84,7 @@ static func create_nectar(_position:Vector2,_auto_fall:bool=false) -> Nectar:
 	#_new_nectar.add_to_group("Nectar")
 	_new_nectar.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_nectar)
-	#_new_nectar.setup()
+	_new_nectar.setup()
 	_new_nectar.global_position = _position - _new_nectar._draggable.position
 	return _new_nectar
 
@@ -63,7 +94,7 @@ static func create_pollen(_position:Vector2,_auto_fall:bool=false) -> Pollen:
 	#_new_pollen.add_to_group("Pollen")
 	_new_pollen.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_pollen)
-	#_new_pollen.setup()
+	_new_pollen.setup()
 	_new_pollen.global_position = _position - _new_pollen._draggable.position
 	return _new_pollen
 
@@ -73,7 +104,7 @@ static func create_royal_jelly(_position:Vector2,_auto_fall:bool=false) -> Royal
 	#_new_jelly.add_to_group("RoyalJelly")
 	_new_jelly.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_jelly)
-	#_new_jelly.setup()
+	_new_jelly.setup()
 	_new_jelly.global_position = _position - _new_jelly._draggable.position
 	return _new_jelly
 
@@ -83,7 +114,7 @@ static func create_honey(_position:Vector2,_auto_fall:bool=false) -> Honey:
 	#_new_honey.add_to_group("Honey")
 	_new_honey.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_honey)
-	#_new_jelly.setup()
+	_new_honey.setup()
 	_new_honey.global_position = _position - _new_honey._draggable.position
 	return _new_honey
 
