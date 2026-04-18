@@ -210,7 +210,7 @@ func build() -> void:
 	
 	if _tween: _tween.kill()
 	_tween = create_tween().set_parallel()
-	_tween.tween_property(progress_hex,"value",progress_hex.max_value,build_time * speed_multiplier)
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,build_time / speed_multiplier)
 	
 	await get_tree().create_timer(build_time / speed_multiplier).timeout
 	

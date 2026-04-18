@@ -5,7 +5,7 @@ static var instance : HiveManager = null
 
 #region STRUCTURE UPGRADES
 
-static var game_length : float = 360
+static var game_length : float = 36
 static var max_number_of_each_object = 8
 
 static var upgrade_global_speed_multiplier_levels : Array[float] = [1.0,1.05,1.1,1.15,1.2,1.3,1.5]

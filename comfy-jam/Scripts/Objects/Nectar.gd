@@ -15,7 +15,19 @@ var _fallable : Fallable = null
 @export var usable : bool = false :
 	get: return !_fallable.falling #!_draggable.dragging && !_fallable.falling
 
-@export var kissed_level : KissLevel = KissLevel.UNKISSED
+@export var kissed_level : KissLevel = KissLevel.UNKISSED:
+	get: return kissed_level
+	set(value): 
+		kissed_level = value
+		match value:
+			KissLevel.UNKISSED:
+				_sprite.modulate = Color(1,0.9,0.9,1)
+			KissLevel.LIGHTLY_KISSED:
+				_sprite.modulate = Color(1,0.8,0.8,1)
+			KissLevel.FAIRLY_KISSED:
+				_sprite.modulate = Color(1,0.7,0.7,1)
+			KissLevel.VERY_KISSED:
+				_sprite.modulate = Color(1,0.6,0.6,1)
 
 signal on_dragged
 
@@ -51,10 +63,20 @@ func setup() -> void:
 
 var _tween : Tween
 func spawning_animation(_duration:float=1.0) -> void:
+	await get_tree().process_frame
 	# Startup animation
 	print_rich(DEBUG_NAME,"StartingAnimation > [color=cyan]Got here")
 	var _starting_scale:Vector2 = scale
 	var _scale_multiplier:float = 1.2
+	match kissed_level:
+			KissLevel.UNKISSED:
+				_sprite.modulate = Color(1,0.9,0.9,1)
+			KissLevel.LIGHTLY_KISSED:
+				_sprite.modulate = Color(1,0.8,0.8,1)
+			KissLevel.FAIRLY_KISSED:
+				_sprite.modulate = Color(1,0.7,0.7,1)
+			KissLevel.VERY_KISSED:
+				_sprite.modulate = Color(1,0.6,0.6,1)
 	_tween = create_tween().set_parallel(true)
 	_tween.tween_property(self, "scale", scale * _scale_multiplier,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	_tween.tween_property(self, "scale", _starting_scale,_duration/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT).set_delay(_duration/2)

@@ -77,6 +77,7 @@ func kiss() -> void:
 	
 	kissing = false
 	
+	# Check if nectar is kissed enough
 	if last_nectar_kiss_level == Nectar.KissLevel.VERY_KISSED:
 		print_rich(DEBUG_NAME,"Kiss > We've kissed the nectar into Honey!")
 		_outputted_honey = true
@@ -84,10 +85,9 @@ func kiss() -> void:
 		output_object()
 	
 	else:
-		add_object_to_output()
+		add_object_to_output(ObjectManager.ObjectType.NECTAR)
 		output_object()
 		
-		# Check if nectar is kissed enough
 		_nectar_output = (output as Nectar)
 		_nectar_output.kissed_level = Nectar.KissLevel.values()[(last_nectar_kiss_level as int) + 1]
 		print_rich(DEBUG_NAME,"Kiss > Kissed nectar up to " + str(Nectar.KissLevel.values()[_nectar_output.kissed_level]))

@@ -6,6 +6,7 @@ uniform float freq = 1.0;
 uniform float block_size = 20.0;
 uniform vec4 starting_colour = vec4(0,0,0,1);
 uniform vec4 ending_colour = vec4(1);
+varying vec4 modulate_color;
 
 const float pi = 3.1415;
 const int ang_res = 16;
@@ -65,6 +66,11 @@ float getClosestDistance(sampler2D text, vec2 uv, vec2 maxDist) {
 	
 }
 
+void vertex() {
+    modulate_color = COLOR;
+}
+
+
 void fragment() {
 	float timeStep = floor(freq * TIME);
 	vec2 scaledDist = TEXTURE_PIXEL_SIZE;
@@ -75,7 +81,7 @@ void fragment() {
 		COLOR = mix(starting_colour, ending_colour, tanh(3.0*w));
 	}
 	else {
-		COLOR = texture(TEXTURE, UV);
+		COLOR = texture(TEXTURE, UV) * modulate_color;
 	}
 	
 }

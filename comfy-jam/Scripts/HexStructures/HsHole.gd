@@ -68,7 +68,7 @@ func foraging() -> void:
 		
 		await on_outputs_empty
 		
-		print_rich("[color=pink] outputs are empty")
+		#print_rich("[color=pink] outputs are empty")
 		
 		
 		
