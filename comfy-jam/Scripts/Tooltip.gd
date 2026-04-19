@@ -151,7 +151,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] =  "- Stores resources"
+					_tooltip[0] =  "- Stores resources\n- Click arrows to reverse direction"
 					if _hex.structure.output != null || _hex.structure._outputs.size() > 0:
 						_tooltip[0] += "\n [b]Stored:[/b]"
 						if _hex.structure.output != null:
@@ -192,6 +192,34 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 					_tooltip[0] = "Slowly converts Nectar into Honey"
 					if _hex.structure.kissing_cooldowning: _tooltip[0] += "\n~ cooling down ~"
 					_tooltip[1] = "KISS STATION"
+					_tooltip[2] = _hex.structure.get_missing_objects()
+			
+			## -- ROYAL CHAMBER -------------------------------------
+			
+			elif _hex.structure is HexStructureDancepad:
+				if SelectionManager.has_selection:
+					if SelectionManager.current_selection is WorkerBee && _hex.structure.assigned_workers == 0:
+						_tooltip[0] =  "Assign Worker to Dancepad"
+					elif SelectionManager.current_selection is Nectar && !_hex.structure.filter!=ObjectManager.ObjectType.NECTAR:
+						_tooltip[0] =  "Filter for Nectar"
+					elif SelectionManager.current_selection is Pollen && !_hex.structure.filter!=ObjectManager.ObjectType.POLLEN:
+						_tooltip[0] =  "Filter for Pollen"
+					elif SelectionManager.current_selection is RoyalJelly && !_hex.structure.filter!=ObjectManager.ObjectType.ROYAL_JELLY:
+						_tooltip[0] =  "Filter for Royal Jelly"
+					elif SelectionManager.current_selection is Honey && !_hex.structure.filter!=ObjectManager.ObjectType.HONEY:
+						_tooltip[0] =  "Filter for Honey"
+					elif SelectionManager.current_selection is Larvae && !_hex.structure.filter!=ObjectManager.ObjectType.LARVAE:
+						_tooltip[0] =  "Filter for Larvae"
+					else:
+						Tooltip.hide_tooltip()
+						return
+				else:
+					_tooltip[0] =  "- Filters out resources\n- Click dots to set direction"
+					if _hex.structure.filter_active:
+						_tooltip[0] += "\n [b]Filtering:[/b] " + str(ObjectManager.ObjectType.keys()[_hex.structure.filter]).to_lower().capitalize()
+					else:
+						_tooltip[0] += "\n[color=a60050][b]Drag object here to set filter[/b]"
+					_tooltip[1] = "DANCEPAD"
 					_tooltip[2] = _hex.structure.get_missing_objects()
 			
 			## -- ROYAL CHAMBER -------------------------------------

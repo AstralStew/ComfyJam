@@ -38,6 +38,7 @@ var dancepad_sprite : Sprite2D = null
 @export var bl_filtered : bool = false
 @export var br_filtered : bool = false
 
+
 func _setup() -> void:
 	super()
 	

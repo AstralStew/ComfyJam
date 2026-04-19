@@ -2,6 +2,7 @@ class_name HiveManager extends Node
 const DEBUG_NAME : String = "[b][HiveManager][/b] "
 static var instance : HiveManager = null
 
+static var chosen_seed : int = -1
 
 #region STRUCTURE UPGRADES
 
@@ -131,11 +132,13 @@ static func on_restarting_scene() -> Signal:
 	return instance._on_restarting_scene
 
 
+
 func reset() -> void:
 	instance = self
 	game_time = 0
-	
-	
+	if chosen_seed == -1:
+		chosen_seed = randi() % 1000
+	seed(chosen_seed)
 
 func _enter_tree() -> void:
 	reset()
@@ -146,6 +149,7 @@ func _ready() -> void:
 
 
 func start_hive() -> void:
+	
 	
 	if !HexManager.initialise():
 		push_error(DEBUG_NAME,"StartHive > ERROR, could not initialise HexManager :(")
@@ -164,6 +168,7 @@ func _wipe_hive() -> void:
 	print_rich("[color=pink]",DEBUG_NAME,"Queue free just happened here")
 	
 	await get_tree().process_frame
+	
 	_on_wipe_scene.emit()
 	
 

@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="21_ivwil"]
 [ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="21_j5hfv"]
 [ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="21_k6nk5"]
+[ext_resource type="Texture2D" uid="uid://cqtia7cjg0j6w" path="res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png" id="22_37gmy"]
 [ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="22_j5hfv"]
 [ext_resource type="Texture2D" uid="uid://1qt5pb31h71x" path="res://Assets/Images/Structures/HS_KissingBooth.png" id="26_fdwxk"]
 [ext_resource type="Script" uid="uid://j0ri86wqy2m8" path="res://Scripts/NewQueenPlus.gd" id="29_51pau"]
@@ -142,6 +143,90 @@ shadow_size = 4
 shadow_offset = Vector2(1, 1)
 anti_aliasing_size = 1.278
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3nym"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.44297108, 1, 0.72135246, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44297108, 1, 0.72135246, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_left = 6.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 4.0
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(0.5, 0.5)
+anti_aliasing_size = 1.278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4r6r"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1872, 0.78, 0.4836, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44297108, 1, 0.72135246, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_left = 6.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 4.0
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(0.5, 0.5)
+anti_aliasing_size = 1.278
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6o2s"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.56, 1, 0.78, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.44297108, 1, 0.72135246, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_left = 6.0
+expand_margin_top = 4.0
+expand_margin_right = 6.0
+expand_margin_bottom = 4.0
+shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
+shadow_size = 4
+shadow_offset = Vector2(0.5, 0.5)
+anti_aliasing_size = 1.278
+
+[sub_resource type="FontVariation" id="FontVariation_k6nk5"]
+base_font = ExtResource("18_lxibn")
+variation_embolden = -1.13
+spacing_space = -2
+spacing_top = -2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdl44"]
 bg_color = Color(0.06100855, 0.03876, 0.15170373, 1)
 corner_detail = 1
@@ -172,34 +257,6 @@ shadow_size = 4
 shadow_offset = Vector2(0.5, 0.5)
 anti_aliasing_size = 1.278
 
-[sub_resource type="FontVariation" id="FontVariation_k6nk5"]
-base_font = ExtResource("18_lxibn")
-variation_embolden = -1.13
-spacing_space = -2
-spacing_top = -2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsr6p"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 0.8666667, 0.79607844, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 2
-shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
-shadow_size = 4
-shadow_offset = Vector2(1, 1)
-anti_aliasing_size = 1.278
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51pau"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -211,94 +268,6 @@ border_width_top = 6
 border_width_right = 6
 border_width_bottom = 6
 border_color = Color(0.4509804, 0.1764706, 0.44705883, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 2
-shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
-shadow_size = 4
-shadow_offset = Vector2(1, 1)
-anti_aliasing_size = 1.278
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37gmy"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1764706, 0.3254902, 0.35686275, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.5529412, 0.32941177, 0.5372549, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 2
-shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
-shadow_size = 4
-shadow_offset = Vector2(1, 1)
-anti_aliasing_size = 1.278
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qak4p"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.5529412, 0.32941177, 0.5372549, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.5254902, 0.75686276, 0.6392157, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 2
-shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
-shadow_size = 4
-shadow_offset = Vector2(1, 1)
-anti_aliasing_size = 1.278
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdwxk"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.44297108, 1, 0.72135246, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 2
-shadow_color = Color(0.06100855, 0.03876, 0.15170373, 0.781)
-shadow_size = 4
-shadow_offset = Vector2(1, 1)
-anti_aliasing_size = 1.278
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mtk7"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.7882353, 0.85490197, 0.72156864, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.654902, 0.35686275, 0.5019608, 1)
 border_blend = true
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -801,6 +770,62 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvkj5")
 
+[node name="RestartButton" type="Button" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1469504261]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 86.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_7s54b")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3nym")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y4r6r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g6o2s")
+text = "Restart hive"
+
+[node name="BuildButton2" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=1625676429]
+visible = false
+custom_minimum_size = Vector2(2, 2)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.0
+offset_top = -305.0
+offset_right = -301.0
+offset_bottom = -303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b3nym")
+
+[node name="Rtl_Plus" type="RichTextLabel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildButton2" unique_id=234122408]
+modulate = Color(0.0627451, 0.043137256, 0.15294118, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.07
+offset_top = -8.0
+offset_right = 7.9300003
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 6)
+mouse_filter = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_k6nk5")
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
+bbcode_enabled = true
+text = "Restart hive"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 3
+
 [node name="DarkOverlay" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes" unique_id=871287542]
 visible = false
 modulate = Color(0.061800003, 0.041999996, 0.15, 0.29411766)
@@ -894,7 +919,7 @@ offset_right = -11.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jsr6p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
 [node name="HsHole" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" unique_id=1858676053]
 position = Vector2(23, 23)
@@ -920,7 +945,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 [node name="HsHoneycomb" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Honeycomb" unique_id=502927539]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 position = Vector2(23, 23)
-scale = Vector2(0.74, 0.74)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("21_k6nk5")
 
 [node name="Nursery" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1560722794]
@@ -937,15 +962,14 @@ offset_right = -44.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_37gmy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
 [node name="HsNursery" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Nursery" unique_id=1446871648]
 position = Vector2(23.000015, 24)
-scale = Vector2(0.86, 0.86)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("21_j5hfv")
 
 [node name="Jelly Factory" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1975001900]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -959,15 +983,14 @@ offset_right = 90.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qak4p")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
 [node name="HsJellyFactory" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Jelly Factory" unique_id=1279538699]
 position = Vector2(23.000015, 24)
-scale = Vector2(0.86, 0.86)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("22_j5hfv")
 
 [node name="Dancepad" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=941321954]
-self_modulate = Color(0.5764706, 0.78431374, 0.6784314, 1)
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -981,7 +1004,12 @@ offset_right = -11.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
+
+[node name="HsDancepad" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Dancepad" unique_id=88110368]
+position = Vector2(22, 24)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("22_37gmy")
 
 [node name="Kiss Station" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=186297737]
 custom_minimum_size = Vector2(10, 10)
@@ -997,38 +1025,12 @@ offset_right = 57.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2mtk7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_51pau")
 
 [node name="HsKissStation" type="Sprite2D" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Kiss Station" unique_id=264155649]
 position = Vector2(22.999998, 23)
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("26_fdwxk")
-
-[node name="BR2" type="Panel" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=305304209]
-visible = false
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = 99.0
-offset_right = 24.0
-offset_bottom = 145.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fdwxk")
-
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" unique_id=1217251974]
-visible = false
-layout_mode = 0
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(1, 0, 0, 1)
 
 [node name="Tooltip" type="Control" parent="SubViewportContainer/SubViewport" unique_id=498368713]
 process_mode = 3
@@ -1086,6 +1088,7 @@ offset_bottom = 5.0
 mouse_filter = 2
 
 [node name="NewQueenPlus" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1174238880]
+visible = false
 z_index = 15
 layout_mode = 3
 anchors_preset = 15
@@ -4574,6 +4577,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[connection signal="pressed" from="SubViewportContainer/SubViewport/HiveNodes/RestartButton" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_restart_scene_with_same_seed"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/DarkOverlay" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_overlay_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_hole_gui_input"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]
