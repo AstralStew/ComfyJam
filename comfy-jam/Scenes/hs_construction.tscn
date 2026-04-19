@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://drglakt16w3pq" path="res://Scripts/HexStructures/HsConstruction.gd" id="1_6t10m"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_cmamy"]
-[ext_resource type="Texture2D" uid="uid://cx77knfucweu3" path="res://Assets/Images/Structures/HS_UnderConstruction.png" id="3_6t10m"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_cmamy"]
+[ext_resource type="SpriteFrames" uid="uid://c7yjiy5bpe3sd" path="res://Assets/Animations/construction_frames.tres" id="5_ldro2"]
 
 [node name="HS_Construction" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_6t10m")
@@ -36,9 +36,11 @@ max_value = 60.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_cmamy")
-tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
+tint_progress = Color(1, 0.8666667, 0.79607844, 1)
 
-[node name="HsConstruction" type="Sprite2D" parent="." unique_id=2026164149]
-position = Vector2(0, 0.5)
+[node name="HsConstruction" type="AnimatedSprite2D" parent="." unique_id=2113815964]
+position = Vector2(0, -0.94500035)
 scale = Vector2(0.95, 0.95)
-texture = ExtResource("3_6t10m")
+sprite_frames = ExtResource("5_ldro2")
+animation = &"construction_waiting"
+frame_progress = 0.42809802

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bpt47xspsa23j"]
 
 [ext_resource type="Script" uid="uid://c2o6rrqex536b" path="res://Scripts/HexStructures/HsNursery.gd" id="1_j6xyi"]
-[ext_resource type="Texture2D" uid="uid://ga174g2mkrsv" path="res://Assets/Images/Structures/HS_Hatchery_EggOnly.png" id="3_1enj5"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="3_2e83q"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_u6lwb"]
+[ext_resource type="SpriteFrames" uid="uid://bt7awamcvj7jm" path="res://Assets/Animations/nursery_frames.tres" id="4_j6xyi"]
 
 [node name="HS_Nursery" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_j6xyi")
@@ -37,9 +37,10 @@ max_value = 60.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_u6lwb")
-tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
+tint_progress = Color(1, 0.8666667, 0.79607844, 1)
 
-[node name="HsNursery" type="Sprite2D" parent="." unique_id=2026164149]
-position = Vector2(0, 1)
-scale = Vector2(0.945, 0.945)
-texture = ExtResource("3_1enj5")
+[node name="HsNursery" type="AnimatedSprite2D" parent="." unique_id=1354381049]
+position = Vector2(1, -1.9450002)
+scale = Vector2(0.95, 0.95)
+sprite_frames = ExtResource("4_j6xyi")
+animation = &"nurturing"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vnyyxglpwctl" path="res://Scripts/HexStructures/HsImpassable.gd" id="1_5rsbn"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_ltoow"]
-[ext_resource type="Texture2D" uid="uid://rqujlqgewlrg" path="res://Assets/Images/Structures/HS_Impassable.png" id="3_tixn7"]
+[ext_resource type="Texture2D" uid="uid://dhbmh2moguxwo" path="res://Assets/Images/Structures/Structures_Sheet.png" id="3_ltoow"]
 
 [node name="HS_Impassable" type="Node2D" unique_id=1869955823]
 modulate = Color(1, 0, 1, 1)
@@ -27,4 +27,6 @@ texture = ExtResource("2_ltoow")
 expand_mode = 1
 
 [node name="HsImpassable" type="Sprite2D" parent="." unique_id=1268797718]
-texture = ExtResource("3_tixn7")
+texture = ExtResource("3_ltoow")
+region_enabled = true
+region_rect = Rect2(173, 9, 45, 51)

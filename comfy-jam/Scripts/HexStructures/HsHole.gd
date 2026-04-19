@@ -102,6 +102,6 @@ func start_forage() -> void:
 func finish_forage() -> void:
 	# Finish up animation
 	var _tween = create_tween().set_parallel(true)
-	_tween.tween_property(sprite, "scale", Vector2(0.36,0.36), wrapup_time)
+	_tween.tween_property(sprite, "scale", Vector2(0.43,0.43), wrapup_time)
 	_tween.tween_property(sprite, "modulate", Color.WHITE, wrapup_time)
 	await _tween.finished

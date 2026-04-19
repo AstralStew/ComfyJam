@@ -9,10 +9,7 @@ var edge_r : Label = null
 var edge_bl : Label = null
 var edge_br : Label = null
 
-var texture_1 : Texture = null
-var texture_2 : Texture = null
-
-var dancepad_sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 1
@@ -57,9 +54,8 @@ func _setup() -> void:
 	set_edge(HexManager.HexDirection.BotL,false)
 	set_edge(HexManager.HexDirection.BotR,false)
 	
-	dancepad_sprite = $HsDancepad
-	texture_1 = preload("res://Assets/Images/Structures/HS_Dancepad.png")
-	texture_2 = preload("res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png")
+	_sprite = $HsDancepad
+	_sprite.play("thinking")
 	
 	cooldown_time = HiveManager.upgrade_dancepad_cooldown
 	speed_multiplier = HiveManager.upgrade_global_speed_multiplier
@@ -305,7 +301,7 @@ func larvae_dropped_here(_larvae:Larvae) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
-	dancepad_sprite.texture = texture_2
+	#dancepad_sprite.texture = texture_2
 	active = true
 	
 	super()
@@ -345,12 +341,14 @@ func cooldown() -> void:
 
 func start_cooling_down() -> void:
 	#sprite.texture = texture_2
+	_sprite.play("thinking")
 	$HsDancepad.modulate = Color(1,1,1,0.7)
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_cooling_down() -> void:
 	#sprite.texture = texture_1
+	_sprite.play("dancing")
 	$HsDancepad.modulate = Color(1,1,1,1)
 	await get_tree().create_timer(wrapup_time).timeout
 

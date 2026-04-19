@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dfek0klitivkr" path="res://Scripts/HexStructures/HsKissStation.gd" id="1_pospv"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_xn7rq"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_rasne"]
-[ext_resource type="Texture2D" uid="uid://1qt5pb31h71x" path="res://Assets/Images/Structures/HS_KissingBooth.png" id="4_xn7rq"]
+[ext_resource type="SpriteFrames" uid="uid://dtqki8pbmetoq" path="res://Assets/Animations/kiss_station_frames.tres" id="4_pospv"]
 
 [node name="HS_Kiss_Station" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pospv")
@@ -41,6 +41,8 @@ nine_patch_stretch = true
 texture_progress = ExtResource("3_rasne")
 tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
 
-[node name="HsKissStation" type="Sprite2D" parent="." unique_id=440202702]
-scale = Vector2(0.87, 0.87)
-texture = ExtResource("4_xn7rq")
+[node name="HsKissStation" type="AnimatedSprite2D" parent="." unique_id=450085672]
+position = Vector2(1, -1.9450002)
+scale = Vector2(0.95, 0.95)
+sprite_frames = ExtResource("4_pospv")
+animation = &"waiting"

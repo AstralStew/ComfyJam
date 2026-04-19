@@ -175,7 +175,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _workers.pop_back()
 			_old_object.remove_from_group("Workers")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.worker_scored()
+			ScoreMeter.worker_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Workers")
 		_object.free_standing = true
@@ -189,7 +189,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _larvaes.pop_back()
 			_old_object.remove_from_group("Larvae")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.larvae_scored()
+			ScoreMeter.larvae_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Larvae")
 		_object.free_standing = true
@@ -203,7 +203,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _nectars.pop_back()
 			_old_object.remove_from_group("Nectar")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.nectar_scored()
+			ScoreMeter.nectar_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Nectar")
 		_object.free_standing = true
@@ -217,7 +217,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _pollens.pop_back()
 			_old_object.remove_from_group("Pollen")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.pollen_scored()
+			ScoreMeter.pollen_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Pollen")
 		_object.free_standing = true
@@ -231,7 +231,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _jellies.pop_back()
 			_old_object.remove_from_group("RoyalJelly")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.royal_jelly_scored()
+			ScoreMeter.royal_jelly_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("RoyalJelly")
 		_object.free_standing = true
@@ -245,7 +245,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _honeys.pop_back()
 			_old_object.remove_from_group("Honey")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			#ScoreMeter.honey_scored()
+			ScoreMeter.honey_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Honey")
 		_object.free_standing = true

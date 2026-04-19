@@ -125,8 +125,6 @@ func _on_restart_scene_with_different_seed() -> void:
 
 func _on_button_pressed() -> void:
 	
-	
-	
 	HiveManager.chosen_seed = randi() % 1000
 	await get_tree().process_frame
 	get_tree().call_deferred("reload_current_scene")

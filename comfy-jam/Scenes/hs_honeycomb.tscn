@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c1ddnwi61ciks" path="res://Scripts/HexStructures/HsHoneycomb.gd" id="1_0bhcy"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_bcsvd"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_o8x1l"]
-[ext_resource type="Texture2D" uid="uid://lkhhe8rjuclo" path="res://Assets/Images/Structures/HS_Honeycomb.png" id="4_0bhcy"]
+[ext_resource type="Texture2D" uid="uid://dhbmh2moguxwo" path="res://Assets/Images/Structures/Structures_Sheet.png" id="4_bcsvd"]
 [ext_resource type="FontFile" uid="uid://gdxm02kup507" path="res://Assets/Fonts/singleday.ttf" id="5_bcsvd"]
 
 [sub_resource type="FontVariation" id="FontVariation_o8x1l"]
@@ -49,7 +49,9 @@ tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
 [node name="HsHoneycomb" type="Sprite2D" parent="." unique_id=440202702]
 modulate = Color(0.65, 0.35099995, 0.35598326, 1)
 position = Vector2(0, 1)
-texture = ExtResource("4_0bhcy")
+texture = ExtResource("4_bcsvd")
+region_enabled = true
+region_rect = Rect2(174, 78, 44, 45)
 
 [node name="Edge_tl" type="Label" parent="." unique_id=1018495924]
 visible = false

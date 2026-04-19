@@ -2,10 +2,8 @@ class_name HexStructureKissStation extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsKissStation][/b] "
 
-var texture_1 : Texture = null
-var texture_2 : Texture = null
 
-var sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
 
 @export var startup_time : float = 1
@@ -31,9 +29,8 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(KissStation) > Yep!")
-	sprite = $HsKissStation
-	texture_1 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee.png")
-	texture_2 = preload("res://Assets/Images/Structures/HS_KissingBooth_bee_kiss.png")
+	_sprite = $HsKissStation
+	_sprite.play("waiting")
 	
 	
 	speed_multiplier = HiveManager.upgrade_kiss_station_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
@@ -55,7 +52,6 @@ func nectar_dropped_here(_nectar:Nectar) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Ready to recieve nectar")
-	sprite.texture = texture_1
 	active = true
 	
 	super()
@@ -95,9 +91,12 @@ func kiss() -> void:
 	
 	kissing_cooldowning = true
 	update_tooltip_info()
-	sprite.modulate = Color(1,1,1,0.7)
+	
+	
+	#sprite.modulate = Color(1,1,1,0.7)
 	await get_tree().create_timer(kissing_cooldown).timeout
-	sprite.modulate = Color(1,1,1,1)
+	#sprite.modulate = Color(1,1,1,1)
+	_sprite.play("waiting")
 	kissing_cooldowning = false
 	update_tooltip_info()
 	
@@ -115,10 +114,10 @@ func kiss() -> void:
 
 
 func start_kissing() -> void:
-	sprite.texture = texture_2
+	_sprite.play("kissing")
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_kissing() -> void:
-	sprite.texture = texture_1
+	_sprite.play("cooldown")
 	await get_tree().create_timer(wrapup_time).timeout

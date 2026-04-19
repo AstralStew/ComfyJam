@@ -22,7 +22,7 @@ floor_width = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=661731583]
 position = Vector2(0, -21)
-scale = Vector2(1.115, 1.115)
+scale = Vector2(1.05, 1.05)
 sprite_frames = ExtResource("2_ugjxm")
 autoplay = "default"
 

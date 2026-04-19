@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bn8cn6aps7wv6"]
+
+[ext_resource type="Texture2D" uid="uid://dhbmh2moguxwo" path="res://Assets/Images/Structures/Structures_Sheet.png" id="1_023g5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_023g5"]
+atlas = ExtResource("1_023g5")
+region = Rect2(56, 66, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikq5j"]
+atlas = ExtResource("1_023g5")
+region = Rect2(112, 66, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ic2k"]
+atlas = ExtResource("1_023g5")
+region = Rect2(0, 66, 56, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_023g5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikq5j")
+}],
+"loop": true,
+"name": &"dancing",
+"speed": 2.83
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ic2k")
+}],
+"loop": true,
+"name": &"thinking",
+"speed": 2.83
+}]

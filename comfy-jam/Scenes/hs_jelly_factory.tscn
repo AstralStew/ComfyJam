@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://s1ifjkdv0ve5" path="res://Scripts/HexStructures/HsJellyFactory.gd" id="1_28kgw"]
 [ext_resource type="Texture2D" uid="uid://qm1xpo021pjm" path="res://Assets/Images/GUI/hexagon.png" id="2_uaxht"]
-[ext_resource type="Texture2D" uid="uid://84lsredsbqqx" path="res://Assets/Images/Structures/HS_JellyFactory_NoBee.png" id="3_28kgw"]
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_uaxht"]
+[ext_resource type="SpriteFrames" uid="uid://c6eb1livjhya7" path="res://Assets/Animations/jelly_factory_frames.tres" id="4_o1ei2"]
 
 [node name="HS_Jelly_Factory" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_28kgw")
@@ -37,7 +37,11 @@ max_value = 60.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_uaxht")
-tint_progress = Color(0.5782135, 0.783878, 0.6793029, 1)
+tint_progress = Color(1, 0.8666667, 0.79607844, 1)
 
-[node name="HsJellyFactory" type="Sprite2D" parent="." unique_id=440202702]
-texture = ExtResource("3_28kgw")
+[node name="HsJellyFactory" type="AnimatedSprite2D" parent="." unique_id=1770043162]
+position = Vector2(0, -1)
+scale = Vector2(0.97, 0.97)
+sprite_frames = ExtResource("4_o1ei2")
+animation = &"produce"
+frame_progress = 0.30890197

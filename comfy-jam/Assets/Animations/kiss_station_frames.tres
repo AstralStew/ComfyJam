@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dtqki8pbmetoq"]
+
+[ext_resource type="Texture2D" uid="uid://dhbmh2moguxwo" path="res://Assets/Images/Structures/Structures_Sheet.png" id="1_prids"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enjtm"]
+atlas = ExtResource("1_prids")
+region = Rect2(0, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prids"]
+atlas = ExtResource("1_prids")
+region = Rect2(112, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7vkk"]
+atlas = ExtResource("1_prids")
+region = Rect2(168, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i70xc"]
+atlas = ExtResource("1_prids")
+region = Rect2(56, 132, 56, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enjtm")
+}],
+"loop": true,
+"name": &"cooldown",
+"speed": 2.83
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prids")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7vkk")
+}],
+"loop": true,
+"name": &"kissing",
+"speed": 2.83
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i70xc")
+}],
+"loop": true,
+"name": &"waiting",
+"speed": 2.83
+}]

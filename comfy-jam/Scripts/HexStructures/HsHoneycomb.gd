@@ -9,9 +9,8 @@ var edge_r : Label = null
 var edge_bl : Label = null
 var edge_br : Label = null
 
-var texture : Texture = null
 
-var honeycomb_sprite : Sprite2D = null
+var _sprite : Sprite2D = null
 
 @export var cooldown_time : float = 1
 
@@ -54,8 +53,7 @@ func _setup() -> void:
 	set_edge(HexManager.HexDirection.BotL,false)
 	set_edge(HexManager.HexDirection.BotR,false)
 	
-	honeycomb_sprite = $HsHoneycomb
-	texture = preload("res://Assets/Images/Structures/HS_Honeycomb.png")
+	_sprite = $HsHoneycomb
 	
 	capacity = HiveManager.upgrade_honeycomb_capacity
 	
@@ -284,7 +282,6 @@ func honey_dropped_here(_honey:Honey) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
-	honeycomb_sprite.texture = texture
 	active = true
 	
 	super()

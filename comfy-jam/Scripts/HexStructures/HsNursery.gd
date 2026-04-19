@@ -5,7 +5,7 @@ func _debug_name() -> String:
 var texture_1 : Texture = null
 var texture_2 : Texture = null
 
-var sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
 var progress_hex : TextureProgressBar  = null
 
@@ -30,7 +30,9 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(Nursery) > Yep!")
-	sprite = $HsNursery
+	_sprite = $HsNursery
+	_sprite.play("default")
+	on_outputs_empty.connect(return_to_default_animation)
 	progress_hex = $ProgressHex
 	texture_1 = preload("res://Assets/Images/Structures/HS_Hatchery_Egg_Bee.png")
 	texture_2 = preload("res://Assets/Images/Structures/HS_Hatchery_Larva_Bee.png")
@@ -53,7 +55,6 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Ready to recieve royal jelly")
-	sprite.texture = texture_1
 	active = true
 	
 	super()
@@ -64,7 +65,7 @@ func nurture() -> void:
 	nurturing = true
 	
 	await start_nurturing()
-	
+		
 	progress_hex.value = 0
 	progress_hex.visible = true
 	
@@ -85,13 +86,15 @@ func nurture() -> void:
 	output_object()
 	
 
+func return_to_default_animation() -> void:
+	_sprite.play("default")
 
 
 func start_nurturing() -> void:
-	sprite.texture = texture_2
+	_sprite.play("nurturing")
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_nurturing() -> void:
-	sprite.texture = texture_1
+	_sprite.play("nurture_end")
 	await get_tree().create_timer(wrapup_time).timeout

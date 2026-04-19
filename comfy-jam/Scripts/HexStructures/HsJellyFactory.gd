@@ -6,7 +6,7 @@ var texture : Texture = null
 
 var progress_hex : TextureProgressBar  = null
 
-var bee_sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 1
@@ -33,7 +33,8 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(JellyFactory) > Yep!")
-	bee_sprite = $HsJellyFactory
+	_sprite = $HsJellyFactory
+	_sprite.play("default")
 	progress_hex = $ProgressHex
 	texture = preload("res://Assets/Images/Structures/HS_JellyFactory_Bee.png")
 		
@@ -59,7 +60,6 @@ func pollen_dropped_here(_pollen:Pollen) -> bool:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")
-	bee_sprite.texture = texture
 	active = true
 	
 	super()
@@ -97,7 +97,9 @@ func produce() -> void:
 
 
 func start_production() -> void:
+	_sprite.play("produce")
 	await get_tree().create_timer(startup_time).timeout
 
 func finish_production() -> void:
+	_sprite.play("default")
 	await get_tree().create_timer(wrapup_time).timeout

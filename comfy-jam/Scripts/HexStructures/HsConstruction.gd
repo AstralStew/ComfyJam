@@ -4,7 +4,7 @@ func _debug_name() -> String:
 
 var texture_2 : Texture = null
 
-var sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
 var progress_hex : TextureProgressBar  = null
 
@@ -32,7 +32,8 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup > Yep!")
-	sprite = $HsConstruction
+	_sprite = $HsConstruction
+	_sprite.play("construction_waiting")
 	progress_hex = $ProgressHex
 	texture_2 = preload("res://Assets/Images/Structures/HS_UnderConstruction_Bee.png")
 	
@@ -192,7 +193,6 @@ func check_inputs() -> void:
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"ObjectDroppedHere > Worker assigned, beginning construction!")
-	sprite.texture = texture_2
 	active = true
 	
 	super()
@@ -227,10 +227,10 @@ func build() -> void:
 
 
 func start_building() -> void:
-	sprite.texture = texture_2
+	_sprite.play("constructing")
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_building() -> void:
-	#sprite.texture = texture_1
+	_sprite.play("construction_waiting")
 	await get_tree().create_timer(wrapup_time).timeout

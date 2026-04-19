@@ -5,11 +5,11 @@ static var instance : ScoreMeter = null
 @export var score_added_scale_multiplier : float = 1.5
 @export var score_added_scale_duration : float = 1
 
-@export var larvae_score : int = 1
-@export var nectar_score : int = 2
-@export var pollen_score : int = 2
+@export var larvae_score : int = 3
+@export var nectar_score : int = 1
+@export var pollen_score : int = 1
 @export var royal_jelly_score : int = 2
-@export var worker_score : int = 8
+@export var worker_score : int = 4
 @export var honey_score : int = 15
 
 var score_hex_parent : Control = null 
