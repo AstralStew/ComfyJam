@@ -4577,7 +4577,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="pressed" from="SubViewportContainer/SubViewport/HiveNodes/RestartButton" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_restart_scene_with_same_seed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/HiveNodes/RestartButton" to="SubViewportContainer/SubViewport/NewQueenPlus" method="_on_restart_scene_with_different_seed"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/DarkOverlay" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_overlay_gui_input"]
 [connection signal="gui_input" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_hole_gui_input"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/HiveNodes/BuildMenu/Hole" to="SubViewportContainer/SubViewport/HiveNodes/BuildMenu" method="_on_option_mouse_entered" binds= ["Hole"]]

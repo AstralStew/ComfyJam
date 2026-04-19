@@ -40,6 +40,14 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 				on_drag_start.emit()
 				wait_for_unclick()
 	
+	if dragging && event is InputEventMouseMotion:
+		
+		if event.relative.x > 0:
+			get_parent()._sprite.flip_h = true
+		else:
+			get_parent()._sprite.flip_h = false
+			
+	
 
 func wait_for_unclick() -> void:
 	while (dragging):

@@ -53,6 +53,7 @@ position = Vector2(0, 1)
 texture = ExtResource("4_2opmt")
 
 [node name="Nectar" type="Sprite2D" parent="." unique_id=1107007782]
+visible = false
 position = Vector2(1, 12)
 scale = Vector2(0.23047754, 0.23047754)
 texture = ExtResource("6_lq1oc")
@@ -60,6 +61,7 @@ region_enabled = true
 region_rect = Rect2(0, 58, 50, 32)
 
 [node name="Pollen" type="Sprite2D" parent="." unique_id=1523181078]
+visible = false
 position = Vector2(1, 12)
 scale = Vector2(0.23047754, 0.23047754)
 texture = ExtResource("6_lq1oc")
@@ -67,6 +69,7 @@ region_enabled = true
 region_rect = Rect2(100, 0, 50, 48)
 
 [node name="RoyalJelly" type="Sprite2D" parent="." unique_id=2131415945]
+visible = false
 position = Vector2(1, 12)
 scale = Vector2(0.23047754, 0.23047754)
 texture = ExtResource("6_lq1oc")
@@ -74,6 +77,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 50, 48)
 
 [node name="Honey" type="Sprite2D" parent="." unique_id=1784124978]
+visible = false
 position = Vector2(1, 12)
 scale = Vector2(0.23047754, 0.23047754)
 texture = ExtResource("6_lq1oc")
@@ -81,6 +85,7 @@ region_enabled = true
 region_rect = Rect2(98, 48, 50, 50)
 
 [node name="Larvae" type="Sprite2D" parent="." unique_id=701706410]
+visible = false
 position = Vector2(0.9999999, 11.999997)
 scale = Vector2(0.22023411, 0.22023411)
 texture = ExtResource("7_ub0sl")

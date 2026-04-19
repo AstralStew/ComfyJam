@@ -179,19 +179,33 @@ func offer_my_output() -> void:
 	var _adjacent_hex : Hex = null
 	var _took_object_from_me : bool = false
 	
+	
+	#var _adjacent_hexes = HexManager.get_adjacent_hexes(hex)
+	
+	
+	
+	var _adjacent_hexes : Array[Hex] = []
 	var _directions = HexManager.HexDirection.values()
 	_directions.shuffle()
 	for _direction in _directions:
 		_adjacent_hex = HexManager.get_adjacent_hex(hex,_direction)
-		if _adjacent_hex != null && _adjacent_hex.structure != null:
+		if _adjacent_hex != null && _adjacent_hex.structure != null && get_edge_open(_direction):
+			_adjacent_hexes.append(_adjacent_hex)
+	
+	var _non_honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is not HexStructureHoneycomb)
+	var _honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is HexStructureHoneycomb)
+	_non_honeycomb_hexes.shuffle()
+	_adjacent_hexes = _non_honeycomb_hexes + _honeycomb_hexes
+	
+	for _sorted_hex in _adjacent_hexes:
 			#adjacent_hex_updated(_adjacent_hex)
-			if !_took_object_from_me && get_edge_open(_direction):
-				print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' is OPEN and has a structure, asking if it wants the object")
-				if _adjacent_hex.structure.adjacent_hex_updated(hex):
-					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' accepted!")
+			if !_took_object_from_me:
+				print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_sorted_hex.name+"' is OPEN and has a structure, asking if it wants the object")
+				if _sorted_hex.structure.adjacent_hex_updated(hex):
+					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_sorted_hex.name+"' accepted!")
 					_took_object_from_me = true
 				else:
-					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_adjacent_hex.name+"' said no or that direction is closed")
+					print_rich(DEBUG_NAME,"OfferMyOutput(Honeycomb) > Adjacent hex '"+_sorted_hex.name+"' said no or that direction is closed")
 	
 	await get_tree().process_frame	
 	while get_tree().paused:
@@ -228,7 +242,7 @@ func adjacent_hex_updated(_adjacent_hex:Hex) -> bool:
 	return super(_adjacent_hex)
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
-	if !active || is_full:
+	if !active || is_full || _nectar.kissed_level > Nectar.KissLevel.UNKISSED:
 		return false
 	
 	#_nectar.queue_free()

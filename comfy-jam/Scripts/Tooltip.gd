@@ -214,11 +214,12 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] =  "- Filters out resources\n- Click dots to set direction"
+					
 					if _hex.structure.filter_active:
-						_tooltip[0] += "\n [b]Filtering:[/b] " + str(ObjectManager.ObjectType.keys()[_hex.structure.filter]).to_lower().capitalize()
+						_tooltip[0] = "[b]Filtering:[/b][color=a60050] " + str(ObjectManager.ObjectType.keys()[_hex.structure.filter]).to_lower().capitalize()
 					else:
-						_tooltip[0] += "\n[color=a60050][b]Drag object here to set filter[/b]"
+						_tooltip[0] = "[color=a60050][b]Drag object here to set filter[/b]"
+					_tooltip[0] +=  "[/color]\n- Filters out resources\n- Click dots to set direction"
 					_tooltip[1] = "DANCEPAD"
 					_tooltip[2] = _hex.structure.get_missing_objects()
 			
@@ -226,21 +227,26 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 			
 			elif _hex.structure is HexStructureRoyalChambers:
 				if SelectionManager.has_selection:
-					if _hex.structure.order_recipe.size() > 0:
-						for i in _hex.structure.order_recipe.size():
-							if _hex.structure.order_recipe[i] == ObjectManager.get_type_of_object(SelectionManager.current_selection):
-								_tooltip[0] = "Offer the " + str(ObjectManager.ObjectType.keys()[_hex.structure.order_recipe[i]]).to_lower().capitalize()
-								break
-						if _tooltip[0] == "":
-							#BuildMenu.hide_build_button()
-							Tooltip.hide_tooltip()
-							return
+					if SelectionManager.current_selection is Honey:
+						_tooltip[0] = "Begin loading up Honey for\n the new Queen's journey...\n[color=a60050][b]Warning:[/b][/color] You only have\n a minute to load up more!"
+					
+					#if _hex.structure.order_recipe.size() > 0:
+						#for i in _hex.structure.order_recipe.size():
+							#if _hex.structure.order_recipe[i] == ObjectManager.get_type_of_object(SelectionManager.current_selection):
+								#_tooltip[0] = "Offer the " + str(ObjectManager.ObjectType.keys()[_hex.structure.order_recipe[i]]).to_lower().capitalize()
+								#break
+						#if _tooltip[0] == "":
+							##BuildMenu.hide_build_button()
+							#Tooltip.hide_tooltip()
+							#return
 					else:
-						BuildMenu.hide_build_button()
+						#BuildMenu.hide_build_button()
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] =  "~lil queen sounds~"
+					if _hex.structure.countdowning: _tooltip[0] = "[color=a60050][b]Less than a minute to feed queen![/b][/color]"
+					else: _tooltip[0] = "[color=a60050]~lil queen sounds~[/color]"
+					_tooltip[0] +=  "\n- Can only be fed via hexes\n   (cannot be fed via mouse)"
 					_tooltip[1] = "ROYAL CHAMBERS"
 					_tooltip[2] = _hex.structure.get_missing_objects()
 		

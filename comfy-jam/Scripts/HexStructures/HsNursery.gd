@@ -65,6 +65,7 @@ func nurture() -> void:
 	
 	await start_nurturing()
 	
+	progress_hex.value = 0
 	progress_hex.visible = true
 	
 	if _tween: _tween.kill()

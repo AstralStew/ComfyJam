@@ -65,7 +65,7 @@ static func create_larvae(_position:Vector2,_auto_fall:bool=false) -> Larvae:
 	_new_larvae.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_larvae)
 	_new_larvae.setup()
-	_new_larvae.global_position = _position - _new_larvae._draggable.position
+	_new_larvae.global_position = _position - _new_larvae._draggable.global_position
 	return _new_larvae
 
 static func create_worker(_position:Vector2,_auto_fall:bool=false) -> WorkerBee:
@@ -75,7 +75,7 @@ static func create_worker(_position:Vector2,_auto_fall:bool=false) -> WorkerBee:
 	_new_worker.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_worker)
 	_new_worker.setup()
-	_new_worker.global_position = _position - _new_worker._draggable.position
+	_new_worker.global_position = _position - _new_worker._draggable.global_position
 	return _new_worker
 
 static func create_nectar(_position:Vector2,_auto_fall:bool=false) -> Nectar:
@@ -85,7 +85,7 @@ static func create_nectar(_position:Vector2,_auto_fall:bool=false) -> Nectar:
 	_new_nectar.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_nectar)
 	_new_nectar.setup()
-	_new_nectar.global_position = _position - _new_nectar._draggable.position
+	_new_nectar.global_position = _position - _new_nectar._draggable.global_position
 	return _new_nectar
 
 static func create_pollen(_position:Vector2,_auto_fall:bool=false) -> Pollen:
@@ -95,7 +95,7 @@ static func create_pollen(_position:Vector2,_auto_fall:bool=false) -> Pollen:
 	_new_pollen.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_pollen)
 	_new_pollen.setup()
-	_new_pollen.global_position = _position - _new_pollen._draggable.position
+	_new_pollen.global_position = _position - _new_pollen._draggable.global_position
 	return _new_pollen
 
 static func create_royal_jelly(_position:Vector2,_auto_fall:bool=false) -> RoyalJelly:
@@ -105,7 +105,7 @@ static func create_royal_jelly(_position:Vector2,_auto_fall:bool=false) -> Royal
 	_new_jelly.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_jelly)
 	_new_jelly.setup()
-	_new_jelly.global_position = _position - _new_jelly._draggable.position
+	_new_jelly.global_position = _position - _new_jelly._draggable.global_position
 	return _new_jelly
 
 static func create_honey(_position:Vector2,_auto_fall:bool=false) -> Honey:
@@ -115,7 +115,7 @@ static func create_honey(_position:Vector2,_auto_fall:bool=false) -> Honey:
 	_new_honey.fall_on_setup = _auto_fall
 	spawned_objects.add_child(_new_honey)
 	_new_honey.setup()
-	_new_honey.global_position = _position - _new_honey._draggable.position
+	_new_honey.global_position = _position - _new_honey._draggable.global_position
 	return _new_honey
 
 static func create_object(_type:ObjectType,_position:Vector2,_auto_fall = false) -> Node2D:
@@ -175,7 +175,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _workers.pop_back()
 			_old_object.remove_from_group("Workers")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.worker_scored()
+			#ScoreMeter.worker_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Workers")
 		_object.free_standing = true
@@ -189,7 +189,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _larvaes.pop_back()
 			_old_object.remove_from_group("Larvae")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.larvae_scored()
+			#ScoreMeter.larvae_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Larvae")
 		_object.free_standing = true
@@ -203,7 +203,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _nectars.pop_back()
 			_old_object.remove_from_group("Nectar")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.nectar_scored()
+			#ScoreMeter.nectar_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Nectar")
 		_object.free_standing = true
@@ -217,7 +217,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _pollens.pop_back()
 			_old_object.remove_from_group("Pollen")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.pollen_scored()
+			#ScoreMeter.pollen_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Pollen")
 		_object.free_standing = true
@@ -231,7 +231,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _jellies.pop_back()
 			_old_object.remove_from_group("RoyalJelly")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.royal_jelly_scored()
+			#ScoreMeter.royal_jelly_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("RoyalJelly")
 		_object.free_standing = true
@@ -245,7 +245,7 @@ static func free_stand_object(_object:Node2D) -> bool:
 			_old_object = _honeys.pop_back()
 			_old_object.remove_from_group("Honey")
 			move_and_destroy(_old_object,free_stand_move_position,1)
-			ScoreMeter.honey_scored()
+			#ScoreMeter.honey_scored()
 			await instance.get_tree().process_frame
 		_object.add_to_group("Honey")
 		_object.free_standing = true

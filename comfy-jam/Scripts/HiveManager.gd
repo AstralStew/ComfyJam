@@ -67,8 +67,8 @@ static var upgrade_construction_speed_multiplier : float = 1.0							# Implement
 static var upgrade_honeycomb_capacity_levels : Array[int] = [3,5,7,9]
 static var upgrade_honeycomb_capacity : int = 3										# Implemented
 
-static var upgrade_royal_chambers_order_cooldown_levels : Array[float] = [30.0,25.0,20.0,15.0]
-static var upgrade_royal_chambers_order_cooldown : float = 30.0						# Implemented
+static var upgrade_royal_chambers_order_cooldown_levels : Array[float] = [60.0,90.0,120.0,150.0]
+static var upgrade_royal_chambers_order_cooldown : float = 60.0						# Implemented
 
 #endregion
 
@@ -79,19 +79,19 @@ static var upgrade_starting_number_of_larvae_levels : Array[int] = [0,2,4,7]
 static var upgrade_starting_number_of_larvae : int = 0
 
 static var upgrade_starting_number_of_nectar_levels : Array[int] = [1,3,5,8]
-static var upgrade_starting_number_of_nectar : int = 1
+static var upgrade_starting_number_of_nectar : int = 8
 
 static var upgrade_starting_number_of_pollen_levels : Array[int] = [1,3,5,8]
-static var upgrade_starting_number_of_pollen : int = 1
+static var upgrade_starting_number_of_pollen : int = 8
 
 static var upgrade_starting_number_of_royal_jelly_levels : Array[int] = [2,3,5,7]
-static var upgrade_starting_number_of_royal_jelly : int = 2
+static var upgrade_starting_number_of_royal_jelly : int = 8
 
 static var upgrade_starting_number_of_honey_levels : Array[int] = [0,1,2,4]
-static var upgrade_starting_number_of_honey : int = 1
+static var upgrade_starting_number_of_honey : int = 8
 
 static var upgrade_starting_number_of_workers_levels : Array[int] = [4,5,6,7]
-static var upgrade_starting_number_of_workers : int = 4
+static var upgrade_starting_number_of_workers : int = 8
 
 
 static var upgrade_larvae_eating_speed_multiplier_levels : Array[float] = [1.0,1.25,1.5,2]
@@ -174,14 +174,14 @@ func _wipe_hive() -> void:
 	_on_wipe_scene.emit()
 	
 
-func _process(delta: float) -> void:
-	
-	game_time += delta
-	
-	if !_game_finished && game_time >= game_length:
-		_game_finished = true
-		if end_on_timeout:
-			print_rich(DEBUG_NAME,"GAME FINISHED!!!")
-			_on_hive_finish.emit()
+#func _process(delta: float) -> void:
+	#
+	#game_time += delta
+	#
+	#if !_game_finished && game_time >= game_length:
+		#_game_finished = true
+		#if end_on_timeout:
+			#print_rich(DEBUG_NAME,"GAME FINISHED!!!")
+			#_on_hive_finish.emit()
 		
 		

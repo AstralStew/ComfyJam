@@ -70,7 +70,7 @@ var even_score_prefab : Control = null
 var current_score_hex : TextureProgressBar = null
 var current_score_capacity : float = 0
 
-var starting_score_capacity : float = 20
+var starting_score_capacity : float = 15
 
 
 var _score_added_tween : Tween = null

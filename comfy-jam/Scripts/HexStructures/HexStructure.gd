@@ -207,7 +207,7 @@ func output_object() -> bool:
 		return false
 	
 	# Create an object from the last chosen returnable type
-	var _output = ObjectManager.create_object(_outputs.pop_front(),global_position - Vector2(0,6))
+	var _output = ObjectManager.create_object(_outputs.pop_front(),global_position)
 	_output.global_scale *= output_scale
 	_output.show_outline() # .material = preload("res://Assets/Materials/selection_material.tres")
 	_output.spawning_animation(output_notify_delay)

@@ -75,7 +75,7 @@ func hide_outline() -> void:
 func drag_start() -> void:
 	if !free_standing: ObjectManager.free_stand_object(self)
 	
-	scale = Vector2(0.69,0.69)
+	scale = Vector2(0.6,0.6)
 	_crawlable.stop()
 	_sprite.flip_h = randi() % 2 == 0
 	show_outline()

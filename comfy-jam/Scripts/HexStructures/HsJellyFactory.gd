@@ -73,6 +73,7 @@ func produce() -> void:
 	
 	await start_production()
 	
+	progress_hex.value = 0
 	progress_hex.visible = true
 	
 	if _tween: _tween.kill()

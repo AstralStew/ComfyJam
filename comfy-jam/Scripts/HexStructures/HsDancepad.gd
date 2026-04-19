@@ -127,7 +127,7 @@ func check_adjacent_hex_is_filtered(_adjacent_hex:Hex) -> bool:
 	
 
 func pop_out_object(_object:ObjectManager.ObjectType) -> void:
-	var _output = ObjectManager.create_object(filter,global_position - Vector2(0,6),true)
+	var _output = ObjectManager.create_object(filter,global_position,true)
 	#_output.global_scale *= output_scale
 	#_output.show_outline() # .material = preload("res://Assets/Materials/selection_material.tres")
 	#_output.spawning_animation(output_notify_delay)
@@ -314,6 +314,13 @@ func activate() -> void:
 
 
 func cooldown() -> void:
+	
+	set_edge(HexManager.HexDirection.TopL,false)
+	set_edge(HexManager.HexDirection.TopR,false)
+	set_edge(HexManager.HexDirection.MidL,false)
+	set_edge(HexManager.HexDirection.MidR,false)
+	set_edge(HexManager.HexDirection.BotL,false)
+	set_edge(HexManager.HexDirection.BotR,false)
 	
 	print_rich(DEBUG_NAME,"Cooldown > Time to come up with new dance routine...")
 	

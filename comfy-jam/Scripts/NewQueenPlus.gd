@@ -106,10 +106,26 @@ func _on_restart_scene_with_same_seed() -> void:
 	
 	await get_tree().process_frame
 	get_tree().call_deferred("reload_current_scene")
+
+func _on_restart_scene_with_different_seed() -> void:
 	
+	background.position = transition_start_pos
+	background.visible = true
+	
+	wipe_tween = create_tween().set_parallel()
+	wipe_tween.tween_property(background,"position",transition_mid_pos,transition_time/3)
+	await get_tree().create_timer(transition_time/3,true).timeout
+	
+	HiveManager.chosen_seed = randi() % 1000
+	
+	await get_tree().process_frame
+	get_tree().call_deferred("reload_current_scene")
+
 
 
 func _on_button_pressed() -> void:
+	
+	
 	
 	HiveManager.chosen_seed = randi() % 1000
 	await get_tree().process_frame

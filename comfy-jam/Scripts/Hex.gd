@@ -27,10 +27,12 @@ signal on_hex_unhovered
 
 
 func object_dropped_here(_object:Node2D) -> void:
-	print_rich(DEBUG_NAME,"ObjectDroppedHere > Object = '",_object.name,"'")
+	print_rich(DEBUG_NAME,"ObjectDroppedHere(Hex) > Object = '",_object.name,"'")
 	if structure == null:
 		if _object is WorkerBee:
 			BuildMenu.build_structure(self,_object)
+	elif structure is HexStructureRoyalChambers:
+		print_rich(DEBUG_NAME,"ObjectDroppedHere(Hex) > I'm a royal chambers, ignoring'")
 	else:
 		structure.object_dropped_here(_object)
 

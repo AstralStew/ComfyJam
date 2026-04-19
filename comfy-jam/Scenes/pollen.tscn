@@ -20,14 +20,14 @@ frame = 1
 frame_progress = 0.18830366
 
 [node name="Draggable" type="Area2D" parent="." unique_id=1944465093]
-position = Vector2(0, -13)
+position = Vector2(2, -11)
 collision_layer = 32
 collision_mask = 256
 script = ExtResource("3_rcm0y")
 can_drag = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Draggable" unique_id=583127688]
-position = Vector2(1.535, 2.235)
+position = Vector2(1.1920929e-07, 2.3841858e-07)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_6naop")
 
