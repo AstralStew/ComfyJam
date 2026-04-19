@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bla0o6cr5y3ih"]
 
 [ext_resource type="Script" uid="uid://bdv2acfxxregg" path="res://Scripts/Objects/RoyalJelly.gd" id="1_fblwy"]
-[ext_resource type="Texture2D" uid="uid://1d2hx45rull5" path="res://Assets/Images/Objects/RoyalJelly.png" id="2_fblwy"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_8qvmd"]
 [ext_resource type="SpriteFrames" uid="uid://csh06ix85igj4" path="res://Assets/Animations/royal_jelly_frames.tres" id="3_jsdxu"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_elejs"]
@@ -17,12 +16,6 @@ script = ExtResource("1_fblwy")
 position = Vector2(0, -12)
 sprite_frames = ExtResource("3_jsdxu")
 autoplay = "default"
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=651330221]
-visible = false
-position = Vector2(0, -14)
-scale = Vector2(0.23, 0.23)
-texture = ExtResource("2_fblwy")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=1206883716]
 position = Vector2(0, -14)

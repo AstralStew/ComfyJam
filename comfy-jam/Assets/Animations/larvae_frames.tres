@@ -1,0 +1,70 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://byiilu33k0sjy"]
+
+[ext_resource type="Texture2D" uid="uid://cvcehbcyscrtt" path="res://Assets/Images/Objects/Larvae_Sheet.png" id="1_ag7v7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag7v7"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(180, 0, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30h0o"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(270, 0, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhl3r"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(0, 56, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euehh"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(90, 56, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n200i"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(180, 56, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tt3s"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(0, 0, 90, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wsck"]
+atlas = ExtResource("1_ag7v7")
+region = Rect2(90, 0, 90, 56)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag7v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30h0o")
+}],
+"loop": false,
+"name": &"bite",
+"speed": 2.83
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhl3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euehh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n200i")
+}],
+"loop": true,
+"name": &"chew",
+"speed": 2.83
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tt3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wsck")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.83
+}]

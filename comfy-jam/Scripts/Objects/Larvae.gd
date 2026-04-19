@@ -4,7 +4,7 @@ var DEBUG_NAME : String :
 
 var free_standing : bool = false
 
-var _sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
 var _crawlable : Crawlable = null
@@ -41,7 +41,7 @@ signal on_dragged
 
 #var _setup_complete := false
 func setup() -> void:
-	_sprite = $Sprite2D
+	_sprite = $AnimatedSprite2D
 	_draggable = $Draggable
 	_fallable = $Fallable
 	_crawlable = $Crawlable
@@ -70,6 +70,8 @@ func setup() -> void:
 	speed_multiplier = HiveManager.upgrade_global_speed_multiplier
 	growth_target = HiveManager.upgrade_larvae_amount_of_food_needed
 	crawl_speed = _crawlable.crawl_speed * HiveManager.upgrade_larvae_move_speed
+	
+	
 	
 	#_setup_complete = true
 
@@ -164,13 +166,16 @@ func eat_nectar() -> void:
 	_draggable.can_drag = false
 	_crawlable.stop()
 	
-	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	#_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	_sprite.play("bite")
+	_sprite.animation_finished.connect(_sprite.play.bind("chew"),CONNECT_ONE_SHOT)
 	
 	await get_tree().create_timer(chew_time_per_nectar / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
 	growth += growth_per_nectar
 	test_growth()
-		
-	_sprite.modulate = Color.WHITE
+	
+	#_sprite.modulate = Color.WHITE
+	_sprite.play("default")
 	
 	_draggable.can_drag = true
 	_crawlable.crawl(_sprite.flip_h)
@@ -184,13 +189,16 @@ func eat_pollen() -> void:
 	_draggable.can_drag = false
 	_crawlable.stop()
 	
-	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	#_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	_sprite.play("bite")
+	_sprite.animation_finished.connect(_sprite.play.bind("chew"),CONNECT_ONE_SHOT)
 	
 	await get_tree().create_timer(chew_time_per_pollen / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
 	growth += growth_per_pollen
 	test_growth()
 	
-	_sprite.modulate = Color.WHITE
+	#_sprite.modulate = Color.WHITE
+	_sprite.play("default")
 	
 	_draggable.can_drag = true
 	_crawlable.crawl(_sprite.flip_h)
@@ -203,13 +211,16 @@ func eat_honey() -> void:
 	_draggable.can_drag = false
 	_crawlable.stop()
 	
-	_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+		#_sprite.modulate = Color(0.953, 0.71, 0.659, 1.0)
+	_sprite.play("bite")
+	_sprite.animation_finished.connect(_sprite.play.bind("chew"),CONNECT_ONE_SHOT)
 	
 	await get_tree().create_timer(chew_time_per_honey / (speed_multiplier * HiveManager.upgrade_larvae_eating_speed_multiplier)).timeout
 	growth += growth_per_honey
 	test_growth()
 	
-	_sprite.modulate = Color.WHITE
+	#_sprite.modulate = Color.WHITE
+	_sprite.play("default")
 	
 	_draggable.can_drag = true
 	_crawlable.crawl(_sprite.flip_h)

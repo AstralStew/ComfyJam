@@ -4,7 +4,7 @@ var DEBUG_NAME : String :
 
 var free_standing : bool = false
 
-var _sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 var _draggable : Draggable = null
 var _fallable : Fallable = null
 var _crawlable : Crawlable = null
@@ -25,7 +25,7 @@ signal on_dragged
 #
 #var _setup_complete := false
 func setup() -> void:
-	_sprite = $Sprite2D
+	_sprite = $AnimatedSprite2D
 	_draggable = $Draggable
 	_fallable = $Fallable
 	_crawlable = $Crawlable
@@ -49,6 +49,8 @@ func setup() -> void:
 	_crawlable.on_crawling_flip.connect(crawl_flip)
 	_crawlable.midpoint = midpoint
 	_crawlable.floor_width = floor_width
+	
+	_sprite.frame = randi() % 2
 	
 	#_setup_complete = true
 

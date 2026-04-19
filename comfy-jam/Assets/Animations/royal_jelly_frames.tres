@@ -1,25 +1,25 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://csh06ix85igj4"]
 
-[ext_resource type="Texture2D" uid="uid://b0awmk6lanc5y" path="res://Assets/Images/Objects/Hive_Resources_Sheet.png" id="1_ut74h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ut74h"]
-atlas = ExtResource("1_ut74h")
-region = Rect2(2, 2, 46, 46)
+[ext_resource type="Texture2D" uid="uid://cjyoxynjxsf2n" path="res://Assets/Images/Objects/Resources_Sheet.png" id="1_ut74h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_207xu"]
 atlas = ExtResource("1_ut74h")
-region = Rect2(52, 2, 46, 46)
+region = Rect2(0, 0, 76, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts6fc"]
+atlas = ExtResource("1_ut74h")
+region = Rect2(76, 0, 76, 74)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ut74h")
+"texture": SubResource("AtlasTexture_207xu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_207xu")
+"texture": SubResource("AtlasTexture_ts6fc")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
+"speed": 2.83
 }]

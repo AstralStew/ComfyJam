@@ -4,8 +4,8 @@
 
 [resource]
 shader = ExtResource("1_lj0ua")
-shader_parameter/max_line_width = 8.0
-shader_parameter/min_line_width = 3.0
+shader_parameter/max_line_width = 6.0
+shader_parameter/min_line_width = 1.0
 shader_parameter/freq = 1.0
 shader_parameter/block_size = 100.0
 shader_parameter/starting_colour = Vector4(0.584, 6.951, 0.479, 1)

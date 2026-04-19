@@ -128,6 +128,8 @@ func set_edge(_direction:HexManager.HexDirection, _open:bool) -> void:
 	if !is_waiting_for_output_removed_by_player:
 		offer_my_output()
 	
+	ask_others_to_offer_their_output()
+	
 
 func get_edge_open(_direction:HexManager.HexDirection) -> bool:
 	match _direction:
@@ -140,6 +142,8 @@ func get_edge_open(_direction:HexManager.HexDirection) -> bool:
 	push_error(DEBUG_NAME,"GetEdgeOpen > [color=red] Bad direction!")
 	
 	return false
+
+
 
 
 func offer_my_output() -> void:
@@ -196,6 +200,32 @@ func offer_my_output() -> void:
 	is_waiting_to_offer_my_output = false
 
 
+func check_adjacent_hex_is_open(_adjacent_hex:Hex) -> bool:
+	
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.TopL) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.TopL)
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.TopR) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.TopR)
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.MidL) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.MidL)
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.MidR) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.MidR)
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.BotL) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.BotL)
+	if HexManager.instance.get_adjacent_coord(hex.coords,HexManager.HexDirection.BotR) == _adjacent_hex.coords:
+		return get_edge_open(HexManager.HexDirection.BotR)
+	
+	return false
+
+
+func adjacent_hex_updated(_adjacent_hex:Hex) -> bool:
+	print_rich(DEBUG_NAME,"AdjacentHexUpdated(Honeycomb) > Checking adjacent hex '"+_adjacent_hex.name+"'...")
+	
+	if check_adjacent_hex_is_open(_adjacent_hex):
+		print_rich(DEBUG_NAME,"AdjacentHexUpdated(Honeycomb) > Direction of adjacent hex '"+_adjacent_hex.name+"' is open and cannot take objects, returning")
+		return false
+	
+	return super(_adjacent_hex)
 
 func nectar_dropped_here(_nectar:Nectar) -> bool:
 	if !active || is_full:
@@ -228,6 +258,15 @@ func royal_jelly_dropped_here(_royal_jelly:RoyalJelly) -> bool:
 	
 	return true
 
+func honey_dropped_here(_honey:Honey) -> bool:
+	if !active || is_full:
+		print_rich(DEBUG_NAME,"HoneyDroppedHere > No space for Honey! Returning false")
+		return false
+	
+	ObjectManager.move_and_destroy(_honey,hex.global_position)
+	add_object_to_output(ObjectManager.ObjectType.HONEY)
+	
+	return true
 
 func activate() -> void:
 	print_rich(DEBUG_NAME,"Activate > Worker assigned, beginning to produce!")

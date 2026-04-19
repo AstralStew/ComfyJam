@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://lxg7t6b2ob6x"]
 
 [ext_resource type="Script" uid="uid://c51ypulm8tjms" path="res://Scripts/Objects/WorkerBee.gd" id="1_fuhfs"]
+[ext_resource type="SpriteFrames" uid="uid://b31jjxsm0bdar" path="res://Assets/Animations/worker_frames.tres" id="2_ugjxm"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_ugjxm"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_qndmq"]
 [ext_resource type="Script" uid="uid://cfk5o6ob6vw13" path="res://Scripts/Crawlable.gd" id="5_kthol"]
@@ -10,15 +11,20 @@
 radius = 16.0
 height = 48.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugjxm"]
+radius = 11.0
+height = 28.408577
+
 [node name="WorkerBee" type="Node2D" unique_id=1959467300]
 script = ExtResource("1_fuhfs")
-midpoint = 580
+midpoint = 560
 floor_width = 10
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=808300566]
-position = Vector2(1.4999988, -19.187494)
-scale = Vector2(0.50500005, 0.50500005)
-texture = ExtResource("6_ugjxm")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=661731583]
+position = Vector2(0, -21)
+scale = Vector2(1.115, 1.115)
+sprite_frames = ExtResource("2_ugjxm")
+autoplay = "default"
 
 [node name="Draggable" type="Area2D" parent="." unique_id=335325692]
 position = Vector2(0.3125, -24)
@@ -30,6 +36,16 @@ can_drag = true
 position = Vector2(0, 8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_3h87t")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Draggable" unique_id=746965610]
+position = Vector2(-7.312499, -18)
+rotation = 2.938267
+shape = SubResource("CapsuleShape2D_ugjxm")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Draggable" unique_id=1863847863]
+position = Vector2(20.6875, -17)
+rotation = 0.8507217
+shape = SubResource("CapsuleShape2D_ugjxm")
 
 [node name="Fallable" type="Node" parent="." unique_id=935422569]
 script = ExtResource("4_qndmq")

@@ -70,9 +70,12 @@ func _setup() -> void:
 	
 	
 	# Add signals from each adjacent hex structure 
-	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
-	_adacent_hexes.shuffle()
-	for _adjacent_hex:Hex in _adacent_hexes:
+	var _adjacent_hexes = HexManager.get_adjacent_hexes(hex)
+	var _non_honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is not HexStructureHoneycomb)
+	var _honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is HexStructureHoneycomb)
+	_non_honeycomb_hexes.shuffle()
+	_adjacent_hexes = _non_honeycomb_hexes + _honeycomb_hexes
+	for _adjacent_hex:Hex in _adjacent_hexes:
 		if _adjacent_hex.structure != null:
 			print_rich(DEBUG_NAME,"Setup > Checking adjacent hex '"+_adjacent_hex.name+"''s structure '"+_adjacent_hex.structure.name+"'")
 			_adjacent_hex.structure.adjacent_hex_updated(hex)
@@ -93,7 +96,7 @@ func offer_my_output() -> void:
 		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(super) > We aren't even waiting for output to be removed, cancelling.")
 		return
 	if is_waiting_for_output_removed_by_player:
-		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(Honeycomb) > Still waiting for output to be removed by player, cancelling")
+		print_rich(DEBUG_NAME,"[color=pink]OfferMyOutput(super) > Still waiting for output to be removed by player, cancelling")
 		return
 	
 	is_waiting_to_offer_my_output = true
@@ -107,8 +110,25 @@ func offer_my_output() -> void:
 		#is_waiting_to_offer_my_output = false
 		#return
 	
+		#_adjacent_hexes.sort_custom(func(a, b):
+		#if b.structure is HexStructureHoneycomb:
+			#if a.structure is not HexStructureHoneycomb:
+				#print_rich("OfferMyOutput> They are a Honeycomb and I am not, moving up")
+				#return true
+			#else:
+				#print_rich("OfferMyOutput > We are both Honeycomb, moving on...")
+				#return false
+		#print_rich("OfferMyOutput > They are not a Honeycomb, moving on...")
+		#return false
+	#)
+	
 	var _adjacent_hexes = HexManager.get_adjacent_hexes(hex)
-	_adjacent_hexes.shuffle()
+	var _non_honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is not HexStructureHoneycomb)
+	var _honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is HexStructureHoneycomb)
+	_non_honeycomb_hexes.shuffle()
+	_adjacent_hexes = _non_honeycomb_hexes + _honeycomb_hexes
+
+	print_rich(DEBUG_NAME," OfferMyOutput > Resorted adjacent hexes: "+str(_adjacent_hexes))
 	var _took_object_from_me : bool = false
 	for _adjacent_hex:Hex in _adjacent_hexes:
 		if _adjacent_hex.structure != null:
@@ -123,9 +143,14 @@ func offer_my_output() -> void:
 	is_waiting_to_offer_my_output = false
 
 func ask_others_to_offer_their_output() -> void:
-	var _adacent_hexes = HexManager.get_adjacent_hexes(hex)
-	_adacent_hexes.shuffle()
-	for _adjacent_hex:Hex in _adacent_hexes:
+	var _adjacent_hexes = HexManager.get_adjacent_hexes(hex)
+	var _non_honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is not HexStructureHoneycomb)
+	var _honeycomb_hexes = _adjacent_hexes.filter(func(_hex):return _hex.structure is HexStructureHoneycomb)
+	_non_honeycomb_hexes.shuffle()
+	_adjacent_hexes = _non_honeycomb_hexes + _honeycomb_hexes
+	
+	print_rich(DEBUG_NAME," OfferMyOutput > Resorted adjacent hexes: "+str(_adjacent_hexes))
+	for _adjacent_hex:Hex in _adjacent_hexes:
 		if _adjacent_hex.structure != null:
 			_adjacent_hex.structure.offer_my_output()
 

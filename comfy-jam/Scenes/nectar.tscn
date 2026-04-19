@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cgm50ypwkds26"]
 
 [ext_resource type="Script" uid="uid://c58rhu3ojmp2p" path="res://Scripts/Objects/Nectar.gd" id="1_ixqpn"]
-[ext_resource type="Texture2D" uid="uid://blcunlc1bq5yw" path="res://Assets/Images/Objects/Nectar.png" id="2_g8ng2"]
 [ext_resource type="Script" uid="uid://bejebuyjod3xb" path="res://Scripts/Draggable.gd" id="3_1ocmj"]
 [ext_resource type="Script" uid="uid://bd0txc82jo681" path="res://Scripts/Fallable.gd" id="4_20g1d"]
 [ext_resource type="SpriteFrames" uid="uid://c7t6ubuxcnmiv" path="res://Assets/Animations/nectar_frames.tres" id="5_g8ng2"]
@@ -18,12 +17,6 @@ position = Vector2(1, -15)
 sprite_frames = ExtResource("5_g8ng2")
 autoplay = "default"
 frame_progress = 0.37388486
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=651330221]
-visible = false
-position = Vector2(0, -20)
-scale = Vector2(0.23, 0.23)
-texture = ExtResource("2_g8ng2")
 
 [node name="Draggable" type="Area2D" parent="." unique_id=1206883716]
 position = Vector2(0, -20)
