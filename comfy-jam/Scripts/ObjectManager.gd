@@ -118,20 +118,20 @@ static func create_honey(_position:Vector2,_auto_fall:bool=false) -> Honey:
 	_new_honey.global_position = _position - _new_honey._draggable.position
 	return _new_honey
 
-static func create_object(_type:ObjectType,_position:Vector2) -> Node2D:
+static func create_object(_type:ObjectType,_position:Vector2,_auto_fall = false) -> Node2D:
 	match _type:
 		ObjectType.LARVAE:
-			return create_larvae(_position)
+			return create_larvae(_position,_auto_fall)
 		ObjectType.WORKER:
-			return create_worker(_position)
+			return create_worker(_position,_auto_fall)
 		ObjectType.NECTAR:
-			return create_nectar(_position)
+			return create_nectar(_position,_auto_fall)
 		ObjectType.POLLEN:
-			return create_pollen(_position)
+			return create_pollen(_position,_auto_fall)
 		ObjectType.ROYAL_JELLY:
-			return create_royal_jelly(_position)
+			return create_royal_jelly(_position,_auto_fall)
 		ObjectType.HONEY:
-			return create_honey(_position)
+			return create_honey(_position,_auto_fall)
 	
 	print_rich(DEBUG_NAME,"CreateObject > [color=red]Bad object type recieved, cancelling.")
 	return null

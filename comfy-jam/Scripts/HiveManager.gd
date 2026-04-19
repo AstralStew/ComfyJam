@@ -85,7 +85,7 @@ static var upgrade_starting_number_of_royal_jelly_levels : Array[int] = [2,3,5,7
 static var upgrade_starting_number_of_royal_jelly : int = 2
 
 static var upgrade_starting_number_of_honey_levels : Array[int] = [0,1,2,4]
-static var upgrade_starting_number_of_honey : int = 0
+static var upgrade_starting_number_of_honey : int = 1
 
 static var upgrade_starting_number_of_workers_levels : Array[int] = [4,5,6,7]
 static var upgrade_starting_number_of_workers : int = 4

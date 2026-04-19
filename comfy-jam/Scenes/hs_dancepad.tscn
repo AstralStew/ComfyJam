@@ -5,12 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://br87ib6fmu0p5" path="res://Assets/Images/GUI/hexagon_small.png" id="3_lq1oc"]
 [ext_resource type="Texture2D" uid="uid://cqtia7cjg0j6w" path="res://Assets/Images/Structures/HS_Dancepad_Bee_Left.png" id="4_2opmt"]
 [ext_resource type="FontFile" uid="uid://gdxm02kup507" path="res://Assets/Fonts/singleday.ttf" id="5_u5mkj"]
+[ext_resource type="Texture2D" uid="uid://b0awmk6lanc5y" path="res://Assets/Images/Objects/Hive_Resources_Sheet.png" id="6_lq1oc"]
+[ext_resource type="Texture2D" uid="uid://c1a8rqm71wfqw" path="res://Assets/Images/Objects/Larve_Sheet.png" id="7_ub0sl"]
 
 [sub_resource type="FontVariation" id="FontVariation_o8x1l"]
 base_font = ExtResource("5_u5mkj")
 variation_embolden = 1.0
 
 [node name="HS_Dancepad" type="Node2D" unique_id=1869955823]
+scale = Vector2(0.9984209, 1)
 script = ExtResource("1_8ugku")
 metadata/_edit_vertical_guides_ = [-7.0, 7.0]
 metadata/_edit_horizontal_guides_ = [-14.0, 14.0]
@@ -48,6 +51,41 @@ tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
 [node name="HsDancepad" type="Sprite2D" parent="." unique_id=440202702]
 position = Vector2(0, 1)
 texture = ExtResource("4_2opmt")
+
+[node name="Nectar" type="Sprite2D" parent="." unique_id=1107007782]
+position = Vector2(1, 12)
+scale = Vector2(0.23047754, 0.23047754)
+texture = ExtResource("6_lq1oc")
+region_enabled = true
+region_rect = Rect2(0, 58, 50, 32)
+
+[node name="Pollen" type="Sprite2D" parent="." unique_id=1523181078]
+position = Vector2(1, 12)
+scale = Vector2(0.23047754, 0.23047754)
+texture = ExtResource("6_lq1oc")
+region_enabled = true
+region_rect = Rect2(100, 0, 50, 48)
+
+[node name="RoyalJelly" type="Sprite2D" parent="." unique_id=2131415945]
+position = Vector2(1, 12)
+scale = Vector2(0.23047754, 0.23047754)
+texture = ExtResource("6_lq1oc")
+region_enabled = true
+region_rect = Rect2(0, 0, 50, 48)
+
+[node name="Honey" type="Sprite2D" parent="." unique_id=1784124978]
+position = Vector2(1, 12)
+scale = Vector2(0.23047754, 0.23047754)
+texture = ExtResource("6_lq1oc")
+region_enabled = true
+region_rect = Rect2(98, 48, 50, 50)
+
+[node name="Larvae" type="Sprite2D" parent="." unique_id=701706410]
+position = Vector2(0.9999999, 11.999997)
+scale = Vector2(0.22023411, 0.22023411)
+texture = ExtResource("7_ub0sl")
+region_enabled = true
+region_rect = Rect2(228, 88, 82, 42)
 
 [node name="Edge_tl" type="Label" parent="." unique_id=1018495924]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
