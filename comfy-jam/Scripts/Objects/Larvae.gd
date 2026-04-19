@@ -136,28 +136,34 @@ func hover_end() -> void:
 
 
 func area_entered(_area:Area2D) -> void:
-	if !free_standing || _draggable.dragging || _fallable.falling || eating_on_cooldown : return
+	if !free_standing || _draggable.dragging || _fallable.falling || eating_on_cooldown: return
 	
 	var _object : Node2D = _area.get_parent()
+	
+	if !ObjectManager.check_if_object_is_ours(_object):return
 	
 	if _object.is_in_group("Nectar"):
 		var _nectar = (_object as Nectar)
 		if _nectar.usable:
-			_object.queue_free()
+			_object._sprite.z_index = 2
+			ObjectManager.move_and_destroy(_object,to_global(Vector2((1 if _sprite.flip_h else -1) * 19,-5)),0.36,Tween.TRANS_EXPO,Tween.EASE_IN)
+			#_object.queue_free()
 			eat_nectar()
 		return
 	
 	if _object.is_in_group("Pollen"):
 		var _pollen = (_object as Pollen)
 		if _pollen.usable:
-			_object.queue_free()
+			_object._sprite.z_index = 2
+			ObjectManager.move_and_destroy(_object,to_global(Vector2((1 if _sprite.flip_h else -1) * 19,-5)),0.36,Tween.TRANS_EXPO,Tween.EASE_IN)
 			eat_pollen()
 		return
 	
 	if _object.is_in_group("Honey"):
 		var _honey = (_object as Honey)
 		if _honey.usable:
-			_object.queue_free()
+			_object._sprite.z_index = 2
+			ObjectManager.move_and_destroy(_object,to_global(Vector2((1 if _sprite.flip_h else -1) * 19,-5)),0.36,Tween.TRANS_EXPO,Tween.EASE_IN)
 			eat_honey()
 		return
 

@@ -10,6 +10,7 @@ var edge_bl : Label = null
 var edge_br : Label = null
 
 var _sprite : AnimatedSprite2D = null
+var progress_hex : TextureProgressBar  = null
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 1
@@ -53,7 +54,9 @@ func _setup() -> void:
 	set_edge(HexManager.HexDirection.MidR,false)
 	set_edge(HexManager.HexDirection.BotL,false)
 	set_edge(HexManager.HexDirection.BotR,false)
+	hide_edges()
 	
+	progress_hex = $ProgressHex
 	_sprite = $HsDancepad
 	_sprite.play("thinking")
 	
@@ -309,6 +312,7 @@ func activate() -> void:
 	#dispensing()
 
 
+var _tween : Tween = null
 func cooldown() -> void:
 	
 	set_edge(HexManager.HexDirection.TopL,false)
@@ -323,11 +327,20 @@ func cooldown() -> void:
 	cooling_down = true
 	
 	await start_cooling_down()
-		
+	
+	progress_hex.value = 0
+	progress_hex.visible = true
+	
+	if _tween: _tween.kill()
+	_tween = create_tween().set_parallel()
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,cooldown_time / speed_multiplier)
+	
 	await get_tree().create_timer(cooldown_time / speed_multiplier).timeout
 	
 	await finish_cooling_down()
 	
+	progress_hex.visible = false
+	progress_hex.value = 0
 	
 	cooling_down = false
 	
@@ -342,14 +355,14 @@ func cooldown() -> void:
 func start_cooling_down() -> void:
 	#sprite.texture = texture_2
 	_sprite.play("thinking")
-	$HsDancepad.modulate = Color(1,1,1,0.7)
+	#$HsDancepad.modulate = Color(1,1,1,0.7)
 	await get_tree().create_timer(startup_time).timeout
 	
 
 func finish_cooling_down() -> void:
 	#sprite.texture = texture_1
 	_sprite.play("dancing")
-	$HsDancepad.modulate = Color(1,1,1,1)
+	#$HsDancepad.modulate = Color(1,1,1,1)
 	await get_tree().create_timer(wrapup_time).timeout
 
 

@@ -23,7 +23,8 @@ height = 60.0
 
 [node name="Larvae" type="Node2D" unique_id=1959467300]
 script = ExtResource("1_gx85f")
-floor_width = 10
+midpoint = 634
+floor_width = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2013206360]
 position = Vector2(-3, -14)

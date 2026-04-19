@@ -12,8 +12,7 @@ wrapup_time = 0.5
 output_candidates = Array[int]([2])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
-visible = false
-self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
+self_modulate = Color(0.19616668, 0.08, 0.25, 0.7882353)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,14 +34,14 @@ offset_right = 43.0
 offset_bottom = 46.0
 pivot_offset = Vector2(43, 46)
 mouse_filter = 2
-max_value = 12.0
+max_value = 60.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_rasne")
-tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
+tint_progress = Color(1, 0.8666667, 0.79607844, 1)
 
 [node name="HsKissStation" type="AnimatedSprite2D" parent="." unique_id=450085672]
-position = Vector2(1, -1.9450002)
+position = Vector2(0, -0.9450003)
 scale = Vector2(0.95, 0.95)
 sprite_frames = ExtResource("4_pospv")
 animation = &"waiting"

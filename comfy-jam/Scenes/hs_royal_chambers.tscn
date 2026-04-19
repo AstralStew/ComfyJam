@@ -27,6 +27,7 @@ texture = ExtResource("2_t6ld1")
 expand_mode = 1
 
 [node name="GameTimeHex" type="TextureProgressBar" parent="." unique_id=1877470411]
+visible = false
 offset_left = -41.0
 offset_top = -44.999996
 offset_right = 41.0
@@ -35,13 +36,14 @@ scale = Vector2(1.12, 1.12)
 pivot_offset = Vector2(41, 44)
 mouse_filter = 2
 max_value = 120.0
+value = 66.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("4_dh5pu")
 tint_progress = Color(0.9529412, 0.70980394, 0.65882355, 1)
 
 [node name="HsRoyalChambers" type="Sprite2D" parent="." unique_id=1268797718]
-position = Vector2(0, 1)
+position = Vector2(0, -1.0000002)
 scale = Vector2(0.97, 0.97)
 texture = ExtResource("4_t6ld1")
 region_enabled = true

@@ -19,7 +19,6 @@ metadata/_edit_vertical_guides_ = [-7.0, 7.0]
 metadata/_edit_horizontal_guides_ = [-14.0, 14.0]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
-visible = false
 self_modulate = Color(0.2, 0.08235294, 0.25490198, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,22 +34,21 @@ texture = ExtResource("2_2opmt")
 expand_mode = 1
 
 [node name="ProgressHex" type="TextureProgressBar" parent="." unique_id=990959636]
-visible = false
 offset_left = -43.0
 offset_top = -46.0
 offset_right = 43.0
 offset_bottom = 46.0
 pivot_offset = Vector2(43, 46)
 mouse_filter = 2
-max_value = 12.0
+max_value = 60.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("3_lq1oc")
-tint_progress = Color(0.9018106, 0.78818816, 0.76487833, 0.49500003)
+tint_progress = Color(0.2352, 0.43512, 0.48, 1)
 
 [node name="HsDancepad" type="AnimatedSprite2D" parent="." unique_id=2046956930]
-position = Vector2(0.99999994, -1.945)
-scale = Vector2(0.9499999, 0.9499999)
+position = Vector2(-0.0015814304, -0.94499964)
+scale = Vector2(0.96, 0.96)
 sprite_frames = ExtResource("4_ub0sl")
 animation = &"thinking"
 
@@ -98,9 +96,9 @@ region_rect = Rect2(228, 88, 82, 42)
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 light_mask = 32769
 offset_left = -5.0
-offset_top = -14.000001
+offset_top = -14.0
 offset_right = 2.4899998
-offset_bottom = -1.000001
+offset_bottom = -1.0
 rotation = -3.6639445
 mouse_filter = 1
 theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)
@@ -151,9 +149,9 @@ mouse_filter = 1
 [node name="Edge_l" type="Label" parent="." unique_id=971121510]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 light_mask = 32769
-offset_left = -14.0
+offset_left = -13.999998
 offset_top = -4.0
-offset_right = -6.51
+offset_right = -6.5099983
 offset_bottom = 9.0
 rotation = 1.6091936
 mouse_filter = 1
@@ -178,7 +176,7 @@ mouse_filter = 1
 [node name="Edge_r" type="Label" parent="." unique_id=1948580910]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
 offset_left = 14.0
-offset_top = 3.000001
+offset_top = 3.0
 offset_right = 21.49
 offset_bottom = 16.0
 rotation = -1.5550884
@@ -203,9 +201,9 @@ mouse_filter = 1
 
 [node name="Edge_bl" type="Label" parent="." unique_id=557388437]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
-offset_left = -10.000001
+offset_left = -10.0
 offset_top = 11.0
-offset_right = -2.5100012
+offset_right = -2.5100002
 offset_bottom = 24.0
 rotation = 0.715585
 mouse_filter = 1
@@ -229,10 +227,10 @@ mouse_filter = 1
 
 [node name="Edge_br" type="Label" parent="." unique_id=411585020]
 modulate = Color(0.9529412, 0.70980394, 0.65882355, 1)
-offset_left = 5.000001
-offset_top = 15.0
-offset_right = 12.490001
-offset_bottom = 28.0
+offset_left = 5.0
+offset_top = 15.000004
+offset_right = 12.49
+offset_bottom = 28.000004
 rotation = -0.62133723
 mouse_filter = 1
 theme_override_colors/font_outline_color = Color(0.2, 0.08235294, 0.25490198, 1)

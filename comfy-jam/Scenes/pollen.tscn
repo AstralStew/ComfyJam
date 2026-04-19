@@ -13,7 +13,8 @@ height = 40.0
 script = ExtResource("1_6naop")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1350525125]
-position = Vector2(1, -12)
+position = Vector2(1, -11)
+scale = Vector2(0.91, 0.91)
 sprite_frames = ExtResource("3_w85s6")
 autoplay = "default"
 frame = 1
@@ -34,7 +35,7 @@ shape = SubResource("CapsuleShape2D_6naop")
 [node name="Fallable" type="Node" parent="." unique_id=1616402917]
 script = ExtResource("4_kdfb2")
 can_fall = true
-midpoint = 627
+midpoint = 608
 floor_width = 4
 metadata/_custom_type_script = "uid://bd0txc82jo681"
 

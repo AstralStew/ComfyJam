@@ -4,7 +4,7 @@ func _debug_name() -> String:
 
 
 var _sprite : AnimatedSprite2D = null
-
+var progress_hex : TextureProgressBar  = null
 
 @export var startup_time : float = 1
 @export var wrapup_time : float = 3
@@ -29,6 +29,7 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(KissStation) > Yep!")
+	progress_hex = $ProgressHex
 	_sprite = $HsKissStation
 	_sprite.play("waiting")
 	
@@ -59,6 +60,7 @@ func activate() -> void:
 
 
 
+var _tween : Tween = null
 func kiss() -> void:
 	kissing = true
 	var _outputted_honey : bool = false
@@ -67,9 +69,20 @@ func kiss() -> void:
 	
 	await start_kissing()
 	
+	progress_hex.value = 0
+	progress_hex.tint_progress = Color(1.0, 0.867, 0.796)
+	progress_hex.visible = true
+	
+	if _tween: _tween.kill()
+	_tween = create_tween().set_parallel()
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,kissing_time / speed_multiplier)
+	
 	await get_tree().create_timer(kissing_time / speed_multiplier).timeout
 	
 	await finish_kissing()
+	
+	progress_hex.visible = false
+	progress_hex.value = 0
 	
 	kissing = false
 	
@@ -92,10 +105,21 @@ func kiss() -> void:
 	kissing_cooldowning = true
 	update_tooltip_info()
 	
+	progress_hex.value = 0
+	progress_hex.tint_progress = Color(0.235, 0.435, 0.48, 1.0)
+	progress_hex.visible = true
+	
+	if _tween: _tween.kill()
+	_tween = create_tween().set_parallel()
+	_tween.tween_property(progress_hex,"value",progress_hex.max_value,kissing_cooldown)
 	
 	#sprite.modulate = Color(1,1,1,0.7)
 	await get_tree().create_timer(kissing_cooldown).timeout
 	#sprite.modulate = Color(1,1,1,1)
+	
+	progress_hex.visible = false
+	progress_hex.value = 0
+	
 	_sprite.play("waiting")
 	kissing_cooldowning = false
 	update_tooltip_info()

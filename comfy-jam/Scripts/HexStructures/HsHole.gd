@@ -2,8 +2,10 @@ class_name HexStructureHole extends HexStructure
 func _debug_name() -> String:
 	return "[b][" + get_parent().name + "/HsHole][/b] "
 
-var sprite : Sprite2D = null
+var _sprite : AnimatedSprite2D = null
 
+static var number_of_nectar_holes_global : int = 0
+static var number_of_pollen_holes_global : int = 0
 
 #@export var returnable_amount : int = 1
 #@export var returnable_candidates : Array[ObjectManager.ObjectType] = []
@@ -23,13 +25,38 @@ func _setup() -> void:
 	super()
 	
 	print_rich(DEBUG_NAME,"Setup(Hole) > Yep!")
-	sprite = $BeeSprite
+	_sprite = $BeeSprite
+	_sprite.play("default")
+	_sprite.flip_h = randi() % 1
 	
 	speed_multiplier = HiveManager.upgrade_hole_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
 	output_amount = HiveManager.upgrade_hole_output_number
 	
-	output_candidates.shuffle()
-	output_candidates.pop_back()
+	if number_of_nectar_holes_global > number_of_pollen_holes_global + 2:
+		output_candidates.remove_at(output_candidates.find(ObjectManager.ObjectType.NECTAR))
+	elif number_of_pollen_holes_global > number_of_nectar_holes_global + 2:
+		output_candidates.remove_at(output_candidates.find(ObjectManager.ObjectType.POLLEN))
+	else:
+		output_candidates.remove_at(randi() % 1)
+	
+	if output_candidates[0] == ObjectManager.ObjectType.NECTAR:
+		number_of_nectar_holes_global += 1
+	else: number_of_pollen_holes_global += 1
+	
+	
+	var _forage_sprites:Array[Node] = $Sky.get_children()
+	_forage_sprites.shuffle()
+	var _sprites_to_destroy:int = randi_range(3,5)
+	for i in _sprites_to_destroy:
+		if i < _sprites_to_destroy:
+			_forage_sprites.pop_back().queue_free()
+	
+	for _forage_sprite in _forage_sprites:
+		if output_candidates[0] == ObjectManager.ObjectType.POLLEN:
+			_forage_sprite.region_rect = Rect2(15,93,45,37)
+		else:
+			_forage_sprite.region_rect = Rect2(244,100,40,28)
+	
 	
 	max_workers = 1
 	
@@ -49,7 +76,7 @@ func activate() -> void:
 	if active: return
 	
 	print_rich(DEBUG_NAME,"Activate > Activated, beginning to forage!")
-	sprite.visible = true
+	_sprite.visible = true
 	active = true
 	
 	super()
@@ -95,13 +122,13 @@ func foraging() -> void:
 func start_forage() -> void:
 	# Startup animation
 	var _tween = create_tween().set_parallel(true)
-	_tween.tween_property(sprite, "scale", Vector2(0.1,0.1), startup_time)
-	_tween.tween_property(sprite, "modulate", Color(0,0,0,0), startup_time)
+	_tween.tween_property(_sprite, "scale", Vector2(0.1,0.1), startup_time).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_tween.tween_property(_sprite, "modulate", Color(0,0,0,0), startup_time).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await _tween.finished
 
 func finish_forage() -> void:
 	# Finish up animation
 	var _tween = create_tween().set_parallel(true)
-	_tween.tween_property(sprite, "scale", Vector2(0.43,0.43), wrapup_time)
-	_tween.tween_property(sprite, "modulate", Color.WHITE, wrapup_time)
+	_tween.tween_property(_sprite, "scale", Vector2(0.46,0.46), wrapup_time).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_tween.tween_property(_sprite, "modulate", Color.WHITE, wrapup_time).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	await _tween.finished

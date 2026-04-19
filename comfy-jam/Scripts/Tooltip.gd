@@ -72,7 +72,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] =  "- Forages Nectar or Pollen"
+					_tooltip[0] =  "- Foraging outside for " + ( "Nectar" if _hex.structure.output_candidates[0] == ObjectManager.ObjectType.NECTAR else "Pollen")
 					_tooltip[1] = "HOLE"
 					_tooltip[2] = _hex.structure.get_missing_objects()
 			
@@ -174,7 +174,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 					return
 				else:
 					#_tooltip[0] =  "- Cannot be built on (yet)"
-					_tooltip[1] = "IMPASSABLE"
+					_tooltip[1] = "SOLID WAX"
 			
 			## -- KISS STATION -------------------------------------
 			
@@ -270,14 +270,14 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 			
 			elif _element is Nectar:
 				if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Element is Nectar!")
-				_tooltip[0] =  "- Resource for building\n- Eaten by Larvae"
+				_tooltip[0] =  "- Resource for building\n- Quick food for Larvae"
 				if _element.kissed_level != Nectar.KissLevel.UNKISSED:
 					_tooltip[0] += "\n [color=a75b80][b]Kiss Level:[/b] " + str(Nectar.KissLevel.keys()[_element.kissed_level]).to_lower().capitalize() +"[/color]"
 				_tooltip[1] = "NECTAR"
 			
 			elif _element is Pollen:
 				if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Element is Pollen!")
-				_tooltip[0] =  "- Resource for building\n- Eaten by Larvae"
+				_tooltip[0] =  "- Resource for building\n- Good food for Larvae"
 				_tooltip[1] = "POLLEN"
 			
 			elif _element is RoyalJelly:
@@ -287,7 +287,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 			
 			elif _element is Honey:
 				if instance.debug: print_rich(DEBUG_NAME,"SetTooltipType > Element is Honey!")
-				_tooltip[0] =  "- Resource for building"
+				_tooltip[0] =  "- Resource for building\n- Fantastic food for Larvae"
 				_tooltip[1] = "HONEY"
 	
 	

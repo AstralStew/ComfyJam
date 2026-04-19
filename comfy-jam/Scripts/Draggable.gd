@@ -27,6 +27,9 @@ func _ready() -> void:
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	
+	if !ObjectManager.check_if_object_is_ours(get_parent()):
+		return
+	
 	if event is InputEventMouseButton:
 	
 		if event.is_action_pressed("LeftClick"):

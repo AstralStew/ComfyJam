@@ -5,11 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://b0sjr3iolrk77" path="res://Assets/Images/Structures/HS_Hole.png" id="3_r64se"]
 [ext_resource type="Material" uid="uid://b4vmpetqcuwva" path="res://Assets/Materials/light_glow_material.tres" id="3_ws02s"]
 [ext_resource type="Material" uid="uid://ci0hsg3yqay3k" path="res://Assets/Materials/bg_scroll_material.tres" id="5_1h2gx"]
-[ext_resource type="Texture2D" uid="uid://cvye8adoqlxxs" path="res://Assets/Images/Objects/Bee_Sheet.png" id="6_r64se"]
+[ext_resource type="Texture2D" uid="uid://cjyoxynjxsf2n" path="res://Assets/Images/Objects/Resources_Sheet.png" id="6_ws02s"]
+[ext_resource type="SpriteFrames" uid="uid://b31jjxsm0bdar" path="res://Assets/Animations/worker_frames.tres" id="7_ws02s"]
 
 [node name="HS_Hole" type="Node2D" unique_id=1869955823]
 script = ExtResource("1_pnbf6")
-forage_time = Vector2(10, 30)
+startup_time = 1.5
+wrapup_time = 3.5
+forage_time = Vector2(9, 23)
 max_workers = 1
 output_candidates = Array[int]([2, 3])
 
@@ -17,7 +20,7 @@ output_candidates = Array[int]([2, 3])
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("3_r64se")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1007952217]
+[node name="Glow" type="TextureRect" parent="." unique_id=1007952217]
 self_modulate = Color(1, 0.8666667, 0.79607844, 1)
 material = ExtResource("3_ws02s")
 anchors_preset = 15
@@ -35,8 +38,9 @@ mouse_filter = 2
 texture = ExtResource("3_405aw")
 stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=301110292]
+[node name="Sky" type="TextureRect" parent="." unique_id=301110292]
 self_modulate = Color(0.59000003, 1, 0.78816664, 1)
+clip_children = 2
 material = ExtResource("5_1h2gx")
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,9 +57,53 @@ mouse_filter = 2
 texture = ExtResource("3_405aw")
 stretch_mode = 5
 
-[node name="BeeSprite" type="Sprite2D" parent="." unique_id=609414424]
+[node name="ForageSprite" type="Sprite2D" parent="Sky" unique_id=1172966394]
+position = Vector2(17.418602, 33.209282)
+rotation = 2.767941
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(244, 100, 40, 28)
+
+[node name="ForageSprite2" type="Sprite2D" parent="Sky" unique_id=615461446]
+position = Vector2(67.418594, 58.790695)
+rotation = -0.5574487
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(15, 93, 45, 37)
+
+[node name="ForageSprite3" type="Sprite2D" parent="Sky" unique_id=403473096]
+position = Vector2(68.58139, 29.720917)
+rotation = 1.4228085
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(15, 93, 45, 37)
+
+[node name="ForageSprite4" type="Sprite2D" parent="Sky" unique_id=1415793112]
+position = Vector2(15.093018, 57.627903)
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(15, 93, 45, 37)
+
+[node name="ForageSprite5" type="Sprite2D" parent="Sky" unique_id=2048660984]
+position = Vector2(40.674408, 75.06976)
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(15, 93, 45, 37)
+
+[node name="ForageSprite6" type="Sprite2D" parent="Sky" unique_id=200226309]
+position = Vector2(44.16277, 18.093033)
+rotation = 2.739257
+scale = Vector2(0.50000006, 0.50000006)
+texture = ExtResource("6_ws02s")
+region_enabled = true
+region_rect = Rect2(15, 93, 45, 37)
+
+[node name="BeeSprite" type="AnimatedSprite2D" parent="." unique_id=1377867511]
 position = Vector2(6.1035156e-05, 3.0517578e-05)
 scale = Vector2(0.43, 0.43)
-texture = ExtResource("6_r64se")
-region_enabled = true
-region_rect = Rect2(0, 0, 90, 84)
+sprite_frames = ExtResource("7_ws02s")

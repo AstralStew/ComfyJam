@@ -137,7 +137,7 @@ static func create_object(_type:ObjectType,_position:Vector2,_auto_fall = false)
 	return null
 
 
-static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7) -> void:
+static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7,_trans:Tween.TransitionType=Tween.TRANS_LINEAR,_ease:Tween.EaseType=Tween.EASE_IN_OUT) -> void:
 	#_object.process_mode = Node.PROCESS_MODE_DISABLED
 	_object.hide_outline()
 	_object.set_script(null)
@@ -147,7 +147,7 @@ static func move_and_destroy(_object:Node2D,_end_pos:Vector2,_duration:float=0.7
 	
 	# Moving animation
 	#var _sprite = _object.get_child(0)
-	var _tween = instance.create_tween().set_parallel(true)#.set_ease(Tween.EASE_IN)
+	var _tween = instance.create_tween().set_parallel(true).set_trans(_trans).set_ease(_ease)
 	_tween.tween_property(_object, "global_position", _end_pos, _duration)
 	_tween.tween_property(_object, "scale", Vector2(0.5,0.5), _duration)
 	_tween.tween_property(_object, "modulate", Color(1,1,1,0), _duration)
