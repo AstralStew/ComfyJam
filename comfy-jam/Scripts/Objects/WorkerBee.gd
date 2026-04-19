@@ -52,6 +52,8 @@ func setup() -> void:
 	
 	_sprite.frame = randi() % 2
 	
+	_sprite.flip_h = randi() % 2 == 0
+	
 	#_setup_complete = true
 
 
@@ -77,7 +79,7 @@ func drag_start() -> void:
 	
 	scale = Vector2(0.6,0.6)
 	_crawlable.stop()
-	_sprite.flip_h = randi() % 2 == 0
+	#_sprite.flip_h = randi() % 2 == 0
 	show_outline()
 	on_dragged.emit()
 

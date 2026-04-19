@@ -84,22 +84,22 @@ static func build_structure(_hex:Hex,_worker:WorkerBee=null) -> void:
 func _on_option_mouse_entered(building_name:String) -> void:
 	match building_name:
 		"Hole":
-			Tooltip.show_tooltip("- Forages either Nectar or Pollen\n  - Always returns the same type","HOLE")
+			Tooltip.show_tooltip("- Forage outside for Nectar or Pollen\n- Always returns the same type\n\n[b]Build cost:[/b]  None :D","HOLE")
 			$Hole.self_modulate = hover_colour
 		"Honeycomb":
-			Tooltip.show_tooltip("- Stores half a dozen resources\n- Click arrows to toggle direction\n[b]Cost[b]\n  - Pollen\n  - Pollen\n  - Honey","HONEYCOMB")
+			Tooltip.show_tooltip("- Stores a few resources\n- Click arrows to toggle direction\n\n[b]Build cost:[/b]  Pollen, Pollen, Honey","HONEYCOMB")
 			$Honeycomb.self_modulate = hover_colour
 		"Nursery":
-			Tooltip.show_tooltip("- Nurtures Larvae with Royal Jelly\n[b]Cost[b]\n  - Nectar\n  - Pollen\n  - Royal Jelly","NURSERY")
+			Tooltip.show_tooltip("- Nurtures new Larvae using Royal Jelly\n\n[b]Build cost:[/b]  Nectar, Pollen, Royal Jelly","NURSERY")
 			$Nursery.self_modulate = hover_colour
 		"JellyFactory":
-			Tooltip.show_tooltip("- Produces Royal Jelly over time","JELLY FACTORY\n[b]Cost[b]\n  - Nectar\n  - Pollen")
+			Tooltip.show_tooltip("- Produces Royal Jelly using Pollen \n\n[b]Build cost:[/b]  Nectar, Pollen","JELLY FACTORY")
 			$"Jelly Factory".self_modulate = hover_colour
 		"Dancepad":
-			Tooltip.show_tooltip("- Filters resources from adjacent structures\n- Requires a resource as a filter\n[b]Cost[b]\n  - Nectar\n  - Pollen\n  - Royal Jelly\n  - Honey","DANCEPAD")
+			Tooltip.show_tooltip("- Filters resources from other hexes\n- Drops out filtered objects\n\n[b]Build cost:[/b]  Nectar, Pollen, Royal Jelly, Honey","DANCEPAD")
 			$Dancepad.self_modulate = hover_colour
 		"KissStation":
-			Tooltip.show_tooltip("- Increases thickness of Nectar\n- Convert thick Nectar into Honey\n[b]Cost[b]\n  - Pollen\n  - Nectar\n  - Nectar","KISS STATION")
+			Tooltip.show_tooltip("- Kisses Nectar into Honey!\n- Takes a few sessions of kisses\n\n[b]Build cost:[/b]  Pollen, Nectar, Nectar","KISS STATION")
 			$"Kiss Station".self_modulate = hover_colour
 
 func _on_option_mouse_exited(building_name:String) -> void:

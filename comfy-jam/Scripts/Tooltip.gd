@@ -51,7 +51,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 				if SelectionManager.has_selection:
 					if SelectionManager.current_selection is WorkerBee:
 						#BuildMenu.show_build_button(_element)
-						_tooltip[0] = "Build a structure..."
+						_tooltip[0] = "Build new structure"
 					else:
 						#BuildMenu.hide_build_button()
 						Tooltip.hide_tooltip()
@@ -189,7 +189,7 @@ static func set_tooltip_type(_type:TooltipType, _element:Variant):
 						Tooltip.hide_tooltip()
 						return
 				else:
-					_tooltip[0] = "Slowly converts Nectar into Honey"
+					_tooltip[0] = "Converts Nectar into Honey\n  over a few cycles"
 					if _hex.structure.kissing_cooldowning: _tooltip[0] += "\n~ cooling down ~"
 					_tooltip[1] = "KISS STATION"
 					_tooltip[2] = _hex.structure.get_missing_objects()

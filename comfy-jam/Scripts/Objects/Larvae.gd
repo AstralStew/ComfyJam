@@ -71,7 +71,8 @@ func setup() -> void:
 	growth_target = HiveManager.upgrade_larvae_amount_of_food_needed
 	crawl_speed = _crawlable.crawl_speed * HiveManager.upgrade_larvae_move_speed
 	
-	
+	_sprite.frame = randi() % 2
+	_sprite.flip_h = randi() % 2 == 0
 	
 	#_setup_complete = true
 
@@ -101,7 +102,7 @@ func drag_start() -> void:
 	
 	scale = Vector2(0.69,0.69)
 	_crawlable.stop()
-	_sprite.flip_h = randi() % 2 == 0
+	
 	show_outline()
 	on_dragged.emit()
 

@@ -34,8 +34,8 @@ shape = SubResource("CapsuleShape2D_6naop")
 [node name="Fallable" type="Node" parent="." unique_id=1616402917]
 script = ExtResource("4_kdfb2")
 can_fall = true
-midpoint = 620
-floor_width = 10
+midpoint = 627
+floor_width = 4
 metadata/_custom_type_script = "uid://bd0txc82jo681"
 
 [connection signal="area_entered" from="Draggable" to="Draggable" method="_on_area_entered"]
