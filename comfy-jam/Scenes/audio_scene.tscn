@@ -1,13 +1,11 @@
 [gd_scene format=3 uid="uid://bjfuwg2jo7lrf"]
 
-[ext_resource type="AudioStream" uid="uid://rswce6f671cp" path="res://Assets/Audio/Doobly Doo Crunched.mp3" id="1_8aacv"]
-[ext_resource type="Script" uid="uid://dv1bhs7axapqs" path="res://Scripts/AudioManager.gd" id="1_67c5v"]
+[ext_resource type="AudioStream" uid="uid://djtw3ux4ibxrs" path="res://Assets/Audio/Doobly Doo Less Crunch Loop.ogg" id="1_67c5v"]
 
 [node name="AudioScene" type="Node" unique_id=1977933037]
 process_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=198681601]
-stream = ExtResource("1_8aacv")
+stream = ExtResource("1_67c5v")
 volume_db = -14.26
 autoplay = true
-script = ExtResource("1_67c5v")
