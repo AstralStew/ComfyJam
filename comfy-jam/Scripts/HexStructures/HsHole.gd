@@ -28,6 +28,9 @@ func _setup() -> void:
 	speed_multiplier = HiveManager.upgrade_hole_speed_multiplier * HiveManager.upgrade_global_speed_multiplier
 	output_amount = HiveManager.upgrade_hole_output_number
 	
+	output_candidates.shuffle()
+	output_candidates.pop_back()
+	
 	max_workers = 1
 	
 

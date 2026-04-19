@@ -10,7 +10,7 @@ var progress_hex : TextureProgressBar  = null
 
 
 @export var startup_time : float = 1
-@export var wrapup_time : float = 3
+@export var wrapup_time : float = 1
 
 @export var speed_multiplier : float = 1
 
