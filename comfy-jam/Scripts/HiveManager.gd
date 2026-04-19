@@ -4,6 +4,8 @@ static var instance : HiveManager = null
 
 static var chosen_seed : int = -1
 
+@export var end_on_timeout := true
+
 #region STRUCTURE UPGRADES
 
 static var game_length : float = 360
@@ -177,6 +179,9 @@ func _process(delta: float) -> void:
 	game_time += delta
 	
 	if !_game_finished && game_time >= game_length:
-		print_rich("[color=pink]",DEBUG_NAME,"GAME FINISHED!!!")
 		_game_finished = true
-		_on_hive_finish.emit()
+		if end_on_timeout:
+			print_rich(DEBUG_NAME,"GAME FINISHED!!!")
+			_on_hive_finish.emit()
+		
+		

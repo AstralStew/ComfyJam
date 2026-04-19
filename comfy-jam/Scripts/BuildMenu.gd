@@ -84,22 +84,22 @@ static func build_structure(_hex:Hex,_worker:WorkerBee=null) -> void:
 func _on_option_mouse_entered(building_name:String) -> void:
 	match building_name:
 		"Hole":
-			Tooltip.show_tooltip("- Forages Nectar or Pollen","HOLE")
+			Tooltip.show_tooltip("- Forages either Nectar or Pollen\n  - Always returns the same type","HOLE")
 			$Hole.self_modulate = hover_colour
 		"Honeycomb":
-			Tooltip.show_tooltip("- Stores half a dozen resources\n- Click arrows to toggle direction\n[b]Cost[b]\n  -","HONEYCOMB")
+			Tooltip.show_tooltip("- Stores half a dozen resources\n- Click arrows to toggle direction\n[b]Cost[b]\n  - Pollen\n  - Pollen\n  - Honey","HONEYCOMB")
 			$Honeycomb.self_modulate = hover_colour
 		"Nursery":
-			Tooltip.show_tooltip("- Nurtures Larvae with Royal Jelly","NURSERY")
+			Tooltip.show_tooltip("- Nurtures Larvae with Royal Jelly\n[b]Cost[b]\n  - Nectar\n  - Pollen\n  - Royal Jelly","NURSERY")
 			$Nursery.self_modulate = hover_colour
 		"JellyFactory":
-			Tooltip.show_tooltip("- Produces Royal Jelly over time","JELLY FACTORY")
+			Tooltip.show_tooltip("- Produces Royal Jelly over time","JELLY FACTORY\n[b]Cost[b]\n  - Nectar\n  - Pollen")
 			$"Jelly Factory".self_modulate = hover_colour
 		"Dancepad":
-			Tooltip.show_tooltip("- Filters resources from adjacent structures\n- Requires a resource as a filter","DANCEPAD")
+			Tooltip.show_tooltip("- Filters resources from adjacent structures\n- Requires a resource as a filter\n[b]Cost[b]\n  - Nectar\n  - Pollen\n  - Royal Jelly\n  - Honey","DANCEPAD")
 			$Dancepad.self_modulate = hover_colour
 		"KissStation":
-			Tooltip.show_tooltip("- Increases thickness of Nectar\n- Convert thick Nectar into Honey","KISS STATION")
+			Tooltip.show_tooltip("- Increases thickness of Nectar\n- Convert thick Nectar into Honey\n[b]Cost[b]\n  - Pollen\n  - Nectar\n  - Nectar","KISS STATION")
 			$"Kiss Station".self_modulate = hover_colour
 
 func _on_option_mouse_exited(building_name:String) -> void:

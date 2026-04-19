@@ -309,6 +309,7 @@ anti_aliasing_size = 1.278
 
 [node name="HiveManager" type="Node" parent="." unique_id=1316011348]
 script = ExtResource("1_jsr6p")
+end_on_timeout = false
 metadata/_custom_type_script = "uid://chxwn46ba28q2"
 
 [node name="HexManager" type="Node" parent="." unique_id=715828618]
@@ -1088,7 +1089,6 @@ offset_bottom = 5.0
 mouse_filter = 2
 
 [node name="NewQueenPlus" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1174238880]
-visible = false
 z_index = 15
 layout_mode = 3
 anchors_preset = 15

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dv1bhs7axapqs" path="res://Scripts/AudioManager.gd" id="1_67c5v"]
 
 [node name="AudioScene" type="Node" unique_id=1977933037]
+process_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=198681601]
 stream = ExtResource("1_8aacv")
